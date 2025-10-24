@@ -20,10 +20,17 @@ import {
   msBetweenISO,
 } from "../../Utils/Helpers.js";
 import { INVOICE_DIR } from "../../Config/constant.js";
+import pLimit from "p-limit";
 
+// --- Facturation d’un projet sur une fenêtre ---
 export async function billProjectForWindow(projectId, startISO, stopISO) {
   const windowHours = msBetweenISO(startISO, stopISO) / (1000 * 60 * 60);
-  const resources = await listResources(projectId, await getKeystoneToken());
+
+  // --- Récupération d’un token unique pour ce projet ---
+  const token = await getKeystoneToken();
+
+  // --- Récupération des ressources du projet ---
+  const resources = await listResources(projectId, token);
 
   const invoice = {
     project_id: projectId,
@@ -33,25 +40,32 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
     total: 0,
   };
 
+  const limit = pLimit(5); // contrôle de la concurrence (par ressources)
+
   for (const res of resources) {
-    const metrics = await getMetrics(res.id, await getKeystoneToken());
+    const resId = res.id;
+    const resName = res.name || res.id;
+
+    const metrics = await getMetrics(resId, token);
     const resourceMetricsMap = {};
 
+    // --- Agrégation des mesures ---
     for (const metric of metrics) {
-      const measures = await getMeasures(
-        metric.id,
-        await getKeystoneToken(),
-        startISO,
-        stopISO
-      );
+      const metricId = metric.id;
+      const metricName = metric.name || metric.metric_name || metricId;
+
+      const measures = await getMeasures(metricId, token, startISO, stopISO);
       const agg = aggregateMeasures(measures, {
         billingMode: metric.billingMode,
         unit: metric.unit,
       });
+
       if (!agg) continue;
-      resourceMetricsMap[metric.name] = agg;
+
+      resourceMetricsMap[metricName] = agg;
     }
 
+    // --- Calcul du coût par métrique ---
     for (const [metricName, agg] of Object.entries(resourceMetricsMap)) {
       const costObj = computeCostForMetric(
         agg,
@@ -61,8 +75,8 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
       );
 
       invoice.lines.push({
-        resource_id: res.id,
-        resource_name: res.name,
+        resource_id: resId,
+        resource_name: resName,
         metric_name: metricName,
         metric_unit: agg.unit,
         aggregate: agg.aggregate,
@@ -78,22 +92,27 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
   return invoice;
 }
 
+// --- Facturation mensuelle pour tous les projets ---
 export async function runMonthlyBillingForAllProjects(year, month) {
   const startISO = startOfMonthISO(year, month);
   const stopISO = addMonthsISO(startISO, 1);
+
   console.info(`Running billing for period ${startISO} - ${stopISO}`);
 
-  const projects = await listProjects(await getKeystoneToken());
-
+  const token = await getKeystoneToken();
+  const projects = await listProjects(token);
   const invoices = [];
+
+  // --- Boucle sur tous les projets (séquentielle pour l’instant) ---
   for (const p of projects) {
     try {
       const invoice = await billProjectForWindow(p.id, startISO, stopISO);
       invoices.push(invoice);
 
+      // const outPath = path.resolve(INVOICE_DIR, `invoice_${p.id}_${startISO.substring(0, 7)}.json`);
       const outPath = path.resolve(
         INVOICE_DIR,
-        `invoice_${p.id}_${startISO.substring(0, 7)}.json`
+        `invoice_${p.id}_${year}-${month}.json`
       );
       fs.mkdirSync(path.dirname(outPath), { recursive: true });
       fs.writeFileSync(outPath, JSON.stringify(invoice, null, 2));
@@ -104,6 +123,7 @@ export async function runMonthlyBillingForAllProjects(year, month) {
     }
   }
 
+  // --- Mise à jour de l’état de facturation ---
   const state = loadState();
   state.last_billing_date = startISO;
   state.cycles = state.cycles || [];
