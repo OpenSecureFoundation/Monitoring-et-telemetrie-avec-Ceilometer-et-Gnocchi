@@ -1,0 +1,24 @@
+{
+  "name": "cloud-project",
+  "version": "1.0.0",
+  "description": "It is an OpenStack project cloud",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "start": "node main.js",
+    "start:dev": "nodemon main.js",
+    "start:prod": "node main.js",
+    "dev": "nodemon main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ronice.Djanze",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.12.2",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "joi": "^18.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "node-cron": "^4.2.1"
+  }
+}
