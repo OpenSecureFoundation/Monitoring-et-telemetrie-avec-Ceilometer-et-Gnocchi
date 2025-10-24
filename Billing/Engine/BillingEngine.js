@@ -21,18 +21,18 @@ import {
 } from "../../Utils/Helpers.js";
 import { INVOICE_DIR } from "../../Config/constant.js";
 import pLimit from "p-limit";
+import { getCachedKeystoneToken } from "../../Keystone module/Services/getCachedKeystoneToken.js";
 
-// Limite du nombre de projets traités simultanément
-const projectLimit = pLimit(5); // 5 projets en parallèle max
-const resourceLimit = pLimit(5); // 5 ressources en parallèle max (par projet)
+// --- Limites parallélisme ---
+const projectLimit = pLimit(5); // max 5 projets simultanés
+const resourceLimit = pLimit(5); // max 5 ressources simultanées par projet
 
-// --- Facturation d’un projet sur une fenêtre ---
+// --- Facturation d’un projet pour une fenêtre ---
 export async function billProjectForWindow(projectId, startISO, stopISO) {
   const windowHours = msBetweenISO(startISO, stopISO) / (1000 * 60 * 60);
-  const token = await getKeystoneToken();
+  const token = await getCachedKeystoneToken();
 
   const resources = await listResources(projectId, token);
-
   const invoice = {
     project_id: projectId,
     period: { start: startISO, stop: stopISO },
@@ -41,12 +41,12 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
     total: 0,
   };
 
-  // --- Facturation des ressources en parallèle contrôlée ---
+  // --- Facturation des ressources en parallèle ---
   const resourceResults = await Promise.all(
     resources.map((res) =>
       resourceLimit(async () => {
         const resId = res.id;
-        const resName = res.name || res.id;
+        const resName = res.name || resId;
 
         const metrics = await getMetrics(resId, token);
         const resourceMetricsMap = {};
@@ -66,6 +66,7 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
             unit: metric.unit,
           });
           if (!agg) continue;
+
           resourceMetricsMap[metricName] = agg;
         }
 
@@ -95,7 +96,7 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
     )
   );
 
-  // Fusion des résultats des ressources
+  // Fusion des résultats
   for (const r of resourceResults) {
     invoice.lines.push(...r.lines);
     invoice.total += r.total;
@@ -111,11 +112,10 @@ export async function runMonthlyBillingForAllProjects(year, month) {
   const stopISO = addMonthsISO(startISO, 1);
   console.info(`Running billing for period ${startISO} - ${stopISO}`);
 
-  const token = await getKeystoneToken();
+  const token = await getCachedKeystoneToken();
   const projects = await listProjects(token);
   const invoices = [];
 
-  // --- Facturation parallèle (5 projets à la fois max) ---
   const results = await Promise.allSettled(
     projects.map((p) =>
       projectLimit(async () => {
@@ -140,7 +140,7 @@ export async function runMonthlyBillingForAllProjects(year, month) {
     )
   );
 
-  // --- Gestion de l’état ---
+  // --- Mise à jour de l’état ---
   const state = loadState();
   state.last_billing_date = startISO;
   state.cycles = state.cycles || [];
