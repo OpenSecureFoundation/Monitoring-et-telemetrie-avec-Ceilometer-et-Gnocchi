@@ -5,15 +5,19 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-export const STATE_FILE = path.resolve(__dirname, "billing_state.json");
+// Dossier pour les factures
 export const INVOICE_DIR = path.resolve(__dirname, "invoices");
 
+// Dossier pour l’audit / état
+export const STATE_DIR = path.resolve(__dirname, "audit");
+export const STATE_FILE = path.resolve(STATE_DIR, "billing_state.json");
+
 export const TARIFFS = {
-  cpu_vcpu_h: 0.02,
-  ram_gb_h: 0.01,
-  storage_gb_h: 0.005,
-  network_gb: 0.0005,
-  io_gb: 0.001,
+  cpu_vcpu_h: 0.02, // € per vCPU-hour
+  ram_gb_h: 0.01, // € per GB-hour
+  storage_gb_h: 0.005, // € per GB-hour (allocated)
+  network_gb: 0.0005, // € per GB transferred
+  io_gb: 0.001, // € per GB IO
 };
 
 export const METRIC_MAP = {

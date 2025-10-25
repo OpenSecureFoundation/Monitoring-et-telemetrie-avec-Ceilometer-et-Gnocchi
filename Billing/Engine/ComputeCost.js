@@ -36,37 +36,29 @@ export function computeCostForMetric(
   const map = METRIC_MAP[metricName] || inferMetricInfoFromName(metricName);
   if (!map) return { cost: 0, details: `unknown metric ${metricName}` };
 
-  const unit = map.unit;
+  let cost = 0;
+  let breakdown = {};
 
+  // === Calcul existant ===
   if (map.billingMode === "activation") {
-    if (unit === "vcpu") {
+    if (map.unit === "vcpu") {
       const vcpus = Number(agg.aggregate || 0);
-      const cost = vcpus * TARIFFS.cpu_vcpu_h * windowHours;
-      return {
-        cost,
-        breakdown: { vcpus, windowHours, tariff: TARIFFS.cpu_vcpu_h },
-      };
-    }
-
-    if (unit === "percent") {
+      cost = vcpus * TARIFFS.cpu_vcpu_h * windowHours;
+      breakdown = { vcpus, windowHours, tariff: TARIFFS.cpu_vcpu_h };
+    } else if (map.unit === "percent") {
       const cpu_util_pct = Number(agg.aggregate || 0);
       const vcpusCount = resourceContext["vcpus"]
         ? Number(resourceContext["vcpus"].aggregate || 1)
         : 1;
       const vcpu_hours = (cpu_util_pct / 100) * vcpusCount * windowHours;
-      const cost = vcpu_hours * TARIFFS.cpu_vcpu_h;
-      return {
-        cost,
-        breakdown: {
-          cpu_util_pct,
-          vcpusCount,
-          vcpu_hours,
-          tariff: TARIFFS.cpu_vcpu_h,
-        },
+      cost = vcpu_hours * TARIFFS.cpu_vcpu_h;
+      breakdown = {
+        cpu_util_pct,
+        vcpusCount,
+        vcpu_hours,
+        tariff: TARIFFS.cpu_vcpu_h,
       };
-    }
-
-    if (unit === "gb") {
+    } else if (map.unit === "gb") {
       const gb_avg = Number(agg.aggregate || 0);
       const gb_h = gb_avg * windowHours;
       const isStorageMetric =
@@ -74,12 +66,10 @@ export function computeCostForMetric(
         metricName.includes("volume") ||
         metricName.includes("storage");
       const tariff = isStorageMetric ? TARIFFS.storage_gb_h : TARIFFS.ram_gb_h;
-      const cost = gb_h * tariff;
-      return { cost, breakdown: { gb_avg, gb_h, tariff } };
+      cost = gb_h * tariff;
+      breakdown = { gb_avg, gb_h, tariff };
     }
-  }
-
-  if (map.billingMode === "consumption" && unit === "bytes") {
+  } else if (map.billingMode === "consumption" && map.unit === "bytes") {
     const totalBytes = Number(agg.aggregate || 0);
     const gb = bytesToGb(totalBytes);
     let tariff = TARIFFS.network_gb;
@@ -92,9 +82,15 @@ export function computeCostForMetric(
       tariff = TARIFFS.io_gb;
     if (metricName.includes("storage")) tariff = TARIFFS.storage_gb_h;
 
-    const cost = gb * tariff;
-    return { cost, breakdown: { totalBytes, gb, tariff } };
+    cost = gb * tariff;
+    breakdown = { totalBytes, gb, tariff };
   }
 
-  return { cost: 0, details: "no rule matched" };
+  // === Option A : informer si incomplet ===
+  if (agg.incomplete) {
+    console.warn(`⚠️ Mesures incomplètes pour ${metricName}`);
+    breakdown.incomplete = true; // tag dans la facture
+  }
+
+  return { cost, breakdown };
 }

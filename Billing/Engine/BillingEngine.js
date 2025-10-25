@@ -3,7 +3,6 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { getKeystoneToken } from "../../Keystone module/Services/keystoneAuth.js";
 import {
   listProjects,
   listResources,
@@ -22,6 +21,7 @@ import {
 import { INVOICE_DIR } from "../../Config/constant.js";
 import pLimit from "p-limit";
 import { getCachedKeystoneToken } from "../../Keystone module/Services/getCachedKeystoneToken.js";
+import crypto from "node:crypto";
 
 // --- Limites parallélisme ---
 const projectLimit = pLimit(5); // max 5 projets simultanés
@@ -112,6 +112,18 @@ export async function runMonthlyBillingForAllProjects(year, month) {
   const stopISO = addMonthsISO(startISO, 1);
   console.info(`Running billing for period ${startISO} - ${stopISO}`);
 
+  const state = loadState();
+  state.cycles = state.cycles || [];
+
+  // --- Vérification idempotence ---
+  const alreadyBilled = state.cycles.some(
+    (c) => c.period_start === startISO && c.period_stop === stopISO
+  );
+  if (alreadyBilled) {
+    console.info(`Period ${startISO} - ${stopISO} already billed. Skipping.`);
+    return []; // ou renvoyer un tableau vide
+  }
+
   const token = await getCachedKeystoneToken();
   const projects = await listProjects(token);
   const invoices = [];
@@ -140,15 +152,22 @@ export async function runMonthlyBillingForAllProjects(year, month) {
     )
   );
 
-  // --- Mise à jour de l’état ---
-  const state = loadState();
+  // --- Hash SHA256 de toutes les factures pour audit trail ---
+  const invoicesHash = crypto
+    .createHash("sha256")
+    .update(JSON.stringify(invoices))
+    .digest("hex");
+
+  // --- Mise à jour de l’état avec audit trail enrichi ---
   state.last_billing_date = startISO;
-  state.cycles = state.cycles || [];
   state.cycles.push({
     period_start: startISO,
     period_stop: stopISO,
     generated_at: toISO(new Date()),
     invoice_count: invoices.length,
+    initiator: "billing_service_admin",
+    invoices_hash: invoicesHash,
+    project_ids: projects.map((p) => p.id),
   });
   saveState(state);
 

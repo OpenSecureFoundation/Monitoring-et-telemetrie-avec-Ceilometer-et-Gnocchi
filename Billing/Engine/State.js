@@ -2,9 +2,8 @@
 // Lecture / écriture de l'état des cycles de facturation
 
 // ========== State.js ==========
-
 import fs from "node:fs";
-import { STATE_FILE } from "./Constant.js";
+import { STATE_FILE, STATE_DIR } from "../../Config/constant.js";
 
 export function loadState() {
   try {
@@ -19,5 +18,6 @@ export function loadState() {
 }
 
 export function saveState(state) {
+  fs.mkdirSync(STATE_DIR, { recursive: true }); // crée le dossier audit si nécessaire
   fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2));
 }
