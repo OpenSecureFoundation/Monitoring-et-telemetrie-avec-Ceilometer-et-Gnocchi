@@ -35,7 +35,7 @@ const errorHandler = (error, port) => {
   }
 };
 
-// 🟢 Démarrage du serveur après connexion MongoDB
+// 🔹 Démarrage du serveur après connexion MongoDB
 const initializeServer = catchAsyncFn(
   async () => {
     console.log("🔗 Connecting to MongoDB...");
@@ -46,7 +46,7 @@ const initializeServer = catchAsyncFn(
     app.set("port", port);
 
     const server = http.createServer(app);
-    // 🟢 Démarre le watcher d’audit Keystone en arrière-plan
+    // 🔹 Démarre le watcher d’audit Keystone en arrière-plan
     await startAuditWatcher();
     server.on("error", (err) => errorHandler(err, port));
     server.on("listening", () => {

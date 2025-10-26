@@ -5,8 +5,17 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Dossier pour les factures
-export const INVOICE_DIR = path.resolve(__dirname, "invoices");
+// Dossier pour les factures JSON
+export const INVOICE_JSON_DIR = path.resolve(__dirname, "invoice-json");
+
+// Dossier pour les résumés JSON
+export const SUMMARY_DIR = path.resolve(__dirname, "summary-json");
+
+// Dossier pour les factures PDF
+export const PDF_DIR = path.resolve(__dirname, "invoice-pdf");
+
+// Dossier pour les projets échoués
+export const LS = path.resolve(__dirname, "ls");
 
 // Dossier pour l’audit / état
 export const STATE_DIR = path.resolve(__dirname, "audit");

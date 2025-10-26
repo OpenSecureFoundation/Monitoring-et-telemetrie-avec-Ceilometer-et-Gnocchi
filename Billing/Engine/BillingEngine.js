@@ -18,11 +18,15 @@ import {
   addMonthsISO,
   msBetweenISO,
 } from "../../Utils/Helpers.js";
-import { INVOICE_DIR } from "../../Config/constant.js";
+import {
+  INVOICE_JSON_DIR,
+  PDF_DIR,
+  SUMMARY_DIR,
+  LS,
+} from "../../Config/constant.js";
 import pLimit from "p-limit";
 import { getCachedKeystoneToken } from "../../Keystone module/Services/getCachedKeystoneToken.js";
-import crypto from "node:crypto";
-import { signInvoice } from "../../Utils/Sign.js";
+import { generateHashes } from "../../Utils/Sign.js";
 import { generateInvoicePDF } from "../PDF/generateInvoicePDF.js";
 import { sendInvoiceEmail } from "../Mail/sendInvoiceEmail.js";
 import { Project } from "../../Models/Project/Project.js";
@@ -138,36 +142,52 @@ export async function runMonthlyBillingForAllProjects(year, month) {
     projects.map((p) =>
       projectLimit(async () => {
         try {
+          // --- Facturation d’un projet ---
           const invoice = await billProjectForWindow(p.id, startISO, stopISO);
-          // Signature HMAC de la facture
-          invoice.hmac_signature = signInvoice(invoice);
-          // Ajout de la facture au tableau de factures
-          invoices.push(invoice);
 
-          // Génération du PDF
+          // --- Signature HMAC de la facture ---
+          invoice.hmac_signature = generateHashes(invoice).hmac;
+
+          // --- Enregistrement de la facture JSON dans le dossier invoice-json ---
+          const invoicePath = path.resolve(
+            INVOICE_JSON_DIR,
+            `invoice_${p.id}_${startISO.substring(0, 7)}.json`
+          );
+          fs.mkdirSync(path.dirname(invoicePath), { recursive: true });
+          fs.writeFileSync(invoicePath, JSON.stringify(invoice, null, 2));
+
+          // --- Enregistrement de la facture PDF dans le dossier invoice-pdf et Génération du PDF ---
+          const pdfPath = path.resolve(
+            PDF_DIR,
+            `invoice_${p.id}_${startISO.substring(0, 7)}.pdf`
+          );
           await generateInvoicePDF(invoice, pdfPath);
 
-          // Récupération du projet courant
-          const project = await Project.findById(project.id);
-          // Récupération du propriétaire du projet
+          // --- Récupération du projet courant ---
+          const project = await Project.findById(p.id);
+          // --- Récupération du propriétaire du projet ---
           const creator = project?.creator_id;
           // Récupération de l'utilisateur
           const user = await KeystoneUser.getUserById(creator);
-          // Envoi du PDF
-          await sendInvoiceEmail(
-            user.email,
-            pdfPath,
-            invoice.period.start,
-            invoice.period.stop
-          );
-          // Sauvegarde JSON
-          const outPath = path.resolve(
-            INVOICE_DIR,
-            `invoice_${p.id}_${startISO.substring(0, 7)}.json`
-          );
-          fs.mkdirSync(path.dirname(outPath), { recursive: true });
-          fs.writeFileSync(outPath, JSON.stringify(invoice, null, 2));
 
+          // Envoi du PDF
+          if (user?.email) {
+            await sendInvoiceEmail(
+              user.email,
+              pdfPath,
+              `Facture ${invoice.period.start} → ${invoice.period.stop}`,
+              `Bonjour ${
+                user.name || "utilisateur"
+              },\n\nVeuillez trouver ci-joint la facture du projet ${p.name}.`
+            );
+          } else {
+            console.warn(
+              `⚠️ Aucun email pour l'utilisateur ${creator}, facture non envoyée.`
+            );
+          }
+
+          // --- Ajout de la facture au tableau d'invoices ---
+          invoices.push(invoice);
           console.info(
             `✅ Invoice generated for project ${p.id} (${invoice.total} units)`
           );
@@ -178,25 +198,68 @@ export async function runMonthlyBillingForAllProjects(year, month) {
     )
   );
 
-  // --- Hash SHA256 de toutes les factures pour audit trail ---
-  const invoicesHash = crypto
-    .createHash("sha256")
-    .update(JSON.stringify(invoices))
-    .digest("hex");
+  // --- Gestion des erreurs projet par projet (Liste des projets n'ayant pas été facturé (échec facturation)) ---
+  const errors = results
+    .map((r, i) => ({ project_id: projects[i].id, error: r.reason?.message }))
+    .filter((e) => e.error);
 
-  // --- Mise à jour de l’état avec audit trail enrichi ---
-  state.last_billing_date = startISO;
+  if (errors.length > 0) {
+    const errorsPath = path.resolve(
+      LS,
+      `errors_${startISO.substring(0, 7)}.json`
+    );
+    fs.writeFileSync(errorsPath, JSON.stringify(errors, null, 2));
+    console.warn(
+      `⚠️ ${errors.length} projets ont échoué, détails dans ${errorsPath}`
+    );
+  }
+
+  // --- Hash SHA256 de toutes les factures pour audit trail ---
+  const invoicesHash = generateHashes(invoices).sha256;
+
+  // --- Génération et signature du résumé global ---
+  const summary = {
+    period_start: startISO,
+    period_stop: stopISO,
+    invoice_count: invoices.length,
+    total_amount: invoices.reduce((sum, inv) => sum + inv.total, 0),
+    invoices_hash: invoicesHash, // Hash global des factures
+    hash: null, // SHA256 du résumé
+    hmac: null, // HMAC du résumé
+    generated_at: toISO(new Date()),
+  };
+
+  // --- Génération du hash et HMAC du résumé ---
+  const { sha256, hmac } = generateHashes(summary);
+  summary.hash = sha256;
+  summary.hmac = hmac;
+
+  // --- Mise à jour de l’état avec audit trail complet (Résumé de chaque cycle
+  // facturation réussi dans lequel nous pouvons observer les projets facturés ---
   state.cycles.push({
     period_start: startISO,
     period_stop: stopISO,
     generated_at: toISO(new Date()),
     invoice_count: invoices.length,
-    initiator: "billing_service_admin",
+    initiator: "ADMIN",
     invoices_hash: invoicesHash,
+    hash: summary.hash,
+    hmac: summary.hmac,
     project_ids: projects.map((p) => p.id),
+    invoices_info: invoices.map((inv) => ({
+      project_id: inv.project_id,
+      generated_at: inv.generated_at, // timestamp précis
+      hmac_signature: inv.hmac_signature,
+    })),
   });
-  // Sauvegarde de l'état
   saveState(state);
+
+  // --- Enregistrement du résumé JSON sur disque ---
+  fs.mkdirSync(SUMMARY_DIR, { recursive: true });
+  fs.writeFileSync(
+    path.resolve(SUMMARY_DIR, `summary_${startISO.substring(0, 7)}.json`),
+    JSON.stringify(summary, null, 2)
+  );
 
   // Résultats
   const successCount = results.filter((r) => r.status === "fulfilled").length;

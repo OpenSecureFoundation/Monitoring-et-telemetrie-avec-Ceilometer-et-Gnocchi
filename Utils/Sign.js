@@ -1,26 +1,24 @@
 // ========== Utils/Sign.js ==========
 import crypto from "node:crypto";
-import { BILLING_SECRET_KEY } from "../Config/security.js";
 
 /**
- * Génère une signature HMAC SHA256 sur le contenu d'une facture
- * @param {object} invoice - Objet facture à signer
+ * Génère un hash SHA256 et une signature HMAC sur le contenu d'un objet
+ * @param {object} obj - Objet à signer
  * @returns {string} HMAC hexadécimal
  */
-export function signInvoice(invoice) {
-  const hmac = crypto.createHmac("sha256", BILLING_SECRET_KEY);
-  // On exclut la signature si elle existe déjà
-  const clone = { ...invoice };
-  delete clone.hmac_signature;
-  hmac.update(JSON.stringify(clone));
-  return hmac.digest("hex");
-}
 
-/**
- * Vérifie la validité d'une signature
- */
-export function verifyInvoiceSignature(invoice) {
-  if (!invoice.hmac_signature) return false;
-  const expected = signInvoice(invoice);
-  return expected === invoice.hmac_signature;
+// Retourne un hash SHA256 et un HMAC pour un objet
+export function generateHashes(obj) {
+  const jsonString = JSON.stringify(obj);
+
+  // Hash SHA256 simple
+  const sha256 = crypto.createHash("sha256").update(jsonString).digest("hex");
+
+  // HMAC (optionnel)
+  const hmac = crypto
+    .createHmac("sha256", process.env.HMAC_SECRET)
+    .update(jsonString)
+    .digest("hex");
+
+  return { sha256, hmac };
 }
