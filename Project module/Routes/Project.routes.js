@@ -96,5 +96,7 @@ console.log(
   "Scheduler de facturation intégré et activé (1er du mois à minuit UTC)."
 );
 
+console.log("⏰ Tâche CRON de facturation planifiée");
+
 // Exportation du routeur
 export default router;

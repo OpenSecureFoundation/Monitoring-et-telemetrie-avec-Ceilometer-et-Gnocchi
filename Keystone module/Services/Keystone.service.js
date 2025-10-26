@@ -10,6 +10,7 @@ import {
 // Importation des utils Error formatter et catchAsync
 import { errorFormat } from "../../Utils/Error-formatter.util.js";
 import { catchAsyncFn } from "../../Utils/catch-asyncFn.util.js";
+import { getCachedKeystoneToken } from "../../Keystone module/Services/getCachedKeystoneToken.js";
 
 // Export de la fonction authenticateKeystone
 export const authenticateKeystone = async (username, password) => {
@@ -55,7 +56,7 @@ export const authenticateKeystone = async (username, password) => {
 // Export de la fonction getProjects
 export const KeystoneProject = {
   getProjects: catchAsyncFn(async () => {
-    // Récupération du token Keystone depuis le store
+    // Récupération du token Keystone depuis le cache
     const token = getKeystoneToken();
 
     // Appel de l'API Keystone pour récupérer les projets
@@ -84,4 +85,19 @@ export const KeystoneProject = {
       enabled: proj.enabled,
     }));
   }),
+};
+
+// Récupération de l'utilisateur connaissant son ID
+export const KeystoneUser = {
+  getUserById: catchAsyncFn(
+    async (userId) => {
+      const token = getCachedKeystoneToken();
+      const response = await axios.get(
+        `${process.env.KEYSTONE_ENDPOINT}/v3/users/${userId}`,
+        { headers: { "X-Auth-Token": token } }
+      );
+      return response.data.user;
+    },
+    { exitOnError: true }
+  ),
 };

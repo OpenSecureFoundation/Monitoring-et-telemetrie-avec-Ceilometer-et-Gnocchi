@@ -22,6 +22,11 @@ import { INVOICE_DIR } from "../../Config/constant.js";
 import pLimit from "p-limit";
 import { getCachedKeystoneToken } from "../../Keystone module/Services/getCachedKeystoneToken.js";
 import crypto from "node:crypto";
+import { signInvoice } from "../../Utils/Sign.js";
+import { generateInvoicePDF } from "../PDF/generateInvoicePDF.js";
+import { sendInvoiceEmail } from "../Mail/sendInvoiceEmail.js";
+import { Project } from "../../Models/Project/Project.js";
+import { KeystoneUser } from "../../Keystone module/Services/Keystone.service.js";
 
 // --- Limites parallélisme ---
 const projectLimit = pLimit(5); // max 5 projets simultanés
@@ -39,6 +44,7 @@ export async function billProjectForWindow(projectId, startISO, stopISO) {
     generated_at: toISO(new Date()),
     lines: [],
     total: 0,
+    hmac_signature: null,
   };
 
   // --- Facturation des ressources en parallèle ---
@@ -133,8 +139,28 @@ export async function runMonthlyBillingForAllProjects(year, month) {
       projectLimit(async () => {
         try {
           const invoice = await billProjectForWindow(p.id, startISO, stopISO);
+          // Signature HMAC de la facture
+          invoice.hmac_signature = signInvoice(invoice);
+          // Ajout de la facture au tableau de factures
           invoices.push(invoice);
 
+          // Génération du PDF
+          await generateInvoicePDF(invoice, pdfPath);
+
+          // Récupération du projet courant
+          const project = await Project.findById(project.id);
+          // Récupération du propriétaire du projet
+          const creator = project?.creator_id;
+          // Récupération de l'utilisateur
+          const user = await KeystoneUser.getUserById(creator);
+          // Envoi du PDF
+          await sendInvoiceEmail(
+            user.email,
+            pdfPath,
+            invoice.period.start,
+            invoice.period.stop
+          );
+          // Sauvegarde JSON
           const outPath = path.resolve(
             INVOICE_DIR,
             `invoice_${p.id}_${startISO.substring(0, 7)}.json`
@@ -169,8 +195,10 @@ export async function runMonthlyBillingForAllProjects(year, month) {
     invoices_hash: invoicesHash,
     project_ids: projects.map((p) => p.id),
   });
+  // Sauvegarde de l'état
   saveState(state);
 
+  // Résultats
   const successCount = results.filter((r) => r.status === "fulfilled").length;
   console.info(
     `Billing completed: ${successCount}/${projects.length} projects processed.`

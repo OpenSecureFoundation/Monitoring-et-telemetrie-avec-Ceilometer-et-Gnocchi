@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Facture {{invoiceId}}</title>
+    <style>
+        body {
+            font-family: "Helvetica", sans-serif;
+            margin: 40px;
+            color: #333;
+        }
+
+        h1 {
+            color: #0066cc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.8em;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Facture n° {{invoiceId}}</h1>
+    <p><strong>Projet :</strong> {{projectName}}</p>
+    <p><strong>Période :</strong> {{period}}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Ressource</th>
+                <th>Métrique</th>
+                <th>Coût (€)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{rows}}
+        </tbody>
+    </table>
+
+    <div class="total">
+        <strong>Total : {{total}} €</strong>
+    </div>
+
+    <footer>
+        Signée automatiquement (HMAC) : {{signature}}<br />
+        Date : {{date}}
+    </footer>
+</body>
+
+</html>
