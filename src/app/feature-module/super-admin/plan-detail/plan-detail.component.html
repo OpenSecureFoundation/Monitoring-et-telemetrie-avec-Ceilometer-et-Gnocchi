@@ -1,0 +1,442 @@
+<!-- Loading Spinner -->
+<div class="loading-container" *ngIf="this.spinnerService.loading$ | async">
+  <div class="loading-spinner"></div>
+</div>
+
+<ng-container *ngIf="!(this.spinnerService.loading$ | async)">
+  <ng-container *ngIf="(this.plan$ | async) as plan">
+    <ng-container *ngIf="(this.metrics$ | async) as metrics">
+
+      <div class="detail-container">
+
+        <!-- ── BREADCRUMB + ACTIONS HEADER ──────────────────────── -->
+        <div class="detail-topbar">
+          <div class="detail-topbar__left">
+            <button class="btn-back" (click)="onBack()">
+              <i class="fas fa-arrow-left"></i>
+              <span>Tous les plans</span>
+            </button>
+            <div class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></div>
+            <span class="breadcrumb-current">{{ plan.name }}</span>
+          </div>
+
+          <div class="detail-topbar__right">
+            <!-- Bouton Modifier -->
+            <button class="btn-action btn-action--edit" (click)="onEdit()" [disabled]="plan.status === 'archived'">
+              <i class="fas fa-pen"></i>
+              <span>Modifier</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ── HERO DU PLAN ──────────────────────────────────────── -->
+        <div class="plan-hero">
+          <div class="plan-hero__glow"></div>
+
+          <div class="plan-hero__left">
+            <div class="plan-hero__icon">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            <div class="plan-hero__info">
+              <div class="plan-hero__meta-top">
+                <span class="plan-version">
+                  <i class="fas fa-code-branch"></i>
+                  v{{ plan.version }}
+                </span>
+                <span class="status-pill" [class.status-pill--active]="plan.status === 'active'"
+                  [class.status-pill--inactive]="plan.status === 'inactive'"
+                  [class.status-pill--archived]="plan.status === 'archived'">
+                  <span class="status-pill__dot"></span>
+                  {{ plan.status | titlecase }}
+                </span>
+              </div>
+              <h1 class="plan-hero__name">{{ plan.name }}</h1>
+              <p class="plan-hero__description">{{ plan.description || 'Aucune description renseignée.' }}</p>
+            </div>
+          </div>
+
+          <div class="plan-hero__right">
+            <!-- KPI chips -->
+            <div class="kpi-grid">
+              <div class="kpi-card">
+                <div class="kpi-card__icon">
+                  <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="kpi-card__body">
+                  <div class="kpi-card__value">{{ cycleLabel(plan.billingCycle) }}</div>
+                  <div class="kpi-card__label">Cycle de facturation</div>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-card__icon">
+                  <i class="fas fa-coins"></i>
+                </div>
+                <div class="kpi-card__body">
+                  <div class="kpi-card__value">{{ plan.currency }}</div>
+                  <div class="kpi-card__label">Devise</div>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-card__icon">
+                  <i class="fas fa-tag"></i>
+                </div>
+                <div class="kpi-card__body">
+                  <div class="kpi-card__value">
+                    {{ plan.basePrice > 0 ? (plan.basePrice | number:'1.0-2') + ' ' + plan.currency : '—' }}
+                  </div>
+                  <div class="kpi-card__label">Prix de base</div>
+                </div>
+              </div>
+              <div class="kpi-card">
+                <div class="kpi-card__icon kpi-card__icon--accent">
+                  <i class="fas fa-list-ul"></i>
+                </div>
+                <div class="kpi-card__body">
+                  <!-- ⚠️ ZONE À REMPLACER — plan.rates?.length depuis le virtual Mongoose -->
+                  <div class="kpi-card__value kpi-card__value--accent">{{ plan.ratesCount }}</div>
+                  <div class="kpi-card__label">Ressources tarifées</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dates -->
+            <div class="plan-dates">
+              <div class="date-item" *ngIf="plan.activatedAt">
+                <i class="fas fa-bolt"></i>
+                <span>Activé le <strong>{{ plan.activatedAt | date:'dd MMM yyyy' }}</strong></span>
+              </div>
+              <div class="date-item" *ngIf="plan.createdAt">
+                <i class="fas fa-calendar-plus"></i>
+                <span>Créé le <strong>{{ plan.createdAt | date:'dd MMM yyyy' }}</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── SECTION TARIFICATION ──────────────────────────────── -->
+        <div class="rates-section">
+
+          <!-- Header de section -->
+          <div class="rates-section__header">
+            <div class="rates-section__title-block">
+              <div class="section-accent-bar"></div>
+              <div>
+                <h2 class="rates-section__title">Tarification des ressources</h2>
+                <p class="rates-section__subtitle">
+                  <!-- ⚠️ ZONE À REMPLACER — mockRates.length → plan.rates.length -->
+                  {{ metrics.length }} ressource{{ metrics.length > 1 ? 's' : '' }} configurée{{ metrics.length > 1 ?
+                  's' : '' }}
+                  pour ce plan
+                </p>
+              </div>
+            </div>
+
+            <button class="btn-add-rate" (click)="onAddRate()" [disabled]="plan.status === 'archived'"
+              data-bs-toggle="modal" data-bs-target="#rate_form_modal">
+              <i class="fas fa-plus"></i>
+              <span>Ajouter une ressource</span>
+            </button>
+          </div>
+
+          <!-- Tableau des rates -->
+          <div class="rates-table-wrapper" *ngIf="metrics.length > 0; else emptyRates">
+            <table class="rates-table">
+              <thead>
+                <tr>
+                  <th class="col-resource">
+                    <i class="fas fa-server"></i> Ressource
+                  </th>
+                  <th class="col-unit">
+                    <i class="fas fa-ruler"></i> Unité
+                  </th>
+                  <th class="col-price">
+                    <i class="fas fa-tag"></i> Prix unitaire
+                  </th>
+                  <th class="col-actions">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- ⚠️ ZONE À REMPLACER — mockRates → plan.rates (depuis le virtual Mongoose) -->
+                <tr class="rate-row" *ngFor="let rate of metrics; let i = index" [style.animation-delay.ms]="i * 60">
+                  <td class="col-resource">
+                    <div class="resource-cell">
+                      <div class="resource-icon">
+                        <i class="fas" [ngClass]="resourceIcon(rate.metricKey)"></i>
+                      </div>
+                      <span class="resource-key">{{ rate.metricKey }}</span>
+                    </div>
+                  </td>
+                  <td class="col-unit">
+                    <span class="unit-badge">{{ rate.billingUnit }}</span>
+                  </td>
+                  <td class="col-price">
+                    <span class="price-value">
+                      {{ rate.price | number:'1.0-6' }}
+                      <span class="price-currency">{{ plan.currency }}</span>
+                    </span>
+                  </td>
+                  <td class="col-actions">
+                    <div class="row-actions">
+                      <button class="row-btn row-btn--edit" (click)="onEditRate(rate)"
+                        [disabled]="plan.status === 'archived'" title="Modifier" data-bs-toggle="modal"
+                        data-bs-target="#rate_form_modal">
+                        <i class="fas fa-pen"></i>
+                      </button>
+                      <!-- ⚠️ ZONE À REMPLACER — (click)="onDeleteRate(rate)"
+                       + data-bs-toggle="modal" data-bs-target="#delete_rate_modal" -->
+                      <button class="row-btn row-btn--delete" (click)="onDeleteRate(rate)"
+                        [disabled]="plan.status === 'archived'" title="Supprimer" data-bs-toggle="modal"
+                        data-bs-target="#delete_rate_modal">
+                        <i class="fas fa-trash-alt"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty rates -->
+          <ng-template #emptyRates>
+            <div class="empty-rates">
+              <div class="empty-rates__icon">
+                <i class="fas fa-receipt"></i>
+              </div>
+              <p class="empty-rates__text">Aucune ressource tarifée pour ce plan.</p>
+              <button class="btn-add-rate" (click)="onAddRate()" [disabled]="plan.status === 'archived'"
+                data-bs-toggle="modal" data-bs-target="#rate_form_modal">
+                <i class="fas fa-plus"></i>
+                <span>Ajouter la première ressource</span>
+              </button>
+            </div>
+          </ng-template>
+
+        </div>
+        <!-- FIN rates-section -->
+
+      </div>
+      <!-- FIN detail-container -->
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<!-- ── MODALE SUPPRESSION RATE ───────────────────────────────── -->
+<!--  ⚠️ ZONE À REMPLACER — (click)="confirmDeleteRate()"
+     → this.planRateService.delete(selectedRate._id).subscribe(...) -->
+<div class="modal custom-modal fade modal-delete" id="delete_rate_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header text-center">
+          <div class="delete-modal-icon">
+            <span><i class="fas fa-exclamation-triangle"></i></span>
+          </div>
+          <h3>Supprimer cette ressource ?</h3>
+          <p>
+            La tarification
+            <strong class="highlight-key">{{ selectedRate?.metricKey }}</strong>
+            sera définitivement supprimée de ce plan.
+          </p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="modal-footer justify-content-center p-0">
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn me-2"
+              (click)="confirmDeleteRate()">
+              Oui, Supprimer
+            </button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-back cancel-btn">
+              Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODALE AJOUT / ÉDITION MÉTRIQUE ──────────────────────── -->
+<div class="modal custom-modal fade" id="rate_form_modal" role="dialog" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content rate-modal">
+
+      <!-- Header -->
+      <div class="rate-modal__header">
+        <div class="rate-modal__header-left">
+          <div class="rate-modal__header-icon">
+            <i class="fas" [ngClass]="isEditingRate ? 'fa-pen' : 'fa-plus'"></i>
+          </div>
+          <div>
+            <h3 class="rate-modal__title">
+              {{ isEditingRate ? 'Modifier le tarif' : 'Ajouter une métrique' }}
+            </h3>
+            <p class="rate-modal__subtitle">
+              {{ isEditingRate ? ('Tarif de ' + selectedRate?.metricKey) : 'Plan ' + plan?.name }}
+            </p>
+          </div>
+        </div>
+        <button type="button" class="rate-modal__close" data-bs-dismiss="modal" (click)="onCloseRateForm()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <form [formGroup]="rateForm" (ngSubmit)="onSubmitRate()" novalidate>
+        <div class="rate-modal__body">
+
+          <!-- ══ MODE AJOUT ══════════════════════════════════════ -->
+          <ng-container *ngIf="!isEditingRate">
+
+            <!-- Loader métriques -->
+            <!-- <div class="metrics-loading" *ngIf="isLoadingMetrics"> -->
+            <div class="metrics-loading" *ngIf="submitting$ | async">
+              <div class="metrics-loading__spinner"></div>
+              <span>Chargement des métriques disponibles...</span>
+            </div>
+
+            <!-- Select métrique -->
+            <!-- <div class="form-group" *ngIf="!isLoadingMetrics" [class.has-error]="isRateFieldInvalid('metricId')"> -->
+            <div class="form-group" *ngIf="!(submitting$ | async)" [class.has-error]="isRateFieldInvalid('metricId')">
+              <label class="form-label" for="metricSelect">
+                <i class="fas fa-chart-bar"></i>
+                Métrique
+                <span class="required">*</span>
+              </label>
+
+              <div class="input-wrapper select-wrapper">
+                <!-- <select id="metricSelect" class="form-input form-select" formControlName="metricId">
+                  <option value="" disabled selected>— Choisir une métrique —</option>
+                  <optgroup *ngFor="let group of metricsByCategory" [label]="categoryLabel(group.category)">
+                    <option *ngFor="let m of group.metrics" [value]="m._id">
+                      {{ m.displayName }}
+                    </option>
+                  </optgroup>
+                </select> -->
+                <!-- <div style="color: red; font-weight: bold; margin-bottom: 10px;">
+                  DEBUG VALEUR : {{ rateForm.get('metricId')?.value | json }}
+                </div> -->
+                <select id="metricSelect" class="form-input form-select" formControlName="metricId"
+                  (change)="onMetricChange($any($event.target).value)">
+                  <option value="" disabled selected>— Choisir une métrique —</option>
+                  <optgroup *ngFor="let group of metricsByCategory" [label]="categoryLabel(group.category)">
+                    <option *ngFor="let m of group.metrics" [value]="m._id">
+                      {{ m.displayName }}
+                    </option>
+                  </optgroup>
+                </select>
+                <!-- <pre style="color:red">
+                  FormControl value: {{ rateForm.get('metricId')?.value | json }}
+                  selectedMetric: {{ selectedMetric?.metricKey | json }}
+                </pre> -->
+                <i class="fas fa-chevron-down select-arrow"></i>
+                <div class="input-focus-bar"></div>
+              </div>
+
+              <span class="field-error" *ngIf="isRateFieldInvalid('metricId')">
+                <i class="fas fa-exclamation-circle"></i>
+                {{ getRateFieldError('metricId') }}
+              </span>
+            </div>
+
+            <!-- Récapitulatif métrique sélectionnée -->
+            <div class="metric-summary" *ngIf="selectedMetric">
+              <div class="metric-summary__header">
+                <div class="metric-summary__icon">
+                  <i class="fas" [ngClass]="resourceIcon(selectedMetric.metricKey)"></i>
+                </div>
+                <div class="metric-summary__name">{{ selectedMetric.displayName }}</div>
+                <div class="metric-summary__badges">
+                  <span class="mode-badge" [class.mode-badge--activation]="selectedMetric.billingMode === 'activation'"
+                    [class.mode-badge--consumption]="selectedMetric.billingMode === 'consumption'">
+                    <i class="fas"
+                      [ngClass]="selectedMetric.billingMode === 'activation' ? 'fa-toggle-on' : 'fa-tachometer-alt'">
+                    </i>
+                    {{ billingModeLabel(selectedMetric.billingMode) }}
+                  </span>
+                </div>
+              </div>
+              <div class="metric-summary__grid">
+                <div class="metric-summary__item">
+                  <span class="item-label">Clé technique</span>
+                  <span class="item-value font-mono">{{ selectedMetric.metricKey }}</span>
+                </div>
+                <div class="metric-summary__item">
+                  <span class="item-label">Unité technique</span>
+                  <span class="item-value font-mono">{{ selectedMetric.technicalUnit }}</span>
+                </div>
+                <div class="metric-summary__item">
+                  <span class="item-label">Unité de facturation</span>
+                  <span class="item-value font-mono accent">{{ selectedMetric.billingUnit }}</span>
+                </div>
+                <div class="metric-summary__item">
+                  <span class="item-label">Catégorie</span>
+                  <span class="item-value">
+                    <i class="fas" [ngClass]="categoryIcon(selectedMetric.category)"></i>
+                    {{ categoryLabel(selectedMetric.category) }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+          </ng-container>
+
+          <!-- ══ MODE ÉDITION — récap en lecture seule ══════════ -->
+          <div class="edit-recap" *ngIf="isEditingRate && selectedRate">
+            <div class="edit-recap__icon">
+              <i class="fas" [ngClass]="resourceIcon(selectedRate.metricKey)"></i>
+            </div>
+            <div class="edit-recap__info">
+              <span class="edit-recap__key font-mono">{{ selectedRate.metricKey }}</span>
+              <span class="unit-badge">{{ selectedRate.billingUnit }}</span>
+            </div>
+          </div>
+
+          <!-- ══ CHAMP PRIX (commun ajout + édition) ════════════ -->
+          <div class="form-group" *ngIf="selectedMetric || isEditingRate"
+            [class.has-error]="isRateFieldInvalid('price')">
+            <label class="form-label" for="ratePrice">
+              <i class="fas fa-tag"></i>
+              Prix unitaire
+              <span class="required">*</span>
+            </label>
+            <div class="input-wrapper price-wrapper">
+              <span class="price-currency-badge">{{ plan?.currency || 'XAF' }}</span>
+              <input id="ratePrice" type="number" class="form-input form-input--price" formControlName="price"
+                placeholder="0.000000" min="0" step="0.000001">
+              <div class="input-focus-bar"></div>
+            </div>
+            <span class="field-hint" *ngIf="selectedMetric">
+              <i class="fas fa-info-circle"></i>
+              Prix par <strong class="font-mono">{{ selectedMetric.billingUnit }}</strong>
+            </span>
+            <span class="field-error" *ngIf="isRateFieldInvalid('price')">
+              <i class="fas fa-exclamation-circle"></i>
+              {{ getRateFieldError('price') }}
+            </span>
+          </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="rate-modal__footer">
+          <button type="button" class="btn-modal btn-modal--ghost" data-bs-dismiss="modal" (click)="onCloseRateForm()">
+            Annuler
+          </button>
+          <button type="submit" class="btn-modal btn-modal--submit" [disabled]="rateForm.invalid ||
+                              (!isEditingRate && !selectedMetric)">
+            <!-- <i class="fas fa-circle-notch fa-spin" *ngIf="isSubmittingRate"></i> -->
+            <i class="fas fa-circle-notch fa-spin" *ngIf="submitting$ | async"></i>
+            <!-- <ng-container *ngIf="!isSubmittingRate"> -->
+            <ng-container *ngIf="!(submitting$ | async)">
+              <i class="fas fa-check"></i>
+              {{ isEditingRate ? 'Enregistrer' : 'Ajouter' }}
+            </ng-container>
+            <!-- <ng-container *ngIf="isSubmittingRate"> -->
+            <ng-container *ngIf="submitting$ | async">
+              Enregistrement...
+            </ng-container>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>

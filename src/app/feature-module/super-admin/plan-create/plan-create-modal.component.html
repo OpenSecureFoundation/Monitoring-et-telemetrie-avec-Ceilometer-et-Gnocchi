@@ -1,0 +1,288 @@
+<!-- ============================================================
+     PLAN CREATE MODAL COMPONENT
+     ============================================================
+     Intégration dans plans-list.component.html :
+       <app-plan-create-modal
+         (planCreated)="onPlanCreated($event)">
+       </app-plan-create-modal>
+
+     Ouvrir la modale depuis le bouton parent :
+       data-bs-toggle="modal" data-bs-target="#create_plan_modal"
+     OU via ViewChild :
+       @ViewChild(PlanCreateModalComponent) modal!: PlanCreateModalComponent;
+       this.modal.open();
+     ============================================================ -->
+
+<div class="modal custom-modal fade" id="create_plan_modal" role="dialog" tabindex="-1"
+  aria-labelledby="createPlanModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content plan-modal">
+
+      <!-- ── BARRE LATÉRALE DÉCORATIVE ── -->
+      <!-- <div class="plan-modal__sidebar">
+        <div class="sidebar-glow"></div>
+        <div class="sidebar-icon">
+          <i class="fas fa-layer-group"></i>
+        </div>
+        <div class="sidebar-steps">
+          <div class="step-dot" [class.active]="currentStep >= 1" [class.done]="currentStep > 1">
+            <span>1</span>
+          </div>
+          <div class="step-line" [class.done]="currentStep > 1"></div>
+          <div class="step-dot" [class.active]="currentStep >= 2" [class.done]="currentStep > 2">
+            <span>2</span>
+          </div>
+        </div>
+        <div class="sidebar-labels">
+          <span [class.label-active]="currentStep === 1">Identité</span>
+          <span [class.label-active]="currentStep === 2">Tarification</span>
+        </div>
+      </div> -->
+
+      <!-- ── CONTENU PRINCIPAL ── -->
+      <div class="plan-modal__main">
+
+        <!-- Header -->
+        <div class="plan-modal__header">
+          <div class="plan-modal__title-block">
+            <p class="plan-modal__step-label">
+              Étape {{ currentStep }} sur 2
+            </p>
+            <h2 class="plan-modal__title" id="createPlanModalLabel">
+              {{ currentStep === 1 ? 'Identité du plan' : 'Configuration tarifaire' }}
+            </h2>
+          </div>
+          <button type="button" class="plan-modal__close" data-bs-dismiss="modal" aria-label="Fermer"
+            (click)="onClose()">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <!-- ── FORMULAIRE (Reactive Form) ──
+             ⚠️ ZONE À REMPLACER — [formGroup]
+             Remplacer [formGroup]="planForm" par votre FormGroup réel
+             déclaré dans le composant TypeScript -->
+        <form [formGroup]="planForm" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- ════ STEP 1 — IDENTITÉ ════ -->
+          <div class="form-step" [class.form-step--active]="currentStep === 1">
+
+            <!-- Nom du plan -->
+            <div class="form-group" [class.has-error]="isFieldInvalid('name')">
+              <label class="form-label" for="planName">
+                <i class="fas fa-signature"></i>
+                Nom du plan
+                <span class="required">*</span>
+              </label>
+              <div class="input-wrapper">
+                <input id="planName" type="text" class="form-input" formControlName="name"
+                  placeholder="Ex : Gold, Enterprise Pro..." autocomplete="off">
+                <div class="input-focus-bar"></div>
+              </div>
+              <span class="field-error" *ngIf="isFieldInvalid('name')">
+                <i class="fas fa-exclamation-circle"></i>
+                {{ getFieldError('name') }}
+              </span>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group" [class.has-error]="isFieldInvalid('description')">
+              <label class="form-label" for="planDescription">
+                <i class="fas fa-align-left"></i>
+                Description
+              </label>
+              <div class="input-wrapper">
+                <textarea id="planDescription" class="form-input form-textarea" formControlName="description"
+                  placeholder="Décrivez ce plan et son public cible..." rows="3">
+                </textarea>
+                <div class="input-focus-bar"></div>
+              </div>
+              <!-- <span class="char-count">
+                {{ planForm.get('description')?.value?.length || 0 }} / 200
+              </span> -->
+            </div>
+
+            <!-- Version du plan -->
+            <div class="form-group" [class.has-error]="isFieldInvalid('version')">
+              <label class="form-label" for="planVersion">
+                <i class="fas fa-code-branch"></i>
+                Version
+                <span class="required">*</span>
+              </label>
+              <div class="input-wrapper version-wrapper">
+                <span class="version-prefix">v</span>
+                <input id="planVersion" type="number" class="form-input form-input--version" formControlName="version"
+                  placeholder="1" min="1" step="1">
+                <div class="input-focus-bar"></div>
+              </div>
+              <span class="field-hint">
+                <i class="fas fa-info-circle"></i>
+                Numéro de version du catalogue tarifaire (entier ≥ 1).
+              </span>
+              <span class="field-error" *ngIf="isFieldInvalid('version')">
+                <i class="fas fa-exclamation-circle"></i>
+                {{ getFieldError('version') }}
+              </span>
+            </div>
+
+          </div>
+
+          <!-- ════ STEP 2 — TARIFICATION ════ -->
+          <div class="form-step" [class.form-step--active]="currentStep === 2">
+
+            <!-- Ligne : Cycle de facturation + Devise -->
+            <div class="form-row">
+
+              <div class="form-group" [class.has-error]="isFieldInvalid('billingCycle')">
+                <label class="form-label" for="billingCycle">
+                  <i class="fas fa-sync-alt"></i>
+                  Cycle de facturation
+                  <span class="required">*</span>
+                </label>
+                <div class="input-wrapper select-wrapper">
+                  <select id="billingCycle" class="form-input form-select" formControlName="billingCycle">
+                    <option value="" disabled>Choisir...</option>
+                    <option value="hourly">Horaire</option>
+                    <option value="daily">Journalier</option>
+                    <option value="weekly">Hebdomadaire</option>
+                    <option value="monthly">Mensuel</option>
+                    <option value="yearly">Annuel</option>
+                  </select>
+                  <i class="fas fa-chevron-down select-arrow"></i>
+                  <div class="input-focus-bar"></div>
+                </div>
+              </div>
+
+              <div class="form-group" [class.has-error]="isFieldInvalid('currency')">
+                <label class="form-label" for="currency">
+                  <i class="fas fa-coins"></i>
+                  Devise
+                  <span class="required">*</span>
+                </label>
+                <div class="currency-selector">
+                  <div class="currency-option" *ngFor="let cur of currencyOptions"
+                    [class.selected]="planForm.get('currency')?.value === cur.value"
+                    (click)="selectCurrency(cur.value)">
+                    <span class="currency-option__symbol">{{ cur.symbol }}</span>
+                    <span class="currency-option__code">{{ cur.value }}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Prix de base -->
+            <div class="form-group" [class.has-error]="isFieldInvalid('basePrice')">
+              <label class="form-label" for="basePrice">
+                <i class="fas fa-tag"></i>
+                Prix de base
+                <span class="form-hint">(optionnel — 0 par défaut)</span>
+              </label>
+              <div class="input-wrapper price-wrapper">
+                <span class="price-currency-badge">
+                  {{ planForm.get('currency')?.value || 'XAF' }}
+                </span>
+                <input id="basePrice" type="number" class="form-input form-input--price" formControlName="basePrice"
+                  placeholder="0" min="0" step="0.01">
+                <div class="input-focus-bar"></div>
+              </div>
+              <span class="field-error" *ngIf="isFieldInvalid('basePrice')">
+                <i class="fas fa-exclamation-circle"></i>
+                {{ getFieldError('basePrice') }}
+              </span>
+            </div>
+
+            <!-- Aperçu récapitulatif -->
+            <!-- <div class="plan-preview">
+              <div class="plan-preview__header">
+                <i class="fas fa-eye"></i>
+                Aperçu du plan
+              </div>
+              <div class="plan-preview__body">
+                <div class="preview-plan-icon">
+                  <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="preview-name">
+                  {{ planForm.get('name')?.value || 'Nom du plan' }}
+                </div>
+                <div class="preview-version">
+                  <i class="fas fa-code-branch"></i>
+                  v{{ planForm.get('version')?.value || '1' }}
+                </div>
+                <div class="preview-meta">
+                  <span class="meta-chip">
+                    <i class="fas fa-sync-alt"></i>
+                    {{ getCycleLabel(planForm.get('billingCycle')?.value) || '—' }}
+                  </span>
+                  <span class="meta-chip">
+                    <i class="fas fa-coins"></i>
+                    {{ planForm.get('currency')?.value || '—' }}
+                  </span>
+                  <span class="meta-chip" *ngIf="planForm.get('basePrice')?.value > 0">
+                    <i class="fas fa-tag"></i>
+                    {{ planForm.get('basePrice')?.value }} {{ planForm.get('currency')?.value }}
+                  </span>
+                </div>
+              </div>
+            </div> -->
+
+          </div>
+
+          <!-- ── FOOTER ACTIONS ── -->
+          <div class="plan-modal__footer">
+
+            <!-- Step 1 : Bouton Suivant -->
+            <ng-container *ngIf="currentStep === 1">
+              <button type="button" class="btn-modal btn-modal--ghost" data-bs-dismiss="modal" (click)="onClose()">
+                Annuler
+              </button>
+              <button type="button" class="btn-modal btn-modal--primary" (click)="goToStep2()"
+                [disabled]="isStep1Invalid()">
+                Suivant
+                <i class="fas fa-arrow-right"></i>
+              </button>
+            </ng-container>
+
+            <!-- Step 2 : Boutons Précédent + Soumettre -->
+            <ng-container *ngIf="currentStep === 2">
+              <button type="submit" class="btn-modal btn-modal--submit"
+                [disabled]="planForm.invalid || (submitting$ | async)">
+
+                <span class="submit-spinner" *ngIf="submitting$ | async">
+                  <i class="fas fa-circle-notch fa-spin"></i>
+                </span>
+
+                <span *ngIf="!(submitting$ | async)">
+                  <i class="fas fa-check"></i>
+                  Créer le plan
+                </span>
+
+                <span *ngIf="submitting$ | async">Création...</span>
+              </button>
+            </ng-container>
+
+            <!-- <ng-container *ngIf="currentStep === 2">
+              <button type="button" class="btn-modal btn-modal--ghost" (click)="goToStep1()">
+                <i class="fas fa-arrow-left"></i>
+                Retour
+              </button>
+              <button type="submit" class="btn-modal btn-modal--submit" [disabled]="planForm.invalid || isSubmitting">
+                <span class="submit-spinner" *ngIf="this.planReducers.submitted">
+                  <i class="fas fa-circle-notch fa-spin"></i>
+                </span>
+                <span *ngIf="!this.planReducers.submitted">
+                  <i class="fas fa-check"></i>
+                  Créer le plan
+                </span>
+                <span *ngIf="this.planReducers.submitted">Création...</span>
+              </button>
+            </ng-container> -->
+
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

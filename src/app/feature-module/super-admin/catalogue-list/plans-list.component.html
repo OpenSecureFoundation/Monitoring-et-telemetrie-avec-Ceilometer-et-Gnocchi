@@ -1,0 +1,224 @@
+<!-- ============================================================
+     PLANS LIST COMPONENT
+     ============================================================ -->
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Billing Plans</h5>
+  </div>
+</div>
+
+<div class="loading-container" *ngIf="this.spinnserService.loading$ | async">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Main Content -->
+<ng-container *ngIf="!(this.spinnserService.loading$ | async)">
+  <ng-container *ngIf="(this.plans$ | async) as plans">
+    <ng-container *ngIf="(this.stats$ | async) as stats">
+
+      <div [hidden]="isLoading">
+        <div class="plans-container">
+
+          <!-- ── HEADER ──────────────────────────────────────────────── -->
+          <div class="plans-header">
+            <div class="plans-header__left">
+              <div class="plans-header__icon">
+                <i class="fas fa-layer-group"></i>
+              </div>
+              <div>
+                <h1 class="plans-header__title">Catalogue de Plans</h1>
+                <p class="plans-header__subtitle">Gérez vos offres tarifaires et leurs ressources</p>
+              </div>
+            </div>
+
+            <button class="btn-add-plan" data-bs-toggle="modal" data-bs-target="#create_plan_modal">
+              <span class="btn-add-plan__icon"><i class="fas fa-plus"></i></span>
+              <span>Nouveau Plan</span>
+            </button>
+          </div>
+
+          <!-- ── STATS BAR ───────────────────────────────────────────── -->
+          <div class="stats-bar">
+            <div class="stats-bar__item">
+              <div class="stats-bar__value">{{ stats.totalPlans }}</div>
+              <div class="stats-bar__label">Total Plans</div>
+              <div class="stats-bar__indicator all"></div>
+            </div>
+            <div class="stats-bar__divider"></div>
+            <div class="stats-bar__item">
+              <div class="stats-bar__value accent-active">{{ stats.activePlans }}</div>
+              <div class="stats-bar__label">Actif</div>
+              <div class="stats-bar__indicator active"></div>
+            </div>
+            <div class="stats-bar__divider"></div>
+            <div class="stats-bar__item">
+              <div class="stats-bar__value accent-inactive">{{ stats.inactivePlans }}</div>
+              <div class="stats-bar__label">Inactif</div>
+              <div class="stats-bar__indicator inactive"></div>
+            </div>
+            <div class="stats-bar__divider"></div>
+            <div class="stats-bar__item">
+              <div class="stats-bar__value accent-archived">{{ stats.archivedPlans }}</div>
+              <div class="stats-bar__label">Archivé</div>
+              <div class="stats-bar__indicator archived"></div>
+            </div>
+          </div>
+
+          <!-- ── FILTER TABS ─────────────────────────────────────────── -->
+          <div class="filter-tabs">
+            <button class="filter-tab" [class.active]="currentFilter === 'all'" (click)="filterPlans('all')">
+              <i class="fas fa-th-large"></i> Tous
+            </button>
+            <button class="filter-tab" [class.active]="currentFilter === 'active'" (click)="filterPlans('active')">
+              <span class="filter-dot active"></span> Actifs
+            </button>
+            <button class="filter-tab" [class.active]="currentFilter === 'inactive'" (click)="filterPlans('inactive')">
+              <span class="filter-dot inactive"></span> Inactifs
+            </button>
+            <button class="filter-tab" [class.active]="currentFilter === 'archived'" (click)="filterPlans('archived')">
+              <span class="filter-dot archived"></span> Archivés
+            </button>
+          </div>
+
+          <!-- ── PLANS GRID ──────────────────────────────────────────── -->
+          <!-- ✅ CORRECTION 3 : itération sur filteredPlans (au lieu de allPlans) -->
+          <div class="plans-grid" *ngIf="filteredPlans.length > 0">
+            <div class="plan-card" *ngFor="let plan of filteredPlans; let i = index"
+              [class.plan-card--active]="plan.status === 'active'"
+              [class.plan-card--archived]="plan.status === 'archived'" [style.animation-delay.ms]="i * 80">
+
+              <!-- Glow de fond selon le tier -->
+              <div class="plan-card__glow" [ngClass]="'glow-' + plan.tier"></div>
+
+              <!-- ── CARD HEADER ── -->
+              <div class="plan-card__header">
+                <div class="plan-card__tier-badge" [ngClass]="'tier-' + plan.tier">
+                  <i class="fas" [ngClass]="tierIcon(plan.tier)"></i>
+                  <span>{{ plan.tier | titlecase }}</span>
+                </div>
+                <div class="plan-card__status-toggle" [class.is-active]="plan.status === 'active'"
+                  [class.is-inactive]="plan.status === 'inactive'" [class.is-archived]="plan.status === 'archived'"
+                  (click)="plan.status !== 'archived' && onToggleStatus(plan)"
+                  [title]="plan.status === 'archived' ? 'Plan archivé' : (plan.status === 'active' ? 'Désactiver' : 'Activer')">
+                  <div class="toggle-track">
+                    <div class="toggle-thumb"></div>
+                  </div>
+                  <span class="toggle-label">
+                    <ng-container *ngIf="plan.status === 'active'">Actif</ng-container>
+                    <ng-container *ngIf="plan.status === 'inactive'">Inactif</ng-container>
+                    <ng-container *ngIf="plan.status === 'archived'">Archivé</ng-container>
+                  </span>
+                </div>
+              </div>
+
+              <!-- ── CARD BODY ── -->
+              <div class="plan-card__body">
+                <h2 class="plan-card__name">{{ plan.name }}</h2>
+                <p class="plan-card__description">{{ plan.description }}</p>
+
+                <!-- Méta infos -->
+                <div class="plan-card__meta">
+                  <div class="meta-chip">
+                    <i class="fas fa-sync-alt"></i>
+                    <span>{{ plan.billingCycle }}</span>
+                  </div>
+                  <div class="meta-chip">
+                    <i class="fas fa-coins"></i>
+                    <span>{{ plan.currency }}</span>
+                  </div>
+                  <div class="meta-chip" *ngIf="plan.basePrice > 0">
+                    <i class="fas fa-tag"></i>
+                    <span>{{ plan.basePrice | number:'1.0-2' }} {{ plan.currency }}/base</span>
+                  </div>
+                </div>
+
+                <!-- Prix affiché + nb de ressources -->
+                <div class="plan-card__pricing">
+                  <div class="pricing-rates">
+                    <span class="pricing-rates__count">{{ plan.ratesCount }}</span>
+                    <span class="pricing-rates__label">ressource{{ plan.ratesCount > 1 ? 's' : '' }} tarifée{{
+                      plan.ratesCount > 1 ? 's' : '' }}</span>
+                  </div>
+                  <div class="pricing-version">
+                    <i class="fas fa-code-branch"></i>
+                    v{{ plan.version }}
+                  </div>
+                </div>
+              </div>
+
+              <!-- ── CARD FOOTER ── -->
+              <div class="plan-card__footer">
+                <button class="card-action-btn card-action-btn--view" (click)="onViewPlan(plan)"
+                  title="Voir les détails">
+                  <i class="fas fa-eye"></i>
+                  <span>Détails</span>
+                </button>
+
+                <button class="card-action-btn card-action-btn--delete" (click)="onDeletePlan(plan)"
+                  [disabled]="plan.status === 'active'"
+                  [title]="plan.status === 'active' ? 'Désactiver avant de supprimer' : 'Supprimer'"
+                  data-bs-toggle="modal" data-bs-target="#delete_plan_modal">
+                  <i class="fas fa-trash-alt"></i>
+                  <span (click)="confirmDelete()">Supprimer</span>
+                </button>
+              </div>
+
+              <!-- Bande décorative bas de carte -->
+              <div class="plan-card__stripe" [ngClass]="'stripe-' + plan.tier"></div>
+            </div>
+          </div>
+
+          <!-- ── EMPTY STATE ─────────────────────────────────────────── -->
+          <!-- ✅ CORRECTION 4 : affiché uniquement quand filteredPlans est vraiment vide -->
+          <div class="empty-state" *ngIf="filteredPlans.length === 0">
+            <div class="empty-state__icon">
+              <i class="fas fa-layer-group"></i>
+            </div>
+            <h3 class="empty-state__title">Aucun plan trouvé</h3>
+            <p class="empty-state__text">Aucun plan ne correspond au filtre sélectionné.</p>
+            <button class="btn-add-plan" (click)="onAddPlan()" *ngIf="currentFilter === 'all'">
+              <span class="btn-add-plan__icon"><i class="fas fa-plus"></i></span>
+              <span>Créer un premier plan</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<!-- ── MODALE SUPPRESSION ──────────────────────────────────────── -->
+<div class="modal custom-modal fade modal-delete" id="delete_plan_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header text-center">
+          <div class="delete-modal-icon">
+            <span><i class="fas fa-exclamation-triangle"></i></span>
+          </div>
+          <h3>Supprimer ce plan ?</h3>
+          <p>
+            <strong class="text-warning">{{ selectedPlan?.name }}</strong>
+            sera définitivement supprimé avec tous ses tarifs associés.
+          </p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="modal-footer justify-content-center p-0">
+            <button type="button" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn me-2"
+              (click)="confirmDelete()">
+              Oui, Supprimer
+            </button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-back cancel-btn">
+              Annuler
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-plan-create-modal (planCreated)="onPlanCreated($event)"></app-plan-create-modal>
