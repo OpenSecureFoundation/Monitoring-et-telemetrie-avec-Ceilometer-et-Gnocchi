@@ -1,0 +1,206 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Customer</h5>
+      </div>
+    </div>
+    <!-- /Page Header -->
+    <div class="row">
+      <div class="col-md-12">
+        <form action="#" [formGroup]="phoneForm">
+          <div class="form-group-item">
+            <h5 class="form-title">Basic Details</h5>
+            <div class="profile-picture">
+              <div class="upload-profile">
+                <div class="profile-img">
+                  <img id="blah" class="avatar" src="assets/img/profiles/avatar-14.jpg" alt="profile-img">
+                </div>
+                <div class="add-profile">
+                  <h5>Upload a New Photo</h5>
+                  <span>Profile-pic.jpg</span>
+                </div>
+              </div>
+              <div class="img-upload">
+                <label class="btn btn-upload">
+                  Upload <input type="file">
+                </label>
+                <a class="btn btn-remove">Remove</a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Name">Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Email">Email <span class="text-danger">*</span></label>
+                  <input type="email" class="form-control" placeholder="Enter Email Address">
+                </div>
+              </div>
+              <!-- <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Phone">Phone <span class="text-danger">*</span></label>
+                  <ngx-mat-intl-tel-input id="phone" name="phone" type="text" class="form-control" [preferredCountries]="['us', 'gb']"
+                    [enablePlaceholder]="true" [enableSearch]="true" name="phone" describedBy="phoneInput"
+                    formControlName="phone"></ngx-mat-intl-tel-input>
+                </div>
+              </div> -->
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Currency">Currency</label>
+                  <mat-select [(ngModel)]="country" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                    <mat-option value="India">Select Currency</mat-option>
+                    <mat-option value="customer1">₹</mat-option>
+                    <mat-option value="customer2">$</mat-option>
+                    <mat-option value="customer3">£</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Website">Website</label>
+                  <input type="text" class="form-control" placeholder="Enter Website Address">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label  for="Notes">Notes</label>
+                  <input type="email" class="form-control" placeholder="Enter Your Notes">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group-item">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="billing-btn mb-2">
+                  <h5 class="form-title">Billing Address</h5>
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Name">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line1">Address Line 1</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 1">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line2">Address Line 2</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 2">
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="Country">Country</label>
+                      <input type="text" class="form-control" placeholder="Enter Country">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="City">City</label>
+                      <input type="text" class="form-control" placeholder="Enter City">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="State">State</label>
+                      <input type="text" class="form-control" placeholder="Enter State">
+                    </div>
+                    <div class="input-block mb-3">
+                    <label for="Pincode">Pincode</label>
+                      <input type="text" class="form-control" placeholder="Enter Pincode">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="billing-btn">
+                  <h5 class="form-title mb-0">Shipping Address</h5>
+                  <a href="javascript:void(0);" class="btn btn-primary">Copy from Billing</a>
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Name">Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line1">Address Line 1</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 1">
+                </div>
+                <div class="input-block mb-3">
+                  <label for="Line2">Address Line 2</label>
+                  <input type="text" class="form-control" placeholder="Enter Address 2">
+                </div>
+                <div class="row">
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="Country">Country</label>
+                      <input type="text" class="form-control" placeholder="Enter Country">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="City">City</label>
+                      <input type="text" class="form-control" placeholder="Enter City">
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="input-block mb-3">
+                      <label for="State">State</label>
+                      <input type="text" class="form-control" placeholder="Enter State">
+                    </div>
+                    <div class="input-block mb-3">
+                      <label for="Pincode">Pincode</label>
+                      <input type="text" class="form-control" placeholder="Enter Pincode">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group-customer customer-additional-form">
+            <div class="row">
+              <h5 class="form-title">Bank Details</h5>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Bank">Bank Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Bank Name">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Branch">Branch</label>
+                  <input type="text" class="form-control" placeholder="Enter Branch Name">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Account ">Account Holder Name</label>
+                  <input type="text" class="form-control" placeholder="Enter Account Holder Name">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Number">Account Number</label>
+                  <input type="text" class="form-control" placeholder="Enter Account Number">
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="IFSC">IFSC</label>
+                  <input type="text" class="form-control" placeholder="Enter IFSC Code">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="add-customer-btns text-end">
+            <a [routerLink]="routes.customer"  class="btn customer-btn-cancel">Cancel</a>
+            <a [routerLink]="routes.customer"  class="btn customer-btn-save">Save Changes</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+

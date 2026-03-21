@@ -1,0 +1,151 @@
+<div class="row">
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Bar Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo">
+          <p-chart
+            type="bar"
+            [data]="barChartData"
+            [options]="barChartOptions"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Horizontal Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo">
+          <p-chart
+            type="bar"
+            [data]="barChartData"
+            [options]="horizontalChartOptions"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Line Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo">
+          <p-chart
+            type="line"
+            [data]="lineStylesData"
+            [options]="lineStylesOptions"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Combo Area Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo">
+          <p-chart
+            type="bar"
+            [data]="comboChartData"
+            [options]="comboChartOptions"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Doughnut Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo d-flex justify-content-center">
+          <p-chart
+            type="doughnut"
+            [data]="doughnutData"
+            [options]="doughnutChartOption"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Polar Area Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo d-flex justify-content-center">
+          <p-chart
+            type="polarArea"
+            [data]="doughnutData"
+            [options]="doughnutChartOption"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Pie Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo d-flex justify-content-center">
+          <p-chart
+            type="pie"
+            [data]="doughnutData"
+            [options]="doughnutChartOption"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+
+  <!-- Chart -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Radar Chart</div>
+      </div>
+      <div class="card-body">
+        <div class="chartjs-wrapper-demo d-flex justify-content-center">
+          <p-chart
+            type="radar"
+            [data]="radarChartData"
+            [options]="radarChartOptions"
+          ></p-chart>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Chart -->
+</div>

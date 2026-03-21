@@ -1,0 +1,47 @@
+<div class="row">
+  <!-- Timeline -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <mat-stepper #stepper>
+          @for (item of dates; track item; let i = $index) {
+            <mat-step>
+              <ng-template matStepLabel>{{ item }}</ng-template>
+              <p class="m-t-40">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
+                praesentium officia, fugit recusandae ipsa, quia velit nulla
+                adipisci? Consequuntur aspernatur at, eaque hic repellendus sit
+                dicta consequatur quae, ut harum ipsam molestias maxime non nisi
+                reiciendis eligendi! Doloremque quia pariatur harum ea amet
+                quibusdam quisquam, quae, temporibus dolores porro doloribus.
+              </p>
+              <div>
+                @if (i > 0) {
+                  <button mat-button matStepperPrevious>
+                    Back
+                  </button>
+                }
+                <button
+                  [hidden]="i === dates.length - 1"
+                  mat-button
+                  matStepperNext
+                  >
+                  Next
+                </button>
+                @if (i === dates.length - 1) {
+                  <button
+                    mat-button
+                    (click)="stepper.reset()"
+                    >
+                    Reset
+                  </button>
+                }
+              </div>
+            </mat-step>
+          }
+        </mat-stepper>
+      </div>
+    </div>
+  </div>
+  <!-- /Ribbon -->
+</div>

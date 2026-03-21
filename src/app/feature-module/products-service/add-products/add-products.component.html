@@ -1,0 +1,217 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Add Products / Services</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group-item">
+          <h5 class="form-title">Basic Details</h5>
+          <div class="row">
+            <div class="col-lg-4 col-md-6 col-sm-12">
+              <div class="input-block mb-3">
+                <label for="Item">Item Type<span class="text-danger">  *</span></label>
+                <div class="align-center">
+                  <div class="form-control me-3">
+                    <label class="custom_radio me-3 mb-0">
+                      <input
+                        type="radio"
+                        class="form-control"
+                        name="payment"
+                        checked
+                        >
+                        <span class="checkmark"></span> Product
+                      </label>
+                    </div>
+                    <div class="form-control">
+                      <label class="custom_radio mb-0">
+                        <input type="radio" name="payment" >
+                        <span class="checkmark"></span> Service
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Product">Product Name <span class="text-danger">  *</span></label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Product Name"
+                    >
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-block mb-3 add-products">
+                    <label for="Product ">Product Code (SKU)<span class="text-danger">  *</span></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="Enter Product Code"
+                      >
+                      <button type="submit" class="btn btn-primary">
+                        Generate Code
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Category ">Category  <span class="text-danger">  *</span></label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Enter Category Name"
+                        >
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label for="Selling">Selling Price  <span class="text-danger">  *</span></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Selling Price"
+                          >
+                        </div>
+                      </div>
+                      <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="input-block mb-3">
+                          <label for="Purchase">Purchase Price  <span class="text-danger">  *</span></label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="Enter Purchase Prices"
+                            >
+                          </div>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                          <div class="input-block mb-3">
+                            <label for="Quantity"> Quantity <span class="text-danger">  *</span></label>
+                            <input
+                              type="number"
+                              class="form-control"
+                              placeholder="Enter Quantity"
+                              name="name"
+                              >
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Units">Units</label>
+                              <mat-select [(ngModel)]="nation" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                                <mat-option value="units">Select Units</mat-option>
+                                <mat-option value="customer1">Pieces</mat-option>
+                                <mat-option value="customer2">Box</mat-option>
+                                <mat-option value="customer3">Kilograms</mat-option>
+                              </mat-select>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Discount">Discount Type</label>
+                              <mat-select [(ngModel)]="Discount" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                                <mat-option value="select Discount">Select Discount Type</mat-option>
+                                <mat-option value="discount1">Percentage</mat-option>
+                                <mat-option value="discount2">Fixed</mat-option>
+                              </mat-select>
+                            </div>
+                          </div>
+                          <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="input-block mb-3 add-products">
+                              <label for="Barcode">Generate Barcode</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Enter Barcode Code"
+                                >
+                                <button type="submit" class="btn btn-primary">
+                                  Generate Code
+                                </button>
+                              </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12">
+                              <div class="input-block mb-3">
+                                <label for="Alert">Alert Quantity </label>
+                                <input
+                                  type="number"
+                                  class="form-control"
+                                  placeholder="Enter Alert Quantity"
+                                  name="name"
+                                  >
+                                </div>
+                              </div>
+                              <div class="col-lg-4 col-md-6 col-sm-12">
+                                <div class="input-block mb-3">
+                                  <label for="Tax">Tax</label>
+                                  <mat-select [(ngModel)]="Tax" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                                    <mat-option value="tax">Select Tax</mat-option>
+                                    <mat-option value="customer1">IVA - (21%)</mat-option>
+                                    <mat-option value="customer2">IRPF - (-15%)</mat-option>
+                                    <mat-option value="customer3">PDV - (20%)</mat-option>
+                                  </mat-select>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group-item">
+                            <div class="row">
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-12 description-box">
+                                <div class="input-block mb-3" id="summernote_container">
+                                  <label for="Descriptions" class="form-control-label">Product Descriptions</label>
+                                  <form [formGroup]="form">
+                                    <div class="editor">
+                                      <ngx-editor [editor]="editor">
+                                        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                        </ngx-editor-menu>
+                                      </ngx-editor>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                              <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                <div class="input-block mb-3">
+                                  <label for="product-image">Product Image</label>
+                                  <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                                    <ngx-dropzone-label class="drop-browse align-center">
+                                      <span
+                                        ><img src="assets/img/icons/drop-icon.svg" alt="upload"
+                                      /></span>
+                                      <div class="d-flex">
+                                        Drop your files here or<span class="text-primary ms-1"
+                                        >browse</span
+                                        >
+                                      </div>
+
+                                      <span class="text-muted">Maximum size: 50MB</span>
+                                    </ngx-dropzone-label>
+                                    @for (f of files; track f) {
+                                      <ngx-dropzone-image-preview
+                                        ngProjectAs="ngx-dropzone-preview"
+                                        [file]="f"
+                                        [removable]="true"
+                                        (removed)="onRemove(f)"
+                                        >
+                                      </ngx-dropzone-image-preview>
+                                    }
+                                  </ngx-dropzone>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <form class="text-end">
+                            <button type="reset" class="btn btn-primary cancel me-2">
+                              Cancel
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Add Item
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+

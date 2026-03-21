@@ -1,0 +1,53 @@
+{
+    "data": [
+      {
+        "sNo": "1",
+        "name": "John Smith",
+        "bankName": "Axis Bank",
+        "branch": "Adambakkam",
+        "accountNumber": "123 456 78920",
+        "ifscCode":"UTIB0003259"
+      },
+      {
+        "sNo": "2",
+        "name": "John Smith",
+        "bankName": "Bank of India",
+        "branch": "Adyar",
+        "accountNumber": "756 890 65820",
+        "ifscCode":"BKID0008010"
+      },
+      {
+        "sNo": "3",
+        "name": "John Smith",
+        "bankName": "Canara Bank",
+        "branch": "Karavalur",
+        "accountNumber": "756 890 75689",
+        "ifscCode":"CNRB0001483"
+      },
+      {
+        "sNo": "5",
+        "name": "John Smith",
+        "bankName": "ICICI Bank",
+        "branch": "Vadavalli",
+        "accountNumber": "756 890 36586",
+        "ifscCode":"ICIC0002142"
+      },
+      {
+        "sNo": "6",
+        "name": "John Smith",
+        "bankName": "State Bank of India",
+        "branch": "Chennai",
+        "accountNumber": "756 890 36589",
+        "ifscCode":"SBIN0000800"
+      }
+    ],
+    "totalData": 6
+  }
+    
+
+
+
+     
+    
+
+  

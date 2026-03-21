@@ -1,0 +1,69 @@
+{
+    "data": [
+      {
+        "sNo": "1",
+        "countryName": "American Samoa(+684)",
+        "countryFlag": "assets/img/flags/as.png",
+        "stateName": "Swains Island",
+        "cityName": "Gandzasar"
+      },
+      {
+        "sNo": "2",
+        "countryName": "Andorra (+376)",
+        "countryFlag": "assets/img/flags/ad.png",
+        "stateName": "Andorra la Vella",
+        "cityName": "Escaldes-Engordany"
+      },
+      {
+        "sNo": "3",
+        "countryName": "Angola (+244)",
+        "countryFlag": "assets/img/flags/ao.png",
+        "stateName": "Benguela",
+        "cityName": "Chissamba"
+      },
+      {
+        "sNo": "4",
+        "countryName": "Anguilla (+1264)",
+        "countryFlag": "assets/img/flags/ai.png",
+        "stateName": "The Valley",
+        "cityName": "Illinois"
+      },
+      {
+        "sNo": "5",
+        "countryName": "Antigua & Barbuda (+1268)",
+        "countryFlag": "assets/img/flags/ag.png",
+        "stateName": "Saint Paul",
+        "cityName": "Maplewood"
+      },
+      {
+        "sNo": "6",
+        "countryName": "Australia",
+        "countryFlag": "assets/img/flags/au.png",
+        "stateName": "Queensland",
+        "cityName": "Sydney"
+      },
+      {
+        "sNo": "7",
+        "countryName": "American Samoa(+684)",
+        "countryFlag": "assets/img/flags/as.png",
+        "stateName": "Swains Island",
+        "cityName": "Gandzasar"
+      },
+      {
+        "sNo": "8",
+        "countryName": "Andorra (+376)",
+        "countryFlag": "assets/img/flags/ad.png",
+        "stateName": "Andorra la Vella",
+        "cityName": "Escaldes-Engordany)"
+      },
+      {
+        "sNo": "9",
+        "countryName": "Angola (+244)",
+        "countryFlag": "assets/img/flags/ao.png",
+        "stateName": "Benguela",
+        "cityName": "Chissamba"
+      }
+    ],
+    "totalData": 8
+  }
+  

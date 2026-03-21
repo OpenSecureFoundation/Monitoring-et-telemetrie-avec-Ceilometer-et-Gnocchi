@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+     
+      "invoice": "#4987",
+      "category": "Food",
+      "created" : "23 Mar 2023",
+      "name": "John Smith",
+      "email": "john@example.com",
+      "img":"assets/img/profiles/avatar-14.jpg",
+      "total": "$1,54,220",
+      "paid": "$1,50,000",
+      "payment": "Cash",
+      "balance": "$0",
+      "due": "-",
+      "status": "Paid"
+    },
+   
+    {
+      
+      "invoice": "#4992",
+      "category": "Stationary",
+      "created" : "16 Nov 2022",
+      "name": "Randall",
+      "email": "randall@example.com",
+      "img":"assets/img/profiles/avatar-19.jpg",
+      "total": "$5,54,220",
+      "paid": "$6,50,000",
+      "payment": "Cash",
+      "balance": "$4,220",
+      "due": "25 Feb 2023",
+      "status": "Paid"
+    }
+  ],
+  "totalData": 2
+}

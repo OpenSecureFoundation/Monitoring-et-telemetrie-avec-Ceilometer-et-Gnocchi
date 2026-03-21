@@ -1,0 +1,71 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "customer": "Orn LLC",
+            "email": "orn@example.com",
+            "domain": "ornllc",
+            "noOfEmployees": "10",
+            "package1": "FREE TRIAL",
+            "package2": "monthly",
+            "createdOn": "15 Dec 2022, 04:35 PM",
+            "status": "Rejected"
+          },
+        {
+            "id": "2",
+            "customer": "Accent-e-Technology",
+            "email": "accent@example.com",
+            "domain": "accent00",
+            "noOfEmployees": "100",
+            "package1": "ENTERPRISE",
+            "package2": "lifetime",
+            "createdOn": "15 Dec 2022, 04:35 PM",
+            "status": "Approved"
+          },
+        {
+            "id": "3",
+            "customer": "Express",
+            "email": "Advertisingexpress@example.com",
+            "domain": "expadvertising",
+            "noOfEmployees": "200",
+            "package1": "ENTERPRISE",
+            "package2": "lifetime",
+            "createdOn": "04 Dec 2022, 12:38 PM",
+            "status": "Approved"
+          },
+        {
+            "id": "4",
+            "customer": "lexicon ",
+            "email": "Technologieslexicon@example.com",
+            "domain": "lexicontech05",
+            "noOfEmployees": "50",
+            "package1": "Basic",
+            "package2": "monthly",
+            "createdOn": "28 Nov 2022, 03:25 PM",
+            "status": "Approved"
+          },
+        {
+            "id": "5",
+            "customer": "Sumo Soft",
+            "email": "Limitedsumo@example.com",
+            "domain": "sumosoftltd",
+            "noOfEmployees": "75",
+            "package1": "Basic",
+            "package2": "Yearly",
+            "createdOn": "20 Nov 2022, 02:47 PM",
+            "status": "Rejected"
+          },
+        {
+            "id": "6",
+            "customer": "Repair Group",
+            "email": "Corepair@example.com",
+            "domain": "repairco1993",
+            "noOfEmployees": "10",
+            "package1": "ENTERPRISE",
+            "package2": "monthly",
+            "createdOn": "15 Dec 2022, 04:35 PM",
+            "status": "Rejected"
+          }
+    ],
+    "totalData": 6
+}

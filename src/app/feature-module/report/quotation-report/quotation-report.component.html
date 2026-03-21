@@ -1,0 +1,249 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header ">
+    <h5>Quotation Report</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="btn btn-filters w-auto popup-toggle" matTooltip="Filter"><span
+            class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+          </li>
+          <li class="">
+            <div class="dropdown dropdown-action" matTooltip="Download">
+              <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span><i
+              class="feather icon-download"></i></span></a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <ul class="d-block">
+                  <li>
+                    <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                    class="far fa-file-pdf me-2"></i>PDF</a>
+                  </li>
+                  <li>
+                    <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                    class="far fa-file-text me-2"></i>CVS</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="btn-filters" href="javascript:void(0);" matTooltip="Print"><span><i
+            class="feather icon-printer"></i></span> </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Search Filter -->
+  <div id="filter_inputs" class="card filter-card">
+    <div class="card-body pb-0">
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="input-block mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="input-block mb-3">
+            <label for="email">Email</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="input-block mb-3">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Search Filter -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class=" card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <div class="table-scroll">
+              <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                <thead class="thead-light">
+                  <tr>
+                    <th mat-sort-header="sno">#</th>
+                    <th mat-sort-header="companyname">Serial Number</th>
+                    <th mat-sort-header="amount">Date</th>
+                    <th mat-sort-header="payment">Company Name</th>
+                    <th mat-sort-header="category">Amount</th>
+                    <th mat-sort-header="createdby">Due Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (data of tableData; track data; let i = $index) {
+                    <tr>
+                      <td>{{data.sNo}}</td>
+                      <td>{{data.serialNo}}</td>
+                      <td>{{data.createdDate}}</td>
+                      <td>
+                        <h2 class="table-avatar">
+                          <a [routerLink]="routes.profile" class="avatar avatar-sm me-2"><img
+                          class="avatar-img rounded-circle" [src]="data.img" alt="User Image"></a>
+                          <a [routerLink]="routes.profile">{{data.companyName}} <span>{{data.mailId}}</span></a>
+                        </h2>
+                      </td>
+                      <td>{{data.amount}}</td>
+                      <td>{{data.duedate}}</td>
+                    </tr>
+                  }
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <app-custom-pagination></app-custom-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Asset -->
+  <div class="toggle-sidebar" [ngClass]="{'open-filter' : toggleData === true}">
+    <div class="sidebar-layout-filter">
+      <div class="sidebar-header">
+        <h5>Filter</h5>
+        <a href="javascript:void(0);" class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+      </div>
+      <div class="sidebar-body">
+        <form action="#" autocomplete="off">
+          <!-- Customer -->
+          <div class="accordion" id="accordionMain1">
+            <div class="card-header-new" id="headingOne">
+              <h6 class="filter-title">
+                <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  Company
+                  <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+              </h6>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+              <div class="card-body-chat">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div id="checkBoxes1">
+                      <div class="form-custom">
+                        <input type="text" class="form-control" id="member_search1" placeholder="Search here">
+                        <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                      </div>
+                      <div class="selectBox-cont">
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span> Orn LLC
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span> Accent Technology
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span> Express Advertising
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span> Lexicon Technologies
+                        </label>
+                        <!-- View All -->
+                        <div class="view-content">
+                          <div class="viewall-One">
+                            @for (user of users; track user) {
+                              <label class="custom_check w-100"
+                                [ngClass]="{ closed: !isCollapsed1, open: isCollapsed1 }">
+                                <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                                <span class="checkmark"></span> {{ user.name }}
+                              </label>
+                            }
+                          </div>
+                          <div class="view-all">
+                            <a (click)="toggleCollapse1()" href="javascript:void(0);" class="viewall-button-One"><span
+                            class="me-2">{{ isCollapsed1 ? "Close All" : "View All" }}</span><span><i class="fa"
+                          [ngClass]="!isCollapsed1 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                        </div>
+                      </div>
+                      <!-- /View All -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Customer -->
+        <!-- Product Code -->
+        <div class="accordion accordion-last" id="accordionMain2">
+          <div class="card-header-new" id="headingTwo">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Serial Number
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+            <div class="card-body-chat">
+              <div id="checkBoxes3">
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="s-no">
+                    <span class="checkmark"></span> AA1100123
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="s-no">
+                    <span class="checkmark"></span> AA1100124
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="s-no">
+                    <span class="checkmark"></span> AA1100125
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="s-no">
+                    <span class="checkmark"></span> AA1100126
+                  </label>
+                  <!-- View All -->
+                  <div class="view-content">
+                    <div class="viewall-Two">
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="s-no">
+                        <span class="checkmark"></span> AA1100127
+                      </label>
+                    </div>
+                    <div class="view-all">
+                      <a href="javascript:void(0);" class="viewall-button-Two"><span class="me-2">View
+                        All</span><span><i class="fa fa-circle-chevron-down"></i></span></a>
+                      </div>
+                    </div>
+                    <!-- /View All -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Product Code -->
+          <div class="filter-buttons">
+            <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+              Apply
+            </button>
+            <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+              Reset
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!--/Add Asset -->

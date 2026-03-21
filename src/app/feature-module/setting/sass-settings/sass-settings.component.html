@@ -1,0 +1,258 @@
+<!-- /Page Header -->
+<div class="row">
+  <div class="card">
+    <div class="card-body w-100">
+      <div class="content-page-header">
+        <h5>SAAS Settings</h5>
+      </div>
+      <form action="#">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Select Default Currency</label>
+              <mat-select
+                [(ngModel)]="paymentmode"
+                [ngModelOptions]="{ standalone: true }"
+                class="select custom-mat-select"
+              >
+                <mat-option value="payment1"
+                  >United States Dollar ( USD )</mat-option
+                >
+                <mat-option value="debit card">Euro (€)</mat-option>
+                <mat-option value="creditcard">Japanese Yen (¥)</mat-option>
+              </mat-select>
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Days between initial warning and subscription ends</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Interval days between warnings</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Interval days between warnings</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label>Maximum Free Domain A Subscriber Can Create</label>
+              <input type="text" class="form-control" />
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="payment-toggle">
+              <h5 class="form-title">Email Verification</h5>
+              <div class="status-toggle">
+                <input id="rating_1" class="check" type="checkbox" checked="" />
+                <label for="rating_1" class="checktoggle checkbox-bg"
+                  >checkbox</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="payment-toggle">
+              <h5 class="form-title">Auto approve Domain creation request</h5>
+              <div class="status-toggle">
+                <input id="rating_2" class="check" type="checkbox" checked="" />
+                <label for="rating_2" class="checktoggle checkbox-bg"
+                  >checkbox</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="modal-footer p-0">
+              <button
+                type="button"
+                data-bs-dismiss="modal"
+                class="btn btn-back cancel-btn me-2"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                data-bs-dismiss="modal"
+                class="btn btn-primary paid-continue-btn"
+              >
+                Save Changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- /Page Wrapper -->
+
+<!-- Add New Modal -->
+<div
+  class="modal custom-modal custom-lg-modal fade"
+  id="add_custom"
+  role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Add Email Template</h4>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body add">
+        <div class="addnew-modal">
+          <form action="#">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Title"
+                  />
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Subject</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Subject"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12 description-box">
+                <div class="input-block mb-3">
+                  <label class="form-control-label">Template Content</label>
+                  <textarea
+                    class="summernote form-control"
+                    placeholder="Type your message"
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              data-bs-dismiss="modal"
+              class="btn btn-back cancel-btn me-2"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              data-bs-dismiss="modal"
+              class="btn btn-primary paid-continue-btn"
+            >
+              Add New
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Vendor Modal -->
+
+<!-- Edit Modal -->
+<div
+  class="modal custom-modal custom-lg-modal fade"
+  id="edit_email"
+  role="dialog"
+>
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Edit Email Template</h4>
+        </div>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body add">
+        <div class="addnew-modal">
+          <form action="#">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Title"
+                    value="Welcome Email"
+                  />
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label>Subject</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Subject"
+                    value="Welcome [Username]"
+                  />
+                </div>
+              </div>
+              <div class="col-md-12 description-box">
+                <div class="input-block mb-3">
+                  <label class="form-control-label">Template Content</label>
+                  <textarea
+                    class="summernote form-control"
+                    placeholder="Type your message"
+                  >
+Hi [User's Name],
+                                        Welcome to Kanakku ! We're thrilled to have you on board. Get ready to experience a seamless and efficient way.
+                                        To get started, Click here
+                                        If you have any questions or need assistance, feel free to reach out to our support team at [support@example.com].</textarea
+                  >
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="modal-footer">
+            <button
+              type="button"
+              data-bs-dismiss="modal"
+              class="btn btn-back cancel-btn me-2"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              data-bs-dismiss="modal"
+              class="btn btn-primary paid-continue-btn"
+            >
+              Save Changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Modal -->

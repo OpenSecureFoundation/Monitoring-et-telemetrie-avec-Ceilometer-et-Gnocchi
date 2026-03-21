@@ -1,0 +1,100 @@
+@if (authenticated === true) {
+  <div
+    class="main-wrapper"
+    [ngClass]="{
+      'menu-opened': mobileSidebar === true && authenticated === true,
+      'expand-menu':
+      expandMenu === 'true' && miniSidebar === true && authenticated === true,
+      'mini-sidebar': miniSidebar === true && authenticated === true,
+      'slide-nav': mobileSidebar === true && authenticated === true,
+      blue: layoutColor === '2',
+      light: layoutColor === '1',
+      dark: layoutColor === '4',
+      fluid: layoutWidth === '1',
+      boxed: layoutWidth === '2',
+      headerlight: layoutTopColor === '1',
+      headerdark: layoutTopColor === '2',
+      lg: layoutSidebarSize === '1',
+      'sm-hover': layoutSidebarSize === '2' || layoutWidth === '2',
+      vertical: layoutPosition === '1',
+      sidebardark: layoutSidebarColor === '2',
+      sidebarlight: layoutSidebarColor === '1',
+      default: layoutSidebarView === '1',
+      detached: layoutSidebarView === '2',
+      horizontal:layoutPosition === '6',
+    }"
+    >
+    @if (layoutPosition === '1') {
+      <app-header-one [ngClass]="{'d-none':hideheader === false}"></app-header-one>
+      <app-side-menu-one [ngClass]="{'d-none':hideheader === false}" ></app-side-menu-one>
+    }
+    @if (layoutPosition === '2') {
+      <app-header-two></app-header-two>
+      <app-side-menu-two></app-side-menu-two>
+    }
+    @if (layoutPosition === '3') {
+      <app-header-three></app-header-three>
+    }
+    @if (layoutPosition === '4') {
+      <app-header-four></app-header-four>
+      <app-side-menu-four></app-side-menu-four>
+    }
+    @if (layoutPosition === '5') {
+      <app-header-five></app-header-five>
+      @if (
+        mobileSidebar === true &&
+        layoutPosition === '5' &&
+        authenticated === true
+        ) {
+        <app-side-menu-one
+        ></app-side-menu-one>
+      }
+    }
+    @if (layoutPosition === '6') {
+      <app-header-one></app-header-one>
+      <app-side-menu-five></app-side-menu-five>
+    }
+    <div
+      [ngClass]="{
+        container: layoutPosition === '3' && authenticated === true
+      }"
+      >
+      @if (layoutPosition === '3' && authenticated === true) {
+        <app-side-menu-three
+        ></app-side-menu-three>
+      }
+      <!-- Page Wrapper -->
+      <div
+        [ngClass]="{
+          'page-wrapper page-wrapper-three': layoutPosition === '4',
+          'page-wrapper-four': layoutPosition === '5',
+          'page-wrapper':
+            layoutPosition === '1' ||
+            layoutPosition === '2' ||
+            layoutPosition === '3' ||
+            layoutPosition === '5' ||
+            layoutPosition === '6',
+            'page-wrapper-fluid' : layoutPosition === '1' && hideheader === false
+        }"
+        >
+        <div
+          class="content"
+          [ngClass]="layoutPosition === '5' ? 'container' : 'container-fluid'"
+          >
+          <div [class.scroll-content]="getScrollContentPages() === true">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+      <!-- /Page Wrapper -->
+      <app-settings-menu></app-settings-menu>
+      <div
+        class="sidebar-overlay" (click)="toggleMobileIcon()"
+        [ngClass]="{
+          opened: mobileSidebar === true && authenticated === true
+        }"
+      ></div>
+    </div>
+  </div>
+}
+

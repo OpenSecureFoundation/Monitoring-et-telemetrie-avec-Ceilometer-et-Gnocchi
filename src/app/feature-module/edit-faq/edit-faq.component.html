@@ -1,0 +1,46 @@
+<div class="content-page-header">
+    <h5 class="text-center m-auto">Edit FAQ</h5>
+</div>					
+<div class="row">
+    <div class="col-lg-6 col-md-8 m-auto">
+        <div class="card-body">
+            <div class="form-group-item border-0 pb-0">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="Title">Title Name <span class="text-danger">*</span></label>
+                            <input type="text"  class="form-control" value="Duis aute irure" placeholder="Enter Title">
+                        </div>											
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="Category">Category <span class="text-danger">*</span></label>
+                            <input type="text"  class="form-control" value="Advertising" placeholder="Enter Category">
+                        </div>											
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="Details">Details <span class="text-danger">*</span></label>
+                            <input type="text"  class="form-control" value="Lorem ipsum" placeholder="Enter Details">
+                        </div>											
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group mb-0 mt-5">
+                            <div class="check-mark-status d-flex justify-content-between">
+                                <h6 class="label-text">Status</h6>
+                                <div class="status-toggle">
+                                    <input id="rating_1" class="check" type="checkbox" checked="">
+                                    <label for="rating_1" class="checktoggle checkbox-bg">checkbox</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>							
+            <div class="text-center mt-4">
+                <a [routerLink]="routes.faq" class="btn btn-primary cancel me-2">Cancel</a>
+                <a [routerLink]="routes.faq" class="btn btn-primary">Update</a>
+            </div>
+        </div>
+    </div>
+</div>

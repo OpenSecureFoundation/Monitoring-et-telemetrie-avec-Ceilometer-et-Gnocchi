@@ -1,0 +1,358 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Vendors</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()" (keydown.enter)="openContent()" tabindex="0" matTooltip="Filter"
+            href="javascript:void(0);" class="btn btn-filters w-auto popup-toggle">
+            <span class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter" /></span>Filter
+          </a>
+        </li>
+        <li class="">
+          <div class="dropdown dropdown-action">
+            <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"
+              matTooltip="Download"><span><i class="feather icon-download"></i></span></a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <ul class="d-block">
+                <li>
+                  <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                      class="far fa-file-pdf me-2"></i>PDF</a>
+                </li>
+                <li>
+                  <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                      class="far fa-file-text me-2"></i>CVS</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="btn-filters" matTooltip="Print" href="javascript:void(0);"><span><i
+                class="feather icon-printer"></i></span>
+          </a>
+        </li>
+        <li>
+          <a class="btn btn-import" href="javascript:void(0);"><span><i class="feather icon-check-square me-2"></i>
+              Import</span></a>
+        </li>
+        <li>
+          <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add_vendor"><i
+              class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add
+            Vendors</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-scroll">
+            <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="sNo">#</th>
+                  <th mat-sort-header="name">Name</th>
+                  <th mat-sort-header="phone">Phone</th>
+                  <th mat-sort-header="created">Created</th>
+                  <th mat-sort-header="balance">Balance</th>
+                  <th mat-sort-header="action">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (data of tableData; track data; let i = $index) {
+                <tr>
+                  <td>{{ data.sNo }}</td>
+                  <td>
+                    <h2 class="table-avatar">
+                      <a [routerLink]="routes.profile" class="avatar avatar-sm me-2"><img
+                          class="avatar-img rounded-circle" [src]="data.img" alt="User Image" /></a>
+                      <a [routerLink]="routes.profile">{{ data.name }} <span>{{ data.email }}</span></a>
+                    </h2>
+                  </td>
+                  <td>{{ data.phone }}</td>
+                  <td>{{ data.created }}</td>
+                  <td>{{ data.balance }}</td>
+                  <td class="d-flex align-items-center">
+                    <a [routerLink]="routes.vendorsLedger" class="btn btn-greys me-2"><i class="fa fa-eye me-1"></i>
+                      Ledger</a>
+                    <div class="dropdown dropdown-action">
+                      <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="dropdown"
+                        aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <ul>
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                              data-bs-target="#edit_vendor"><i class="far fa-edit me-2"></i>Edit</a>
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                              data-bs-target="#delete_modal"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <app-custom-pagination></app-custom-pagination>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Asset -->
+<div class="toggle-sidebar" [ngClass]="{ 'open-filter': Toggledata === true }">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a (click)="openContent()" href="javascript:void(0);" class="sidebar-closes"><i
+          class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <!-- Customer -->
+        <div class="accordion" id="accordionMain1">
+          <div class="card-header-new" id="headingOne">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Vendors
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+            <div class="card-body-chat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="checkBoxes1">
+                    <div class="form-custom">
+                      <input type="text" class="form-control" id="member_search1" placeholder="Search Customer" />
+                      <span><img src="assets/img/icons/search.svg" alt="img" /></span>
+                    </div>
+                    <div class="selectBox-cont">
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> John Smith
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Johnny Charles
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Robert George
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Sharonda Letha
+                      </label>
+                      <!-- View All -->
+                      <div class="view-content">
+                        @for (user of users; track user) {
+                        <div class="viewall-One" [ngClass]="{
+                              closed: !isCollapsed,
+                              open: isCollapsed
+                            }">
+                          <label htmlFor="label" class="custom_check w-100">
+                            <input id="label" type="checkbox" name="username" [(ngModel)]="user.checked" />
+                            <span class="checkmark"></span> {{ user.name }}
+                          </label>
+                        </div>
+                        }
+                        <div class="view-all">
+                          <a href="javascript:void(0);" class="viewall-button-One" (click)="toggleCollapse()"><span
+                              class="me-2">{{
+                              isCollapsed ? "Close All" : "View All"
+                              }}</span><span><i class="fa"
+                                [ngClass]="!isCollapsed ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                        </div>
+                      </div>
+                      <!-- /View All -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Customer -->
+
+        <div class="filter-buttons">
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+            Apply
+          </button>
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!--/Add Asset -->
+
+<!-- Add Vendor Modal -->
+<div class="modal custom-modal fade" id="add_vendor" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Add Vendor</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" placeholder="Enter Name">
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label for="email">Email</label>
+              <input type="text" class="form-control" placeholder="Enter Email Address">
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-3">
+              <label for="phone">Phone Number</label>
+              <input type="number" class="form-control" placeholder="Enter Phone Number">
+            </div>
+          </div>
+          <div class="col-lg-12 col-sm-12">
+            <div class="input-block mb-0">
+              <label for="balance">Closing Balance</label>
+              <input type="number" class="form-control" placeholder="Enter Closing Balance Amount">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add Vendor</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add Vendor Modal -->
+
+<!-- Edit Vendor Modal -->
+<div class="modal custom-modal fade" id="edit_vendor" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Edit Vendor</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-3">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" value="John Smith" placeholder="Enter Name">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-3">
+              <label for="Email">Email</label>
+              <input type="text" class="form-control" value="john@example.com" placeholder="Select Date">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-3">
+              <label for="Phone">Phone Number</label>
+              <input type="text" class="form-control" value="+1 989-438-3131" placeholder="Enter Reference Number">
+            </div>
+          </div>
+          <div class="col-lg-12 col-md-12">
+            <div class="input-block mb-0">
+              <label for="balance">Balance</label>
+              <input type="text" class="form-control" value="$4200" placeholder="Enter Reference Number">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit Vendor Modal -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Vendor</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <button type="reset" data-bs-dismiss="modal"
+                class="w-100 btn btn-primary paid-continue-btn">Delete</button>
+            </div>
+            <div class="col-6">
+              <button type="submit" data-bs-dismiss="modal"
+                class="w-100 btn btn-primary paid-cancel-btn">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->

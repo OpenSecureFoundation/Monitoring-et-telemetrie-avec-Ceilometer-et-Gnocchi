@@ -1,0 +1,612 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Ticket Overview</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()" (keydown.enter)="openContent()" tabindex="0"
+            class="btn btn-primary popup-toggle rounded-circle d-inline-flex p-2" href="javascript:void(0);"><i
+              class="feather icon-filter" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<div class="ticket-details-group">
+  <div class="row align-items-center">
+    <div class="col-lg-6 col-md-6 col-12">
+      <div class="customer-details">
+        <div class="d-flex align-items-center">
+          <span class="ticket-widget-img rounded-circle d-inline-flex">
+            <img src="assets/img/icons/ticket.svg" alt="image" />
+          </span>
+          <div class="ticket-details-cont">
+            <p>TK-105</p>
+            <h6>New Support Ticket</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-12">
+      <div class="ticket-details text-lg-end text-md-end">
+        <span class="badge bg-warning-light text-warning-light">Medium</span>
+        <span class="badge bg-success-light ms-2">Paid</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ticket-description-group">
+  <h6>Description</h6>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
+  </p>
+  <p class="mb-0">
+    Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor
+    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+    nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat.
+  </p>
+</div>
+<div class="ticket-information">
+  <div class="row align-items-center">
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="customer-details">
+        <div class="d-flex align-items-center">
+          <span class="customer-widget-img d-inline-flex">
+            <img class="rounded-circle" src="assets/img/profiles/avatar-05.jpg" alt="image" />
+          </span>
+          <div class="customer-details-cont">
+            <h6>Requester</h6>
+            <p>John Smith</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="customer-details">
+        <div class="d-flex align-items-center">
+          <span class="customer-widget-icon rounded-circle d-inline-flex">
+            <i class="feather icon-calendar"></i>
+          </span>
+          <div class="customer-details-cont">
+            <h6>Requested Date</h6>
+            <p>30 Dec, 2022</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="customer-details border-0">
+        <div class="d-flex align-items-center">
+          <span class="customer-widget-icon rounded-circle d-inline-flex">
+            <i class="feather icon-file-text"></i>
+          </span>
+          <div class="customer-details-cont">
+            <h6>Subject</h6>
+            <p>Support Ticket</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="ticket-history ticket-information pb-0">
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <div class="card-inform">
+        <div class="ticket-info d-flex align-items-center justify-content-between">
+          <h6>Attachments</h6>
+          <label htmlFor="label" class="ticket-upload upload-doc mb-0">
+            <span class="report-info"><i class="feather icon-paperclip me-2"></i></span>Add File
+            <input id="label" type="file" multiple="" id="image_personal" />
+          </label>
+        </div>
+      </div>
+      <!-- Support Ticket -->
+      <div class="support-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="support-widget-icon rounded-circle d-inline-flex">
+            <i class="feather icon-file-text"></i>
+          </span>
+          <div class="support-details-cont">
+            <h6>New Support Ticket</h6>
+            <p>3.7MB</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <a class="btn-action-icon me-2" href="javascript:void(0);" download><i class="feather icon-download"></i></a>
+          <div class="dropdown dropdown-action">
+            <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="false"><i
+                class="fas fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <ul>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-edit me-2"></i>Edit</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-eye me-2"></i>View</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Support Ticket -->
+
+      <!-- Support Ticket -->
+      <div class="support-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="support-widget-icon rounded-circle d-inline-flex">
+            <i class="feather icon-file-text"></i>
+          </span>
+          <div class="support-details-cont">
+            <h6>New Support Ticket</h6>
+            <p>3.7MB</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <a class="btn-action-icon me-2" href="javascript:void(0);" download><i class="feather icon-download"></i></a>
+          <div class="dropdown dropdown-action">
+            <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="false"><i
+                class="fas fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <ul>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-edit me-2"></i>Edit</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-eye me-2"></i>View</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Support Ticket -->
+
+      <!-- Support Ticket -->
+      <div class="support-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="support-widget-icon rounded-circle d-inline-flex">
+            <i class="feather icon-file-text"></i>
+          </span>
+          <div class="support-details-cont">
+            <h6>New Support Ticket</h6>
+            <p>3.7MB</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <a class="btn-action-icon me-2" href="javascript:void(0);" download><i class="feather icon-download"></i></a>
+          <div class="dropdown dropdown-action">
+            <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="false"><i
+                class="fas fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <ul>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-edit me-2"></i>Edit</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-eye me-2"></i>View</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Support Ticket -->
+
+      <!-- Support Ticket -->
+      <div class="support-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="support-widget-icon rounded-circle d-inline-flex">
+            <i class="feather icon-file-text"></i>
+          </span>
+          <div class="support-details-cont">
+            <h6>New Support Ticket</h6>
+            <p>3.7MB</p>
+          </div>
+        </div>
+        <div class="d-flex align-items-center">
+          <a class="btn-action-icon me-2" href="javascript:void(0);" download><i class="feather icon-download"></i></a>
+          <div class="dropdown dropdown-action">
+            <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="false"><i
+                class="fas fa-ellipsis-v"></i></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <ul>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-edit me-2"></i>Edit</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="javascript:void(0);"><i class="far fa-eye me-2"></i>View</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Support Ticket -->
+    </div>
+    <div class="col-lg-6 col-md-12">
+      <div class="card-inform">
+        <div class="ticket-info d-flex align-items-center justify-content-between">
+          <h6>History</h6>
+        </div>
+      </div>
+      <div class="card-inform d-block mt-lg-5 mt-0">
+        <ul class="activity-feed">
+          <li class="feed-item">
+            <span class="feed-text"><strong class="text-gray-dark me-2">John Smith</strong> Created a
+              new response Created a new response</span>
+            <p>30 Dec 2022 01:24AM</p>
+          </li>
+          <li class="feed-item">
+            <span class="feed-text"><strong class="text-gray-dark me-2">Forest Kroch </strong> Lorem
+              ipsum dolor sit amet,</span>
+            <p>24 Dec 2022 10:36AM</p>
+          </li>
+          <li class="feed-item">
+            <span class="feed-text"><strong class="text-gray-dark me-2">Townsend Seary </strong> Sed
+              ut perspiciatis unde</span>
+            <p>18 Dec 2022 09:18PM</p>
+          </li>
+          <li class="feed-item">
+            <span class="feed-text"><strong class="text-gray-dark me-2">Margaretta Worvell </strong>
+              Nemo enim ipsam voluptatem</span>
+            <p>19 Jan 2022 09:18PM</p>
+          </li>
+          <li class="feed-item">
+            <span class="feed-text"><strong class="text-gray-dark me-2">Harald Kowalski </strong>
+              Neque porro quisquam est, qui dolorem</span>
+            <p>12 May 2022 09:18PM</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- comments -->
+<div class="comments">
+  <div class="comments-head">
+    <h5>Comments</h5>
+  </div>
+  <!-- card -->
+  <div class="card">
+    <div class="card-body">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="comments-widget-img rounded-circle d-inline-flex">
+            <img class="avatar-img rounded-circle" src="assets/img/profiles/avatar-01.jpg" alt="User Image" />
+          </span>
+          <div class="comments-details-cont">
+            <h6>Dennis</h6>
+            <p>a week ago</p>
+          </div>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex"><span><i
+              class="feather icon-corner-down-left me-2"></i></span>Reply</a>
+      </div>
+      <div class="card-describe">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod
+          tempor incididunt labore dolore magna aliqua. Ut enim minim veniam,
+          nostrud exercitation ullamco laboris nisi ut aliquip ex commodo
+          consequat. Duis aute non proident, sunt in culpa qui officia deserunt
+          mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+
+  <!-- card -->
+  <div class="card">
+    <div class="card-body">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="comments-widget-img rounded-circle d-inline-flex">
+            <img class="avatar-img rounded-circle" src="assets/img/profiles/avatar-02.jpg" alt="User Image" />
+          </span>
+          <div class="comments-details-cont">
+            <h6>Alexandr</h6>
+            <p>a week ago</p>
+          </div>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex"><span><i
+              class="feather icon-corner-down-left me-2"></i></span>Reply</a>
+      </div>
+      <div class="card-describe">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod
+          tempor incididunt labore dolore magna aliqua. Ut enim minim veniam,
+          nostrud exercitation ullamco laboris nisi ut aliquip ex commodo
+          consequat. Duis aute non proident, sunt in culpa qui officia deserunt
+          mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+
+  <!-- card -->
+  <div class="card">
+    <div class="card-body">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="comments-widget-img rounded-circle d-inline-flex">
+            <img class="avatar-img rounded-circle" src="assets/img/profiles/avatar-04.jpg" alt="User Image" />
+          </span>
+          <div class="comments-details-cont">
+            <h6>Doris Brown</h6>
+            <p>a week ago</p>
+          </div>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex"><span><i
+              class="feather icon-corner-down-left me-2"></i></span>Reply</a>
+      </div>
+      <div class="card-describe">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod
+          tempor incididunt labore dolore magna aliqua. Ut enim minim veniam,
+          nostrud exercitation ullamco laboris nisi ut aliquip ex commodo
+          consequat. Duis aute non proident, sunt in culpa qui officia deserunt
+          mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+</div>
+<!-- /comments -->
+
+<div class="comments">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="input-block mb-3">
+        <label htmlFor="label">First Name</label>
+        <input id="label" type="text" class="form-control" placeholder="Enter Comments" />
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="text-end">
+        <button type="submit" class="btn btn-primary">Post Comments</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Add Asset -->
+<!-- <div [ngClass]="{ 'open-filter': toggleData === true }" class="toggle-sidebar">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <div class="d-flex">
+        <div class="dropdown dropdown-action">
+          <a
+            href="javascript:void(0);"
+            class="btn-action-icon"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            ><i class="fas fa-ellipsis-v"></i
+          ></a>
+          <div class="dropdown-menu dropdown-menu-end">
+            <ul>
+              <li>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  ><i class="far fa-edit me-2"></i>Edit</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  ><i class="far fa-trash-alt me-2"></i>Delete</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="javascript:void(0);"
+                  ><i class="far fa-eye me-2"></i>View</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+        <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" href="javascript:void(0);" class="sidebar-closes ms-3"
+          ><i class="fa-regular fa-circle-xmark"></i
+        ></a>
+      </div>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <div class="form-group-item ticket-sidebar">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label  htmlFor="label">Ticket Status</label>
+                <div
+                  class="task-priority-btn select-status justify-content-center table-project-subtitle"
+                >
+                <mat-select
+                [(ngModel)]="selectValue1"
+                [ngModelOptions]="{ standalone: true }"
+                class="select custom-mat-select"
+              >
+                <mat-option value="dataValue1">Select Status</mat-option>
+                <mat-option value="dataValue2">Done</mat-option>
+                <mat-option value="dataValue3">Inprogress</mat-option>
+                <mat-option value="dataValue4">Waiting</mat-option>
+              </mat-select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label  htmlFor="label">Ticket Type</label>
+
+                <mat-select
+                  [(ngModel)]="selectValue2"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select"
+                >
+                  <mat-option value="dataValue1">Select Ticket</mat-option>
+                  <mat-option value="dataValue2">Task 1</mat-option>
+                  <mat-option value="dataValue3">Task 2</mat-option>
+                  <mat-option value="dataValue4">Task 3</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label  htmlFor="label">Assigned To</label>
+
+                <mat-select
+                  [(ngModel)]="selectValue3"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select"
+                >
+                  <mat-option value="dataValue1">Select Assigned</mat-option>
+                  <mat-option value="dataValue2">John Smith</mat-option>
+                  <mat-option value="dataValue3">Johnson</mat-option>
+                  <mat-option value="dataValue4">Randall</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label  htmlFor="label">Project</label>
+                <a
+                  class="action-sets"
+                  href="javascript:void(0);"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <span
+                    ><i class="fa-solid fa-circle text-warning-light me-1"></i>
+                    Medium</span
+                  >
+                  <img
+                    src="assets/img/icons/arrow-down.svg"
+                    width="15"
+                    alt="img"
+                  />
+                </a>
+                <ul class="dropdown-menu action-drop">
+                  <li>
+                    <a href="javascript:void(0);" class="dropdown-item"
+                      ><i
+                        class="fa-solid fa-circle info-border me-2 text-info"
+                      ></i>
+                      High</a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="dropdown-item"
+                      ><i
+                        class="fa-solid fa-circle warning-border me-2 text-warning-light"
+                      ></i>
+                      Medium</a
+                    >
+                  </li>
+                  <li>
+                    <a href="javascript:void(0);" class="dropdown-item"
+                      ><i
+                        class="fa-solid fa-circle danger-border me-2 text-danger-light"
+                      ></i>
+                      Low</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label  htmlFor="label">Project</label>
+
+                <mat-select
+                  [(ngModel)]="selectValue4"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select"
+                >
+                  <mat-option value="dataValue1">Select Project</mat-option>
+                  <mat-option value="dataValue2">Project 1</mat-option>
+                  <mat-option value="dataValue3">Project 2</mat-option>
+                  <mat-option value="dataValue4">Project 3</mat-option>
+                </mat-select>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label" class="form-control-label">Due Date</label>
+                <div class="cal-icon">
+                  <input id="label"
+                    type="email"
+                    class="form-control datetimepicker" bsDatepicker [bsConfig]="{ adaptivePosition: true }"
+                    placeholder="DD-MM-YYYY"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="input-block mb-3">
+                <label  htmlFor="label">Category</label>
+
+                <mat-select
+                  [(ngModel)]="selectValue5"
+                  [ngModelOptions]="{ standalone: true }"
+                  class="select custom-mat-select"
+                >
+                  <mat-option value="dataValue1">Select Category</mat-option>
+                  <mat-option value="dataValue2">Category 1</mat-option>
+                  <mat-option value="dataValue3">Category 2</mat-option>
+                  <mat-option value="dataValue4">Category 3</mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div> -->
+<!--/Add Asset -->

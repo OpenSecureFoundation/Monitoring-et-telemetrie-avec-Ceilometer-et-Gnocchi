@@ -1,0 +1,59 @@
+{
+  "data": [
+    {
+      "invoiceNo": "INV-001",
+      "customer": "Orn LLC",
+      "email": "orn@example.com",
+      "createdOn": "15 Dec 2022, 04:35 PM",
+      "amount": "$299.99",
+      "status": "Paid",
+      "mode": "CASH"
+    },
+    {
+      "invoiceNo": "INV-005",
+      "customer": "Accent Technology",
+      "email": "accent@example.com",
+      "createdOn": "15 Dec 2022, 04:35 PM",
+      "amount": "$299.99",
+      "status": "Paid",
+      "mode": "UPI"
+    },
+    {
+      "invoiceNo": "INV-101",
+      "customer": "Express Advertising",
+      "email": "express@example.com",
+      "createdOn": "04 Dec 2022, 12:38 PM",
+      "amount": "$299.99",
+      "status": "Paid",
+      "mode": "UPI"
+    },
+    {
+      "invoiceNo": "INV-321",
+      "customer": "Sumo Soft Limited",
+      "email": "sumo@example.com",
+      "createdOn": "20 Nov 2023, 02:47 PM",
+      "amount": "$299.99",
+      "status": "Pending",
+      "mode": "-"
+    },
+    {
+      "invoiceNo": "INV-333",
+      "customer": "Repair Group Co",
+      "email": "repair@example.com",
+      "createdOn": "15 Nov 2022, 10:42 AM",
+      "amount": "$299.99",
+      "status": "Pending",
+      "mode": "-"
+    },
+    {
+      "invoiceNo": "INV-421",
+      "customer": "Lexicon Technologies",
+      "email": "lexicon@example.com",
+      "createdOn": "28 Nov 2022, 03:25 PM",
+      "amount": "$299.99",
+      "status": "Paid",
+      "mode": "CHEQUE"
+    }
+  ],
+  "totalData": 6
+}

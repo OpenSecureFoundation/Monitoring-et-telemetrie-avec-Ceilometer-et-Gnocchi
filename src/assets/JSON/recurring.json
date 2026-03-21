@@ -1,0 +1,92 @@
+{
+    "data": [
+      {
+        "invoiceId":"#4987",
+        "category": "Food",
+        "createdOn": "23 Mar 2023",
+        "invoicePerson": "John Smith",
+        "img": "assets/img/profiles/avatar-02.jpg",
+        "mailId": "john@example.com",
+        "totalAmount": "$1,54,220",
+        "paidAmount": "$1,50,000",
+        "paymentmode": "Cash",
+        "balance":"$2,54,00",
+        "dueDate":"25 Mar 2023",
+        "status":"Recurring"
+      },
+      {
+        "invoiceId":"#4988",
+        "category": "Advertising",
+        "createdOn": "16 Mar 2022",
+        "invoicePerson": "Johnny",
+        "img": "assets/img/profiles/avatar-01.jpg",
+        "mailId": "johnny@example.com",
+        "totalAmount": "$3,54,220",
+        "paidAmount": "$2,50,000",
+        "paymentmode": "Cheque",
+        "balance":"$4,220",
+        "dueDate":"16 Jan 2023",
+        "status":"Recurring"
+      },
+      {
+        "invoiceId":"#4989",
+        "category": "Marketing",
+        "createdOn": "25 Feb 2023",
+        "invoicePerson": "Robert",
+        "img": "assets/img/profiles/avatar-08.jpg",
+        "mailId": "robert@example.com",
+        "totalAmount": "$1,54,220",
+        "paidAmount": "$1,50,000",
+        "paymentmode": "Cash",
+        "balance":"$4,220",
+        "dueDate":"16 Jan 2023",
+        "status":"Recurring"
+      },
+      {
+        "invoiceId":"#4990",
+        "category": "Repairs",
+        "createdOn": "25 Mar 2022",
+        "invoicePerson": "Sharonda",
+        "img": "assets/img/profiles/avatar-04.jpg",
+        "mailId": "sharonda@example.com",
+        "totalAmount": "$1,54,220",
+        "paidAmount": "$1,50,000",
+        "paymentmode": "Cash",
+        "balance":"$4,220",
+        "dueDate":"12 May 2023",
+        "status":"Recurring"
+      },
+      {
+        "invoiceId":"#4991",
+        "category": "Software",
+        "createdOn": "12 May 2022",
+        "invoicePerson": "Pricilla",
+        "img": "assets/img/profiles/avatar-06.jpg",
+        "mailId": "pricilla@example.com",
+        "totalAmount": "$5,54,220",
+        "paidAmount": "$3,50,000",
+        "paymentmode": "Cheque",
+        "balance":"$4,220",
+        "dueDate":"18 May 2023",
+        "status":"Recurring"
+      },
+      {
+        "invoiceId":"#4992",
+        "category": "Stationary",
+        "createdOn": "16 Nov 2022",
+        "invoicePerson": "Randall",
+        "img": "assets/img/profiles/avatar-09.jpg",
+        "mailId": "randall@example.com",
+        "totalAmount": "$5,54,220",
+        "paidAmount": "$6,50,000",
+        "paymentmode": "Cash",
+        "balance":"$4,220",
+        "dueDate":"25 Feb 2023",
+        "status":"Recurring"
+      }
+     
+      
+    ],
+    "totalData": 9
+  }
+  

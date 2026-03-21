@@ -1,0 +1,71 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "supplier": "Michael",
+            "date": "01 Aug 2023",
+            "refNo": "#312345",
+            "totalAmount": "$3000.00",
+            "paymentMethod": "Cash",
+            "discount": "12",
+            "taxAmount": "$375",
+            "img": "assets/img/profiles/avatar-14.jpg"
+        },
+        {
+            "id": "2",
+            "supplier": "Richard",
+            "date": "12 Aug 2023",
+            "refNo": "#236348",
+            "totalAmount": "$2000.00",
+            "paymentMethod": "Cash",
+            "discount": "08",
+            "taxAmount": "$247",
+            "img": "assets/img/profiles/avatar-15.jpg"
+        },
+        {
+            "id": "3",
+            "supplier": "Joseph",
+            "date": "16 Sep 2023",
+            "refNo": "#395374",
+            "totalAmount": "$17200.00",
+            "paymentMethod": "Cash",
+            "discount": "10",
+            "taxAmount": "$172",
+            "img": "assets/img/profiles/avatar-16.jpg"
+        },
+        {
+            "id": "4",
+            "supplier": "David",
+            "date": "24 Sep 2023",
+            "refNo": "#312345",
+            "totalAmount": "$32000.00",
+            "paymentMethod": "Cash",
+            "discount": "14",
+            "taxAmount": "$590",
+            "img": "assets/img/profiles/avatar-17.jpg"
+        },
+        {
+            "id": "5",
+            "supplier": "Benjamin",
+            "date": "19 Oct 2023",
+            "refNo": "#893246",
+            "totalAmount": "$24000.00",
+            "paymentMethod": "Cash",
+            "discount": "12",
+            "taxAmount": "$375",
+            "img": "assets/img/profiles/avatar-18.jpg"
+        },
+        {
+            "id": "6",
+            "supplier": "Steven",
+            "date": "20 Oct 2023",
+            "refNo": "#457289",
+            "totalAmount": "$12000.00",
+            "paymentMethod": "Cash",
+            "discount": "05",
+            "taxAmount": "$440",
+            "img": "assets/img/profiles/avatar-19.jpg"
+        }
+    ],
+    "totalData": 6
+}

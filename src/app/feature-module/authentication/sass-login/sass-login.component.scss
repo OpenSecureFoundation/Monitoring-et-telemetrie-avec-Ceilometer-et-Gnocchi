@@ -1,0 +1,72 @@
+/* Banner Section */
+.banner-section {
+  background:
+    linear-gradient(rgba(32, 43, 67, 0.9), rgba(32, 43, 67, 0.8)),
+    url("/assets/imgs/cloud-foundation.jpg") center/cover;
+  min-height: 100vh;
+  border-radius: 16px;
+}
+
+.content-overlay {
+  position: relative;
+  z-index: 2;
+  padding-top: 8rem;
+}
+
+/* Login Section */
+.login-card {
+  transition: transform 0.3s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-5px);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+  z-index: 5;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #6c757d;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.separator::before {
+  margin-right: 1rem;
+}
+
+.separator::after {
+  margin-left: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .banner-section {
+    min-height: 400px;
+  }
+
+  .content-overlay {
+    padding-top: 4rem;
+    text-align: center;
+  }
+
+  .login-card {
+    margin-top: 0px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  }
+}

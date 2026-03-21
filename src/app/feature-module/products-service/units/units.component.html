@@ -1,0 +1,235 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header ">
+    <h5>Units </h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li class="">
+          <div class="dropdown dropdown-action" matTooltip="Download">
+            <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span><i
+            class="feather icon-download"></i></span></a>
+            <div class="dropdown-menu dropdown-menu-right">
+              <ul class="d-block">
+                <li>
+                  <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                  class="far fa-file-pdf me-2"></i>PDF</a>
+                </li>
+                <li>
+                  <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                  class="far fa-file-text me-2"></i>CVS</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="btn-filters" href="javascript:void(0);" matTooltip="Print"><span><i
+          class="feather icon-printer"></i></span> </a>
+        </li>
+        <li>
+          <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add_unit"><i
+          class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add Unit</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<!-- All Invoice -->
+<div class="card invoices-tabs-card">
+  <div class="invoices-main-tabs">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <div class="invoices-tabs">
+          <ul>
+            <li><a [routerLink]="routes.productlist">Product</a></li>
+            <li><a [routerLink]="routes.category">Category</a></li>
+            <li><a [routerLink]="routes.units" class="active">Units</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /All Invoice -->
+
+<!-- Table -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+            <thead class="thead-light">
+              <tr>
+                <th mat-sort-header="id">#</th>
+                <th mat-sort-header="unit">Unit Name</th>
+                <th mat-sort-header="short">Short Name</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (data of units; track data; let i = $index) {
+                <tr>
+                  <td>{{data.id}}</td>
+                  <td>{{data.unit}}</td>
+                  <td>{{data.short}}</td>
+                  <td class="d-flex align-items-center">
+                    <a class="btn-action-icon me-2" href="javascript:void(0);" data-bs-toggle="modal"
+                      data-bs-target="#edit_unit"><i class="feather icon-edit"></i></a>
+                      <a class="btn-action-icon" href="javascript:void(0);" data-bs-toggle="modal"
+                        data-bs-target="#delete_modal"><i class="feather icon-trash-2"></i></a>
+                      </td>
+                    </tr>
+                  }
+
+                </tbody>
+              </table>
+
+            </div>
+            <app-custom-pagination></app-custom-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Table -->
+    <!-- Add Units Modal -->
+    <div class="modal custom-modal fade" id="add_unit" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <div class="form-header modal-header-title text-start mb-0">
+              <h4 class="mb-0">Add Units</h4>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="name">Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Name">
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Symbol">Symbol <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Enter Symbol">
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-0">
+                  <label for="Parent">Parent Unit <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" placeholder="Parent Unit">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add Unit</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Add Units Modal -->
+
+    <!-- Add Units Modal -->
+    <div class="modal custom-modal fade" id="edit_unit" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <div class="form-header modal-header-title text-start mb-0">
+              <h4 class="mb-0">Edit Units</h4>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Name">Name </label>
+                  <input type="text" class="form-control" value="Kilogram" placeholder="Enter Title">
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-3">
+                  <label for="Symbol">Symbol</label>
+                  <input type="text" class="form-control" value="Slug" placeholder="Enter Slug">
+                </div>
+              </div>
+              <div class="col-lg-12 col-sm-12">
+                <div class="input-block mb-0">
+                  <label for="Unit">Parent Unit</label>
+                  <input type="text" class="form-control" value="kg" placeholder="Parent Unit">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Add Units Modal -->
+
+    <!-- Delete Items Modal -->
+    <div class="modal custom-modal fade" id="delete_modal" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="form-header">
+              <h3>Delete Units</h3>
+              <p>Are you sure want to delete?</p>
+            </div>
+            <div class="modal-btn delete-action">
+              <div class="row">
+                <div class="col-6">
+                  <button type="reset" data-bs-dismiss="modal"
+                  class="w-100 btn btn-primary paid-continue-btn">Delete</button>
+                </div>
+                <div class="col-6">
+                  <button type="submit" data-bs-dismiss="modal"
+                  class="w-100 btn btn-primary paid-cancel-btn">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Delete Items Modal -->

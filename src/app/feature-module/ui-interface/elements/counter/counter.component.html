@@ -1,0 +1,119 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Counter</h5>
+  </div>	
+</div>
+<!-- /Page Header -->
+<div class="row">
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5>Clients</h5>
+        <h6 class="counter">{{ clients | number }}</h6>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5>Total Sales</h5>
+        <h6 class="counter">{{ sales  | number}}</h6>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-body">
+        <h5>Total Projects</h5>
+        <h6 class="counter">{{ projects  | number}}</h6>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Count Down</h5>
+      </div>
+      <div class="card-body">
+        <h6>Time Count from 3</h6>
+        <!-- <span id="timer-countdown"> 00 Day 00 : 03 : 00 </span> -->
+        <span id="timer-countdown"> {{ countFromThree }} </span>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Count Up</h5>
+      </div>
+      <div class="card-body">
+        <h6>Time Counting From 0</h6>
+        <span id="timer-countdown">{{ countFromZero }} </span>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Count In between</h5>
+      </div>
+      <div class="card-body">
+        <h6>Time counting from 30 to 20</h6>
+        <span id="timer-countinbetween">
+          {{ countFromThirty }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Count Callback</h5>
+      </div>
+      <div class="card-body">
+        <h6>Count from 10 to 0 and calls timer end callback</h6>
+        <span
+          [class.counterCompleted]="countDownFromTen ===0"
+          id="timer-countercallback"
+        >
+          {{ countFromTen }}
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+
+  <!-- Counter -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Custom Output</h5>
+      </div>
+      <div class="card-body">
+        <h6>Changed output pattern</h6>
+        <span id="timer-outputpattern"> {{countFromThreeWithUnit}} </span>
+      </div>
+    </div>
+  </div>
+  <!-- /Counter -->
+</div>

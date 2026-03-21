@@ -1,0 +1,215 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header ">
+    <h5>Transactions</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" matTooltip="Filter" href="javascript:void(0);" class="btn btn-filters w-auto popup-toggle"><span class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="input-block mb-3">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table matSort
+            (matSortChange)="sortData($event)"
+            class="table table-center table-hover datatable">
+            <thead class="thead-light">
+              <tr>
+                <th mat-sort-header="sNo">#</th>
+                <th mat-sort-header="type">Type</th>
+                <th mat-sort-header="amount">Amount</th>
+                <th mat-sort-header="date">Date </th>
+                <th mat-sort-header="paymentType">Payment Type</th>
+                <th mat-sort-header="status">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (data of Transactions; track data; let i = $index) {
+                <tr>
+                  <td>{{data.sNo}}</td>
+                  <td>{{data.type}}</td>
+                            <td [ngClass]="{
+                                'text-success-light': data.amount === '+$650',
+                                'text-danger': data.amount === '+$350'
+                              }" class="text-success-light">{{ data.amount }}</td>
+                  <td>{{data.date}}</td>
+                  <td>{{data.paymentType}}</td>
+                            <td><span [ngClass]="{
+                                'bg-success-light': data.status === 'Completed',
+                                'bg-danger-light': data.status  === 'Cancel'
+                                
+                              }"
+                  class="badge badge-pill ">{{data.status}}</span></td>
+                </tr>
+              }
+
+            </tbody>
+          </table>
+
+        </div>
+        <app-custom-pagination></app-custom-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Asset -->
+<div class="toggle-sidebar" [ngClass]="{'open-filter' : toggleData === true}">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a href="javascript:void(0);" (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <!-- Type -->
+        <div class="accordion" id="accordionMain1">
+          <div class="card-header-new" id="headingOne">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Type
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"  data-bs-parent="#accordionExample1">
+            <div class="card-body-chat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="checkBoxes1">
+                    <div class="form-custom">
+                      <input type="text" class="form-control" id="member_search1" placeholder="Search here">
+                      <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                    </div>
+                    <div class="selectBox-cont">
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="type">
+                        <span class="checkmark"></span>  Wallet Topup
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="type">
+                        <span class="checkmark"></span>  Purchase
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="type">
+                        <span class="checkmark"></span>  Refund
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Type -->
+
+        <!-- By Status -->
+        <div class="accordion" id="accordionMain3">
+          <div class="card-header-new" id="headingThree">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                By Status
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree"  data-bs-parent="#accordionExample3">
+            <div class="card-body-chat">
+              <div id="checkBoxes2">
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Completed
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span>  cancel
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /By Status -->
+
+        <!-- Payment Type -->
+        <div class="accordion accordion-last" id="accordionMain4">
+          <div class="card-header-new" id="headingFour">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                Payment Type
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour"  data-bs-parent="#accordionExample4">
+            <div class="card-body-chat">
+              <div id="checkBoxes3">
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="payment-type">
+                    <span class="checkmark"></span> Paypal
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="payment-type">
+                    <span class="checkmark"></span>  Cash
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Payment Type -->
+
+        <div class="filter-buttons">
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+            Apply
+          </button>
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!--/Add Asset -->

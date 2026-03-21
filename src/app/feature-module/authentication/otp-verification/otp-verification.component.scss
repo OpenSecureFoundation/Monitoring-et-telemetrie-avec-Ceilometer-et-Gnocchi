@@ -1,0 +1,490 @@
+/* OTP SECTION MODERNISATION */
+.content-section {
+  background: #4f46e5;
+  border: 1px solid #4f46e5;
+}
+
+.otp-container {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  max-width: 500px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px 50px;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.otp-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.otp-header img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.otp-title {
+  // color: #2a2e35;
+  color: var(--dark);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.otp-message {
+  // color: #6b7280;
+  color: var(--gray);
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 35px;
+  font-family: "Inter", sans-serif;
+  text-align: center;
+}
+
+.otp-inputs {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.otp-input {
+  width: 55px;
+  height: 65px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #2a2e35;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #f8fafc;
+  text-align: center;
+  display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  line-height: 65px;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+
+  &:focus {
+    border-color: #6366f1;
+    box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+    background: #ffffff;
+    transform: scale(1.05);
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+    font-weight: 400;
+  }
+}
+
+.otp-button {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  border: none;
+  padding: 16px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(99, 102, 241, 0.15);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(99, 102, 241, 0.25);
+    background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.otp-resend {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #6b7280;
+
+  a {
+    color: #6366f1;
+    font-weight: 600;
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 2px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #6366f1;
+      transition: width 0.3s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+}
+
+.saas-login-wrapper {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.otp-container {
+  animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+/* end OPT SECTION MODERNISATION */
+
+/* BANNER SECTION MODERNISATION */
+.banner-section {
+  background:
+    linear-gradient(rgba(32, 43, 67, 0.9), rgba(32, 43, 67, 0.8)),
+    url("/assets/imgs/cybersecurity-concept-collage-design.jpg") center/cover;
+  min-height: 100vh;
+}
+
+.authentication-wrapper {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.authentication-content {
+  position: relative;
+  z-index: 2;
+  max-width: 500px;
+  margin: 0 auto;
+
+  h1 {
+    color: white;
+    font-size: 2.8rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    font-family: "Inter", sans-serif;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: slideInLeft 0.8s ease-out;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    font-family: "Inter", sans-serif;
+    animation: fadeIn 1s 0.3s both;
+  }
+}
+
+.authen-img {
+  position: relative;
+  text-align: center;
+  margin-top: auto;
+  animation: float 4s ease-in-out infinite;
+
+  img {
+    width: min(80%, 400px);
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+}
+
+.login-bg-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.1;
+  background: url("/assets/img/CyberSecurity-Photoroom.png") repeat;
+}
+
+/* Animations spécifiques */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes dots-movement {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
+/*End BANNER SECTION MODERNISATION */
+
+/* Nouveau style pour le timer */
+.otp-timer {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #6b7280;
+  font-family: "Inter", sans-serif;
+
+  span {
+    font-weight: 600;
+    color: #ef4444;
+  }
+}
+/*------Fin-----*/
+
+/* Responsive Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .saas-login-wrapper {
+    padding: 20px 15px !important;
+    background: #f1f5f9 !important;
+  }
+
+  .otp-container {
+    padding: 25px 20px !important;
+    max-width: 100% !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08) !important;
+  }
+
+  .otp-inputs {
+    gap: 10px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .otp-input {
+    width: 45px !important;
+    height: 55px !important;
+    font-size: 20px !important;
+  }
+
+  .otp-title {
+    font-size: 24px !important;
+  }
+
+  .otp-message {
+    font-size: 14px !important;
+    margin-bottom: 25px !important;
+  }
+
+  .otp-button {
+    padding: 14px 20px !important;
+  }
+}
+/* Responsive Mobile (max-width: 767px) */
+@media (max-width: 767px) {
+  .mobile-bg-overlay {
+    display: block !important;
+  }
+
+  .saas-login-wrapper {
+    padding: 20px 15px !important;
+    background: none !important;
+  }
+
+  .otp-container {
+    padding: 25px 20px !important;
+    max-width: 100% !important;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15) !important;
+    background: rgba(255, 255, 255, 0.92);
+  }
+
+  .otp-inputs {
+    gap: 10px !important;
+    margin-bottom: 30px !important;
+  }
+
+  .otp-input {
+    width: 45px !important;
+    height: 55px !important;
+    font-size: 20px !important;
+    line-height: 55px !important;
+  }
+
+  .otp-title {
+    font-size: 24px !important;
+  }
+
+  .otp-message {
+    font-size: 14px !important;
+    margin-bottom: 25px !important;
+  }
+
+  .otp-button {
+    padding: 14px 20px !important;
+  }
+
+}
+/*--------------Fin-----------*/
+
+/* Petits mobiles (max-width: 400px) */
+@media (max-width: 400px) {
+  .otp-inputs {
+    gap: 6px !important;
+  }
+
+  .otp-input {
+    width: 40px !important;
+    height: 50px !important;
+    font-size: 18px !important;
+    line-height: 50px !important;
+  }
+
+  .otp-title {
+    font-size: 22px !important;
+  }
+}
+/*----------Fin----------*/
+
+/* Animation des icônes de fond */
+@keyframes floating {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+.bg-icon {
+  animation: floating 12s ease-in-out infinite;
+}
+
+.bg-icon:nth-child(2n) {
+  animation-duration: 15s;
+  animation-delay: 2s;
+}
+
+.bg-icon:nth-child(3n) {
+  animation-duration: 18s;
+  animation-delay: 4s;
+}
+
+.bg-icon:nth-child(5n) {
+  animation-direction: reverse;
+}
+/*------Fin animation-------*/
+
+/* Nouveau fond mobile */
+.mobile-bg-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(32, 43, 67, 0.95) 0%,
+    rgba(32, 43, 67, 0.85) 100%
+  );
+}
+
+.mobile-bg-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(99, 102, 241, 0.1) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 80% 80%,
+      rgba(139, 92, 246, 0.1) 0%,
+      transparent 20%
+    );
+  opacity: 0.6;
+}
+
+.mobile-bg-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.bg-icon {
+  position: absolute;
+  font-size: 24px;
+  color: rgba(255, 255, 255, 0.08);
+  z-index: 0;
+}
+/*---------Fin-----------*/
+
+
+
+
+
+
+
+
+
+

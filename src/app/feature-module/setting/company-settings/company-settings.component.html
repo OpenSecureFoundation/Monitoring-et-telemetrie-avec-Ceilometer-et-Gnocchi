@@ -1,0 +1,163 @@
+<div class="row">
+  <div class="card company-settings-new">
+    <div class="card-body w-100">
+      <div class="content-page-header">
+        <h5>Company Settings</h5>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-12">
+          <div class="input-block mb-3">
+            <label for="Company">Company Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Enter Company Name"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6 col-12">
+            <div class="input-block mb-3">
+              <label for="Addres">Company Address</label>
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Enter Company Address"
+                />
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="Phone">Phone Number</label>
+                <input type="text" class="form-control" placeholder="Enter Phone Number">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="Company">Company Email</label>
+                <input type="text" class="form-control" placeholder="Enter Company Email">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="Line1">Address Line 1</label>
+                <input type="text" class="form-control" placeholder="Enter Address Line 1">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="Line2">Address Line 2</label>
+                <input type="text" class="form-control" placeholder="Enter Address Line 2">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="Country">Country</label>
+                <input type="text" class="form-control" placeholder="Enter Country">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="State">State</label>
+                <input type="text" class="form-control" placeholder="Enter State">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="City">City</label>
+                <input type="text" class="form-control" placeholder="Enter City">
+              </div>
+            </div>
+            <div class="col-lg-6 col-12">
+              <div class="input-block mb-3">
+                <label for="Pincode">Pincode</label>
+                <input type="text" class="form-control" placeholder="Enter Pincode">
+              </div>
+            </div>
+            <div class="col-lg-12 col-12">
+              <div class="input-block mb-3">
+                <label for="Site">Site Logo</label>
+                <div class="input-block service-upload logo-upload mb-0">
+                  <div class="drag-drop">
+                    <h6 class="drop-browse align-center">
+                      <span class="text-info me-1">Click To Replace</span> or Drag and Drop
+                    </h6>
+                    <p class="text-muted">SVG, PNG, JPG (Max 800*400px)</p>
+                    <input type="file" multiple="">
+                  </div>
+                  <span class="sites-logo"><img src="assets/img/settings-logo1.png" alt="upload"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-6 col-12">
+              <div class="input-block mb-3 mb-0 pb-0">
+                <label for="Favicon">Favicon</label>
+                <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                  <ngx-dropzone-label class="drop-browse align-center">
+                    <span
+                      ><img src="assets/img/icons/img-drop.svg" alt="upload"
+                    /></span>
+                    <div class="drag-drop">
+                      <h6 class="drop-browse align-center">
+                        <span class="text-info me-1">Click to Replace </span> or Drag
+                        and Drop
+                      </h6>
+                    </div>
+
+                    <span class="text-muted">SVG, PNG, JPG</span>
+                  </ngx-dropzone-label>
+                  @for (f of files; track f) {
+                    <ngx-dropzone-image-preview
+                      ngProjectAs="ngx-dropzone-preview"
+                      [file]="f"
+                      [removable]="true"
+                      (removed)="onRemove(f)"
+                      >
+                    </ngx-dropzone-image-preview>
+                  }
+                </ngx-dropzone>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-6 col-12">
+              <div class="input-block mb-3 mb-0 pb-0">
+                <label for="Company">Company icon</label>
+                <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                  <ngx-dropzone-label class="drop-browse align-center">
+                    <span
+                      ><img src="assets/img/icons/img-drop.svg" alt="upload"
+                    /></span>
+                    <div class="drag-drop">
+                      <h6 class="drop-browse align-center">
+                        <span class="text-info me-1">Click to Replace </span> or Drag
+                        and Drop
+                      </h6>
+                    </div>
+
+                    <span class="text-muted">SVG, PNG, JPG</span>
+                  </ngx-dropzone-label>
+                  @for (f of files; track f) {
+                    <ngx-dropzone-image-preview
+                      ngProjectAs="ngx-dropzone-preview"
+                      [file]="f"
+                      [removable]="true"
+                      (removed)="onRemove(f)"
+                      >
+                    </ngx-dropzone-image-preview>
+                  }
+                </ngx-dropzone>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="btn-path text-end">
+                <a
+                  href="javascript:void(0);"
+                  class="btn btn-cancel bg-primary-light me-3"
+                  >Cancel</a
+                  >
+                  <a href="javascript:void(0);" class="btn btn-primary">Save Changes</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>

@@ -1,0 +1,71 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "customer": "John Smith",
+            "date": "01 Aug 2023",
+            "invoiceNo": "INV312345",
+            "totalAmount": "$28000.00",
+            "paymentMethod": "Cash",
+            "discount": "10",
+            "taxAmount": "$280",
+            "img": "assets/img/profiles/avatar-14.jpg"
+        },
+        {
+            "id": "2",
+            "customer": "Johny Charles",
+            "date": "13 Aug 2023",
+            "invoiceNo": "INV472894",
+            "totalAmount": "$32000.00",
+            "paymentMethod": "Cash",
+            "discount": "07",
+            "taxAmount": "$340",
+            "img": "assets/img/profiles/avatar-15.jpg"
+        },
+        {
+            "id": "3",
+            "customer": "Robert George",
+            "date": "16 Sep 2023",
+            "invoiceNo": "INV562967",
+            "totalAmount": "$10000.00",
+            "paymentMethod": "Cash",
+            "discount": "12",
+            "taxAmount": "$170",
+            "img": "assets/img/profiles/avatar-16.jpg"
+        },
+        {
+            "id": "4",
+            "customer": "Sharonda Letha",
+            "date": "24 Sep 2023",
+            "invoiceNo": "INV012649",
+            "totalAmount": "$12000.00",
+            "paymentMethod": "Cash",
+            "discount": "18",
+            "taxAmount": "$520",
+            "img": "assets/img/profiles/avatar-17.jpg"
+        },
+        {
+            "id": "5",
+            "customer": "Pricillia Maureen",
+            "date": "10 Oct 2023",
+            "invoiceNo": "INV941759",
+            "totalAmount": "$16000.00",
+            "paymentMethod": "Cash",
+            "discount": "05",
+            "taxAmount": "$270",
+            "img": "assets/img/profiles/avatar-18.jpg"
+        },
+        {
+            "id": "6",
+            "customer": "Randall Hollis",
+            "date": "29 Oct 2023",
+            "invoiceNo": "INV375016",
+            "totalAmount": "$22000.00",
+            "paymentMethod": "Cash",
+            "discount": "16",
+            "taxAmount": "$350",
+            "img": "assets/img/profiles/avatar-19.jpg"
+        }
+    ],
+    "totalData": 6
+}

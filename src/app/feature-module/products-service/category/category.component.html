@@ -1,0 +1,451 @@
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header ">
+    <h5>Category </h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a
+            (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0"
+            matTooltip="Filter"
+            href="javascript:void(0);"
+            class="btn btn-filters w-auto popup-toggle"
+            >
+            <span class="me-2"
+              ><img src="assets/img/icons/filter-icon.svg" alt="filter" /></span
+              >Filter
+            </a>
+          </li>
+          <li class="">
+            <div class="dropdown dropdown-action">
+              <a
+                href="javascript:void(0);"
+                class="btn-filters"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                matTooltip="Download"
+                ><span><i class="feather icon-download"></i></span
+              ></a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <ul class="d-block">
+                  <li>
+                    <a
+                      class="d-flex align-items-center download-item"
+                      href="javascript:void(0);"
+                      download
+                      ><i class="far fa-file-pdf me-2"></i>PDF</a
+                      >
+                    </li>
+                    <li>
+                      <a
+                        class="d-flex align-items-center download-item"
+                        href="javascript:void(0);"
+                        download
+                        ><i class="far fa-file-text me-2"></i>CVS</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a class="btn-filters"  matTooltip="Print" href="javascript:void(0);"
+                  ><span><i class="feather icon-printer"></i></span>
+                </a>
+              </li>
+              <li>
+                <a class="btn btn-import" href="javascript:void(0);"
+                  ><span
+                  ><i class="feather icon-check-square me-2"></i> Import</span
+                  ></a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="btn btn-primary"
+                    href="javascript:void(0);"
+                    data-bs-toggle="modal"
+                    data-bs-target="#add_category"
+                    ><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add
+                    Category</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- /Page Header -->
+
+          <!-- Search Filter -->
+          <div id="filter_inputs" class="card filter-card">
+            <div class="card-body pb-0">
+              <div class="row">
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label htmlFor="label">Name</label>
+                    <input id="label" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label htmlFor="label">Email</label>
+                    <input id="label" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group">
+                    <label htmlFor="label">Phone</label>
+                    <input id="label" type="text" class="form-control">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Search Filter -->
+
+          <!-- All Invoice -->
+          <div class="card invoices-tabs-card">
+            <div class="invoices-main-tabs">
+              <div class="row align-items-center">
+                <div class="col-lg-12">
+                  <div class="invoices-tabs">
+                    <ul>
+                      <li><a [routerLink]="routes.productlist">Product</a></li>
+                      <li><a [routerLink]="routes.category" class="active">Category</a></li>
+                      <li><a [routerLink]="routes.units">Units</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /All Invoice -->
+
+          <!-- Table -->
+          <div class="row">
+            <div class="col-sm-12">
+              <div class=" card-table">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table matSort
+                      (matSortChange)="sortData($event)"
+                      class="table table-center table-hover datatable">
+                      <thead class="thead-light">
+                        <tr>
+                          <th  mat-sort-header="id">#</th>
+                          <th mat-sort-header="category">Category Name</th>
+                          <th mat-sort-header="total">Total Products</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (data of category; track data; let i = $index) {
+                          <tr>
+                            <td>{{data.id}}</td>
+                            <td><a href="" class="product-list-item-img"><img [src]="data.img" alt="product-list"><span>{{data.category}}</span></a></td>
+                            <td>{{data.total}}</td>
+                            <td class="d-flex align-items-center">
+                              <a class=" btn-action-icon me-2"  href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#edit_category"><i class="feather icon-edit"></i></a>
+                              <a class=" btn-action-icon" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="feather icon-trash-2"></i></a>
+                            </td>
+                          </tr>
+                        }
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                  <app-custom-pagination></app-custom-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Table -->
+
+          <!-- Add Asset -->
+          <div class="toggle-sidebar" [ngClass]="{'open-filter' : toggleData === true}">
+            <div class="sidebar-layout-filter">
+              <div class="sidebar-header">
+                <h5>Filter</h5>
+                <a href="javascript:void(0);" (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+              </div>
+              <div class="sidebar-body">
+                <form action="#" autocomplete="off">
+                  <!-- Product -->
+                  <div class="accordion" id="accordionMain1">
+                    <div class="card-header-new" id="headingOne">
+                      <h6 class="filter-title">
+                        <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Category Name
+                          <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                        </a>
+                      </h6>
+                    </div>
+
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"  data-bs-parent="#accordionExample1">
+                      <div class="card-body-chat">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div id="checkBoxes1">
+                              <div class="form-custom">
+                                <input type="text" class="form-control" id="member_search1" placeholder="Search Product">
+                                <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                              </div>
+                              <div class="selectBox-cont">
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="username">
+                                  <span class="checkmark"></span>  Advertising
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="username">
+                                  <span class="checkmark"></span> Food
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="username">
+                                  <span class="checkmark"></span> Furniture
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="username">
+                                  <span class="checkmark"></span> Repairs
+                                </label>
+                                <!-- View All -->
+                                <div class="view-content">
+                                  <div class="viewall-One">
+                                    @for (user of users; track user) {
+                                      <label class="custom_check w-100" [ngClass]="{ closed: !isCollapsed1, open: isCollapsed1 }">
+                                        <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                                        <span class="checkmark"></span> {{ user.name }}
+                                      </label>
+                                    }
+                                  </div>
+                                  <div class="view-all">
+                                    <a (click)="toggleCollapse1()" href="javascript:void(0);" class="viewall-button-One"><span
+                                    class="me-2">{{ isCollapsed1 ? "Close All" : "View All" }}</span><span><i
+                                  class="fa" [ngClass]="!isCollapsed1 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                                </div>
+                              </div>
+                              <!-- /View All -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Product -->
+
+                <div class="filter-buttons">
+                  <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+                    Apply
+                  </button>
+                  <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+                    Reset
+                  </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <!-- /Add Asset -->
+        <!-- Add Category Modal -->
+        <div class="modal custom-modal fade" id="add_category" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header border-0 pb-0">
+                <div class="form-header modal-header-title text-start mb-0">
+                  <h4 class="mb-0">Add Category</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card-body">
+                      <div class="form-group-item border-0 pb-0 mb-0">
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Name">Name <span class="text-danger">*</span></label>
+                              <input type="text"  class="form-control" placeholder="Enter Title">
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Slug">Slug</label>
+                              <input type="text" class="form-control" placeholder="Enter Slug">
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Parent">Parent Category</label>
+                              <mat-select [(ngModel)]="parent" [ngModelOptions]="{standalone: true}" class="select custom-mat-select">
+                                <mat-option value="none">None</mat-option>
+                                <mat-option value="customer1">Coupon</mat-option>
+                                <mat-option value="customer2">News</mat-option>
+                                <mat-option value="customer3">Plugins</mat-option>
+                                <mat-option value="customer3">Theme</mat-option>
+                                <mat-option value="customer3">Tutorial</mat-option>
+                              </mat-select>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-0 pb-0">
+                              <label for="Image">Image</label>
+                              <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                                <ngx-dropzone-label class="drop-browse align-center">
+                                  <span
+                                    ><img src="assets/img/icons/drop-icon.svg" alt="upload"
+                                  /></span>
+                                  <div class="d-flex">
+                                    Drop your files here or<span class="text-primary ms-1"
+                                    >browse</span
+                                    >
+                                  </div>
+
+                                  <span class="text-muted">Maximum size: 50MB</span>
+                                </ngx-dropzone-label>
+                                @for (f of files; track f) {
+                                  <ngx-dropzone-image-preview
+                                    ngProjectAs="ngx-dropzone-preview"
+                                    [file]="f"
+                                    [removable]="true"
+                                    (removed)="onRemove(f)"
+                                    >
+                                  </ngx-dropzone-image-preview>
+                                }
+                              </ngx-dropzone>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add Category</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Add Category Modal -->
+
+        <!-- Add Category Modal -->
+        <div class="modal custom-modal fade" id="edit_category" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header border-0 pb-0">
+                <div class="form-header modal-header-title text-start mb-0">
+                  <h4 class="mb-0">Edit Category</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card-body">
+                      <div class="form-group-item border-0 pb-0 mb-0">
+                        <div class="row">
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Name">Name <span class="text-danger">*</span></label>
+                              <input type="text"  class="form-control" value="Advertising" placeholder="Enter Title">
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Slug">Slug</label>
+                              <input type="text" class="form-control" value="advertising" placeholder="Enter Slug">
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-3">
+                              <label for="Parent">Parent Category</label>
+                              <mat-select [(ngModel)]="parent2" [ngModelOptions]="{standalone: true}" class="select custom-mat-select">
+                                <mat-option value="none">None</mat-option>
+                                <mat-option value="customer1">Coupon</mat-option>
+                                <mat-option value="customer2">News</mat-option>
+                                <mat-option value="customer3">Plugins</mat-option>
+                                <mat-option value="customer3">Theme</mat-option>
+                                <mat-option value="customer3">Tutorial</mat-option>
+                              </mat-select>
+                            </div>
+                          </div>
+                          <div class="col-lg-12 col-sm-12">
+                            <div class="input-block mb-0 pb-0">
+                              <label for="Image">Image</label>
+                              <ngx-dropzone (change)="onSelect($event)" class="service-upload">
+                                <ngx-dropzone-label class="drop-browse align-center">
+                                  <span
+                                    ><img src="assets/img/icons/drop-icon.svg" alt="upload"
+                                  /></span>
+                                  <div class="d-flex">
+                                    Drop your files here or<span class="text-primary ms-1"
+                                    >browse</span
+                                    >
+                                  </div>
+
+                                  <span class="text-muted">Maximum size: 50MB</span>
+                                </ngx-dropzone-label>
+                                @for (f of files; track f) {
+                                  <ngx-dropzone-image-preview
+                                    ngProjectAs="ngx-dropzone-preview"
+                                    [file]="f"
+                                    [removable]="true"
+                                    (removed)="onRemove(f)"
+                                    >
+                                  </ngx-dropzone-image-preview>
+                                }
+                              </ngx-dropzone>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+                <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Add Vendor Modal -->
+
+        <!-- Delete Items Modal -->
+        <div class="modal custom-modal fade" id="delete_modal" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-body">
+                <div class="form-header">
+                  <h3>Delete Category</h3>
+                  <p>Are you sure want to delete?</p>
+                </div>
+                <div class="modal-btn delete-action">
+                  <div class="row">
+                    <div class="col-6">
+                      <button type="reset" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-continue-btn">Delete</button>
+                    </div>
+                    <div class="col-6">
+                      <button type="submit" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-cancel-btn">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Delete Items Modal -->
+
+
+
+

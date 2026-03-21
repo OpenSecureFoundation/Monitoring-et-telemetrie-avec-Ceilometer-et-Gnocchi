@@ -1,0 +1,270 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Toasts</h5>
+  </div>	
+</div>	
+<!-- /Page Header -->	
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card" id="types">
+      <div class="card-header">
+        <h4 class="card-title">Types</h4>
+      </div>
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-outline-success mr-1 mb-1 me-1"
+          (click)="typeSuccess()"
+        >
+          Success
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-info mr-1 mb-1 me-1"
+          (click)="typeInfo()"
+        >
+          Info
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-warning mr-1 mb-1 me-1"
+          (click)="typeWarning()"
+        >
+          Warning
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-danger mr-1 mb-1"
+          (click)="typeError()"
+        >
+          Error
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Position</h4>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-sm-12 mb-4">
+            <h5 class="mb-3">Top Positions</h5>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1 me-1"
+              (click)="topLeft()"
+            >
+              Top Left
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1 me-1"
+              (click)="topCenter()"
+            >
+              Top Center
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1 me-1"
+              (click)="topRight()"
+            >
+              Top Right
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1"
+              (click)="fullWidth()"
+            >
+              Top Full Width
+            </button>
+          </div>
+
+          <div class="col-sm-12">
+            <h5 class="mb-3">Bottom Positions</h5>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1 me-1"
+              (click)="bottomLeft()"
+            >
+              Bottom Left
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1 me-1"
+              (click)="bottomCenter()"
+            >
+              Bottom Center
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1 me-1"
+              (click)="bottomRight()"
+            >
+              Bottom Right
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-primary mr-1 mb-1"
+              (click)="bottomFull()"
+            >
+              Bottom Full Width
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Options</h4>
+      </div>
+      <div class="card-body">
+        <button
+          type="button"
+          class="btn btn-outline-success mr-1 mb-1 me-1"
+          (click)="notification()"
+          id="text-notification"
+        >
+          Notifications
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-success mr-1 mb-1 me-1"
+          (click)="closeButton()"
+          id="close-button"
+        >
+          Close Button
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-success mr-1 mb-1 me-1"
+          (click)="progressBar()"
+          id="progress-bar"
+        >
+          Progress Bar
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-success mr-1 mb-1 me-1"
+          (click)="clearToast()"
+          id="clear-toast-btn"
+        >
+          Clear Toast
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Clear Toasts</h4>
+      </div>
+      <div class="card-body">
+        <div class="row mt-1">
+          <div class="col-md-6 col-sm-12 mb-3 mb-md-0">
+            <h5>Remove</h5>
+            <p>Immediately remove current toasts without using animation.</p>
+            <button
+              type="button"
+              class="btn btn-outline-info mr-1 mb-1 me-1"
+              (click)="showRemove()"
+              id="show-remove-toast"
+            >
+              Show Toast
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger mr-1 mb-1"
+              (click)="remove()"
+              id="remove-toast"
+            >
+              Remove Toast
+            </button>
+          </div>
+          <div class="col-md-6 col-sm-12 mb-3 mb-md-0">
+            <h5>Clear</h5>
+            <p>Remove current toasts using animation.</p>
+            <button
+              type="button"
+              class="btn btn-outline-info mr-1 mb-1 me-1"
+              (click)="showRemove()"
+              id="show-clear-toast"
+            >
+              Show Toast
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger mr-1 mb-1"
+              (click)="remove()"
+              id="clear-toast"
+            >
+              Clear Toast
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">Duration & Timeout</h4>
+      </div>
+      <div class="card-body">
+        <p>
+          you can use options like <code>showDuration</code>,
+          <code>hideDuration</code>, <code>timeout</code> for your toasts. To
+          create a sticky toast set the <code>timeout</code> to <code>0</code>
+        </p>
+        <button
+          type="button"
+          class="btn btn-outline-info mr-1 mb-1 me-1"
+          (click)="fastDuration()"
+          id="fast-duration"
+        >
+          Show .5s
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-info mr-1 mb-1 me-1"
+          (click)="slowDuration()"
+          id="slow-duration"
+        >
+          Hide 3s
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-info mr-1 mb-1 me-1"
+          (click)="timeouts()"
+          id="timeout"
+        >
+          Timeout 5s
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-info mr-1 mb-1"
+          (click)="stickys()"
+          id="sticky"
+        >
+          Sticky Toast
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

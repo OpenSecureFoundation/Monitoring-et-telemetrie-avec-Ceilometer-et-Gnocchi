@@ -1,0 +1,527 @@
+<div class="card mb-0">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Edit Credit Note</h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="cards">
+
+          <div class="form-group-item border-0 mb-0">
+            <div class="row align-item-center">
+              <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Credit Notes Id</label>
+                  <input id="label"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Credit Note ID Name"
+                    />
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label">Select Customer</label>
+                    <ul class="form-group-plus css-equal-heights">
+                      <li>
+                        <mat-select
+                          [(ngModel)]="customer"
+                          [ngModelOptions]="{ standalone: true }"
+                          class="select custom-mat-select"
+                          >
+                          <mat-option value="customers">Choose Customer</mat-option>
+                          <mat-option value="customer1">Customer 1</mat-option>
+                          <mat-option value="customer2">Customer 2</mat-option>
+                          <mat-option value="customer3">Customer 3</mat-option>
+                        </mat-select>
+                      </li>
+                      <li>
+                        <a
+                          class="btn btn-primary form-plus-btn"
+                          [routerLink]="routes.addCustomer"
+                          >
+                          <i class="feather icon-plus-circle"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                  <div class="input-block mb-3">
+                    <label htmlFor="label">Credit Note Date</label>
+                    <input
+
+                      type="email"
+                      class="form-control datetimepicker"
+                      placeholder="Select Date"
+                      
+                      bsDatepicker [bsConfig]="{ adaptivePosition: true }" [(bsValue)]="myDateValue">
+
+
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label htmlFor="label">Due Date</label>
+                      <input
+
+
+                        type="email"
+                        class="form-control datetimepicker"
+                        placeholder="Select Date"
+                        
+                        
+                        bsDatepicker [bsConfig]="{ adaptivePosition: true }"
+
+                        />
+
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                      <div class="input-block mb-3">
+                        <label htmlFor="label">Reference No</label>
+                        <input id="label"
+                          type="text"
+                          class="form-control"
+                          placeholder="Enter Phone Number"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col-lg-12">
+                        <div class="input-block mb-3">
+                          <label htmlFor="label">Products</label>
+                          <ul class="form-group-plus css-equal-heights">
+                            <li>
+                              <mat-select
+                                [(ngModel)]="products"
+                                [ngModelOptions]="{ standalone: true }"
+                                class="select custom-mat-select"
+                                >
+                                <mat-option value="select">Select Product</mat-option>
+                                <mat-option value="Product 1">Product 1</mat-option>
+                                <mat-option value="Product 2">Product 2</mat-option>
+                                <mat-option value="customer3">Product 3</mat-option>
+                              </mat-select>
+                            </li>
+                            <li>
+                              <a
+                                class="btn btn-primary form-plus-btn"
+                                [routerLink]="routes.addproducts"
+                                >
+                                <i class="feather icon-plus-circle"></i>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group-item">
+                    <div class="card-table">
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table
+                            matSort
+                            (matSortChange)="sortData($event)"
+                            class="table table-center table-hover datatable"
+                            >
+                            <thead class="thead-light">
+                              <tr>
+                                <th mat-sort-header="product">Product / Service</th>
+                                <th mat-sort-header="quantity">Quantity</th>
+                                <th mat-sort-header="unit">Unit</th>
+                                <th mat-sort-header="rate">Rate</th>
+                                <th mat-sort-header="discount">Discount</th>
+                                <th mat-sort-header="tax">Tax</th>
+                                <th mat-sort-header="amount">Amount</th>
+                                <th mat-sort-header="action">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @for (data of editcreditnotes; track data; let i = $index) {
+                                <tr>
+                                  <td>{{ data.product }}</td>
+                                  <td><input type="number" class="form-control" placeholder="120"></td>
+                                  <td>{{ data.unit }}</td>
+                                  <td><input type="number" class="form-control" placeholder="120"></td>
+                                  <td>{{ data.discount }}</td>
+                                  <td>{{ data.tax }}</td>
+                                  <td>{{ data.amount }}</td>
+                                  <td class="d-flex align-items-center">
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="btn-action-icon me-2"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#add_discount"
+                                      ><span><i class="feather icon-edit"></i></span
+                                    ></a>
+                                    <a
+                                      href="javascript:void(0);"
+                                      class="btn-action-icon"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#delete_discount"
+                                      ><span><i class="feather icon-trash-2"></i></span
+                                    ></a>
+                                  </td>
+                                </tr>
+                              }
+                            </tbody>
+                          </table>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="row">
+                        <div class="col-lg-7">
+                          <div class="input-block mb-3">
+                            <label for="Discount">Discount Type</label>
+                            <mat-select
+                              [(ngModel)]="discount"
+                              [ngModelOptions]="{ standalone: true }"
+                              class="select custom-mat-select"
+                              >
+                              <mat-option value="discount1">Percentage(%)</mat-option>
+                              <mat-option value="discount2">Fixed</mat-option>
+
+                            </mat-select>
+                          </div>
+                        </div>
+                        <div class="col-lg-5">
+                          <div class="input-block mb-3">
+                            <label for="Discount">Discount(%)</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              placeholder="10"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="input-block mb-3">
+                          <label for="Tax">Tax</label>
+                          <mat-select
+                            [(ngModel)]="tax"
+                            [ngModelOptions]="{ standalone: true }"
+                            class="select custom-mat-select"
+                            >
+                            <mat-option value="tax1">No Tax</mat-option>
+                            <mat-option value="tax2">IVA - (21%)</mat-option>
+                            <mat-option value="tax3">IVA - (21%)</mat-option>
+                            <mat-option value="tax4">IVA - (21%)</mat-option>
+
+
+                          </mat-select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group-item border-0 p-0">
+                      <div class="row">
+                        <div class="col-xl-6 col-lg-12">
+                          <div class="form-group-bank">
+                            <div class="row align-items-center">
+                              <div class="col-md-8">
+                                <div class="input-block mb-3">
+                                  <label for="Bank">Select Bank</label>
+                                  <mat-select
+                                    [(ngModel)]="selectbank"
+                                    [ngModelOptions]="{ standalone: true }"
+                                    class="select custom-mat-select"
+                                    >
+                                    <mat-option value="bank1">Select Bank</mat-option>
+                                    <mat-option value="Ban">SBI</mat-option>
+                                    <mat-option value="Ban">IOB</mat-option>
+                                    <mat-option value="Ban">Canara</mat-option>
+
+
+                                  </mat-select>
+                                </div>
+                              </div>
+                              <div class="col-md-4">
+                                <div class="input-block ">
+                                  <a
+                                    class="btn btn-primary"
+                                    href="javascript:void(0);"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#bank_details"
+                                    >Add Bank</a
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="input-block mb-3 notes-form-group-info">
+                                <label for="Notes">Notes</label>
+                                <textarea
+                                  class="form-control"
+                                  placeholder="Enter Notes"
+                                ></textarea>
+                              </div>
+                              <div class="input-block mb-3 notes-form-group-info mb-0">
+                                <label for="Terms">Terms and Conditions</label>
+                                <textarea
+                                  class="form-control"
+                                  placeholder="Enter Terms and Conditions"
+                                ></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-xl-6 col-lg-12">
+                            <div class="form-group-bank">
+                              <div class="invoice-total-box">
+                                <div class="invoice-total-inner">
+                                  <p>Taxable Amount <span>$120.00</span></p>
+                                  <p>Discount <span>$13.20</span></p>
+                                  <p>Vat <span>$0.00</span></p>
+                                  <div
+                                    class="status-toggle justify-content-between"
+                                    >
+                                    <div class="d-flex align-center">
+                                      <p>Round Off</p>
+                                      <input
+                                        id="rating_1"
+                                        class="check"
+                                        type="checkbox"
+                                        checked=""
+                                        />
+                                        <label
+                                          for="rating_1"
+                                          class="checktoggle checkbox-bg"
+                                          >checkbox</label
+                                          >
+                                        </div>
+                                        <span>$0.00</span>
+                                      </div>
+                                    </div>
+                                    <div class="invoice-total-footer">
+                                      <h4>Total Amount <span>$107.80</span></h4>
+                                    </div>
+                                  </div>
+                                  <div class="input-block mb-3">
+                                    <label for="Signature">Signature Name</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter Signature Name"
+                                      />
+                                    </div>
+                                    <div class="col-md-12 ">
+                                      <div class="input-block mb-3 mb-0 pb-0">
+                                        <label for="SignatureImage">Signature Image</label>
+                                        <ngx-dropzone (change)="onSelect($event)" class="service-upload add-credit">
+                                          <ngx-dropzone-label class="drop-browse align-center">                           <span><i ></i>Upload Signature</span>
+                                        </ngx-dropzone-label>
+                                        @for (f of files; track f) {
+                                          <ngx-dropzone-image-preview
+                                            ngProjectAs="ngx-dropzone-preview"
+                                            [file]="f"
+                                            [removable]="true"
+                                            (removed)="onRemove(f)"
+                                            >
+                                          </ngx-dropzone-image-preview>
+                                        }
+                                      </ngx-dropzone>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="add-customer-btns text-end">
+                            <a  [routerLink]="routes.editcreditnotes" class="btn customer-btn-cancel"
+                              >Cancel</a
+                              >
+                              <a  [routerLink]="routes.editcreditnotes" class="btn customer-btn-save"
+                                >Save</a
+                                >
+                              </div>
+
+                            </div>
+                          </div>
+                          <!-- Add Tax & Discount Modal -->
+                          <div class="modal custom-modal fade" id="add_discount" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header border-0 pb-0">
+                                  <div class="form-header modal-header-title text-start mb-0">
+                                    <h4 class="mb-0">Add Tax & Discount</h4>
+                                  </div>
+                                  <button
+                                    type="button"
+                                    class="close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                    >
+                                    <span class="align-center" aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="row">
+                                    <div class="col-lg-12 col-md-12">
+                                      <div class="input-block mb-3">
+                                        <label htmlFor="label">Rate</label>
+                                        <input id="label" type="number" class="form-control" placeholder="120" />
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                      <div class="input-block mb-3">
+                                        <label htmlFor="label">Discount Amount</label>
+                                        <input id="label" type="number" class="form-control" placeholder="0" />
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12">
+                                      <div class="input-block mb-3 mb-0">
+                                        <label htmlFor="label">Tax</label>
+                                        <select class="form-select">
+                                          <option>N/A</option>
+                                          <option>5%</option>
+                                          <option>10%</option>
+                                          <option>15%</option>
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer add-tax-btns">
+                                  <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn add-btn-cancel-btn"
+                                    >Cancel</a
+                                    >
+                                    <a
+                                      href="javascript:void(0);"
+                                      data-bs-dismiss="modal"
+                                      class="btn btn-primary add-tax-save-btn"
+                                      >Save</a
+                                      >
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /Add Tax & Discount Modal -->
+
+                              <!-- Delete Items Modal -->
+                              <div class="modal custom-modal fade" id="delete_discount" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered modal-md">
+                                  <div class="modal-content">
+                                    <div class="modal-header border-0 justify-content-center pb-0">
+                                      <div class="form-header modal-header-title text-center mb-0">
+                                        <h4 class="mb-2">Delete Product / Services</h4>
+                                        <p>Are you sure want to delete?</p>
+                                      </div>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="modal-btn delete-action">
+                                        <div class="row">
+                                          <div class="col-6">
+                                            <a
+                                              href="javascript:void(0);"
+                                              data-bs-dismiss="modal"
+                                              class="btn btn-primary paid-continue-btn"
+                                              >Delete</a
+                                              >
+                                            </div>
+                                            <div class="col-6">
+                                              <a
+                                                href="javascript:void(0);"
+                                                data-bs-dismiss="modal"
+                                                class="btn btn-primary paid-cancel-btn"
+                                                >Cancel</a
+                                                >
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!-- /Delete Items Modal -->
+
+                                  <!-- Add Bank Details Modal -->
+                                  <div class="modal custom-modal fade" id="bank_details" role="dialog">
+                                    <div class="modal-dialog modal-dialog-centered modal-md">
+                                      <div class="modal-content">
+                                        <div class="modal-header border-0 pb-0">
+                                          <div class="form-header modal-header-title text-start mb-0">
+                                            <h4 class="mb-0">Add Bank Details</h4>
+                                          </div>
+                                          <button
+                                            type="button"
+                                            class="close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                            >
+                                            <span class="align-center" aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                          <div class="row">
+                                            <div class="col-lg-12 col-md-12">
+                                              <div class="form-group">
+                                                <label htmlFor="label">Bank Name <span class="text-danger">*</span></label>
+                                                <input id="label"
+                                                  type="text"
+                                                  class="form-control"
+                                                  placeholder="Enter Bank Name"
+                                                  />
+                                                </div>
+                                              </div>
+                                              <div class="col-lg-12 col-md-12">
+                                                <div class="form-group">
+                                                  <label htmlFor="label">Account Number <span class="text-danger">*</span></label>
+                                                  <input id="label"
+                                                    type="number"
+                                                    class="form-control"
+                                                    placeholder="Enter Account Number"
+                                                    />
+                                                  </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                  <div class="form-group">
+                                                    <label htmlFor="label">Branch Name <span class="text-danger">*</span></label>
+                                                    <input id="label"
+                                                      type="text"
+                                                      class="form-control"
+                                                      placeholder="Enter Branch Name"
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group mb-0">
+                                                      <label htmlFor="label">IFSC Code <span class="text-danger">*</span></label>
+                                                      <input id="label"
+                                                        type="number"
+                                                        class="form-control"
+                                                        placeholder="Enter IFSC COde"
+                                                        />
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <a
+                                                    href="javascript:void(0);"
+                                                    data-bs-dismiss="modal"
+                                                    class="btn btn-primary paid-cancel-btn me-2"
+                                                    >Back</a
+                                                    >
+                                                    <a
+                                                      href="javascript:void(0);"
+                                                      data-bs-dismiss="modal"
+                                                      class="btn btn-primary paid-continue-btn"
+                                                      >Save</a
+                                                      >
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- /Add Bank Details Modal -->
+                                            </div>
+                                          </div>
+                                        </div>
+

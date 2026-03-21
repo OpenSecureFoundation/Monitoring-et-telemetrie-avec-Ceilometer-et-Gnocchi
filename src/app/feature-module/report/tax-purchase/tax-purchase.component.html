@@ -1,0 +1,589 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Tax Report</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="btn btn-filters w-auto popup-toggle" matTooltip="Filter"><span
+            class="me-2 filter-img"><img src="assets/img/icons/filter-icon.svg" alt="filter"
+          class="filter-img-top" /></span>Filter
+        </a>
+      </li>
+      <li class="daterangepicker-wrap cal-icon cal-icon-info">
+        <input type="text" class="btn-filters" name="datetimes" placeholder="From Date - To Date"
+          #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue" />
+        </li>
+
+        <li>
+          <div class="dropdown dropdown-action" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Download"
+            matTooltip="Download">
+            <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span><i
+            class="feather icon-download"></i></span></a>
+            <div class="dropdown-menu dropdown-menu-end">
+              <ul class="d-block">
+                <li>
+                  <div class="dropdown dropdown-action" matTooltip="Download">
+                    <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown"
+                      aria-expanded="false"><span><i class="feather icon-download"></i></span></a>
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <ul class="d-block">
+                          <li>
+                            <a class="d-flex align-items-center download-item" href="javascript:void(0);"
+                              download><i class="far fa-file-pdf me-2"></i>PDF</a>
+                            </li>
+                            <li>
+                              <a class="d-flex align-items-center download-item" href="javascript:void(0);"
+                                download><i class="far fa-file-text me-2"></i>CVS</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </li>
+                      <li>
+                        <a class="btn-filters" href="javascript:void(0);" matTooltip="Print"><span><i
+                        class="feather icon-printer"></i></span> </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <a class="btn-filters" href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                  title="Print" matTooltip="Print"><span><i class="feather icon-printer"></i></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <ul class="nav" id="nav-tab" role="tablist">
+        <li>
+          <a href="javascript:void(0);" class="nav-link btn btn-primary tax active" id="nav-purchase-tab" data-bs-toggle="tab"
+            data-bs-target="#nav-purchase" role="tab" aria-controls="nav-purchase" aria-selected="true">Purchase Tax
+          Report</a>
+        </li>
+        <li>
+          <a href="javascript:void(0);" class="nav-link btn btn-primary tax" id="nav-sales-tab" data-bs-toggle="tab"
+          data-bs-target="#nav-sales" role="tab" aria-controls="nav-sales" aria-selected="false">Sales Tax Report</a>
+        </li>
+      </ul>
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-purchase" role="tabpanel" aria-labelledby="nav-purchase-tab">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card-table">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="table-scroll">
+                      <div class="companies-table">
+                        <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                          <thead class="thead-light">
+                            <tr>
+                              <th mat-sort-header="id">#</th>
+                              <th mat-sort-header="supplier">Supplier</th>
+                              <th mat-sort-header="date">Date</th>
+                              <th mat-sort-header="refNo">Ref No</th>
+                              <th mat-sort-header="totalAmount">Total Amount</th>
+                              <th mat-sort-header="paymentMethod">Payment Method</th>
+                              <th mat-sort-header="discount">Discount</th>
+                              <th mat-sort-header="taxAmount">Tax Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @for (data of tableData; track data) {
+                              <tr>
+                                <td>{{ data.id }}</td>
+                                <td>
+                                  <h2 class="table-avatar">
+                                    <a [routerLink] = "routes.profile" class="avatar avatar-md me-2 companies">
+                                    <img class="avatar-img rounded-circle" [src]="data.img" alt="User Image" /></a>
+                                    <a [routerLink] = "routes.profile">{{ data.supplier }}</a>
+                                  </h2>
+                                </td>
+                                <td>{{ data.date }}</td>
+                                <td>{{ data.refNo }}</td>
+                                <td>{{ data.totalAmount }}</td>
+                                <td>{{ data.paymentMethod }}</td>
+                                <td>{{ data.discount }}</td>
+                                <td>{{ data.taxAmount }}</td>
+                              </tr>
+                            }
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <app-custom-pagination></app-custom-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="nav-sales" role="tabpanel" aria-labelledby="nav-sales-tab">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="card-table">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <div class="table-scroll">
+                      <div class="companies-table">
+                        <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                          <thead class="thead-light">
+                            <tr>
+                              <th mat-sort-header="id">#</th>
+                              <th mat-sort-header="customer">Customer</th>
+                              <th mat-sort-header="date">Date</th>
+                              <th mat-sort-header="invoiceNo">Invoice No</th>
+                              <th mat-sort-header="totalAmount">Total Amount</th>
+                              <th mat-sort-header="paymentMethod">Payment Method</th>
+                              <th mat-sort-header="discount">Discount</th>
+                              <th mat-sort-header="taxAmount">Tax Amount</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @for (data of tableData2; track data) {
+                              <tr>
+                                <td>{{ data.id }}</td>
+                                <td>
+                                  <h2 class="table-avatar">
+                                    <a [routerLink] = "routes.profile" class="avatar avatar-md me-2 companies">
+                                    <img class="avatar-img rounded-circle" [src]="data.img" alt="User Image" /></a>
+                                    <a [routerLink] = "routes.profile">{{ data.customer }}</a>
+                                  </h2>
+                                </td>
+                                <td>{{ data.date }}</td>
+                                <td>{{ data.invoiceNo }}</td>
+                                <td>{{ data.totalAmount }}</td>
+                                <td>{{ data.paymentMethod }}</td>
+                                <td>{{ data.discount }}</td>
+                                <td>{{ data.taxAmount }}</td>
+                              </tr>
+                            }
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                  <app-custom-pagination></app-custom-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- /Page Header -->
+
+      <!-- Search Filter -->
+      <div id="filter_inputs" class="card filter-card">
+        <div class="card-body pb-0">
+          <div class="row">
+            <div class="col-sm-6 col-md-3">
+              <div class="input-block mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="input-block mb-3">
+                <label for="Email">Email</label>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+              <div class="input-block mb-3">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Search Filter -->
+      <!-- Add Asset -->
+      <div class="toggle-sidebar" [ngClass]="{ 'open-filter': toggleData === true }">
+        <div class="sidebar-layout-filter">
+          <div class="sidebar-header">
+            <h5>Filter</h5>
+            <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" href="javascript:void(0);" class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+          </div>
+          <div class="sidebar-body">
+            <form action="#" autocomplete="off">
+              <!-- Customer -->
+              <div class="accordion" id="accordionMain1">
+                <div class="card-header-new" id="headingOne">
+                  <h6 class="filter-title">
+                    <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                      aria-expanded="true" aria-controls="collapseOne">
+                      Supplier Name
+                      <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                    </a>
+                  </h6>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+                  <div class="card-body-chat">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div id="checkBoxes1">
+                          <div class="form-custom">
+                            <input type="text" class="form-control" id="member_search1" placeholder="Search here" />
+                            <span><img src="assets/img/icons/search.svg" alt="img" /></span>
+                          </div>
+                          <div class="selectBox-cont">
+                            <label class="custom_check w-100">
+                              <input type="checkbox" name="username" />
+                              <span class="checkmark"></span> Michael
+                            </label>
+                            <label class="custom_check w-100">
+                              <input type="checkbox" name="username" />
+                              <span class="checkmark"></span> Richard
+                            </label>
+                            <label class="custom_check w-100">
+                              <input type="checkbox" name="username" />
+                              <span class="checkmark"></span> Joseph
+                            </label>
+                            <label class="custom_check w-100">
+                              <input type="checkbox" name="username" />
+                              <span class="checkmark"></span> David
+                            </label>
+                            <!-- View All -->
+                            <div class="view-content">
+                              <div class="viewall-One">
+                                @for (user of users1; track user) {
+<label class="custom_check w-100" [ngClass]="{
+                              closed: !isCollapsed1,
+                              open: isCollapsed1
+                            }">
+                                    <input type="checkbox" name="username" [(ngModel)]="user.checked" />
+                                    <span class="checkmark"></span> {{ user.name }}
+                                  </label>
+                                }
+                              </div>
+                              <div class="view-all">
+                                <a (click)="toggleCollapse1()" href="javascript:void(0);" class="viewall-button-One"><span
+                                  class="me-2">{{
+                                  isCollapsed1 ? "Close All" : "View All"
+                              }}</span><span><i class="fa" [ngClass]="
+                                  !isCollapsed1
+                                    ? 'fa-circle-chevron-down'
+                                    : 'fa-circle-chevron-up'
+                                "></i></span></a>
+                            </div>
+                          </div>
+                          <!-- /View All -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Customer -->
+
+            <!-- Product Code -->
+            <div class="accordion" id="accordionMain2">
+              <div class="card-header-new" id="headingTwo">
+                <h6 class="filter-title">
+                  <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    Ref No
+                    <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                  </a>
+                </h6>
+              </div>
+
+              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+                <div class="card-body-chat">
+                  <div id="checkBoxes3">
+                    <div class="selectBox-cont">
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="ref-no" />
+                        <span class="checkmark"></span> 312345
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="ref-no" />
+                        <span class="checkmark"></span> 236348
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="ref-no" />
+                        <span class="checkmark"></span> 395374
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="ref-no" />
+                        <span class="checkmark"></span> 763265
+                      </label>
+                      <!-- View All -->
+                      <div class="view-content">
+                        <div class="viewall-One">
+                          @for (user of users1; track user) {
+<label class="custom_check w-100" [ngClass]="{
+                          closed: !isCollapsed2,
+                          open: isCollapsed1
+                        }">
+                              <input type="checkbox" name="username" [(ngModel)]="user.checked" />
+                              <span class="checkmark"></span> {{ user.name }}
+                            </label>
+                          }
+                        </div>
+                        <div class="view-all">
+                          <a (click)="toggleCollapse2()" href="javascript:void(0);" class="viewall-button-One"><span
+                            class="me-2">{{
+                            isCollapsed2 ? "Close All" : "View All"
+                          }}</span><span><i class="fa" [ngClass]="
+                              !isCollapsed2
+                                ? 'fa-circle-chevron-down'
+                                : 'fa-circle-chevron-up'
+                            "></i></span></a>
+                      </div>
+                    </div>
+                    <!-- /View All -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Product Code -->
+
+          <!-- By Status -->
+          <div class="accordion accordion-last" id="accordionMain3">
+            <div class="card-header-new" id="headingThree">
+              <h6 class="filter-title">
+                <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  Payment Method
+                  <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+              </h6>
+            </div>
+
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
+              <div class="card-body-chat">
+                <div id="checkBoxes2">
+                  <div class="selectBox-cont">
+                    <label class="custom_check w-100">
+                      <input type="checkbox" name="payment-mode" />
+                      <span class="checkmark"></span> Cash
+                    </label>
+                    <label class="custom_check w-100">
+                      <input type="checkbox" name="payment-mode" />
+                      <span class="checkmark"></span> Cheque
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /By Status -->
+
+          <div class="filter-buttons">
+            <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+              Apply
+            </button>
+            <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+              Reset
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!--/Add Asset -->
+
+  <!-- Delete Items Modal -->
+  <div class="modal custom-modal fade" id="delete_modal" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="form-header">
+            <h3>Delete Companies</h3>
+            <p>Are you sure want to delete?</p>
+          </div>
+          <div class="modal-btn delete-action">
+            <div class="row">
+              <div class="col-6">
+                <button type="reset" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-continue-btn">
+                  Delete
+                </button>
+              </div>
+              <div class="col-6">
+                <button type="submit" data-bs-dismiss="modal" class="w-100 btn btn-primary paid-cancel-btn">
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Delete Items Modal -->
+
+  <!-- Add Package Modal -->
+  <div class="modal custom-modal fade p-20" id="add_package" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <div class="form-header modal-header-title text-start mb-0">
+            <h4 class="mb-0">Package</h4>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h6>Plan Type</h6>
+          <ul class="nav nav-tabs row" id="myTab" role="tablist">
+            <li class="nav-item col-md-4 text-center" role="presentation">
+              <h6 class="nav-link active" id="month-tab" data-bs-toggle="tab" data-bs-target="#month" role="tab"
+                aria-controls="month" aria-selected="true">
+                Monthly
+              </h6>
+            </li>
+            <li class="nav-item col-md-4 text-center" role="presentation">
+              <h6 class="nav-link" id="year-tab" data-bs-toggle="tab" data-bs-target="#year" role="tab"
+                aria-controls="year" aria-selected="false">
+                Yearly
+              </h6>
+            </li>
+            <li class="nav-item col-md-4 text-center" role="presentation">
+              <h6 class="nav-link" id="lifetime-tab" data-bs-toggle="tab" data-bs-target="#lifetime" role="tab"
+                aria-controls="lifetime" aria-selected="false">
+                Lifetime
+              </h6>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="month" role="tabpanel" aria-labelledby="month-tab">
+              <div class="form-check">
+                <label class="form-check-label" for="monthly1">
+                  <input class="form-check-input" type="radio" name="monthly" id="monthly1" />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Basic</span>
+                    <span class="">$49.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="monthly2">
+                  <input class="form-check-input" type="radio" name="monthly" id="monthly2" />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Enterprise</span>
+                    <span class="">$99.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="monthly3">
+                  <input class="form-check-input" type="radio" name="monthly" id="monthly3" checked />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Free Trail</span>
+                    <span class="">$0.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="year" role="tabpanel" aria-labelledby="year-tab">
+              <div class="form-check">
+                <label class="form-check-label" for="yearly1">
+                  <input class="form-check-input" type="radio" name="yearly" id="yearly1" />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Basic</span>
+                    <span class="">$49.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="yearly2">
+                  <input class="form-check-input" type="radio" name="yearly" id="yearly2" />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Enterprise</span>
+                    <span class="">$99.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="yearly3">
+                  <input class="form-check-input" type="radio" name="yearly" id="yearly3" checked />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Free Trail</span>
+                    <span class="">$0.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="lifetime" role="tabpanel" aria-labelledby="lifetime-tab">
+              <div class="form-check">
+                <label class="form-check-label" for="lifetime1">
+                  <input class="form-check-input" type="radio" name="lifetime" id="lifetime1" />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Basic</span>
+                    <span class="">$49.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="lifetime2">
+                  <input class="form-check-input" type="radio" name="lifetime" id="lifetime2" />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Enterprise</span>
+                    <span class="">$99.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label" for="lifetime3">
+                  <input class="form-check-input" type="radio" name="lifetime" id="lifetime3" checked />
+                  <span class="d-flex justify-content-between text-dark">
+                    <span class="">Free Trail</span>
+                    <span class="">$0.00</span>
+                  </span>
+                  <span class="d-flex justify-content-between text-dull">
+                    <span class="">Lorem Ipsum is simply dummy text</span>
+                    <span class="">/month</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+          <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Assign</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Add Package Modal -->

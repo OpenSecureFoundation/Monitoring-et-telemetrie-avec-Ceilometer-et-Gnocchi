@@ -1,0 +1,601 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Invoices</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a   (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" matTooltip="Filter"  href="javascript:void(0);" class="btn btn-filters w-auto popup-toggle"><span class="me-2"><img src ="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+        </li>
+        <li>
+          <a class="btn-filters" matTooltip="settings"  href="javascript:void(0);"><span><i class="feather icon-settings"></i></span> </a>
+        </li>
+        <li>
+          <a class="btn btn-primary" [routerLink]="routes.addInvoice"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>New Invoice</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<!-- Inovices card -->
+<div class="row">
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header">
+          <span class="inovices-widget-icon bg-info-light">
+            <img src="assets/img/icons/receipt-item.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Total Invoice</div>
+            <div class="dash-counts">
+              <p>$298</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="inovices-all">No of Invoice <span class="rounded-circle bg-light-gray">02</span></p>
+          <p class="inovice-trending text-success-light">02 <span class="ms-2"><i class="feather icon-trending-up"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header">
+          <span class="inovices-widget-icon bg-primary-light">
+            <img src="assets/img/icons/transaction-minus.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Total Outstanding</div>
+            <div class="dash-counts">
+              <p>$325,215</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="inovices-all">No of Invoice <span class="rounded-circle bg-light-gray">03</span></p>
+          <p class="inovice-trending text-success-light">04 <span class="ms-2"><i class="feather icon-trending-up"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header">
+          <span class="inovices-widget-icon bg-warning-light">
+            <img src="assets/img/icons/archive-book.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Total Overdue</div>
+            <div class="dash-counts">
+              <p>$7825</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="inovices-all">No of Invoice <span class="rounded-circle bg-light-gray">01</span></p>
+          <p class="inovice-trending text-danger-light">03 <span class="ms-2"><i class="feather icon-trending-down"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header">
+          <span class="inovices-widget-icon bg-primary-light">
+            <img src="assets/img/icons/clipboard-close.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Cancelled</div>
+            <div class="dash-counts">
+              <p>100</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="inovices-all">No of Invoice <span class="rounded-circle bg-light-gray">04</span></p>
+          <p class="inovice-trending text-danger-light">05 <span class="ms-2"><i class="feather icon-trending-down"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header">
+          <span class="inovices-widget-icon bg-green-light">
+            <img src="assets/img/icons/message-edit.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Draft</div>
+            <div class="dash-counts">
+              <p>$125,586</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="inovices-all">No of Invoice <span class="rounded-circle bg-light-gray">06</span></p>
+          <p class="inovice-trending text-danger-light">02 <span class="ms-2"><i class="feather icon-trending-down"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header">
+          <span class="inovices-widget-icon bg-danger-light">
+            <img src="assets/img/icons/3d-rotate.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Recurring</div>
+            <div class="dash-counts">
+              <p>$86,892</p>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+          <p class="inovices-all">No of Invoice <span class="rounded-circle bg-light-gray">03</span></p>
+          <p class="inovice-trending text-success-light">02 <span class="ms-2"><i class="feather icon-trending-up"></i></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Inovices card -->
+<!-- All Invoice -->
+<div class="card invoices-tabs-card">
+  <div class="invoices-main-tabs">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <div class="invoices-tabs">
+          <ul>
+            <li><a [routerLink]="routes.invoiceList" >All</a></li>
+            <li><a [routerLink]="routes.invoicePaid"class="active">Paid</a></li>
+            <li><a [routerLink]="routes.invoiceOverdue">Overdue</a></li>
+            <li><a [routerLink]="routes.invoiceCancelled">Cancelled</a></li>
+            <li><a [routerLink]="routes.invoiceRecurring">Partially paid</a></li>
+            <li><a [routerLink]="routes.invoiceunpaid" >Unpaid</a></li>
+            <li><a [routerLink]="routes.invoicerefunded">Refunded</a></li>
+            <li><a [routerLink]="routes.invoiceDraft">Draft</a></li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /All Invoice -->
+
+<!-- Table -->
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-scroll">
+            <table  matSort
+              (matSortChange)="sortData($event)"
+              class="table table-stripped table-hover datatable">
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="invoice">
+                    <label class="custom_check invoice-id">
+                      <input type="checkbox" name="invoice">
+                      <span class="checkmark"></span>Invoice ID
+                    </label>
+                  </th>
+                  <th mat-sort-header="category">Category</th>
+                  <th mat-sort-header="created">Created On</th>
+                  <th mat-sort-header="name">Invoice To</th>
+                  <th mat-sort-header="total">Total Amount</th>
+                  <th mat-sort-header="paid">Paid Amount</th>
+                  <th mat-sort-header="payment">Payment Mode</th>
+                  <th mat-sort-header="balance">Balance</th>
+                  <th mat-sort-header="due">Due Date</th>
+                  <th mat-sort-header="status">Status</th>
+                  <th mat-sort-header="action" class="text-end">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (data of tableData; track data; let i = $index) {
+                  <tr >
+                    <td>
+                      <label class="custom_check">
+                        <input type="checkbox" name="invoice">
+                        <span class="checkmark"></span>
+                      </label>
+                      <a [routerLink]="routes.viewInvoice" class="invoice-link">{{data.invoice}}</a>
+                    </td>
+                    <td>{{data.category}}</td>
+                    <td>{{data.created}}</td>
+                    <td>
+                      <h2 class="table-avatar">
+                        <a [routerLink]="routes.profile" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" [src]="data.img" alt="User Image"></a>
+                        <a [routerLink]="routes.profile">{{data.name}} <span>{{data.email}}</span></a>
+                      </h2>
+                    </td>
+                    <td>{{data.total}}</td>
+                    <td>{{data.paid}}</td>
+                    <td>{{data.payment}}</td>
+                    <td>{{data.balance}}</td>
+                    <td>{{data.due}}</td>
+                    <td><span class="badge bg-success-light">{{data.status}}</span></td>
+                    <td class="text-end">
+                      <div class="dropdown dropdown-action">
+                        <a href="javascript:void(0);" class="btn-action-icon" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                          <a class="dropdown-item" [routerLink]="routes.editInvoice"><i class="far fa-edit me-2"></i>Edit</a>
+                          <a class="dropdown-item" [routerLink]="routes.viewInvoice"><i class="far fa-eye me-2"></i>View</a>
+                          <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+
+
+        </div>
+        <app-custom-pagination></app-custom-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Table -->
+<!-- Add Asset -->
+<div [ngClass]="{'open-filter' : toggleData === true}" class="toggle-sidebar">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" href="javascript:void(0);" class="sidebar-closes"><i
+      class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <!-- Customer -->
+        <div class="accordion" id="accordionMain1">
+          <div class="card-header-new" id="headingOne">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                aria-expanded="true" aria-controls="collapseOne">
+                Customer
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+            <div class="card-body-chat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="checkBoxes1">
+                    <div class="form-custom">
+                      <input type="text" class="form-control" id="member_search1" placeholder="Search here">
+                      <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                    </div>
+                    <div class="selectBox-cont">
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> John Smith
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> Johnny
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> Robert
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="username">
+                        <span class="checkmark"></span> Sharonda
+                      </label>
+                      <!-- View All -->
+                      <div class="view-content">
+                        @for (user of users1; track user) {
+                          <div class="viewall-One"
+                            [ngClass]="{'closed': !isCollapsed1, 'open': isCollapsed1}">
+                            <label class="custom_check w-100">
+                              <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                              <span class="checkmark"></span> {{ user.name }}
+                            </label>
+                          </div>
+                        }
+                        <div class="view-all">
+                          <a href="javascript:void(0);" class="viewall-button-One" (click)="toggleCollapse1()"><span
+                          class="me-2">{{ isCollapsed1 ? 'Close All' : 'View All' }}</span><span><i class="fa"
+                        [ngClass]="!isCollapsed1 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                      </div>
+                    </div>
+                    <!-- /View All -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Customer -->
+      <!-- Invoice Number -->
+      <div class="accordion" id="accordionMain5">
+        <div class="card-header-new" id="headingFive">
+          <h6 class="filter-title">
+            <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseFive"
+              aria-expanded="true" aria-controls="collapseFive">
+              Invoice Number
+              <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+            </a>
+          </h6>
+        </div>
+
+        <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample5">
+          <div class="card-body-chat">
+            <div class="row">
+              <div class="col-md-12">
+                <div id="checkBoxes5">
+                  <div class="form-custom">
+                    <input type="text" class="form-control" id="member_search1" placeholder="Search Invoice">
+                    <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                  </div>
+                  <div class="selectBox-cont">
+                    <label class="custom_check w-100">
+                      <input type="checkbox" name="username">
+                      <span class="checkmark"></span> 4987
+                    </label>
+                    <label class="custom_check w-100">
+                      <input type="checkbox" name="username">
+                      <span class="checkmark"></span> 4988
+                    </label>
+                    <label class="custom_check w-100">
+                      <input type="checkbox" name="username">
+                      <span class="checkmark"></span> 4989
+                    </label>
+                    <label class="custom_check w-100">
+                      <input type="checkbox" name="username">
+                      <span class="checkmark"></span> 4990
+                    </label>
+                    <!-- View All -->
+                    <div class="view-content">
+                      @for (user of users2; track user) {
+                        <div class="viewall-One"
+                          [ngClass]="{'closed': !isCollapsed2, 'open': isCollapsed}">
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                            <span class="checkmark"></span> {{ user.name }}
+                          </label>
+                        </div>
+                      }
+                      <div class="view-all">
+                        <a href="javascript:void(0);" class="viewall-button-One" (click)="toggleCollapse2()"><span
+                        class="me-2">{{ isCollapsed2 ? 'Close' : 'View All' }}</span><span><i
+                      class="fa fa-circle-chevron-down"></i></span></a>
+                    </div>
+                  </div>
+                  <!-- /View All -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Invoice Number -->
+
+
+    <!-- Select Date -->
+    <div class="accordion" id="accordionMain2">
+      <div class="card-header-new" id="headingTwo">
+        <h6 class="filter-title">
+          <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+            data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            Select Date
+            <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+          </a>
+        </h6>
+      </div>
+
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample2">
+        <div class="card-body-chat">
+          <div class="input-block mb-3 formcal">
+            <label htmlFor="label" class="form-control-label">From</label>
+            <div class="cal-icon">
+              <input id="label" matInput type="email" class="form-control datetimepicker" placeholder="DD-MM-YYYY"
+                bsDatepicker [bsConfig]="{ adaptivePosition: true }">
+              </div>
+            </div>
+            <div class="input-block mb-3 formcal">
+              <label htmlFor="label" class="form-control-label">To</label>
+              <div class="cal-icon">
+                <input id="label" matInput type="email" class="form-control datetimepicker" placeholder="DD-MM-YYYY"
+                  bsDatepicker [bsConfig]="{ adaptivePosition: true }">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Select Date -->
+
+        <!-- By Status -->
+        <div class="accordion" id="accordionMain3">
+          <div class="card-header-new" id="headingThree">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                By Status
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
+            <div class="card-body-chat">
+              <div id="checkBoxes2">
+                <div class="form-custom">
+                  <input type="text" class="form-control" id="member_search2" placeholder="Search here">
+                  <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                </div>
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> All Invoices
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Paid
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Overdue
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Draft
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Recurring
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Cancelled
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /By Status -->
+
+        <!-- Category -->
+        <div class="accordion accordion-last" id="accordionMain4">
+          <div class="card-header-new" id="headingFour">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                Category
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample4">
+            <div class="card-body-chat">
+              <div id="checkBoxes3">
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> Advertising
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> Food
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> Marketing
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="category">
+                    <span class="checkmark"></span> Repairs
+                  </label>
+                  <!-- View All -->
+                  <div class="view-content">
+                    <div class="viewall-Two">
+                      @for (user of users3; track user) {
+                        <label class="custom_check w-100"
+                          [ngClass]="{ closed: !isCollapsed3, open: isCollapsed }">
+                          <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                          <span class="checkmark"></span> {{ user.name }}
+                        </label>
+                      }
+                    </div>
+                    <div class="view-all">
+                      <a href="javascript:void(0);" (click)="toggleCollapse3()" class="viewall-button-Two"><span
+                      class="me-2">{{ isCollapsed3 ? "Close All" : "View All" }}</span><span><i class="fa"
+                    [ngClass]="!isCollapsed3 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                  </div>
+                </div>
+                <!-- /View All -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Category -->
+
+      <div class="filter-buttons">
+        <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+          Apply
+        </button>
+        <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+          Reset
+        </button>
+      </div>
+    </form>
+
+  </div>
+</div>
+</div>
+<!--/Add Asset -->
+<!-- Delete Paid Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Invoice</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" class="btn btn-primary paid-continue-btn">Delete</a>
+            </div>
+            <div class="col-6">
+              <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Paid Modal -->

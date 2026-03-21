@@ -1,0 +1,37 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "modules": "Plan",
+            "label": "Name",
+            "type": "Text",
+            "defaultValue": "Enter Name",
+            "required": "required"
+        },
+        {
+            "id": "2",
+            "modules": "Companies",
+            "label": "Email",
+            "type": "Email",
+            "defaultValue": "Enter Email",
+            "required": "required"
+        },
+        {
+            "id": "3",
+            "modules": "Ledger",
+            "label": "Phone",
+            "type": "Text",
+            "defaultValue": "Enter Phone",
+            "required": "required"
+        },
+        {
+            "id": "4",
+            "modules": "Packages",
+            "label": "Comments",
+            "type": "Textarea",
+            "defaultValue": "Enter Comments",
+            "required": "required"
+        }
+    ],
+    "totalData": 4
+}

@@ -1,0 +1,152 @@
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <nav class="greedys sidebar-horizantal">
+        <ul class="list-inline-item list-unstyled links sidebar-horizantal">
+          @for (
+            mainTittle of side_bar_data; track
+            mainTittle; let mainTittleIndex = $index) {
+            <li class="menu-title">
+              <span>{{ mainTittle.tittle }} 1</span>
+            </li>
+            @for (menu of mainTittle?.menu; track menu; let menuIndex = $index) {
+              @if (
+                menu?.hasSubRoute === false &&
+                (menu.menuValue === 'Inventory'
+                )
+                ) {
+                <li
+                  [class.active]="base === menu.base"
+                  >
+                  <a [routerLink]="menu?.route"
+                    ><i [class]="'la la-' + menu.icon"></i>
+                    <span>{{ menu?.menuValue }} </span>
+                  </a>
+                </li>
+              }
+              @if (
+                menu.hasSubRoute === true &&
+                (menu.menuValue === 'Dashboard' ||
+                menu.menuValue === 'Applications' ||
+                menu.menuValue === 'Super Admin' ||
+                menu.menuValue === 'Customer' ||
+                menu.menuValue === 'Products / Services' ||
+                menu.menuValue === 'Invoices' ||
+                menu.menuValue === 'Signature')
+                ) {
+                <li
+                  class="submenu"
+                  [class.active]="base === menu.base"
+                  (click)="expandSubMenus(menu)"
+                  >
+                  <a
+                    href="javascript:void(0)"
+                    [ngClass]="{ subdrop: menu.showSubRoute === true }"
+                    >
+                    <i [class]="'feather icon-' + menu.icon"></i>
+                    <span>{{ menu.menuValue }}</span>
+                    <span class="menu-arrow"></span>
+                  </a>
+                  <ul
+                      [ngClass]="
+                        menu.showSubRoute === true
+                          ? 'show-sub-menu'
+                          : 'hide-sub-menu'
+                      "
+                    >
+                    @for (subMenus of menu.subMenus; track subMenus) {
+                      <li>
+                        <a
+                          [routerLink]="subMenus.route"
+                          >{{ subMenus.menuValue }}</a
+                          >
+                        </li>
+                      }
+                    </ul>
+                  </li>
+                }
+              }
+            }
+          </ul>
+          <button (click)="openMoreMenus()" class="viewmoremenu">{{showMoreMenu?'Less Menu':'More Menu'}}</button>
+          <!-- /Settings -->
+          <ul class="hidden-links" [class.hidden]="showMoreMenu === false">
+            @for (
+              mainTittle of side_bar_data; track
+              mainTittle; let mainTittleIndex = $index) {
+              <li class="menu-title">
+                <span>{{ mainTittle.tittle }}</span>
+              </li>
+              @for (menu of mainTittle.menu; track menu) {
+                @if (menu?.hasSubRoute === false) {
+                  <li
+                    [class.active]="base === menu.base"
+                        [hidden]="
+                          menu.menuValue === 'Inventory' ||
+                          menu.menuValue === 'Customers' ||
+                          menu.menuValue === 'Customer' ||
+                          menu.menuValue === 'Vendors' ||
+                          menu.menuValue === 'Customer Details' ||
+                          menu.menuValue === 'List of Signature' ||
+                          menu.menuValue === 'Signature Invoice' 
+                         "
+                    >
+                    <a [routerLink]="menu?.route"
+                      ><i [class]="'feather icon-' + menu.icon"></i>
+                      <span>{{ menu?.menuValue }}</span>
+                    </a>
+                  </li>
+                }
+                @if (menu.hasSubRoute === true) {
+                  <li
+                    class="submenu"
+                        [hidden]="
+                          (menu.menuValue === 'Dashboard' ||
+                          menu.menuValue === 'Applications' ||
+                          menu.menuValue === 'Super Admin' ||
+                            menu.menuValue === 'Projects' ||
+                            menu.menuValue === 'Customers' ||
+                            menu.menuValue === 'Customer' ||
+                            menu.menuValue === 'Products / Services' ||
+                            menu.menuValue === 'Invoices' ||
+                          menu.menuValue === 'Signature')   "
+                    [class.active]="base === menu.base"
+                    (click)="expandSubMenus(menu)"
+                    >
+                    <a
+                      href="javascript:void(0)"
+                      [ngClass]="{ subdrop: menu.showSubRoute === true }"
+                      >
+                      <i [class]="'feather icon-' + menu.icon"></i>
+                      <span>{{ menu.menuValue }}</span>
+                      <span class="menu-arrow"></span>
+                    </a>
+                    <ul
+                          [ngClass]="
+                            menu.showSubRoute === true
+                              ? 'show-sub-menu'
+                              : 'hide-sub-menu'
+                          "
+                      >
+                      @for (subMenus of menu.subMenus; track subMenus) {
+                        <li>
+                          <a
+                            [routerLink]="subMenus.route"
+                            >{{ subMenus.menuValue }}</a
+                            >
+                          </li>
+                        }
+                      </ul>
+                    </li>
+                  }
+                }
+              }
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+    </div>
+    <!-- /Sidebar -->

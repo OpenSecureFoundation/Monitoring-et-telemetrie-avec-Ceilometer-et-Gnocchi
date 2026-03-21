@@ -1,0 +1,75 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "date": "Wed Sep 15 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    },
+    {
+      "id": 2,
+      "date": "Wed Feb 28 2021 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    },
+    {
+      "id": 3,
+      "date": "Wed Sep 15 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    },
+    {
+      "id": 4,
+      "date": "Wed Sep 15 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    },
+    {
+      "id": 5,
+      "date": "Wed Sep 15 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    },
+    {
+      "id": 6,
+      "date": "Wed Sep 15 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    },
+    {
+      "id": 7,
+      "date": "Wed Sep 15 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "economic_zone": "Tax Free Customers",
+      "tax": "Tax Free",
+      "tax_rate": "5%",
+      "net": "$108",
+      "gross": "$108",
+      "amount": "$0"
+    }
+  ],
+  "totalData": 7
+}

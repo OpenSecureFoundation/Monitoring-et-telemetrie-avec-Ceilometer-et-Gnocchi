@@ -1,0 +1,24 @@
+{
+    "data": [
+     
+      {
+        "ticketId": "#4989",
+        "subject": "Calling for help",
+        "assigned": "Sharonda",
+        "assignedPerson": "assets/img/profiles/avatar-04.jpg",
+        "assignedDate": "28 Jan 2022",
+        "createdOn": "29 Jan 2022, 6:12PM",
+        "dueDate": "28 Mar 2023",
+        "assignee": "Pricilla ",
+        "assigneeImg":"assets/img/profiles/avatar-06.jpg",
+        "assigneePho":"+1 843-443-5298",
+        "lastReply":"21 Jan 2023",
+        "priority": "High",
+        "status": "Pending",
+        "img": "assets/img/profiles/avatar-16.jpg"
+      }
+     
+    ],
+    "totalData": 9
+  }
+  

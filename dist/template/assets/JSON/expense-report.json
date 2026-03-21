@@ -1,0 +1,61 @@
+{
+    "data": [
+      {
+        "sNo": 1,
+        "companyName": "Orn LLC",
+        "mailId": "orn@example.com",
+        "amount": "$199.99",
+        "img": "assets/img/profiles/avatar-14.jpg",
+        "paymentStatus": "Paid",
+        "category":"Marketing",
+        "createdDate": "01 Aug 2023, 04:35 PM"
+      },
+      {
+        "sNo": 2,
+        "companyName": "Accent-e-Technology",
+        "mailId": "accent@example.com",
+        "amount": "$99.99",
+        "img": "assets/img/profiles/avatar-15.jpg",
+        "paymentStatus": "Paid",
+        "category":"Software",
+        "createdDate": "05 Aug 2023, 07:00 PM"
+      },
+      {
+        "sNo": 3,
+        "companyName": "Express Advertising",
+        "mailId": "express@example.com",
+        "amount": "$300.00",
+        "img": "assets/img/profiles/avatar-16.jpg",
+        "paymentStatus": "Paid",
+        "category":"Advertising",
+        "createdDate": "13 Aug 2023, 06:35 PM"
+      },
+      {
+        "sNo": 4,
+        "companyName": "lexicon Technologies",
+        "mailId": "lexicon@example.com",
+        "amount": "$690.00",
+        "img": "assets/img/profiles/avatar-17.jpg",
+        "paymentStatus": "Pending",
+        "category":"Software",
+        "createdDate": "15 Aug 2023, 03:30 PM"
+      },
+      {
+        "sNo": 5,
+        "companyName": "Sumo Soft Limited",
+        "mailId": "sumo@example.com",
+        "amount": "$99.99",
+        "img": "assets/img/profiles/avatar-18.jpg",
+        "paymentStatus": "Pending",
+        "category":"Stationery",
+        "createdDate": "16 Aug 2023, 05:15 PM"
+      }
+     
+    
+  
+  
+     
+    ],
+    "totalData": 9
+  }
+  

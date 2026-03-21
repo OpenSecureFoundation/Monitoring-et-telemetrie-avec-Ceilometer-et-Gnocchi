@@ -1,0 +1,41 @@
+{
+    "data": [
+      {
+        "id": 1,
+        "role": "Admin",
+        "created": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "id": 2,
+        "role": "Customer",
+        "created": "28 Nov 2022, 03:25 PM"
+      },
+      {
+        "id": 3,
+        "role": "Shop Owner",
+        "created": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "id": 4,
+        "role": "Receptionist",
+        "created": "9 Dec 2022, 06:12 PM"
+      },
+      {
+        "id": 5,
+        "role": "Shop Owner",
+        "created": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "id": 6,
+        "role": "Admin",
+        "created": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "id": 7,
+        "role": "Customer",
+        "created": "28 Nov 2022, 03:25 PM"
+      }
+    ],
+    "totalData": 7
+  }
+  

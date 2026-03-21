@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-xl-8 offset-xl-2">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3 class="page-title">Edit Post</h3>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <div class="card">
+      <div class="card-body">
+        <div class="bank-inner-details">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Title<span class="text-danger">*</span></label>
+                <input id="label"
+                  type="text"
+                  class="form-control"
+                  value="All the Lorem Ipsum generators on the Internet"
+                />
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="input-block mb-3 modal-select-box">
+                <label htmlFor="label">Category</label>
+                <select class="form-select">
+                  <option>Expenses</option>
+                  <option>Sales</option>
+                  <option>Profit-loss</option>
+                  `
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="input-block mb-3 tag_input">
+                <mat-label>Tags</mat-label>
+                <!-- <mat-form-field appearance="fill">
+                  <mat-chip-list #chipList>
+                    <mat-chip
+                      *ngFor="let item of tags"
+                      (removed)="remove(item)"
+                    >
+                      {{ item.name }}
+                      <button matChipRemove>
+                        <mat-icon>cancel</mat-icon>
+                      </button>
+                    </mat-chip>
+                    <input
+                      placeholder="Enter New Tag.. "
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="true"
+                      (matChipInputTokenEnd)="add($event)"
+                    />
+                  </mat-chip-list>
+                </mat-form-field> -->
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Blog Image</label>
+                <div class="change-photo-btn">
+                  <div>
+                    <p>Add Image</p>
+                  </div>
+                      <input id="label" type="file" class="upload" />
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="input-block mb-3">
+                <label htmlFor="label">Description</label>
+                <angular-editor ngDefaultControl [config]="config">
+                </angular-editor>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="blog-categories-btn pt-0">
+        <div class="bank-details-btn">
+          <a [routerLink]="routes.allBlogs " class="btn btn-primary me-2"
+            >Add Post</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

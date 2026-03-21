@@ -1,0 +1,64 @@
+{
+    "data": [
+      {
+        "sNo": 1,
+        "title": "Duis aute irure in reprehenderit in voluptate velit?",
+        "category":"19 Dec 2022, 06:12 PM",
+        "details": "Ut enim ad minima veniam, quis nostrum exercitationem"
+      },
+      {
+        "sNo": 2,
+        "title": "Duis aute irure in reprehenderit in voluptate velit?",
+        "category":"19 Dec 2022, 06:12 PM",
+        "details": "At vero eos et accusamus et iusto odio dignissimos "
+      },
+      {
+        "sNo": 3,
+        "title": "Excepteur occaecat cupidatat non proident?",
+        "category":"19 Dec 2022, 06:12 PM",
+        "details": "Nam libero tempore, cum soluta nobis est eligendi optio"
+      },
+      
+      {
+        "sNo": 4,
+        "title": "Sed ut perspiciatis unde omnis iste natus?",
+        "category":"19 Dec 2022, 06:12 PM",
+        "details": "Sed ut perspiciatis unde omnis iste natus"
+        
+      },
+      {
+        "sNo": 5,
+        "title": "Nemo enim ipsam voluptatem quia voluptas sit?",
+        "category":"12 Dec 2022, 06:12 PM",
+        "details": "Et harum quidem rerum facilis est et expedita distinctio"
+      },
+      {
+        "sNo": 6,
+        "title": "Neque porro quisquam est, qui dolorem ipsum?",
+        "category":"19 Dec 2022, 06:12 PM",
+        "details": "Temporibus autem quibusdam et officiis debitis aut rerum"
+      },
+      {
+        "sNo": 7,
+        "title": "Sed ut perspiciatis unde omnis iste natus?",
+        "category":"15 Dec 2022, 06:12 PM",
+        "details": "Sed ut perspiciatis unde omnis iste natus"
+      },
+      {
+        "sNo": 8,
+        "title": "Nemo enim ipsam voluptatem quia voluptas sit?",
+        "category":"17 Dec 2022, 06:12 PM",
+        "details": "Et harum quidem rerum facilis est et expedita distinctio"
+      },
+      {
+        "sNo": 9,
+        "title": "Neque porro quisquam est, qui dolorem ipsum?",
+        "category":"21 Dec 2022, 06:12 PM",
+        "details": "Temporibus autem quibusdam et officiis debitis aut rerum"
+      }
+     
+      
+    ],
+    "totalData": 9
+  }
+  

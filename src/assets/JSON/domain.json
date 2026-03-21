@@ -1,0 +1,105 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "Hermann Groups",
+      "domainUrl": "hru.example.com",
+      "plan": "Advanced",
+      "planDuration": "(Monthly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Approved",
+      "img": "assets/img/companies/company-01.svg"
+    },
+    {
+      "id": "2",
+      "name": "Skiles LLC",
+      "domainUrl": "sk.example.com",
+      "plan": "Basic",
+      "planDuration": "(Yearly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-02.svg"
+    },
+    {
+      "id": "3",
+      "name": "Kerluke Group",
+      "domainUrl": "kerluke.example.com",
+      "plan": "Basic",
+      "planDuration": "(Yearly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Rejected",
+      "img": "assets/img/companies/company-03.svg"
+    },
+    {
+      "id": "4",
+      "name": "Schowalter Group",
+      "domainUrl": "schowalter.example.com",
+      "plan": "Advanced",
+      "planDuration": "(Monthly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-04.svg"
+    },
+    {
+      "id": "5",
+      "name": "Accentric Global",
+      "domainUrl": "accentric.example.com",
+      "plan": "Basic",
+      "planDuration": "(Yearly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-05.svg"
+    },
+    {
+      "id": "6",
+      "name": "Dexter Matrix",
+      "domainUrl": "dexter.example.com",
+      "plan": "Advanced",
+      "planDuration": "(Monthly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-06.svg"
+    },
+    {
+      "id": "7",
+      "name": "Emporis Technologies",
+      "domainUrl": "emporis.example.com",
+      "plan": "Basic",
+      "planDuration": "(Yearly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-07.svg"
+    },
+    {
+      "id": "8",
+      "name": "Beacon Softwares",
+      "domainUrl": "beacon.example.com",
+      "plan": "Advanced",
+      "planDuration": "(Monthly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-08.svg"
+    },
+    {
+      "id": "9",
+      "name": "Global tech",
+      "domainUrl": "global.example.com",
+      "plan": "Basic",
+      "planDuration": "(Yearly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-09.svg"
+    },
+    {
+      "id": "10",
+      "name": "High Tech Lead",
+      "domainUrl": "high.example.com",
+      "plan": "Basic",
+      "planDuration": "(Yearly)",
+      "registeredOn": "19 Jan 2024",
+      "status": "Pending",
+      "img": "assets/img/companies/company-10.svg"
+    }
+  ],
+  "totalData": 10
+}
