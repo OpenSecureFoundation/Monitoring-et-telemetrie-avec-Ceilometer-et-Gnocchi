@@ -1,0 +1,780 @@
+<!-- Project Details Container -->
+<div class="project-details-container">
+
+  <!-- Animated Background -->
+  <div class="page-background"></div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="this.spinnerService.loading$ | async">
+    <div class="loading-spinner"></div>
+  </div>
+
+
+  <ng-container *ngIf="!(this.spinnerService.loading$ | async)">
+    <ng-container *ngIf="project$ | async as project">
+      <!-- Page Header with Glassmorphism -->
+      <div class="project-header-modern">
+        <div class="breadcrumb-section">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb-modern">
+              <li class="breadcrumb-item">
+                <a routerLink="/projects">
+                  <i class="fas fa-arrow-left"></i>
+                  Projects
+                </a>
+              </li>
+              <li class="breadcrumb-item active">Project Details</li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="project-hero">
+          <div class="project-hero-content">
+            <div class="project-avatar-large">
+              <div class="avatar-glow"></div>
+              <span class="avatar-text">PE</span>
+            </div>
+
+            <div class="project-title-section">
+              <div class="project-status-inline">
+                <span class="status-pulse active"></span>
+                <span class="status-label">{{project.projectInf.enabled ? 'Active' : 'Inactive'}}</span>
+              </div>
+              <h1 class="project-title-hero">{{project.projectInf.name}}</h1>
+              <div class="project-id-modern">
+                <span class="id-text">{{project.projectInf.id}}</span>
+                <button class="copy-btn-modern" title="Copy ID" (click)="copyProjectId()">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-hero-actions">
+            <button class="action-btn-hero primary">
+              <i class="fas fa-cog"></i>
+              Settings
+            </button>
+            <button class="action-btn-hero secondary">
+              <i class="fas fa-chart-line"></i>
+              Analytics
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Dashboard with Modern Cards -->
+      <div class="kpi-dashboard">
+        <div class="kpi-grid-three">
+
+          <!-- Compute KPI Card -->
+          <div class="kpi-card-modern-large" data-status="healthy">
+            <div class="kpi-card-glow"></div>
+
+            <div class="kpi-header-large">
+              <div class="kpi-icon-wrapper-large compute">
+                <i class="fas fa-microchip"></i>
+              </div>
+              <div class="kpi-title-section">
+                <h3 class="kpi-title">Compute Resources</h3>
+                <p class="kpi-subtitle">CPU, RAM & Instances</p>
+              </div>
+            </div>
+
+            <div class="kpi-items-grid">
+              <!-- Cores -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-server"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">vCPUs</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.compute.cores.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.compute.cores.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Instances -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-boxes"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Instances</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.compute.instances.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.compute.instances.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RAM -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-memory"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">RAM</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.compute.ram.used / 1024 | number:'1.0-0'}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.compute.ram.limit / 1024 | number:'1.0-0'}} GB</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Network KPI Card -->
+          <div class="kpi-card-modern-large" data-status="healthy">
+            <div class="kpi-card-glow"></div>
+
+            <div class="kpi-header-large">
+              <div class="kpi-icon-wrapper-large network">
+                <i class="fas fa-network-wired"></i>
+              </div>
+              <div class="kpi-title-section">
+                <h3 class="kpi-title">Network Resources</h3>
+                <p class="kpi-subtitle">Networks, Ports & Routers</p>
+              </div>
+            </div>
+
+            <div class="kpi-items-grid">
+              <!-- Networks -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Networks</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.networks.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.networks.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ports -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-ethernet"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Ports</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.ports.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.ports.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Routers -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-random"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Routers</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.routers.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.routers.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subnets -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-sitemap"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Subnets</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.subnets.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.subnets.limit}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Storage KPI Card -->
+          <div class="kpi-card-modern-large" data-status="healthy">
+            <div class="kpi-card-glow"></div>
+
+            <div class="kpi-header-large">
+              <div class="kpi-icon-wrapper-large storage">
+                <i class="fas fa-hdd"></i>
+              </div>
+              <div class="kpi-title-section">
+                <h3 class="kpi-title">Storage Resources</h3>
+                <p class="kpi-subtitle">Volumes & Capacity</p>
+              </div>
+            </div>
+
+            <div class="kpi-items-grid">
+              <!-- Volumes -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-database"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Volumes</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.storage.volumes.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.storage.volumes.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gigabytes -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-save"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Capacity</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.storage.gigabytes.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.storage.gigabytes.limit}} GB</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Snapshots -->
+              <div class="kpi-item" *ngIf="project.quotas.storage.snapshots">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-camera"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Snapshots</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.storage.snapshots.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.storage.snapshots.limit}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modern Tabs Navigation -->
+      <div class="tabs-navigation-modern">
+        <div class="tabs-wrapper">
+          <button class="tab-btn" [class.active]="activeTab === 'dashboard'" (click)="switchTab('dashboard')">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" [class.active]="activeTab === 'instances'" (click)="switchTab('instances')">
+            <i class="fas fa-server"></i>
+            <span>Instances</span>
+            <span class="tab-badge">{{project.stats.instances}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" [class.active]="activeTab === 'members'" (click)="switchTab('members')">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+            <span class="tab-badge">{{project.stats.users}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" [class.active]="activeTab === 'volumes'" (click)="switchTab('volumes')">
+            <i class="fas fa-hdd"></i>
+            <span>Volumes</span>
+            <span class="tab-badge">{{project.stats.volumes}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" [class.active]="activeTab === 'networks'" (click)="switchTab('networks')">
+            <i class="fas fa-network-wired"></i>
+            <span>Networks</span>
+            <span class="tab-badge">{{project.stats.networks}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" [class.active]="activeTab === 'security'" (click)="switchTab('security')">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security</span>
+            <div class="tab-indicator"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content-modern">
+
+        <!-- ======================== -->
+        <!-- Dashboard Tab            -->
+        <!-- ======================== -->
+        <div class="tab-pane" [class.active]="activeTab === 'dashboard'" id="dashboard">
+          <div class="instances-showcase">
+            <div class="section-header-modern">
+              <h2 class="section-title-modern">Recent Instances</h2>
+              <a href="#" class="view-all-link" (click)="$event.preventDefault(); switchTab('instances')">
+                View all
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <div class="instances-grid-modern">
+              <div class="instance-card-modern" *ngFor="let instance of project.instances; let index = index"
+                [class.active]="instance.status === 'ACTIVE'" [class.suspended]="instance.status === 'SUSPENDED'"
+                (click)="viewResource(instance)">
+
+                <div class="instance-card-header">
+                  <div class="instance-info-row">
+                    <div class="instance-icon">
+                      <i class="fas fa-server"></i>
+                    </div>
+                    <div class="instance-name-status">
+                      <h4 class="instance-name">{{instance.name}}</h4>
+                      <span class="instance-status-badge" [class.active]="instance.status === 'ACTIVE'"
+                        [class.suspended]="instance.status === 'SUSPENDED'">
+                        <span class="status-dot"></span>
+                        {{instance.status}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="instance-actions-quick">
+                    <button class="quick-action" title="Console" (click)="$event.stopPropagation(); openConsole(instance)">
+                      <i class="fas fa-terminal"></i>
+                    </button>
+                    <button class="quick-action" title="Metrics" (click)="$event.stopPropagation(); viewMetrics(instance)">
+                      <i class="fas fa-chart-bar"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="instance-details-grid">
+                  <div class="detail-item-modern">
+                    <span class="detail-icon"><i class="fas fa-network-wired"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">IP Address</span>
+                      <span class="detail-value">{{instance.addresses[0]?.ip || 'N/A'}}</span>
+                    </div>
+                  </div>
+                  <div class="detail-item-modern">
+                    <span class="detail-icon"><i class="fas fa-tag"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">Network</span>
+                      <span class="detail-value">{{instance.addresses[0]?.network || 'N/A'}}</span>
+                    </div>
+                  </div>
+                  <div class="detail-item-modern">
+                    <span class="detail-icon"><i class="fas fa-microchip"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">vCPUs</span>
+                      <span class="detail-value">4 cores</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="instance-metrics-modern" *ngIf="instance.cpuUsage !== undefined">
+                  <div class="metric-row">
+                    <div class="metric-header">
+                      <span class="metric-name">CPU</span>
+                      <span class="metric-value">{{instance.cpuUsage}}%</span>
+                    </div>
+                    <div class="metric-bar-wrapper">
+                      <div class="metric-bar-track">
+                        <div class="metric-bar-fill" [style.width.%]="instance.cpuUsage"
+                          [class.warning]="instance.cpuUsage >= 70" [class.danger]="instance.cpuUsage >= 90"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="metric-row">
+                    <div class="metric-header">
+                      <span class="metric-name">RAM</span>
+                      <span class="metric-value">{{instance.ramUsage}}%</span>
+                    </div>
+                    <div class="metric-bar-wrapper">
+                      <div class="metric-bar-track">
+                        <div class="metric-bar-fill" [style.width.%]="instance.ramUsage"
+                          [class.warning]="instance.ramUsage >= 70" [class.danger]="instance.ramUsage >= 90"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- Instances Tab            -->
+        <!-- ======================== -->
+        <div class="tab-pane" [class.active]="activeTab === 'instances'" id="instances">
+          <div class="modern-table-container">
+            <div class="table-header-modern">
+              <h2 class="section-title-modern">All Instances</h2>
+              <div class="table-actions">
+                <button class="action-btn-modern primary">
+                  <i class="fas fa-plus"></i>
+                  New Instance
+                </button>
+              </div>
+            </div>
+            <p class="placeholder-text">Table view for all instances...</p>
+          </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- Members Tab              -->
+        <!-- ======================== -->
+        <div class="tab-pane" [class.active]="activeTab === 'members'" id="members">
+          <div class="members-showcase">
+            <div class="section-header-modern">
+              <h2 class="section-title-modern">Members</h2>
+              <a [routerLink]="['/super-admin/projects', projectId, 'members']" class="view-all-link">
+                View all members
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state-modern" *ngIf="!project.users || project.users.length === 0">
+              <div class="empty-state-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h3 class="empty-state-title">No members found</h3>
+              <p class="empty-state-subtitle">Add members to this project to get started.</p>
+            </div>
+
+            <!-- Members Grid — affiche 4 max -->
+            <div class="members-grid-modern" *ngIf="project.users && project.users.length > 0">
+              <div class="member-card-modern"
+                *ngFor="let user of $any(project.users) | slice:0:3"
+                [class.disabled]="!$any(user).enabled">
+
+                <!-- Card Header -->
+                <div class="member-card-header">
+                  <div class="member-avatar-wrapper">
+                    <div class="member-avatar" [class.has-email]="$any(user).email">
+                      {{ getUserInitials($any(user).name) }}
+                    </div>
+                    <span class="member-online-dot" [class.enabled]="$any(user).enabled" [class.disabled]="!$any(user).enabled"></span>
+                  </div>
+                  <div class="member-name-section">
+                    <h4 class="member-name">{{ $any(user).name }}</h4>
+                    <span class="member-email" *ngIf="$any(user).email">{{ $any(user).email }}</span>
+                    <span class="member-email no-email" *ngIf="!$any(user).email">No email</span>
+                  </div>
+                  <div class="member-actions-quick">
+                    <button class="quick-action" title="Edit member" (click)="$event.stopPropagation()">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Member ID -->
+                <div class="member-id-row">
+                  <span class="detail-icon"><i class="fas fa-fingerprint"></i></span>
+                  <div class="detail-content">
+                    <span class="detail-label">User ID</span>
+                    <span class="member-id-value">{{ $any(user).id }}</span>
+                  </div>
+                </div>
+
+                <!-- Member Footer : domain + roles + status -->
+                <div class="member-footer">
+                  <div class="member-footer-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>{{ $any(user).domainId }}</span>
+                  </div>
+                  <div class="member-roles">
+                    <span class="member-role-badge" *ngFor="let role of $any(user).roles">
+                      {{ role }}
+                    </span>
+                  </div>
+                  <span class="member-status-badge" [class.enabled]="$any(user).enabled" [class.disabled]="!$any(user).enabled">
+                    <span class="status-dot"></span>
+                    {{ $any(user).enabled ? 'Enabled' : 'Disabled' }}
+                  </span>
+                </div>
+
+              </div>
+            </div>
+            <!-- End Members Grid -->
+
+            <!-- "See all" footer link -->
+            <div class="members-see-all" *ngIf="project.users && project.users.length > 4">
+              <div class="members-count-info">
+                <i class="fas fa-users"></i>
+                <span>Showing 4 of {{ project.users.length }} members</span>
+              </div>
+              <a [routerLink]="['/super-admin/projects', projectId, 'members']" class="see-all-btn">
+                <i class="fas fa-th"></i>
+                See all members
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- Volumes Tab              -->
+        <!-- ======================== -->
+        <div class="tab-pane" [class.active]="activeTab === 'volumes'" id="volumes">
+          <div class="volumes-showcase">
+            <div class="section-header-modern">
+              <h2 class="section-title-modern">Volumes</h2>
+              <button class="action-btn-modern primary">
+                <i class="fas fa-plus"></i>
+                New Volume
+              </button>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state-modern" *ngIf="!project.volumes || project.volumes.length === 0">
+              <div class="empty-state-icon">
+                <i class="fas fa-hdd"></i>
+              </div>
+              <h3 class="empty-state-title">No volumes found</h3>
+              <p class="empty-state-subtitle">Create your first volume to get started.</p>
+            </div>
+
+            <!-- Volumes Grid -->
+            <div class="volumes-grid-modern" *ngIf="project.volumes && project.volumes.length > 0">
+              <div class="volume-card-modern"
+                *ngFor="let volume of project.volumes"
+                [class.in-use]="volume.status === 'in-use'"
+                [class.available]="volume.status === 'available'"
+                [class.error]="volume.status === 'error'">
+
+                <!-- Card Header -->
+                <div class="volume-card-header">
+                  <div class="volume-info-row">
+                    <div class="volume-icon" [class.in-use]="volume.status === 'in-use'" [class.bootable]="volume.bootable">
+                      <i class="fas fa-bookmark" *ngIf="volume.bootable"></i>
+                      <i class="fas fa-database" *ngIf="!volume.bootable"></i>
+                    </div>
+                    <div class="volume-name-status">
+                      <h4 class="volume-name">{{ volume.name }}</h4>
+                      <div class="volume-badges">
+                        <span class="volume-status-badge"
+                          [class.in-use]="volume.status === 'in-use'"
+                          [class.available]="volume.status === 'available'"
+                          [class.error]="volume.status === 'error'">
+                          <span class="status-dot"></span>
+                          {{ volume.status }}
+                        </span>
+                        <span class="volume-type-badge bootable" *ngIf="volume.bootable">
+                          <i class="fas fa-power-off"></i>
+                          Bootable
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="volume-actions-quick">
+                    <button class="quick-action" title="Edit volume" (click)="$event.stopPropagation()">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="quick-action" title="Delete volume" (click)="$event.stopPropagation()">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Volume ID -->
+                <div class="volume-id-row">
+                  <span class="detail-icon"><i class="fas fa-fingerprint"></i></span>
+                  <div class="detail-content">
+                    <span class="detail-label">Volume ID</span>
+                    <span class="volume-id-value">{{ volume.id }}</span>
+                  </div>
+                </div>
+
+                <!-- Size indicator -->
+                <div class="volume-size-row">
+                  <div class="volume-size-info">
+                    <span class="detail-icon"><i class="fas fa-hdd"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">Capacity</span>
+                      <span class="volume-size-value">{{ volume.size }} <span class="size-unit">GB</span></span>
+                    </div>
+                  </div>
+                  <div class="volume-size-visual">
+                    <div class="size-blocks">
+                      <div class="size-block filled" *ngFor="let b of getFilledBlocks(volume.size)"></div>
+                      <div class="size-block empty" *ngFor="let b of getEmptyBlocks(volume.size)"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Attachments Section -->
+                <div class="volume-attachments-section" *ngIf="volume.attachments && volume.attachments.length > 0">
+                  <div class="attachments-header">
+                    <i class="fas fa-link"></i>
+                    <span>Attachments ({{ volume.attachments.length }})</span>
+                  </div>
+                  <div class="attachment-item" *ngFor="let attachment of volume.attachments">
+                    <div class="attachment-detail">
+                      <span class="detail-label">Server ID</span>
+                      <span class="attachment-server-id">{{ attachment.serverId }}</span>
+                    </div>
+                    <div class="attachment-device-badge">
+                      <i class="fas fa-plug"></i>
+                      {{ attachment.device }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- No attachments -->
+                <div class="no-attachments" *ngIf="!volume.attachments || volume.attachments.length === 0">
+                  <i class="fas fa-unlink"></i>
+                  <span>Not attached to any instance</span>
+                </div>
+
+              </div>
+            </div>
+            <!-- End Volumes Grid -->
+          </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- Networks Tab             -->
+        <!-- ======================== -->
+        <div class="tab-pane" [class.active]="activeTab === 'networks'" id="networks">
+          <div class="networks-showcase">
+            <div class="section-header-modern">
+              <h2 class="section-title-modern">Networks</h2>
+              <button class="action-btn-modern primary">
+                <i class="fas fa-plus"></i>
+                New Network
+              </button>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state-modern" *ngIf="!project.networks || project.networks.length === 0">
+              <div class="empty-state-icon">
+                <i class="fas fa-network-wired"></i>
+              </div>
+              <h3 class="empty-state-title">No networks found</h3>
+              <p class="empty-state-subtitle">Create your first network to get started.</p>
+            </div>
+
+            <!-- Networks Grid -->
+            <div class="networks-grid-modern" *ngIf="project.networks && project.networks.length > 0">
+              <div class="network-card-modern"
+                *ngFor="let network of project.networks"
+                [class.active]="network.status === 'ACTIVE'"
+                [class.external]="network.external">
+
+                <!-- Card Header -->
+                <div class="network-card-header">
+                  <div class="network-info-row">
+                    <div class="network-icon" [class.external]="network.external">
+                      <i class="fas fa-globe" *ngIf="network.external"></i>
+                      <i class="fas fa-project-diagram" *ngIf="!network.external"></i>
+                    </div>
+                    <div class="network-name-status">
+                      <h4 class="network-name">{{ network.name }}</h4>
+                      <div class="network-badges">
+                        <span class="network-status-badge" [class.active]="network.status === 'ACTIVE'">
+                          <span class="status-dot"></span>
+                          {{ network.status }}
+                        </span>
+                        <span class="network-type-badge external" *ngIf="network.external">
+                          <i class="fas fa-globe"></i>
+                          External
+                        </span>
+                        <span class="network-type-badge shared" *ngIf="network.shared">
+                          <i class="fas fa-share-alt"></i>
+                          Shared
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="network-actions-quick">
+                    <button class="quick-action" title="Edit network" (click)="$event.stopPropagation()">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="quick-action" title="Delete network" (click)="$event.stopPropagation()">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Network ID -->
+                <div class="network-id-row">
+                  <span class="detail-icon"><i class="fas fa-fingerprint"></i></span>
+                  <div class="detail-content">
+                    <span class="detail-label">Network ID</span>
+                    <span class="detail-value network-id-value">{{ network.id }}</span>
+                  </div>
+                </div>
+
+                <!-- Subnets Section -->
+                <div class="network-subnets-section" *ngIf="network.subnets && network.subnets.length > 0">
+                  <div class="subnets-header">
+                    <i class="fas fa-sitemap"></i>
+                    <span>Subnets ({{ network.subnets.length }})</span>
+                  </div>
+                  <div class="subnet-item" *ngFor="let subnet of network.subnets">
+                    <div class="subnet-details">
+                      <div class="subnet-detail">
+                        <span class="detail-label">CIDR</span>
+                        <span class="subnet-cidr">{{ subnet.cidr }}</span>
+                      </div>
+                      <div class="subnet-detail">
+                        <span class="detail-label">Gateway</span>
+                        <span class="subnet-value">{{ subnet.gateway }}</span>
+                      </div>
+                      <div class="subnet-detail">
+                        <span class="detail-label">IP Version</span>
+                        <span class="subnet-ipv-badge">IPv{{ subnet.ipVersion }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- No subnets -->
+                <div class="no-subnets" *ngIf="!network.subnets || network.subnets.length === 0">
+                  <i class="fas fa-info-circle"></i>
+                  <span>No subnets configured</span>
+                </div>
+
+                <!-- Ports count -->
+                <div class="network-footer" *ngIf="network.ports !== undefined">
+                  <div class="network-footer-item">
+                    <i class="fas fa-ethernet"></i>
+                    <span>{{ network.ports?.length || 0 }} port(s)</span>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!-- End Networks Grid -->
+          </div>
+        </div>
+
+        <!-- ======================== -->
+        <!-- Security Tab             -->
+        <!-- ======================== -->
+        <div class="tab-pane" [class.active]="activeTab === 'security'" id="security">
+          <div class="modern-table-container">
+            <div class="table-header-modern">
+              <h2 class="section-title-modern">Security Groups</h2>
+            </div>
+            <p class="placeholder-text">Security groups coming soon...</p>
+          </div>
+        </div>
+
+      </div>
+      <!-- End Tab Content -->
+
+    </ng-container>
+  </ng-container>
+</div>
