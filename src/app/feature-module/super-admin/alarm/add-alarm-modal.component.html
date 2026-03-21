@@ -1,0 +1,568 @@
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- ADD ALARM MODAL                                                  -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" [class.visible]="isOpen" (click)="onOverlayClick($event)" (wheel)="$event.stopPropagation()"
+  (touchmove)="$event.stopPropagation()">
+  <div class="modal-container" [@modalAnimation]>
+
+    <!-- ── Header ──────────────────────────────────────────────────── -->
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-icon">
+          <i class="fas fa-bell"></i>
+        </div>
+        <div>
+          <h2 class="modal-title">New Alarm</h2>
+          <p class="modal-subtitle">Configure a monitoring threshold for this instance</p>
+        </div>
+      </div>
+      <button class="modal-close-btn" (click)="close()" aria-label="Close">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <!-- ── Step Indicator ─────────────────────────────────────────── -->
+    <div class="modal-steps">
+      <div class="step-item" [class.active]="currentStep >= 1" [class.done]="currentStep > 1">
+        <div class="step-circle">
+          <i class="fas fa-check" *ngIf="currentStep > 1"></i>
+          <span *ngIf="currentStep <= 1">1</span>
+        </div>
+        <span class="step-label">General</span>
+      </div>
+      <div class="step-line" [class.done]="currentStep > 1"></div>
+
+      <div class="step-item" [class.active]="currentStep >= 2" [class.done]="currentStep > 2">
+        <div class="step-circle">
+          <i class="fas fa-check" *ngIf="currentStep > 2"></i>
+          <span *ngIf="currentStep <= 2">2</span>
+        </div>
+        <span class="step-label">Threshold</span>
+      </div>
+      <div class="step-line" [class.done]="currentStep > 2"></div>
+
+      <div class="step-item" [class.active]="currentStep >= 3">
+        <div class="step-circle">
+          <span>3</span>
+        </div>
+        <span class="step-label">Actions</span>
+      </div>
+    </div>
+
+    <!-- ── Form ───────────────────────────────────────────────────── -->
+    <form [formGroup]="alarmForm" (ngSubmit)="onSubmit()" novalidate>
+      <div class="modal-body">
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- STEP 1 — General Information                              -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <div class="step-pane" *ngIf="currentStep === 1" [@stepAnimation]>
+
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <i class="fas fa-info-circle"></i>
+              Identity
+            </h3>
+
+            <div class="form-row">
+              <!-- Name -->
+              <div class="form-group" [class.error]="isFieldInvalid('name')">
+                <label class="form-label">
+                  Alarm Name
+                  <span class="required-star">*</span>
+                </label>
+                <div class="input-wrapper">
+                  <i class="fas fa-tag input-icon"></i>
+                  <input type="text" class="form-input" formControlName="name" placeholder="e.g. cpu_high_alarm"
+                    autocomplete="off" />
+                </div>
+                <span class="field-error" *ngIf="isFieldInvalid('name')">
+                  Name is required
+                </span>
+              </div>
+
+              <!-- Severity -->
+              <div class="form-group" [class.error]="isFieldInvalid('severity')">
+                <label class="form-label">
+                  Severity
+                  <span class="required-star">*</span>
+                </label>
+                <div class="input-wrapper select-wrapper">
+                  <i class="fas fa-exclamation-triangle input-icon"></i>
+                  <select class="form-select" formControlName="severity">
+                    <option value="" disabled>Select severity</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="critical">Critical</option>
+                  </select>
+                  <i class="fas fa-chevron-down select-arrow"></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="form-group" [class.error]="isFieldInvalid('description')">
+              <label class="form-label">Description</label>
+              <div class="input-wrapper">
+                <textarea class="form-textarea" formControlName="description"
+                  placeholder="Describe when this alarm should fire..." rows="3"></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-section">
+            <h3 class="form-section-title">
+              <i class="fas fa-cogs"></i>
+              Configuration
+            </h3>
+
+            <div class="form-row">
+              <!-- Alarm Type -->
+              <div class="form-group" [class.error]="isFieldInvalid('type')">
+                <label class="form-label">
+                  Alarm Type
+                  <span class="required-star">*</span>
+                </label>
+                <div class="input-wrapper select-wrapper">
+                  <i class="fas fa-layer-group input-icon"></i>
+                  <select class="form-select" formControlName="type" (change)="onTypeChange()">
+                    <option value="" disabled>Select type</option>
+                    <optgroup label="Gnocchi">
+                      <option value="gnocchi_resources_threshold">Gnocchi Resources Threshold</option>
+                      <option value="gnocchi_aggregation_by_metrics_threshold">Gnocchi Aggregation by Metrics</option>
+                      <option value="gnocchi_aggregation_by_resources_threshold">Gnocchi Aggregation by Resources
+                      </option>
+                    </optgroup>
+                    <optgroup label="Composite">
+                      <option value="composite">Composite</option>
+                    </optgroup>
+                    <optgroup label="Event">
+                      <option value="event">Event</option>
+                    </optgroup>
+                    <optgroup label="Prometheus">
+                      <option value="prometheus">Prometheus Query</option>
+                    </optgroup>
+                    <optgroup label="Loadbalancer">
+                      <option value="loadbalancer_member_health">Loadbalancer Member Health</option>
+                    </optgroup>
+                  </select>
+                  <i class="fas fa-chevron-down select-arrow"></i>
+                </div>
+                <span class="field-hint" *ngIf="alarmForm.get('type')?.value === 'gnocchi_resources_threshold'">
+                  <i class="fas fa-info-circle"></i>
+                  Threshold on a specific Gnocchi resource metric
+                </span>
+              </div>
+
+              <!-- Enabled / Repeat row -->
+              <div class="form-group toggles-group">
+                <label class="form-label">Options</label>
+                <div class="toggles-row">
+                  <label class="toggle-item">
+                    <div class="toggle-switch">
+                      <input type="checkbox" formControlName="enabled" />
+                      <span class="toggle-track">
+                        <span class="toggle-thumb"></span>
+                      </span>
+                    </div>
+                    <div class="toggle-label-content">
+                      <span class="toggle-label-main">Enabled</span>
+                      <span class="toggle-label-sub">Alarm is active</span>
+                    </div>
+                  </label>
+
+                  <label class="toggle-item">
+                    <div class="toggle-switch">
+                      <input type="checkbox" formControlName="repeat_actions" />
+                      <span class="toggle-track">
+                        <span class="toggle-thumb"></span>
+                      </span>
+                    </div>
+                    <div class="toggle-label-content">
+                      <span class="toggle-label-main">Repeat Actions</span>
+                      <span class="toggle-label-sub">Re-fire on each evaluation</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- STEP 2 — Threshold Rule                                   -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <div class="step-pane" *ngIf="currentStep === 2" [@stepAnimation] formGroupName="threshold_rule">
+
+          <!-- Gnocchi Resources Threshold -->
+          <ng-container *ngIf="alarmForm.get('type')?.value === 'gnocchi_resources_threshold'">
+
+            <div class="form-section">
+              <h3 class="form-section-title">
+                <i class="fas fa-database"></i>
+                Gnocchi Resource
+              </h3>
+
+              <div class="form-row">
+                <!-- Metric -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'metric')">
+                  <label class="form-label">
+                    Metric
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper select-wrapper">
+                    <i class="fas fa-chart-line input-icon"></i>
+                    <select class="form-select" formControlName="metric">
+                      <option value="" disabled>Select metric</option>
+                      <optgroup label="Compute">
+                        <!-- <option value="cpu_util">cpu_util — CPU Utilization (%)</option> -->
+                        <option value="cpu">cpu — CPU Time (ns)</option>
+                        <option value="memory.usage">memory.usage — Memory Usage (MB)</option>
+                        <option value="memory.resident">memory.resident — Resident Memory (MB)</option>
+                        <!-- <option value="disk.device.read.requests">disk.device.read.requests — Disk Read Requests</option> -->
+                        <option value="disk.read.bytes.rate">disk.read.bytes.rate — Disk Read Rate (B/s)</option>
+                        <!-- <option value="disk.write.bytes.rate">disk.write.bytes.rate — Disk Write Rate (B/s)</option> -->
+                        <option value="disk.device.write.requests">disk.device.write.requests — Disk Write Requests
+                        </option>
+                        <!-- <option value="disk.read.requests.rate">disk.read.requests.rate — Disk Read IOPS</option>
+                        <option value="disk.write.requests.rate">disk.write.requests.rate — Disk Write IOPS</option> -->
+                      </optgroup>
+                      <optgroup label="Network">
+                        <!-- <option value="network.incoming.bytes.rate">network.incoming.bytes.rate — Network In (B/s) -->
+                        <option value="network.incoming.bytes">network.incoming.bytes — Network In (B)
+                        </option>
+                        <!-- <option value="network.outgoing.bytes.rate">network.outgoing.bytes.rate — Network Out (B/s) -->
+                        <option value="network.outgoing.bytes">network.outgoing.bytes — Network Out (B)
+                        </option>
+                        <!-- <option value="network.incoming.packets.rate">network.incoming.packets.rate — Packets In/s -->
+                        <option value="network.incoming.packets">network.incoming.packets — Packets In
+                        </option>
+                        <option value="network.outgoing.packets.rate">network.outgoing.packets.rate — Packets Out/s
+                        </option>
+                        <option value="network.incoming.packets.drop.rate">network.incoming.packets.drop.rate — Dropped
+                          <!-- In/s</option> -->
+                        <option value="network.incoming.packets.drop">network.incoming.packets.drop — Dropped
+                          Packets in</option>
+                        <option value="network.outgoing.packets.drop.rate">network.outgoing.packets.drop — Dropped
+                          Packets out</option>
+                      </optgroup>
+                    </select>
+                    <i class="fas fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+
+                <!-- Resource Type -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'resource_type')">
+                  <label class="form-label">
+                    Resource Type
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper select-wrapper">
+                    <i class="fas fa-server input-icon"></i>
+                    <select class="form-select" formControlName="resource_type">
+                      <option value="" disabled>Select resource type</option>
+                      <option value="instance">instance</option>
+                      <option value="instance_network_interface">instance_network_interface</option>
+                      <option value="instance_disk">instance_disk</option>
+                      <!-- <option value="volume">volume</option> -->
+                      <!-- <option value="image">image</option> -->
+                      <option value="network">network</option>
+                      <!-- <option value="port">port</option> -->
+                      <option value="router">router</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Resource ID -->
+              <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'resource_id')">
+                <label class="form-label">
+                  Resource ID
+                  <span class="required-star">*</span>
+                </label>
+                <div class="input-wrapper resource-id-wrapper">
+                  <i class="fas fa-fingerprint input-icon"></i>
+                  <input type="text" class="form-input" formControlName="resource_id"
+                    placeholder="UUID of the target resource" autocomplete="off" />
+                  <button type="button" class="use-current-btn" (click)="useCurrentInstanceId()"
+                    title="Use current instance ID">
+                    <i class="fas fa-magic"></i>
+                    Use current
+                  </button>
+                </div>
+                <span class="field-error" *ngIf="isSubFieldInvalid('threshold_rule', 'resource_id')">
+                  Resource ID is required
+                </span>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3 class="form-section-title">
+                <i class="fas fa-sliders-h"></i>
+                Threshold Parameters
+              </h3>
+
+              <div class="form-row three-cols">
+                <!-- Aggregation Method -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'aggregation_method')">
+                  <label class="form-label">
+                    Aggregation
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper select-wrapper">
+                    <i class="fas fa-calculator input-icon"></i>
+                    <select class="form-select" formControlName="aggregation_method">
+                      <option value="" disabled>Select method</option>
+                      <option value="mean">mean — Average</option>
+                      <option value="sum">sum — Sum</option>
+                      <option value="max">max — Maximum</option>
+                      <option value="min">min — Minimum</option>
+                      <option value="count">count — Count</option>
+                      <option value="last">last — Last value</option>
+                      <option value="median">median — Median</option>
+                      <option value="std">std — Std Deviation</option>
+                      <option value="first">first — First value</option>
+                      <option value="rate:mean">rate:mean — Rate of change</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+
+                <!-- Comparison Operator -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'comparison_operator')">
+                  <label class="form-label">
+                    Operator
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper select-wrapper">
+                    <i class="fas fa-code-branch input-icon"></i>
+                    <select class="form-select" formControlName="comparison_operator">
+                      <option value="" disabled>Select operator</option>
+                      <option value="gt">gt — Greater than ( > )</option>
+                      <option value="gte">gte — Greater or equal ( ≥ )</option>
+                      <option value="lt">lt — Less than ( &lt; )</option>
+                      <option value="lte">lte — Less or equal ( ≤ )</option>
+                      <option value="eq">eq — Equal ( = )</option>
+                      <option value="ne">ne — Not equal ( ≠ )</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+
+                <!-- Threshold -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'threshold')">
+                  <label class="form-label">
+                    Threshold Value
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <i class="fas fa-tachometer-alt input-icon"></i>
+                    <input type="number" class="form-input" formControlName="threshold" placeholder="e.g. 80" min="0" />
+                    <span class="input-unit" *ngIf="getMetricUnit()">{{getMetricUnit()}}</span>
+                  </div>
+                  <span class="field-error" *ngIf="isSubFieldInvalid('threshold_rule', 'threshold')">
+                    A positive value is required
+                  </span>
+                </div>
+              </div>
+
+              <div class="form-row two-cols">
+                <!-- Granularity -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'granularity')">
+                  <label class="form-label">
+                    Granularity (seconds)
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper select-wrapper">
+                    <i class="fas fa-stopwatch input-icon"></i>
+                    <select class="form-select" formControlName="granularity">
+                      <option [value]="60">60 s — 1 minute</option>
+                      <option [value]="300">300 s — 5 minutes</option>
+                      <option [value]="600">600 s — 10 minutes</option>
+                      <option [value]="900">900 s — 15 minutes</option>
+                      <option [value]="1800">1800 s — 30 minutes</option>
+                      <option [value]="3600">3600 s — 1 hour</option>
+                    </select>
+                    <i class="fas fa-chevron-down select-arrow"></i>
+                  </div>
+                </div>
+
+                <!-- Evaluation Periods -->
+                <div class="form-group" [class.error]="isSubFieldInvalid('threshold_rule', 'evaluation_periods')">
+                  <label class="form-label">
+                    Evaluation Periods
+                    <span class="required-star">*</span>
+                  </label>
+                  <div class="input-wrapper">
+                    <i class="fas fa-redo input-icon"></i>
+                    <input type="number" class="form-input" formControlName="evaluation_periods" placeholder="e.g. 3"
+                      min="1" max="100" />
+                  </div>
+                  <span class="field-hint">
+                    <i class="fas fa-info-circle"></i>
+                    Alarm fires after <strong>{{getEvalDuration()}}</strong> of consecutive breaches
+                  </span>
+                </div>
+              </div>
+
+              <!-- Live preview rule summary -->
+              <div class="rule-preview" *ngIf="canShowRulePreview()">
+                <i class="fas fa-eye rule-preview-icon"></i>
+                <span class="rule-preview-text">
+                  Fire when <strong>{{alarmForm.get('threshold_rule.metric')?.value}}</strong>
+                  <span class="rule-op">{{getOperatorLabel()}}</span>
+                  <strong>{{alarmForm.get('threshold_rule.threshold')?.value}}{{getMetricUnit()}}</strong>
+                  ({{alarmForm.get('threshold_rule.aggregation_method')?.value}} over
+                  {{alarmForm.get('threshold_rule.evaluation_periods')?.value}} ×
+                  {{alarmForm.get('threshold_rule.granularity')?.value}}s)
+                </span>
+              </div>
+            </div>
+
+          </ng-container>
+
+          <!-- Placeholder for other types -->
+          <ng-container *ngIf="alarmForm.get('type')?.value !== 'gnocchi_resources_threshold'">
+            <div class="type-placeholder">
+              <i class="fas fa-tools"></i>
+              <h3>{{getTypeLabel()}}</h3>
+              <p>Configuration for this alarm type will appear here.</p>
+            </div>
+          </ng-container>
+
+        </div>
+
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <!-- STEP 3 — Actions & Notifications                          -->
+        <!-- ══════════════════════════════════════════════════════════ -->
+        <div class="step-pane" *ngIf="currentStep === 3" [@stepAnimation]>
+
+          <!-- alarm_actions -->
+          <div class="form-section">
+            <h3 class="form-section-title critical">
+              <i class="fas fa-bell"></i>
+              Alarm Actions
+              <span class="section-badge critical">ALARM</span>
+            </h3>
+            <p class="section-description">
+              URLs called when the alarm transitions to <strong>ALARM</strong> state (webhooks, Zaqar, Log, etc.)
+            </p>
+            <div class="actions-list" formArrayName="alarm_actions">
+              <div class="action-input-row" *ngFor="let ctrl of alarmActionsArray.controls; let i = index">
+                <div class="input-wrapper action-input-wrapper">
+                  <i class="fas fa-link input-icon"></i>
+                  <input type="text" class="form-input" [formControlName]="i"
+                    placeholder="http://... or log:// or trust+heat://..." />
+                </div>
+                <button type="button" class="remove-action-btn" (click)="removeAction('alarm_actions', i)"
+                  *ngIf="alarmActionsArray.length > 0">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="add-action-btn" (click)="addAction('alarm_actions')">
+              <i class="fas fa-plus"></i>
+              Add Action URL
+            </button>
+          </div>
+
+          <!-- ok_actions -->
+          <div class="form-section">
+            <h3 class="form-section-title success">
+              <i class="fas fa-check-circle"></i>
+              OK Actions
+              <span class="section-badge success">OK</span>
+            </h3>
+            <p class="section-description">
+              URLs called when the alarm transitions back to <strong>OK</strong> state
+            </p>
+            <div class="actions-list" formArrayName="ok_actions">
+              <div class="action-input-row" *ngFor="let ctrl of okActionsArray.controls; let i = index">
+                <div class="input-wrapper action-input-wrapper">
+                  <i class="fas fa-link input-icon"></i>
+                  <input type="text" class="form-input" [formControlName]="i"
+                    placeholder="http://... or log:// or trust+heat://..." />
+                </div>
+                <button type="button" class="remove-action-btn" (click)="removeAction('ok_actions', i)"
+                  *ngIf="okActionsArray.length > 0">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="add-action-btn" (click)="addAction('ok_actions')">
+              <i class="fas fa-plus"></i>
+              Add Action URL
+            </button>
+          </div>
+
+          <!-- insufficient_data_actions -->
+          <div class="form-section">
+            <h3 class="form-section-title warning">
+              <i class="fas fa-question-circle"></i>
+              Insufficient Data Actions
+              <span class="section-badge warning">NO DATA</span>
+            </h3>
+            <p class="section-description">
+              URLs called when there is <strong>insufficient data</strong> to evaluate the alarm
+            </p>
+            <div class="actions-list" formArrayName="insufficient_data_actions">
+              <div class="action-input-row" *ngFor="let ctrl of insufficientDataActionsArray.controls; let i = index">
+                <div class="input-wrapper action-input-wrapper">
+                  <i class="fas fa-link input-icon"></i>
+                  <input type="text" class="form-input" [formControlName]="i"
+                    placeholder="http://... or log:// or trust+heat://..." />
+                </div>
+                <button type="button" class="remove-action-btn" (click)="removeAction('insufficient_data_actions', i)"
+                  *ngIf="insufficientDataActionsArray.length > 0">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <button type="button" class="add-action-btn" (click)="addAction('insufficient_data_actions')">
+              <i class="fas fa-plus"></i>
+              Add Action URL
+            </button>
+          </div>
+
+        </div>
+
+      </div><!-- /modal-body -->
+
+      <!-- ── Footer ─────────────────────────────────────────────────── -->
+      <div class="modal-footer">
+        <button type="button" class="footer-btn cancel" (click)="close()">
+          <i class="fas fa-times"></i>
+          Cancel
+        </button>
+
+        <div class="footer-nav-btns">
+          <button type="button" class="footer-btn secondary" (click)="prevStep()" *ngIf="currentStep > 1">
+            <i class="fas fa-arrow-left"></i>
+            Back
+          </button>
+
+          <button type="button" class="footer-btn primary" (click)="nextStep()" *ngIf="currentStep < 3">
+            Next
+            <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <button type="submit" class="footer-btn submit" *ngIf="currentStep === 3"
+            [disabled]="alarmForm.invalid || submitting">
+            <span *ngIf="!submitting">
+              <i class="fas fa-bell"></i>
+              Create Alarm
+            </span>
+            <span *ngIf="submitting" class="submitting-state">
+              <span class="btn-spinner"></span>
+              Creating...
+            </span>
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

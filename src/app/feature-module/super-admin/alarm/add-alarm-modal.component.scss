@@ -1,0 +1,944 @@
+// ═══════════════════════════════════════════════════════════════════
+// ADD ALARM MODAL — SCSS
+// Cohérent avec le design system resource-monitoring
+// ═══════════════════════════════════════════════════════════════════
+
+// ── Overlay ──────────────────────────────────────────────────────
+.modal-overlay {
+  // inset: 0;
+  z-index: 9999;
+  overscroll-behavior: contain; // ← empêche la propagation du scroll
+  overflow-y: auto; // ← scroll géré par l'overlay lui-même
+  height: 100vh;
+  position: fixed;
+  inset: 0;
+  // z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(10, 14, 39, 0);
+  backdrop-filter: blur(0px);
+  pointer-events: none;
+  transition:
+    background 0.35s ease,
+    backdrop-filter 0.35s ease;
+
+  &.visible {
+    background: rgba(10, 14, 39, 0.85);
+    backdrop-filter: blur(8px);
+    pointer-events: all;
+  }
+}
+
+// ── Container ────────────────────────────────────────────────────
+.modal-container {
+  width: 100%;
+  max-width: 780px;
+  max-height: 90vh;
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  // overflow: visible; // ← était: hidden
+  position: relative;
+  z-index: 10000;
+
+  // Subtle top accent line
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--accent-primary),
+      var(--accent-secondary)
+    );
+    border-radius: 24px 24px 0 0;
+  }
+}
+
+// ── Header ───────────────────────────────────────────────────────
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.75rem 2rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.modal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.2),
+    rgba(124, 58, 237, 0.1)
+  );
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--accent-primary);
+  flex-shrink: 0;
+
+  // soft glow
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.12);
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 0.2rem;
+  background: linear-gradient(
+    135deg,
+    var(--text-primary),
+    var(--accent-primary)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.modal-close-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.4);
+    color: var(--danger);
+    transform: rotate(90deg);
+  }
+}
+
+// ── Step Indicator ───────────────────────────────────────────────
+.modal-steps {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.015);
+  flex-shrink: 0;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+
+  .step-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.35s ease;
+  }
+
+  .step-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.35s ease;
+  }
+
+  &.active {
+    .step-circle {
+      border-color: var(--accent-primary);
+      background: rgba(0, 212, 255, 0.15);
+      color: var(--accent-primary);
+      box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+    }
+
+    .step-label {
+      color: var(--accent-primary);
+      font-weight: 600;
+    }
+  }
+
+  &.done {
+    .step-circle {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--success);
+    }
+
+    .step-label {
+      color: var(--success);
+    }
+  }
+}
+
+.step-line {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0 1rem;
+  border-radius: 2px;
+  transition: background 0.5s ease;
+  min-width: 20px;
+
+  &.done {
+    background: linear-gradient(90deg, var(--success), rgba(16, 185, 129, 0.3));
+  }
+}
+
+// ── Body ─────────────────────────────────────────────────────────
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain; // ← idem pour le body interne
+  padding: 2rem;
+  // Hauteur minimale pour forcer le scroll
+  min-height: 0;
+  max-height: calc(
+    90vh - 260px
+  ); // ← header ~100px + steps ~70px + footer ~80px = ~220px
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 212, 255, 0.2);
+    border-radius: 3px;
+  }
+}
+
+// ── Step Pane ────────────────────────────────────────────────────
+.step-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+// ── Form Sections ────────────────────────────────────────────────
+.form-section {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-section-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 0.25rem;
+
+  i {
+    color: var(--accent-primary);
+    width: 16px;
+  }
+
+  &.critical i {
+    color: var(--danger);
+  }
+  &.success i {
+    color: var(--success);
+  }
+  &.warning i {
+    color: var(--warning);
+  }
+}
+
+.section-badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 8px;
+
+  &.critical {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+
+  &.success {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+
+  &.warning {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+}
+
+.section-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: -0.5rem 0 0.25rem;
+  line-height: 1.6;
+}
+
+// ── Form Layout ──────────────────────────────────────────────────
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+
+  &.three-cols {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  &.two-cols {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  &.error {
+    .input-wrapper {
+      .form-input,
+      .form-select,
+      .form-textarea {
+        border-color: rgba(239, 68, 68, 0.5);
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08);
+      }
+    }
+  }
+
+  &.toggles-group {
+    justify-content: flex-start;
+  }
+}
+
+// ── Labels ───────────────────────────────────────────────────────
+.form-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  .required-star {
+    color: var(--danger);
+    margin-left: 0.25rem;
+  }
+}
+
+// ── Input Wrapper ────────────────────────────────────────────────
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .input-icon {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 1;
+    transition: color 0.25s ease;
+  }
+
+  &:focus-within .input-icon {
+    color: var(--accent-primary);
+  }
+}
+
+// ── Inputs ───────────────────────────────────────────────────────
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: "Outfit", sans-serif;
+  font-size: 0.92rem;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  outline: none;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: rgba(148, 163, 184, 0.4);
+    font-style: italic;
+  }
+
+  &:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+  }
+
+  &:hover:not(:focus) {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+// ── Select ───────────────────────────────────────────────────────
+.select-wrapper {
+  position: relative;
+
+  .form-select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 2.5rem;
+
+    option,
+    optgroup {
+      background: #1a1f3a;
+      color: var(--text-primary);
+    }
+  }
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// ── Input Unit ───────────────────────────────────────────────────
+.input-unit {
+  position: absolute;
+  right: 1rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  font-family: "JetBrains Mono", monospace;
+  pointer-events: none;
+}
+
+// ── Resource ID with "Use current" button ────────────────────────
+.resource-id-wrapper {
+  gap: 0;
+
+  .form-input {
+    border-radius: 10px 0 0 10px;
+    flex: 1;
+  }
+}
+
+.use-current-btn {
+  flex-shrink: 0;
+  padding: 0 1rem;
+  height: 44px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  color: var(--accent-primary);
+  font-family: "Outfit", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+
+  &:hover {
+    background: rgba(0, 212, 255, 0.2);
+    border-color: var(--accent-primary);
+  }
+}
+
+// ── Field hints & errors ─────────────────────────────────────────
+.field-hint {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  i {
+    color: var(--accent-primary);
+    font-size: 0.72rem;
+  }
+
+  strong {
+    color: var(--accent-primary);
+    font-weight: 600;
+  }
+}
+
+.field-error {
+  font-size: 0.78rem;
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  &::before {
+    content: "⚠";
+    font-size: 0.75rem;
+  }
+}
+
+// ── Toggle Switches ──────────────────────────────────────────────
+.toggles-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    border-color: rgba(0, 212, 255, 0.2);
+    background: rgba(0, 212, 255, 0.03);
+  }
+}
+
+.toggle-switch {
+  position: relative;
+  flex-shrink: 0;
+
+  input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .toggle-track {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+
+      .toggle-thumb {
+        transform: translateX(20px);
+      }
+    }
+  }
+}
+
+.toggle-track {
+  display: block;
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.toggle-thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toggle-label-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.toggle-label-main {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.toggle-label-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+// ── Rule Preview Banner ──────────────────────────────────────────
+.rule-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.06),
+    rgba(124, 58, 237, 0.04)
+  );
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px;
+  animation: fadeInUp 0.3s ease;
+}
+
+.rule-preview-icon {
+  color: var(--accent-primary);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.rule-preview-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+
+  strong {
+    color: var(--accent-primary);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.85rem;
+  }
+}
+
+.rule-op {
+  display: inline-block;
+  margin: 0 0.3rem;
+  padding: 0.1rem 0.5rem;
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--warning);
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+// ── Action URL inputs ────────────────────────────────────────────
+.actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.action-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeInUp 0.3s ease;
+}
+
+.action-input-wrapper {
+  flex: 1;
+}
+
+.add-action-btn {
+  background: transparent;
+  border: 1px dashed rgba(0, 212, 255, 0.3);
+  color: var(--accent-primary);
+  font-family: "Outfit", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.6rem 1.25rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  width: fit-content;
+
+  i {
+    font-size: 0.8rem;
+  }
+
+  &:hover {
+    background: rgba(0, 212, 255, 0.07);
+    border-color: var(--accent-primary);
+    border-style: solid;
+  }
+}
+
+.remove-action-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+  font-size: 0.8rem;
+
+  &:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: var(--danger);
+    transform: scale(1.1);
+  }
+}
+
+// ── Placeholder for unsupported types ────────────────────────────
+.type-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  text-align: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+
+  i {
+    font-size: 3.5rem;
+    color: var(--text-secondary);
+    opacity: 0.3;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+  }
+}
+
+// ── Footer ───────────────────────────────────────────────────────
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.015);
+  flex-shrink: 0;
+  gap: 1rem;
+}
+
+.footer-nav-btns {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.footer-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-family: "Outfit", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.25s ease;
+  border: none;
+  white-space: nowrap;
+
+  &.cancel {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-secondary);
+
+    &:hover {
+      border-color: var(--danger);
+      color: var(--danger);
+      background: rgba(239, 68, 68, 0.08);
+    }
+  }
+
+  &.secondary {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &.primary {
+    background: linear-gradient(
+      135deg,
+      var(--accent-primary),
+      var(--accent-secondary)
+    );
+    color: white;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 212, 255, 0.25);
+    }
+  }
+
+  &.submit {
+    background: linear-gradient(135deg, var(--success), #059669);
+    color: white;
+    min-width: 150px;
+    justify-content: center;
+
+    &:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
+    }
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+}
+
+// ── Submit spinner ───────────────────────────────────────────────
+.submitting-state {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+// ── Responsive ───────────────────────────────────────────────────
+@media (max-width: 640px) {
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal-container {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 24px 24px 0 0;
+
+    &::before {
+      border-radius: 24px 24px 0 0;
+    }
+  }
+
+  .form-row,
+  .form-row.three-cols,
+  .form-row.two-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-steps {
+    padding: 1rem;
+
+    .step-label {
+      display: none;
+    }
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+
+    .footer-btn {
+      justify-content: center;
+    }
+
+    .footer-nav-btns {
+      justify-content: flex-end;
+    }
+  }
+}
+
+// .modal-overlay {
+//   position: fixed;
+//   inset: 0;
+//   z-index: 9999;
+//   overscroll-behavior: contain; // ← empêche la propagation du scroll
+//   overflow-y: auto; // ← scroll géré par l'overlay lui-même
+// }
+
+.modal-container {
+  position: relative;
+  z-index: 10000;
+  // ... reste inchangé
+}
+
+// .modal-body {
+//   overflow-y: auto;
+//   overscroll-behavior: contain; // ← idem pour le body interne
+// ... reste inchangé
+// }
