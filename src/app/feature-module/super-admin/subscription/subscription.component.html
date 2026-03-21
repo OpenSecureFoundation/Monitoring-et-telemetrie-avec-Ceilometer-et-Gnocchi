@@ -1,0 +1,182 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Projects Overview</h5>
+  </div>
+</div>
+<!-- Loading Spinner -->
+<div class="loading-container" *ngIf="this.spinnerService.loading$ | async">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Main Content -->
+<ng-container *ngIf="!(this.spinnerService.loading$ | async)">
+  <ng-container *ngIf="(this.stat$ | async) as stat">
+    <ng-container *ngIf="(this.allProject$ | async) as projects">
+
+      <div class="openstack-container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">Total Projects</div>
+                <div class="stat-value">{{stat.totalProjects}}</div>
+              </div>
+              <div class="stat-icon projects">
+                <i class="fas fa-server"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">Active Projects</div>
+                <div class="stat-value">{{stat.activeProjects}}</div>
+              </div>
+              <div class="stat-icon active">
+                <i class="fas fa-check-circle"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">Inactive Projects</div>
+                <div class="stat-value">{{stat.inactiveProjects}}</div>
+              </div>
+              <div class="stat-icon inactive">
+                <i class="fas fa-times-circle"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <div>
+                <div class="stat-label">All Domains</div>
+                <div class="stat-value">{{stat.totalDomains}}</div>
+              </div>
+              <div class="stat-icon domains">
+                <i class="fas fa-globe"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="projects-section" *ngIf="projects.length > 0">
+          <div class="section-header">
+            <h2 class="section-title">Projects</h2>
+            <div class="filter-tabs">
+              <button class="filter-tab" [class.active]="currentFilter === 'all'"
+                (click)="filterProjects('all')">All</button>
+              <button class="filter-tab" [class.active]="currentFilter === 'active'"
+                (click)="filterProjects('active')">Active</button>
+              <button class="filter-tab" [class.active]="currentFilter === 'inactive'"
+                (click)="filterProjects('inactive')">Inactive</button>
+            </div>
+          </div>
+
+          <div class="projects-grid">
+            <div class="project-card" *ngFor="let project of filteredProjects; let i = index"
+              [style.animation-delay.s]="(i * 0.1)">
+              <div class="project-card-header">
+                <div class="project-info">
+                  <h3 class="project-name">
+                    <i class="fas fa-cube"></i>
+                    {{project.name}}
+                  </h3>
+                  <span class="project-id">{{project.id}}</span>
+                </div>
+                <div class="project-status">
+                  <span class="status-badge" [ngClass]="project.enabled ? 'active' : 'inactive'">
+                    <span class="status-dot"></span>
+                    {{project.enabled ? 'Active' : 'Inactive'}}
+                  </span>
+                </div>
+              </div>
+
+              <div class="project-details">
+                <div class="detail-row">
+                  <span class="detail-label">
+                    <i class="fas fa-network-wired"></i>
+                    Domain
+                  </span>
+                  <span class="detail-value">{{project.domain_id}}</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">
+                    <i class="fas fa-layer-group"></i>
+                    Is Domain
+                  </span>
+                  <span class="detail-value">{{project.is_domain ? 'Yes' : 'No'}}</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">
+                    <i class="fas fa-sitemap"></i>
+                    Parent ID
+                  </span>
+                  <span class="detail-value">{{project.parent_id || 'N/A'}}</span>
+                </div>
+              </div>
+
+              <div class="project-actions">
+                <button class="action-btn" (click)="viewProject(project)">
+                  <i class="fas fa-eye"></i>
+                  View
+                </button>
+                <button class="action-btn" (click)="editProject(project)">
+                  <i class="fas fa-edit"></i>
+                  Edit
+                </button>
+                <button class="action-btn danger" (click)="deleteProject(project)" data-bs-toggle="modal"
+                  data-bs-target="#delete_modal">
+                  <i class="fas fa-trash"></i>
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="projects.length === 0">
+          <div class="empty-icon">
+            <i class="fas fa-inbox"></i>
+          </div>
+          <h3 class="empty-title">No Projects Found</h3>
+          <p class="empty-text">There are no projects to display at the moment.</p>
+        </div>
+
+      </div>
+
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<!-- Delete Modal (keep your existing modal) -->
+<div class="modal custom-modal fade modal-delete" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <div class="delete-modal-icon">
+            <span><i class="feather icon-check-circle"></i></span>
+          </div>
+          <h3>Are You Sure?</h3>
+          <p>You want to delete this project</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="modal-footer justify-content-center p-0">
+            <button type="submit" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn me-2">Yes,
+              Delete</button>
+            <button type="button" data-bs-dismiss="modal" class="btn btn-back cancel-btn">No, Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
