@@ -1,9 +1,12 @@
 let keystoneToken = null;
 let keystoneAuth = null;
+let name = null;
+let passwd = null;
 
 // Set keystone token
 export const setKeystoneToken = (token) => {
   keystoneToken = token;
+  console.log("Keystone token cached: ", keystoneToken);
 };
 
 // Get keystone token

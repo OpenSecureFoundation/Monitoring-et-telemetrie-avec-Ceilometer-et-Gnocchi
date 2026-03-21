@@ -3,7 +3,7 @@ import axios from "axios";
 import { getKeystoneToken } from "./keystoneAuth.js";
 
 // Axios avec timeout global
-const axiosInstance = axios.create({ timeout: 20000 });
+// const axiosInstance = axios.create({ timeout: 20000 });
 
 // --- Retry automatique ---
 async function withRetries(fn, retries = 3, delayMs = 1000) {

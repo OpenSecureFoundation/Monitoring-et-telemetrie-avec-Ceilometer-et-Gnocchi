@@ -3,7 +3,9 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// const __dirname = path.dirname(fileURLToPath(import.meta.url)); // ✅ pour les modules ESM tests
+
+const __dirname = path.resolve(); // ou path.dirname(process.argv[1])
 
 // Dossier pour les factures JSON
 export const INVOICE_JSON_DIR = path.resolve(__dirname, "invoice-json");
@@ -30,15 +32,68 @@ export const TARIFFS = {
 };
 
 export const METRIC_MAP = {
-  vcpus: { billingMode: "activation", unit: "vcpu" },
-  cpu_util: { billingMode: "activation", unit: "percent" },
-  "memory.usage": { billingMode: "activation", unit: "gb" },
-  "memory.resident": { billingMode: "activation", unit: "gb" },
-  "disk.size": { billingMode: "activation", unit: "gb" },
-  "volume.size": { billingMode: "activation", unit: "gb" },
-  "network.incoming.bytes": { billingMode: "consumption", unit: "bytes" },
-  "network.outgoing.bytes": { billingMode: "consumption", unit: "bytes" },
-  "disk.read.bytes": { billingMode: "consumption", unit: "bytes" },
-  "disk.write.bytes": { billingMode: "consumption", unit: "bytes" },
-  "storage.objects.size": { billingMode: "consumption", unit: "bytes" },
+  // === CPU ===
+  "cpu.vcpus": {
+    billingMode: "activation",
+    unit: "vcpu",
+  },
+  "cpu.utilization": {
+    billingMode: "activation",
+    unit: "percent",
+  },
+
+  // === RAM ===
+  "memory.usage": {
+    billingMode: "activation",
+    unit: "gb",
+  },
+  "memory.resident": {
+    billingMode: "activation",
+    unit: "gb",
+  },
+
+  // === Stockage disque / volume ===
+  "disk.volume.size": {
+    billingMode: "activation",
+    unit: "gb",
+  },
+  "volume.size": {
+    billingMode: "activation",
+    unit: "gb",
+  },
+
+  // === Réseau ===
+  "network.incoming.bytes": {
+    billingMode: "consumption",
+    unit: "B",
+  },
+  "network.outgoing.bytes": {
+    billingMode: "consumption",
+    unit: "B",
+  },
+
+  // === Disque I/O ===
+  "disk.io.bytes": {
+    billingMode: "consumption",
+    unit: "B",
+  },
+  "disk.read.bytes": {
+    billingMode: "consumption",
+    unit: "B",
+  },
+  "disk.write.bytes": {
+    billingMode: "consumption",
+    unit: "B",
+  },
+
+  // === Stockage objets ===
+  "storage.objects.size": {
+    billingMode: "consumption",
+    unit: "B",
+  },
+};
+
+export const BILLING_CONFIG = {
+  GRANULARITY: 300, // 1 heure (standard industrie)
+  AGGREGATION: "mean", // Par défaut
 };

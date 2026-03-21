@@ -1,5 +1,5 @@
 // Error handler middleware
-module.exports = (err, req, res, next) => {
+export default function handleError(err, req, res, next) {
   console.error("❗Erreur capturée :", err);
 
   console.log("Erreur reçue :", {
@@ -9,7 +9,7 @@ module.exports = (err, req, res, next) => {
     isOperational: err.isOperational,
   });
 
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV;
 
   // S'assurer que l'objet erreur a les propriétés minimales
   let statusCode = err.statusCode || 500;
@@ -40,4 +40,4 @@ module.exports = (err, req, res, next) => {
   console.log("💥 Réponse envoyée :", errorResponse);
 
   res.status(statusCode).json(errorResponse);
-};
+}

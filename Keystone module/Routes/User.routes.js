@@ -1,7 +1,7 @@
 // Importation des modules
 import express from "express";
-// import validateRequest from "../../Middlewares/Validate.middl.js";
-// import userJoiSchema from "../Validations/User.validation.js";
+import validateRequest from "../../Middlewares/Validate.middl.js";
+import userJoiSchema from "../Validations/User.validation.js";
 
 import { login } from "../Controllers/User.controllers.js";
 

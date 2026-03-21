@@ -1,9 +1,9 @@
 import axios from "axios";
-import { setKeystoneAuth } from "./keystoneTokenStore";
+import { setKeystoneAuth } from "./keystoneTokenStore.js";
 
 // Export de la fonction d'authentification du moteur de facturation
 export async function getKeystoneToken() {
-  const authUrl = process.env.OS_AUTH_URL + "/auth/tokens";
+  const url = `${process.env.KEYSTONE_ENDPOINT}/auth/tokens`;
 
   const data = {
     auth: {
@@ -27,7 +27,7 @@ export async function getKeystoneToken() {
   };
 
   try {
-    const res = await axios.post(authUrl, data, {
+    const res = await axios.post(url, data, {
       headers: { "Content-Type": "application/json" },
     });
     // Le token est dans le header 'x-subject-token'
@@ -38,7 +38,7 @@ export async function getKeystoneToken() {
   } catch (err) {
     console.error(
       "Erreur d'authentification Keystone :",
-      err.response?.data || err.message
+      err.response?.data || err.message,
     );
     throw err;
   }

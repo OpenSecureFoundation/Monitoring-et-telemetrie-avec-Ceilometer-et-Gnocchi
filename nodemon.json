@@ -1,0 +1,19 @@
+{
+  "watch": ["main.js"],
+  "ext": "js,json",
+  "ignore": [
+    "node_modules",
+    ".git",
+    "logs",
+    "C:\\DumpStack.log.tmp",
+    "C:\\pagefile.sys",
+    "C:\\hiberfil.sys",
+    "C:\\System Volume Information"
+  ],
+  "exec": "node main.js",
+  "env": {
+    "NODE_ENV": "development",
+    "PORT": "3000"
+  },
+  "delay": "250"
+}
