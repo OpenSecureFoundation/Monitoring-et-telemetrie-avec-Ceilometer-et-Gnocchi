@@ -1,0 +1,74 @@
+{
+  "data": [
+    { 
+      "sNo":"1",
+      "customerId":"4905681",
+      "customer": "John Smith",
+      "img": "assets/img/profiles/avatar-14.jpg",
+      "phno": "+1 843-443-3282",
+      "amount": "$1,54,220",
+      "paymentmode": "Cash",
+      "createdOn":"23 Mar 2023",
+      "status":"Paid"
+    },
+    {
+      "sNo":"2",
+      "customerId":"4905682",
+      "customer": "Robert",
+      "img": "assets/img/profiles/avatar-15.jpg",
+      "phno": "+1 917-409-0861",
+      "amount": "$1,54,220",
+      "paymentmode": "Cash",
+      "createdOn":"23 Mar 2023",
+      "status":"Pending"
+    },
+    {
+      "sNo":"3",
+      "customerId":"4905683",
+      "customer": "Johnny",
+      "img": "assets/img/profiles/avatar-16.jpg",
+      "phno": "+1 956-623-2880",
+      "amount": "$1,54,220",
+      "paymentmode": "Cash",
+      "createdOn":"23 Mar 20230",
+      "status":"Cancelled"
+    },
+    {
+      "sNo":"4",
+      "customerId":"4905684",
+      "customer": "Sharonda",
+      "img": "assets/img/profiles/avatar-17.jpg",
+      "phno": "+1 707-439-1732",
+      "amount": "$1,54,220",
+      "paymentmode": "Cash",
+      "createdOn":"23 Mar 2023",
+      "status":"Paid"
+    },
+    {
+      "sNo":"5",
+      "customerId":"4905685",
+      "customer": "Pricilla",
+      "img": "assets/img/profiles/avatar-18.jpg",
+      "phno": "+1 559-741-9672",
+      "amount": "$1,54,220",
+      "paymentmode": "Cash",
+      "createdOn":"23 Mar 2023",
+      "status":"Pending"
+    },
+    {
+      "sNo":"6",
+      "customerId":"4905686",
+      "customer": "Randalll",
+      "img": "assets/img/profiles/avatar-19.jpg",
+      "phno": "+1 989-438-3131",
+      "amount": "$1,54,220",
+      "paymentmode": "Cash",
+      "createdOn":"23 Mar 2023",
+      "status":"Cancelled"
+    }
+    
+   
+    
+  ],
+  "totalData": 6
+}

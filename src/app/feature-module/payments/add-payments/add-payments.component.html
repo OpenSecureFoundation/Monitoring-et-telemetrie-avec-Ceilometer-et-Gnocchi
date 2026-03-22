@@ -1,0 +1,171 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 class="page-title">Payments</h3>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="routes.dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a [routerLink]="routes.paymentsList">Payments</a>
+        </li>
+        <li class="breadcrumb-item active">Add Payments</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <form (ngSubmit)="addPayment()" [formGroup]="addPaymentForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label htmlFor="label">Date:</label>
+                <div class="cal-icon">
+                  <input id="label"
+                    type="text"
+                    [bsConfig]="bsConfig"
+                    name="dp"
+                    [minDate]="today"
+                    placeholder="Datepicker"
+                    formControlName="expensesDate"
+                    class="form-control"
+                    bsDatepicker [bsConfig]="{ adaptivePosition: true }"
+                    />
+                    @if (
+                      addPaymentForm.get('paymentDate')?.invalid &&
+                      addPaymentForm.get('paymentDate')?.touched
+                      ) {
+                      <div
+                        >
+                        <small class="text-danger">*Date required</small>
+                      </div>
+                    }
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label htmlFor="label">Customer:</label>
+                  <select class="form-select" formControlName="paymentCustomer">
+                    <option>Select Customer</option>
+                    <option>Brian Johnson</option>
+                    <option>Marie Canales</option>
+                    <option>Barbara Moore</option>
+                    <option>Greg Lynch</option>
+                    <option>Karlene Chaidez</option>
+                  </select>
+                  @if (
+                    addPaymentForm.get('paymentCustomer')?.invalid &&
+                    addPaymentForm.get('paymentCustomer')?.touched
+                    ) {
+                    <div
+                      >
+                      <small class="text-danger">*Customer Name required</small>
+                    </div>
+                  }
+                </div>
+                <div class="form-group">
+                  <label htmlFor="label">Address:</label>
+                  <textarea
+                    rows="5"
+                    cols="5"
+                    class="form-control"
+                    placeholder="Enter Address"
+                    formControlName="paymentAddress"
+                  ></textarea>
+                  @if (
+                    addPaymentForm.get('paymentAddress')?.invalid &&
+                    addPaymentForm.get('paymentAddress')?.touched
+                    ) {
+                    <div
+                      >
+                      <small class="text-danger">*Address required</small>
+                    </div>
+                  }
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label htmlFor="label">Amount:</label>
+                  <input id="label"
+                    type="text"
+                    class="form-control"
+                    formControlName="paymentAmount"
+                    />
+                    @if (
+                      addPaymentForm.get('paymentAmount')?.invalid &&
+                      addPaymentForm.get('paymentAmount')?.touched
+                      ) {
+                      <div
+                        >
+                        <small class="text-danger">*Amount required</small>
+                      </div>
+                    }
+                  </div>
+                  <div class="form-group">
+                    <label htmlFor="label">Payment Number:</label>
+                    <input id="label"
+                      type="text"
+                      class="form-control"
+                      formControlName="paymentNumber"
+                      />
+                      @if (
+                        addPaymentForm.get('paymentNumber')?.invalid &&
+                        addPaymentForm.get('paymentNumber')?.touched
+                        ) {
+                        <div
+                          >
+                          <small class="text-danger">*Number required</small>
+                        </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label htmlFor="label">Invoice:</label>
+                      <select class="form-select" formControlName="paymentInvoice">
+                        <option>Select Invoice</option>
+                        <option value="Afganistan">List Empty</option>
+                      </select>
+                      @if (
+                        addPaymentForm.get('paymentInvoice')?.invalid &&
+                        addPaymentForm.get('paymentInvoice')?.touched
+                        ) {
+                        <div
+                          >
+                          <small class="text-danger">*Invoice required</small>
+                        </div>
+                      }
+                    </div>
+                    <div class="form-group">
+                      <label htmlFor="label">Payment Mode:</label>
+                      <select class="form-select" formControlName="paymentMode">
+                        <option>Select Payment Mode</option>
+                        <option value="Afganistan">Cash</option>
+                        <option value="Albania">Credit</option>
+                        <option value="Algeria">Cheque</option>
+                      </select>
+                      @if (
+                        addPaymentForm.get('paymentMode')?.invalid &&
+                        addPaymentForm.get('paymentMode')?.touched
+                        ) {
+                        <div
+                          >
+                          <small class="text-danger">*Payment Mode required</small>
+                        </div>
+                      }
+                    </div>
+                    <div class="text-end mt-4">
+                      <button type="submit" class="btn btn-primary">
+                        Add Payments
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

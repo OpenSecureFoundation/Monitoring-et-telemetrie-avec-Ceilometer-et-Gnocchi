@@ -1,0 +1,371 @@
+<!-- Alerts Dashboard Container -->
+<div class="alerts-dashboard-container">
+
+  <!-- Animated Background -->
+  <div class="page-background"></div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="this.spinnerService.loading$ | async">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Main Content - AJOUT DE LA CONDITION *ngIf -->
+  <ng-container *ngIf="!(this.spinnerService.loading$ | async)">
+    <ng-container *ngIf="(alerts$ | async) as alerts">
+      <!-- Page Header -->
+      <div class="alerts-header">
+        <div class="header-content">
+          <div class="title-section">
+            <h6 class="page-title">
+              <i class="fas fa-bell"></i>
+              Alerts & Monitoring
+            </h6>
+            <p class="page-subtitle">Real-time infrastructure health monitoring across all projects</p>
+          </div>
+          <div class="header-actions">
+            <button class="action-btn secondary">
+              <i class="fas fa-download"></i>
+              Export Report
+            </button>
+            <button class="action-btn primary">
+              <i class="fas fa-cog"></i>
+              Configure
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Global Stats Cards -->
+      <div class="alerts-stats-section" *ngIf="(stats$ | async) as stats">
+        <div class="stats-grid-alerts">
+          <!-- Critical Alerts -->
+          <div class="stat-card-alert critical">
+            <div class="stat-glow"></div>
+            <div class="stat-header">
+              <div class="stat-icon-wrapper critical">
+                <i class="fas fa-exclamation-triangle"></i>
+              </div>
+              <div class="stat-trend pulse">
+                <span class="pulse-dot"></span>
+                <span>Live</span>
+              </div>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Critical Alerts</div>
+              <div class="stat-value">{{stats.critical}}</div>
+              <div class="stat-change negative">
+                <i class="fas fa-arrow-up"></i>
+                <span>+3 in last hour</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warning Alerts -->
+          <div class="stat-card-alert warning">
+            <div class="stat-glow"></div>
+            <div class="stat-header">
+              <div class="stat-icon-wrapper warning">
+                <i class="fas fa-exclamation-circle"></i>
+              </div>
+              <div class="stat-trend">
+                <i class="fas fa-chart-line"></i>
+                <span>Trending</span>
+              </div>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Warnings</div>
+              <div class="stat-value">{{stats.warning}}</div>
+              <div class="stat-change stable">
+                <i class="fas fa-minus"></i>
+                <span>No change</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- OK Status -->
+          <div class="stat-card-alert success">
+            <div class="stat-glow"></div>
+            <div class="stat-header">
+              <div class="stat-icon-wrapper success">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-trend positive">
+                <i class="fas fa-arrow-down"></i>
+                <span>Improving</span>
+              </div>
+            </div>
+            <div class="stat-content">
+              <div class="stat-label">Healthy Resources</div>
+              <div class="stat-value">{{stats.ok}}</div>
+              <div class="stat-change positive">
+                <i class="fas fa-arrow-up"></i>
+                <span>+12 resolved</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters and Actions Bar -->
+      <div class="filters-bar">
+        <div class="filters-left">
+          <div class="filter-group">
+            <label class="filter-label">Severity</label>
+            <div class="filter-chips">
+              <button class="filter-chip" [class.active]="severityFilter === 'all'" (click)="filterBySeverity('all')">
+                All
+              </button>
+              <button class="filter-chip critical" [class.active]="severityFilter === 'critical'"
+                (click)="filterBySeverity('critical')">
+                <span class="chip-dot"></span>
+                Critical
+              </button>
+              <button class="filter-chip warning" [class.active]="severityFilter === 'warning'"
+                (click)="filterBySeverity('warning')">
+                <span class="chip-dot"></span>
+                Warning
+              </button>
+              <button class="filter-chip success" [class.active]="severityFilter === 'ok'"
+                (click)="filterBySeverity('ok')">
+                <span class="chip-dot"></span>
+                OK
+              </button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <label class="filter-label">Resource Type</label>
+            <div class="filter-select-wrapper">
+              <select class="filter-select" [(ngModel)]="resourceTypeFilter" (change)="applyFilters()">
+                <option value="all">All Resources</option>
+                <option value="compute">Compute</option>
+                <option value="network">Network</option>
+                <option value="storage">Storage</option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+
+          <div class="filter-group" *ngIf="(projects$ | async) as projects">
+            <label class="filter-label">Project</label>
+            <div class="filter-select-wrapper">
+              <select class="filter-select" [(ngModel)]="projectFilter" (change)="applyFilters()">
+                <option value="all">All Projects</option>
+                <option *ngFor="let project of projects" [value]="project.id">{{project.name}}</option>
+              </select>
+              <i class="fas fa-chevron-down select-icon"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="filters-right">
+          <button class="action-btn-filter" (click)="acknowledgeAll()">
+            <i class="fas fa-check-double"></i>
+            Acknowledge All
+          </button>
+          <button class="action-btn-filter refresh" (click)="refreshAlerts()">
+            <i class="fas fa-sync-alt"></i>
+            Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Alerts Timeline/List -->
+      <div class="alerts-content">
+
+        <!-- View Toggle -->
+        <div class="view-toggle-bar">
+          <div class="view-toggle">
+            <button class="toggle-btn" [class.active]="viewMode === 'list'" (click)="viewMode = 'list'">
+              <i class="fas fa-list"></i>
+              List View
+            </button>
+            <button class="toggle-btn" [class.active]="viewMode === 'timeline'" (click)="viewMode = 'timeline'">
+              <i class="fas fa-stream"></i>
+              Timeline
+            </button>
+            <button class="toggle-btn" [class.active]="viewMode === 'grid'" (click)="viewMode = 'grid'">
+              <i class="fas fa-th"></i>
+              Grid
+            </button>
+          </div>
+
+          <div class="results-info">
+            <span class="results-count">{{filteredAlerts.length}} alerts</span>
+            <span class="results-separator">•</span>
+            <span class="last-update">Updated {{lastUpdateTime}}</span>
+          </div>
+        </div>
+
+        <!-- List View -->
+        <div class="alerts-list" *ngIf="viewMode === 'list'">
+          <div class="alert-card" *ngFor="let alert of filteredAlerts; let i = index"
+            [class.critical]="alert.severity === 'critical'" [class.warning]="alert.severity === 'warning'"
+            [class.success]="alert.severity === 'ok'" [class.acknowledged]="alert.acknowledged"
+            [style.animation-delay.s]="(i * 0.05)">
+
+            <div class="alert-severity-indicator"></div>
+
+            <div class="alert-main-content">
+              <div class="alert-header-row">
+                <div class="alert-title-section">
+                  <div class="alert-icon-wrapper" [ngClass]="alert.severity">
+                    <i class="fas" [ngClass]="{
+                      'fa-exclamation-triangle': alert.severity === 'critical',
+                      'fa-exclamation-circle': alert.severity === 'warning',
+                      'fa-check-circle': alert.severity === 'ok'
+                    }"></i>
+                  </div>
+                  <div class="alert-title-content">
+                    <h3 class="alert-title">{{alert.title}}</h3>
+                    <div class="alert-meta">
+                      <span class="meta-item">
+                        <i class="fas fa-cube"></i>
+                        {{alert.projectName}}
+                      </span>
+                      <span class="meta-separator">•</span>
+                      <span class="meta-item">
+                        <i class="fas fa-server"></i>
+                        {{alert.resourceType}}
+                      </span>
+                      <span class="meta-separator">•</span>
+                      <span class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        {{alert.timestamp | date:'short'}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="alert-actions-quick">
+                  <button class="quick-action-btn" *ngIf="!alert.acknowledged" (click)="acknowledgeAlert(alert)"
+                    title="Acknowledge">
+                    <i class="fas fa-check"></i>
+                  </button>
+                  <button class="quick-action-btn" (click)="viewAlertDetails(alert)" title="View Details">
+                    <i class="fas fa-eye"></i>
+                  </button>
+                  <button class="quick-action-btn" (click)="muteAlert(alert)" title="Mute">
+                    <i class="fas fa-bell-slash"></i>
+                  </button>
+                  <button class="quick-action-btn danger" (click)="dismissAlert(alert)" title="Dismiss">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="alert-message">
+                <p>{{alert.message}}</p>
+              </div>
+
+              <div class="alert-details-row" *ngIf="alert.details">
+                <div class="detail-chip" *ngFor="let detail of alert.details">
+                  <span class="detail-label">{{detail.label}}:</span>
+                  <span class="detail-value">{{detail.value}}</span>
+                </div>
+              </div>
+
+              <div class="alert-footer" *ngIf="alert.acknowledged">
+                <div class="acknowledged-badge">
+                  <i class="fas fa-check-circle"></i>
+                  Acknowledged by {{alert.acknowledgedBy}} • {{alert.acknowledgedAt | date:'short'}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline View -->
+        <div class="alerts-timeline" *ngIf="viewMode === 'timeline'">
+          <div class="timeline-container">
+            <div class="timeline-item" *ngFor="let alert of filteredAlerts; let i = index"
+              [class.critical]="alert.severity === 'critical'" [class.warning]="alert.severity === 'warning'"
+              [class.success]="alert.severity === 'ok'">
+
+              <div class="timeline-marker">
+                <div class="marker-dot"></div>
+              </div>
+
+              <div class="timeline-content">
+                <div class="timeline-time">{{alert.timestamp | date:'HH:mm'}}</div>
+                <div class="timeline-card">
+                  <div class="timeline-card-header">
+                    <div class="timeline-icon" [ngClass]="alert.severity">
+                      <i class="fas" [ngClass]="{
+                        'fa-exclamation-triangle': alert.severity === 'critical',
+                        'fa-exclamation-circle': alert.severity === 'warning',
+                        'fa-check-circle': alert.severity === 'ok'
+                      }"></i>
+                    </div>
+                    <h4>{{alert.title}}</h4>
+                  </div>
+                  <p class="timeline-message">{{alert.message}}</p>
+                  <div class="timeline-meta">
+                    <span>{{alert.projectName}}</span>
+                    <span>•</span>
+                    <span>{{alert.resourceType}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grid View -->
+        <div class="alerts-grid" *ngIf="viewMode === 'grid'">
+          <div class="alert-grid-card" *ngFor="let alert of filteredAlerts; let i = index"
+            [class.critical]="alert.severity === 'critical'" [class.warning]="alert.severity === 'warning'"
+            [class.success]="alert.severity === 'ok'" [style.animation-delay.s]="(i * 0.05)">
+
+            <div class="grid-card-header">
+              <div class="severity-badge" [ngClass]="alert.severity">
+                <i class="fas" [ngClass]="{
+                  'fa-exclamation-triangle': alert.severity === 'critical',
+                  'fa-exclamation-circle': alert.severity === 'warning',
+                  'fa-check-circle': alert.severity === 'ok'
+                }"></i>
+                {{alert.severity | uppercase}}
+              </div>
+              <span class="grid-time">{{alert.timestamp | date:'short'}}</span>
+            </div>
+
+            <h4 class="grid-title">{{alert.title}}</h4>
+            <p class="grid-message">{{alert.message}}</p>
+
+            <div class="grid-meta">
+              <span class="grid-project">
+                <i class="fas fa-cube"></i>
+                {{alert.projectName}}
+              </span>
+              <span class="grid-resource">
+                <i class="fas fa-server"></i>
+                {{alert.resourceType}}
+              </span>
+            </div>
+
+            <div class="grid-actions">
+              <button class="grid-action-btn" *ngIf="!alert.acknowledged" (click)="acknowledgeAlert(alert)">
+                <i class="fas fa-check"></i>
+              </button>
+              <button class="grid-action-btn" (click)="viewAlertDetails(alert)">
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="filteredAlerts.length === 0">
+          <div class="empty-icon">
+            <i class="fas fa-bell-slash"></i>
+          </div>
+          <h3 class="empty-title">No Alerts Found</h3>
+          <p class="empty-text">All systems are running smoothly or no alerts match your filters.</p>
+        </div>
+
+      </div>
+
+    </ng-container>
+  </ng-container>
+
+</div>

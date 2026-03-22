@@ -1,0 +1,86 @@
+<!-- Sidebar -->
+<div
+  class="sidebar sidebar-three-three"
+
+  (mouseover)="miniSideBarMouseHover('over')"
+  (focus)="miniSideBarMouseHover('over')"
+  (mouseout)="miniSideBarMouseHover('out')"
+  (blur)="miniSideBarMouseHover('out')"
+  id="sidebar"
+  [ngClass]="{
+    'sidebar-six': headerSidebarStyle === '1',
+    'sidebar-seven': headerSidebarStyle === '2',
+    'sidebar-eight': headerSidebarStyle === '3',
+    'sidebar-nine': headerSidebarStyle === '4'
+  }"
+  >
+  <ng-scrollbar thumbClass="custom-scrollbars">
+    <div class="sidebar-inner slimScroll">
+      <div
+        id="sidebar-menu"
+        class="sidebar-menu"
+        [ngClass]="{
+          'sidebar-menu-six': headerSidebarStyle === '1',
+          'sidebar-menu-seven ': headerSidebarStyle === '2',
+          'sidebar-menu-eight': headerSidebarStyle === '3',
+          'sidebar-menu-nine': headerSidebarStyle === '4',
+          'sidebar-menu-ten': primarySkinStyle === '1',
+          'sidebar-menu-eleven ': primarySkinStyle === '2',
+          'sidebar-menu-twelve': primarySkinStyle === '3'
+        }"
+        >
+        <ul>
+          @for (mainTittle of side_bar_data; track mainTittle) {
+            <li class="menu-title">
+              <span>{{ mainTittle.tittle }}</span>
+            </li>
+            @for (menu of mainTittle?.menu; track menu) {
+              @if (menu?.hasSubRoute === false) {
+                <li
+                  [class.active]="base === menu.base"
+                  >
+                  <a [routerLink]="menu?.route"
+                    ><i class="feather" [class]="'icon-' + menu.icon"></i>
+                    <span>{{ menu?.menuValue }}</span></a
+                    >
+                  </li>
+                }
+                @if (menu.hasSubRoute === true) {
+                  <li class="submenu">
+                    <a
+                      [class.active]="base === menu.base"
+                      (click)="expandSubMenus(menu)"
+                      href="javascript:void(0)"
+                  [ngClass]="{ subdrop: menu.showSubRoute ===
+                     true }"
+                      ><i class="feather" [class]="'icon-' + menu.icon"></i>
+                      <span> {{ menu.menuValue }}</span>
+                      <span class="menu-arrow"></span
+                      ></a>
+                      <ul
+                  [ngClass]="
+                    menu.showSubRoute === true
+                      ? 'show-sub-menu'
+                      : 'hide-sub-menu'
+                  "
+                        >
+                        @for (subMenus of menu.subMenus; track subMenus) {
+                          <li>
+                            <a
+                              [class.active]="currentRoute === subMenus.base"
+                              [routerLink]="subMenus.route"
+                              >{{ subMenus.menuValue }}</a
+                              >
+                            </li>
+                          }
+                        </ul>
+                      </li>
+                    }
+                  }
+                }
+              </ul>
+            </div>
+          </div>
+        </ng-scrollbar>
+      </div>
+      <!-- /Sidebar -->

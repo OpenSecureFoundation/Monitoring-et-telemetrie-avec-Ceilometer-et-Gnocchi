@@ -1,0 +1,165 @@
+<div class="row">
+  <div class="col-xl-12 col-md-8">
+    <div class="w-100 pt-0">
+      <div class="content-page-header">
+        <h5>Invoice Templates</h5>
+      </div>
+      <!-- All Invoice -->
+      <div class="card invoices-tabs-card">
+        <div class="invoice-template-tab invoices-main-tabs">
+          <div class="row align-items-center">
+            <div class="col-lg-12">
+              <div class="invoices-tabs">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a id="invoice-tab" data-bs-toggle="tab" data-bs-target="#invoice_tab"
+                      type="button" role="tab" aria-controls="invoice_tab" aria-selected="true"
+                    href="javascript:void(0);" class="active">Invoice</a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="purchases-tab" data-bs-toggle="tab" data-bs-target="#purchases_tab"
+                      type="button" role="tab" aria-controls="purchases_tab" aria-selected="true"
+                      href="javascript:void(0);">Purchases
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a id="receipt-tab" data-bs-toggle="tab" data-bs-target="#receipt_tab"
+                      type="button" role="tab" aria-controls="receipt_tab" aria-selected="true"
+                      href="javascript:void(0);">Receipt
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tab-content">
+        <div class="tab-pane active" id="invoice_tab" role="tabpanel" aria-labelledby="invoice-tab"
+          tabindex="0">
+          <div class="card template-invoice-card">
+            <div class="card-body pb-0">
+              <div class="invoice-card-title">
+                <h6>Invoice</h6>
+              </div>
+              <div class="row">
+                @for (image of albumsOne; track image; let i = $index) {
+                  <!-- Invoice List -->
+                  @if (i<5) {
+                    <div class="col-md-6 col-xl-3 col-sm-12 d-md-flex d-sm-block">
+                      <div
+                        class="blog grid-blog invoice-blog flex-fill  d-flex flex-wrap align-content-betweens active ">
+                        <div class="blog-image">
+                          <a href="javascript:void(0)" class="img-general"><img class="img-fluid"
+                            [src]="image.src" (click)="open(i, albumsTwo)"
+                            (keydown.enter)="open(i, albumsTwo)" tabindex="0"
+                            alt="Post Image">
+                          </a>
+                          <a href="javascript:void(0)" src="" (click)="open(i, albumsOne)"
+                            class="preview-invoice image-popup"><i
+                          class="fa-regular fa-eye"></i></a>
+                        </div>
+                        <div class="invoice-content-title">
+                          <a href="javascript:void(0)">{{ image.title }}</a>
+                          <span class="invoice-star" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title=""
+                            data-bs-original-title="Make as default">
+                            <i class="fa-regular fa-star"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  <!-- /Invoice List -->
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="purchases_tab" role="tabpanel" aria-labelledby="purchases-tab" tabindex="0">
+          <div class="card template-invoice-card">
+            <div class="card-body pb-0">
+              <div class="invoice-card-title">
+                <h6>Purchases</h6>
+              </div>
+              <div class="row">
+                @for (image of albumsOne; track image; let i = $index) {
+                  <!-- Invoice List -->
+                  @if (i<5) {
+                    <div class="col-md-6 col-xl-3 col-sm-12 d-md-flex d-sm-block">
+                      <div
+                        class="blog grid-blog invoice-blog flex-fill  d-flex flex-wrap align-content-betweens active ">
+                        <div class="blog-image">
+                          <a href="javascript:void(0)" class="img-general"><img class="img-fluid"
+                            [src]="image.src" (click)="open(i, albumsTwo)"
+                            (keydown.enter)="open(i, albumsTwo)" tabindex="0"
+                            alt="Post Image">
+                          </a>
+                          <a href="javascript:void(0)" src="" (click)="open(i, albumsOne)"
+                            class="preview-invoice image-popup"><i
+                          class="fa-regular fa-eye"></i></a>
+                        </div>
+                        <div class="invoice-content-title">
+                          <a href="javascript:void(0)">{{ image.title }}</a>
+                          <span class="invoice-star" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title=""
+                            data-bs-original-title="Make as default">
+                            <i class="fa-regular fa-star"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  <!-- /Invoice List -->
+                }
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="receipt_tab" role="tabpanel" aria-labelledby="receipt-tab" tabindex="0">
+          <div class="card template-invoice-card mb-0">
+            <div class="card-body pb-0">
+              <div class="invoice-card-title">
+                <h6>Receipt</h6>
+              </div>
+              <div class="row">
+                @for (image of albumsThree; track image; let i = $index) {
+                  <!-- Invoice List -->
+                  @if (i<5) {
+                    <div class="col-md-6 col-xl-3 col-sm-12 d-md-flex d-sm-block">
+                      <div
+                        class="blog grid-blog invoice-blog flex-fill  d-flex flex-wrap align-content-betweens active">
+                        <div class="blog-image receipt">
+                          <a href="javascript:void(0)" class="img-general"><img class="img-fluid"
+                            [src]="image.src" alt="Post Image">
+                          </a>
+                          <a href="javascript:void(0)" src="" (click)="open(i, albumsThree)"
+                            (keydown.enter)="open(i, albumsThree)" tabindex="0"
+                            class="preview-invoice image-popup"><i
+                          class="fa-regular fa-eye"></i></a>
+                        </div>
+                        <div class="invoice-content-title">
+                          <a href="javascript:void(0)">{{ image.title1 }}</a>
+                          <span class="invoice-star" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title=""
+                            data-bs-original-title="Make as default">
+                            <i class="fa-regular fa-star"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                  <!-- /Invoice List -->
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /All Invoice -->
+
+
+    </div>
+  </div>
+</div>

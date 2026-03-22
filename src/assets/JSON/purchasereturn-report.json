@@ -1,0 +1,51 @@
+{
+    "data": [
+      {
+        "sNo":"1",
+        "product":"Lenovo 3rd Generation",
+        "productImg":"assets/img/sales-return1.svg",
+        "purchaseAmount": "$7248.00",
+        "purchaseQty": "50",
+        "instockQty": "100",
+        "duedate":"20 Aug 2023"
+      },
+      {
+        "sNo":"2",
+        "product":"Nike Jordan",
+        "productImg":"assets/img/sales-return2.svg",
+        "purchaseAmount": "$1350.00",
+        "purchaseQty": "70",
+        "instockQty": "140",
+        "duedate":"23 Aug 2023"
+      },
+      {
+        "sNo":"3",
+        "product":"Apple Series 5 Watch",
+        "productImg":"assets/img/sales-return3.svg",
+        "purchaseAmount": "$700.00",
+        "purchaseQty": "30",
+        "instockQty": "200",
+        "duedate":"25 Aug 2023"
+      },
+      {
+        "sNo":"4",
+        "product":"Amazon Echo Dot",
+        "productImg":"assets/img/sales-return4.svg",
+        "purchaseAmount": "$200.00",
+        "purchaseQty": "20",
+        "instockQty": "250",
+        "duedate":"27 Aug 2023"
+      },
+      {
+        "sNo":"5",
+        "product":"Lobar Handy",
+        "productImg":"assets/img/sales-return5.svg",
+        "purchaseAmount": "$150.00",
+        "purchaseQty": "40",
+        "instockQty": "300",
+        "duedate":"30 Aug 2023"
+      }
+    ],
+    "totalData": 5
+  }
+  

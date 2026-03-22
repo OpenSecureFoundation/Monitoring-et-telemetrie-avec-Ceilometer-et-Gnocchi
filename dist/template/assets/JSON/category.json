@@ -1,0 +1,62 @@
+{
+    "data": [
+      {
+        "id": "1",
+        "category": "Advertising",
+        "img": "assets/img/category/category-01.jpg",
+        "total": 60
+      },
+      {
+        "id": "2",
+        "category": "Food",
+        "img": "assets/img/category/category-02.jpg",
+        "total": 55
+      },
+      {
+        "id": "3",
+        "category": "Marketing",
+        "img": "assets/img/category/category-03.jpg",
+        "total":  70
+      },
+     
+      {
+        "id": "4",
+        "category": "Repairs",
+        "img": "assets/img/category/category-04.jpg",
+        "total":  82
+      },
+      {
+        "id": "5",
+        "category": "Software",
+        "img": "assets/img/category/category-05.jpg",
+        "total": 26
+      },
+     
+      {
+        "id": "6",
+        "category": "Stationary",
+        "img": "assets/img/category/category-06.jpg",
+        "total": 60
+      },
+      {
+        "id": "7",
+        "category": "Advertising",
+        "img": "assets/img/category/category-01.jpg",
+        "total": 60
+      },
+      {
+        "id": "8",
+        "category": "Food",
+        "img": "assets/img/category/category-02.jpg",
+        "total": 55
+      },
+      {
+        "id": "9",
+        "category": "Marketing",
+        "img": "assets/img/category/category-03.jpg",
+        "total":  70
+      }
+    ],
+    "totalData": 9
+  }
+  

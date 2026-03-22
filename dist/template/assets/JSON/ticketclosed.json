@@ -1,0 +1,25 @@
+{
+    "data": [
+      {
+        "ticketId": "#4990",
+        "subject": "Management",
+        "assigned": "Sharonda",
+        "assignedPerson": "assets/img/profiles/avatar-08.jpg",
+        "assignedDate": "27 Feb 2022",
+        "createdOn": "28 Feb 2022, 6:12PM",
+        "dueDate": "29 Mar 2023",
+        "assignee": "Sharonda",
+        "assigneeImg":"assets/img/profiles/avatar-17.jpg",
+        "assigneePho":"+1 843-443-5298",
+        "lastReply":"25 Jan 2023",
+        "priority": "Medium",
+        "status": "closed"
+        
+      }
+     
+     
+     
+      
+    ],
+    "totalData": 1
+  }

@@ -1,0 +1,152 @@
+<!-- Sign Up -->
+<div class="row gx-0">
+  <!-- Banner Content -->
+  <div class="col-lg-6 position-relative banner-section">
+    <div class="authentication-wrapper h-100">
+      <div class="authentication-content">
+        <div class="content-overlay px-5">
+          <h1 class="display-4 fw-bold text-white mb-4 animate__animated animate__fadeInDown">Créez un compte chez nous
+          </h1>
+          <!-- <p class="lead text-white-80 mb-5 animate__animated animate__fadeIn animate__delay-1s">
+            Gestion intelligente de factures pour entreprises modernes
+          </p> -->
+          <!-- <div class="feature-list">
+          <div class="feature-item d-flex align-items-center mb-3">
+            <i class="fas fa-bolt text-primary me-3 fs-4"></i>
+            <span class="text-white">Processus 100% automatisé</span>
+          </div>
+          <div class="feature-item d-flex align-items-center mb-3">
+            <i class="fas fa-shield-alt text-primary me-3 fs-4"></i>
+            <span class="text-white">Sécurité bancaire de niveau militaire</span>
+          </div>
+          <div class="feature-item d-flex align-items-center">
+            <i class="fas fa-cloud-upload-alt text-primary me-3 fs-4"></i>
+            <span class="text-white">Synchronisation multi-appareils</span>
+          </div>
+        </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Banner Content -->
+
+  <!-- sign up Content -->
+  <div class="col-lg-6 d-flex align-items-center justify-content-center py-5 bg-light">
+    <div class="saas-signup-wrapper px-3 px-md-5 py-4 w-100" style="max-width: 600px;">
+      <form [formGroup]="this.userService.registerForm" (ngSubmit)="register()" class="needs-validation" novalidate>
+        <!-- Step 1 -->
+        <div class="signup-step" *ngIf="step === 1">
+          <div class="text-center mb-5">
+            <img src="assets/img/saas-login-logo.svg" alt="logo" class="mb-4" style="height: 40px;">
+            <h2 class="fw-bold mb-3">Commencez votre essai gratuit</h2>
+            <p class="text-muted">14 jours d'accès illimité - Aucune carte requise</p>
+          </div>
+
+          <div class="form-floating mb-4">
+            <input type="text" class="form-control form-control-lg" id="name" placeholder=" " required
+              formControlName="firstname">
+            <label for="name">Fisrtname</label>
+            <div class="invalid-feedback">Veuillez entrer votre nom</div>
+          </div>
+
+          <div class="form-floating mb-4">
+            <input type="text" class="form-control form-control-lg" id="name" placeholder=" " required
+              formControlName="lastname">
+            <label for="name">Lastname</label>
+            <div class="invalid-feedback">Veuillez entrer votre nom</div>
+          </div>
+
+          <div class="form-floating mb-4">
+            <input type="email" class="form-control form-control-lg" id="email" placeholder=" " required
+              formControlName="email">
+            <label for="email"> Email address</label>
+            <div class="invalid-feedback">Veuillez entrer une adresse email valide</div>
+          </div>
+
+          <!-- <div class="input-group mb-4">
+            <div class="form-floating">
+              <input type="text" class="form-control form-control-lg" id="domain" placeholder=" " required>
+              <label for="domain">Nom de domaine</label>
+            </div>
+            <span class="input-group-text bg-transparent">.kanakku.com</span>
+          </div> -->
+
+          <!-- <div class="form-floating mb-5">
+            <input type="text" class="form-control form-control-lg" id="company" placeholder=" " required>
+            <label for="company">Nom de l'entreprise</label>
+            <div class="invalid-feedback">Veuillez entrer le nom de votre entreprise</div>
+          </div> -->
+
+          <button type="button" (click)="next()" class="btn btn-primary btn-lg w-100 py-3">
+            Continuer
+            <i class="fas fa-arrow-right ms-2"></i>
+          </button>
+        </div>
+
+        <!-- Step 2 -->
+        <div *ngIf="step === 2">
+          <div class="text-center mb-5">
+            <h2 class="fw-bold mb-3">Sécurisez votre compte</h2>
+            <p class="text-muted">Créez un mot de passe robuste</p>
+          </div>
+
+          <div class="form-floating mb-4">
+            <div class="password-input">
+              <input [type]="show_password ? 'text' : 'password'" class="form-control form-control-lg" id="password"
+                required formControlName="password">
+              <label for="password">Mot de passe</label>
+              <button type="button" (click)="show_password = !show_password" class="btn btn-link">
+                <i class="fas" [ngClass]="show_password ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+            <div class="password-strength mt-2">
+              <div class="strength-bar"></div>
+            </div>
+          </div>
+
+          <div class="form-floating mb-4">
+            <div class="password-input">
+              <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control form-control-lg"
+                id="confirmPassword" required>
+              <label for="confirmPassword">Confirmer le mot de passe</label>
+              <button type="button" (click)="toggleConfirmPasswordVisibility()" class="btn btn-link">
+                <i class="fas" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="terms" required>
+            <label class="form-check-label" for="terms">
+              J'accepte les <a href="#">Conditions d'utilisation</a> et la <a href="#">Politique de confidentialité</a>
+            </label>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <button type="button" (click)="previous()" class="btn btn-outline-secondary">
+              <i class="fas fa-arrow-left me-2"></i>
+              Retour
+            </button>
+            <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+              <span *ngIf="this.spinnerService.loading$ | async">
+                <span class="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true"></span>
+                loading...
+                <i class="fas fa-sign-in-alt me-2"></i>
+                <i class="fas fa-spinner fa-spin" *ngIf="!this.userService.loading"></i>
+              </span>
+              <span *ngIf="!(spinnerService.loading$ | async)">
+                <i class="fas fa-sign-in-alt me-2"></i>
+                S'inscrire
+              </span>
+            </button>
+          </div>
+          <div class="text-center text-muted mt-4">
+            Déjà un compte? <a [routerLink]="routes.sassLogin" class="text-decoration-none">Connexion</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- /sign up Content -->
+</div>
+<!-- /Sign Up -->

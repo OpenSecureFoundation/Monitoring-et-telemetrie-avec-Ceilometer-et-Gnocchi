@@ -1,0 +1,505 @@
+{
+  "data":[
+    {
+      "id": "63aa825607b917e929d47efc",
+      "date": "24-04-2015",
+      "category": "occaecat",
+      "sales": "$1,673.70",
+      "refunded": "$3,640.56",
+      "discounts": "$2,070.76",
+      "tax": "$3,103.83",
+      "amount": "$1,216.22"
+    },
+    {
+      "id": "63aa82563835292cbebfb658",
+      "date": "30-10-2018",
+      "category": "reprehenderit",
+      "sales": "$2,316.09",
+      "refunded": "$1,183.74",
+      "discounts": "$2,605.28",
+      "tax": "$2,477.39",
+      "amount": "$1,429.29"
+    },
+    {
+      "id": "63aa82564aaea69ab62ca7e0",
+      "date": "30-08-2014",
+      "category": "est",
+      "sales": "$2,656.57",
+      "refunded": "$3,316.33",
+      "discounts": "$3,422.34",
+      "tax": "$2,775.07",
+      "amount": "$1,420.38"
+    },
+    {
+      "id": "63aa825636b9afbe21695564",
+      "date": "07-07-2020",
+      "category": "id",
+      "sales": "$2,421.19",
+      "refunded": "$3,441.40",
+      "discounts": "$3,866.53",
+      "tax": "$1,561.34",
+      "amount": "$3,811.29"
+    },
+    {
+      "id": "63aa825658d4fb420ec47ebd",
+      "date": "16-12-2016",
+      "category": "laborum",
+      "sales": "$3,628.28",
+      "refunded": "$1,449.64",
+      "discounts": "$1,335.83",
+      "tax": "$1,648.61",
+      "amount": "$1,248.54"
+    },
+    {
+      "id": "63aa8256367b7ef8f473a96b",
+      "date": "20-02-2016",
+      "category": "cupidatat",
+      "sales": "$2,876.30",
+      "refunded": "$3,274.04",
+      "discounts": "$1,897.74",
+      "tax": "$1,534.13",
+      "amount": "$1,309.07"
+    },
+    {
+      "id": "63aa825649cf0e1a57fb30a4",
+      "date": "21-09-2018",
+      "category": "labore",
+      "sales": "$2,458.67",
+      "refunded": "$1,911.62",
+      "discounts": "$1,125.95",
+      "tax": "$3,938.52",
+      "amount": "$2,958.15"
+    },
+    {
+      "id": "63aa825695dcde0d2cf88db6",
+      "date": "29-04-2021",
+      "category": "eiusmod",
+      "sales": "$1,130.76",
+      "refunded": "$2,460.86",
+      "discounts": "$1,214.13",
+      "tax": "$1,282.65",
+      "amount": "$1,917.46"
+    },
+    {
+      "id": "63aa825687922499a5505e7f",
+      "date": "27-06-2015",
+      "category": "ullamco",
+      "sales": "$1,769.99",
+      "refunded": "$2,407.84",
+      "discounts": "$2,705.62",
+      "tax": "$1,381.39",
+      "amount": "$2,593.46"
+    },
+    {
+      "id": "63aa82563e4b9a15c3ca03d5",
+      "date": "14-03-2018",
+      "category": "aliquip",
+      "sales": "$3,085.57",
+      "refunded": "$3,251.88",
+      "discounts": "$2,674.09",
+      "tax": "$3,797.65",
+      "amount": "$1,841.77"
+    },
+    {
+      "id": "63aa82569b4568cb897096d5",
+      "date": "07-04-2021",
+      "category": "Lorem",
+      "sales": "$3,168.49",
+      "refunded": "$2,774.23",
+      "discounts": "$2,289.31",
+      "tax": "$2,620.02",
+      "amount": "$3,082.30"
+    },
+    {
+      "id": "63aa825688dc828b2a327c9d",
+      "date": "24-09-2022",
+      "category": "pariatur",
+      "sales": "$3,136.73",
+      "refunded": "$1,223.56",
+      "discounts": "$1,450.05",
+      "tax": "$3,779.87",
+      "amount": "$2,546.98"
+    },
+    {
+      "id": "63aa8256eb775c84ee031b75",
+      "date": "28-04-2015",
+      "category": "laborum",
+      "sales": "$3,477.60",
+      "refunded": "$1,508.06",
+      "discounts": "$1,950.20",
+      "tax": "$1,425.71",
+      "amount": "$3,525.25"
+    },
+    {
+      "id": "63aa825681c98613b327eb1a",
+      "date": "29-10-2016",
+      "category": "laborum",
+      "sales": "$1,166.51",
+      "refunded": "$1,284.79",
+      "discounts": "$3,483.27",
+      "tax": "$3,875.49",
+      "amount": "$1,890.28"
+    },
+    {
+      "id": "63aa82564816646bc265486f",
+      "date": "15-04-2017",
+      "category": "commodo",
+      "sales": "$2,994.58",
+      "refunded": "$3,473.28",
+      "discounts": "$2,582.24",
+      "tax": "$3,636.36",
+      "amount": "$2,505.14"
+    },
+    {
+      "id": "63aa8256a1692222a8999256",
+      "date": "12-06-2020",
+      "category": "exercitation",
+      "sales": "$2,149.32",
+      "refunded": "$3,829.34",
+      "discounts": "$1,671.33",
+      "tax": "$3,710.98",
+      "amount": "$2,464.33"
+    },
+    {
+      "id": "63aa825612e21290ef4fbb61",
+      "date": "08-10-2022",
+      "category": "nostrud",
+      "sales": "$1,079.01",
+      "refunded": "$2,837.35",
+      "discounts": "$2,198.04",
+      "tax": "$2,354.16",
+      "amount": "$1,824.33"
+    },
+    {
+      "id": "63aa8256fa310b4ac999e0ad",
+      "date": "26-12-2018",
+      "category": "sint",
+      "sales": "$1,896.99",
+      "refunded": "$2,414.95",
+      "discounts": "$1,995.62",
+      "tax": "$3,561.26",
+      "amount": "$2,531.56"
+    },
+    {
+      "id": "63aa8256df9832075fb412e3",
+      "date": "03-10-2016",
+      "category": "ut",
+      "sales": "$1,697.93",
+      "refunded": "$2,825.14",
+      "discounts": "$2,894.16",
+      "tax": "$3,355.96",
+      "amount": "$2,190.93"
+    },
+    {
+      "id": "63aa82566725785a2f19f97a",
+      "date": "23-03-2014",
+      "category": "fugiat",
+      "sales": "$1,303.48",
+      "refunded": "$2,631.40",
+      "discounts": "$2,686.10",
+      "tax": "$1,243.30",
+      "amount": "$3,424.60"
+    },
+    {
+      "id": "63aa8256df05d38d691e2ded",
+      "date": "05-06-2021",
+      "category": "eiusmod",
+      "sales": "$1,684.01",
+      "refunded": "$3,270.21",
+      "discounts": "$1,356.05",
+      "tax": "$3,387.75",
+      "amount": "$1,413.69"
+    },
+    {
+      "id": "63aa82568a0e7c690a4878f4",
+      "date": "02-10-2022",
+      "category": "nisi",
+      "sales": "$1,631.06",
+      "refunded": "$2,236.16",
+      "discounts": "$1,545.44",
+      "tax": "$3,267.54",
+      "amount": "$2,393.53"
+    },
+    {
+      "id": "63aa825622fec9f0bd07bf7a",
+      "date": "11-06-2022",
+      "category": "esse",
+      "sales": "$2,708.31",
+      "refunded": "$2,502.62",
+      "discounts": "$1,507.18",
+      "tax": "$3,337.90",
+      "amount": "$2,356.06"
+    },
+    {
+      "id": "63aa8256337481c598a3cef3",
+      "date": "01-04-2015",
+      "category": "labore",
+      "sales": "$1,491.46",
+      "refunded": "$1,036.29",
+      "discounts": "$2,125.12",
+      "tax": "$2,048.13",
+      "amount": "$3,642.39"
+    },
+    {
+      "id": "63aa82566b571ae356ef5ccd",
+      "date": "20-12-2018",
+      "category": "dolore",
+      "sales": "$1,252.20",
+      "refunded": "$1,817.76",
+      "discounts": "$1,083.35",
+      "tax": "$3,816.51",
+      "amount": "$3,758.90"
+    },
+    {
+      "id": "63aa8256bc9a20ca3899f653",
+      "date": "29-06-2015",
+      "category": "ut",
+      "sales": "$3,031.95",
+      "refunded": "$2,100.58",
+      "discounts": "$2,282.92",
+      "tax": "$1,098.60",
+      "amount": "$2,645.44"
+    },
+    {
+      "id": "63aa8256f9d0eed26a460af6",
+      "date": "21-01-2014",
+      "category": "id",
+      "sales": "$1,293.94",
+      "refunded": "$2,872.75",
+      "discounts": "$2,362.77",
+      "tax": "$1,107.16",
+      "amount": "$1,212.55"
+    },
+    {
+      "id": "63aa8256f96df930c6a9fa07",
+      "date": "11-01-2018",
+      "category": "qui",
+      "sales": "$1,483.29",
+      "refunded": "$2,323.88",
+      "discounts": "$3,781.18",
+      "tax": "$3,956.25",
+      "amount": "$1,247.62"
+    },
+    {
+      "id": "63aa8256145b6aa580887dd8",
+      "date": "22-11-2019",
+      "category": "magna",
+      "sales": "$3,800.00",
+      "refunded": "$3,670.14",
+      "discounts": "$3,738.79",
+      "tax": "$1,596.15",
+      "amount": "$2,299.55"
+    },
+    {
+      "id": "63aa82561317d1ca165cf8f4",
+      "date": "24-04-2016",
+      "category": "reprehenderit",
+      "sales": "$3,668.70",
+      "refunded": "$1,743.52",
+      "discounts": "$3,357.00",
+      "tax": "$1,727.50",
+      "amount": "$3,858.50"
+    },
+    {
+      "id": "63aa8256dd88a48234816f20",
+      "date": "15-07-2021",
+      "category": "mollit",
+      "sales": "$3,385.80",
+      "refunded": "$2,840.66",
+      "discounts": "$1,492.76",
+      "tax": "$2,061.29",
+      "amount": "$1,165.46"
+    },
+    {
+      "id": "63aa8256d650052dd8603b45",
+      "date": "05-05-2014",
+      "category": "pariatur",
+      "sales": "$1,220.06",
+      "refunded": "$1,296.31",
+      "discounts": "$2,083.22",
+      "tax": "$3,283.78",
+      "amount": "$3,018.92"
+    },
+    {
+      "id": "63aa825698cbc9b97495a597",
+      "date": "11-08-2015",
+      "category": "voluptate",
+      "sales": "$3,615.33",
+      "refunded": "$3,149.54",
+      "discounts": "$3,633.36",
+      "tax": "$2,450.21",
+      "amount": "$1,805.49"
+    },
+    {
+      "id": "63aa8256cc33f945f8d64d00",
+      "date": "15-11-2021",
+      "category": "ex",
+      "sales": "$2,055.86",
+      "refunded": "$3,434.84",
+      "discounts": "$1,993.09",
+      "tax": "$1,087.26",
+      "amount": "$3,194.35"
+    },
+    {
+      "id": "63aa8256e0764bfa34f18bc7",
+      "date": "28-09-2017",
+      "category": "proident",
+      "sales": "$3,993.99",
+      "refunded": "$3,978.07",
+      "discounts": "$3,446.97",
+      "tax": "$3,437.91",
+      "amount": "$2,276.03"
+    },
+    {
+      "id": "63aa8256591d3ed35a5d6f7e",
+      "date": "09-01-2019",
+      "category": "culpa",
+      "sales": "$2,535.56",
+      "refunded": "$2,163.43",
+      "discounts": "$2,331.60",
+      "tax": "$1,988.66",
+      "amount": "$3,181.75"
+    },
+    {
+      "id": "63aa8256f2fdc9cf53583988",
+      "date": "12-12-2015",
+      "category": "ut",
+      "sales": "$2,838.65",
+      "refunded": "$2,482.85",
+      "discounts": "$3,121.89",
+      "tax": "$3,197.57",
+      "amount": "$1,388.72"
+    },
+    {
+      "id": "63aa825641ebda9f09c93ed5",
+      "date": "01-12-2022",
+      "category": "deserunt",
+      "sales": "$1,666.19",
+      "refunded": "$2,598.64",
+      "discounts": "$1,846.74",
+      "tax": "$3,342.05",
+      "amount": "$1,084.07"
+    },
+    {
+      "id": "63aa8256f9e0b3957d7d70da",
+      "date": "02-04-2022",
+      "category": "fugiat",
+      "sales": "$3,647.05",
+      "refunded": "$3,824.61",
+      "discounts": "$3,667.50",
+      "tax": "$2,851.28",
+      "amount": "$2,640.15"
+    },
+    {
+      "id": "63aa82564e0a92e212f37851",
+      "date": "17-06-2015",
+      "category": "minim",
+      "sales": "$1,699.72",
+      "refunded": "$1,695.92",
+      "discounts": "$2,400.85",
+      "tax": "$1,157.35",
+      "amount": "$2,999.14"
+    },
+    {
+      "id": "63aa825690fdaf22871b7ab0",
+      "date": "16-07-2014",
+      "category": "aliquip",
+      "sales": "$3,350.25",
+      "refunded": "$2,901.35",
+      "discounts": "$3,013.72",
+      "tax": "$2,284.16",
+      "amount": "$1,901.40"
+    },
+    {
+      "id": "63aa825673cc3bc7cf60b8d1",
+      "date": "12-11-2016",
+      "category": "qui",
+      "sales": "$3,871.28",
+      "refunded": "$2,598.51",
+      "discounts": "$1,233.46",
+      "tax": "$2,272.78",
+      "amount": "$1,464.23"
+    },
+    {
+      "id": "63aa82569c464a36b2e6e1e4",
+      "date": "02-04-2019",
+      "category": "ipsum",
+      "sales": "$1,715.65",
+      "refunded": "$1,197.56",
+      "discounts": "$1,739.91",
+      "tax": "$2,251.85",
+      "amount": "$1,682.16"
+    },
+    {
+      "id": "63aa8256735431d8ad113dfc",
+      "date": "22-04-2019",
+      "category": "elit",
+      "sales": "$3,928.89",
+      "refunded": "$1,919.59",
+      "discounts": "$1,249.61",
+      "tax": "$3,070.26",
+      "amount": "$1,446.03"
+    },
+    {
+      "id": "63aa8256af6ffb5008464fc2",
+      "date": "14-12-2015",
+      "category": "proident",
+      "sales": "$3,947.85",
+      "refunded": "$3,505.31",
+      "discounts": "$2,296.39",
+      "tax": "$2,508.35",
+      "amount": "$3,041.87"
+    },
+    {
+      "id": "63aa8256b1a180b36551880d",
+      "date": "05-07-2021",
+      "category": "magna",
+      "sales": "$1,376.21",
+      "refunded": "$2,465.35",
+      "discounts": "$3,898.87",
+      "tax": "$2,791.80",
+      "amount": "$2,021.31"
+    },
+    {
+      "id": "63aa8256bc51303b6b622eb8",
+      "date": "26-05-2022",
+      "category": "enim",
+      "sales": "$2,879.59",
+      "refunded": "$2,863.66",
+      "discounts": "$3,274.74",
+      "tax": "$2,772.45",
+      "amount": "$1,257.49"
+    },
+    {
+      "id": "63aa8256435e2077d1ed6c3e",
+      "date": "21-02-2021",
+      "category": "occaecat",
+      "sales": "$3,582.74",
+      "refunded": "$3,292.27",
+      "discounts": "$2,929.66",
+      "tax": "$2,901.15",
+      "amount": "$1,898.78"
+    },
+    {
+      "id": "63aa8256c3d68240d54bf0ff",
+      "date": "21-10-2017",
+      "category": "nostrud",
+      "sales": "$1,531.24",
+      "refunded": "$2,524.65",
+      "discounts": "$2,417.11",
+      "tax": "$1,702.68",
+      "amount": "$2,989.13"
+    },
+    {
+      "id": "63aa82569fe3bb5cf82fca07",
+      "date": "18-01-2018",
+      "category": "nostrud",
+      "sales": "$3,198.88",
+      "refunded": "$2,079.17",
+      "discounts": "$2,275.28",
+      "tax": "$2,394.40",
+      "amount": "$2,601.90"
+    }
+  ],
+  "totalData": 50
+}

@@ -1,0 +1,140 @@
+<div class="card">
+  <div class="card-body">
+    <div class="page-header">
+      <div class="content-page-header">
+        <h5>Settings</h5>
+      </div>
+    </div>
+    <!-- Settings Menu -->
+    <div class="widget settings-menu mb-0">
+      <ul>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.profileSettings"
+            class="nav-link"
+            [class.active]="url === routes.profileSettings"
+          >
+            <i class="feather icon-user"></i> <span>Account Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.companysettings"
+            class="nav-link"
+            [class.active]="url === routes.companysettings"
+          >
+            <i class="feather icon-settings"></i> <span>Company Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.invoiceSettings"
+            class="nav-link"
+            [class.active]="url === routes.invoiceSettings"
+          >
+            <i class="feather icon-file"></i> <span>Invoice Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.templateinvoice"
+            class="nav-link active"
+            [class.active]="url === routes.templateinvoice"
+          >
+            <i class="feather icon-layers"></i> <span>Invoice Templates</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.paymentsettings"
+            class="nav-link"
+            [class.active]="url === routes.paymentsettings"
+          >
+            <i class="feather icon-credit-card"></i>
+            <span>Payment Methods</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.bankaccount"
+            class="nav-link"
+            [class.active]="url === routes.bankaccount"
+          >
+            <i class="feather icon-aperture"></i> <span>Bank Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.taxrats"
+            class="nav-link"
+            [class.active]="url === routes.taxrats"
+          >
+            <i class="feather icon-file-text"></i> <span>Tax Rates</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.planBilling"
+            class="nav-link"
+            [class.active]="url === routes.planBilling"
+          >
+            <i class="feather icon-credit-card"></i> <span>Plan & Billing</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.twoFactor"
+            class="nav-link"
+            [class.active]="url === routes.twoFactor"
+          >
+            <i class="feather icon-aperture"></i> <span>Two Factor</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.customField"
+            class="nav-link"
+            [class.active]="url === routes.customField"
+          >
+            <i class="feather icon-file-text"></i> <span>Custom Fields</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.emailsettings"
+            class="nav-link"
+            [class.active]="url === routes.emailsettings"
+          >
+            <i class="feather icon-mail"></i> <span>Email Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.preferences"
+            class="nav-link"
+            [class.active]="url === routes.preferences"
+          >
+            <i class="feather icon-settings"></i>
+            <span>Preference Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="routes.emailTemplate" [class.active]="url === routes.emailTemplate">
+            <i class="feather icon-airplay"></i> <span>Email Templates</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="routes.seoSetting"  [class.active]="url === routes.seoSetting">
+            <i class="feather icon-send"></i> <span>SEO Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="routes.sassSetting" [class.active]="url === routes.sassSetting">
+            <i class="feather icon-target"></i> <span>SaaS Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /Settings Menu -->
+  </div>
+</div>

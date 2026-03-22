@@ -1,0 +1,317 @@
+<!-- Ajouter une meta viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="chat-window" [ngClass]="{'chat-slide' : chatSlide === true}"
+      style="border-radius: 24px; display: flex; justify-content: center; align-items: center;">
+      <div class="chat-cont-right full-height">
+      <div class="chat-header">
+
+          <div class="chat-block d-flex">
+            <a id="back_user_list" href="javascript:void(0)" class="back-user-list" (click)="showChatSlide()">
+              <i class="fa fa-chevron-left"></i>
+            </a>
+            <div class="media-img-wrap">
+              <div class="avatar avatar-online">
+                <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+              </div>
+            </div>
+            <div class="media-body">
+              <div class="user-name">Brian Johnson</div>
+              <div class="user-status">online</div>
+            </div>
+          </div>
+          <div class="chat-options">
+            <a href="javascript:void(0)" class="d-none d-md-inline">
+              <span><i class="feather icon-phone"></i></span>
+            </a>
+            <a href="javascript:void(0)" class="d-none d-md-inline">
+              <span><i class="feather icon-video"></i></span>
+            </a>
+            <a href="javascript:void(0)" class="d-none d-md-inline">
+              <span><i class="feather icon-more-vertical"></i></span>
+            </a>
+          </div>
+        </div>
+        <!-- Remplacer le header existant par cette version améliorée -->
+        <!-- <div class="chat-header">
+          <div class="chat-block d-flex">
+            <button class="back-user-list" (click)="showChatSlide()" aria-label="Retour">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+            <div class="media-img-wrap">
+              <div class="avatar avatar-online">
+                <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle"
+                  loading="lazy" width="40" height="40">
+              </div>
+            </div>
+            <div class="media-body">
+              <div class="user-name">Brian Johnson</div>
+              <div class="user-status">online</div>
+            </div>
+          </div>
+          <div class="chat-options">
+            <button class="mobile-menu-trigger">
+              <i class="feather icon-more-vertical"></i>
+            </button>
+          </div>
+        </div> -->
+        <div class="chat-body">
+          <div class="chat-scroll">
+            <ul class="list-unstyled">
+              <li class="chat-block sent">
+                <div class="media-body">
+                  <div class="msg-box">
+                    <div>
+                      <p>Hello. What can I do for you?</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:30 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-block d-flex received">
+                <div class="avatar">
+                  <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                </div>
+                <div class="media-body">
+                  <div class="msg-box">
+                    <div>
+                      <p>I'm just looking around.</p>
+                      <p>Will you tell me something about yourself?</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:35 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="msg-box">
+                    <div>
+                      <p>Are you there? That time!</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:40 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="msg-box">
+                    <div>
+                      <div class="chat-msg-attachments">
+                        <div class="chat-attachment">
+                          <img src="assets/img/img-01.jpg" alt="profile-img">
+                          <div class="chat-attach-caption">placeholder.jpg</div>
+                          <a href="" class="chat-attach-download">
+                            <i class="fas fa-download"></i>
+                          </a>
+                        </div>
+                        <div class="chat-attachment">
+                          <img src="assets/img/img-01.jpg" alt="profile-img">
+                          <div class="chat-attach-caption">placeholder.jpg</div>
+                          <a href="" class="chat-attach-download">
+                            <i class="fas fa-download"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:41 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-block sent">
+                <div class="media-body">
+                  <div class="msg-box">
+                    <div>
+                      <p>Where?</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:42 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="msg-box">
+                    <div>
+                      <p>OK, my name is Limingqiang. I like singing, playing basketballand so on.</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:42 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="msg-box">
+                    <div>
+                      <div class="chat-msg-attachments">
+                        <div class="chat-attachment">
+                          <img src="assets/img/img-01.jpg" alt="profile-img">
+                          <div class="chat-attach-caption">placeholder.jpg</div>
+                          <a href="" class="chat-attach-download">
+                            <i class="fas fa-download"></i>
+                          </a>
+                        </div>
+                      </div>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:50 AM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-block d-flex received">
+                <div class="avatar">
+                  <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                </div>
+                <div class="media-body">
+                  <div class="msg-box">
+                    <div>
+                      <p>You wait for notice.</p>
+                      <p>Consectetuorem ipsum dolor sit?</p>
+                      <p>Ok?</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>8:55 PM</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-date">Today</li>
+              <li class="chat-block d-flex received">
+                <div class="avatar">
+                  <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                </div>
+                <div class="media-body">
+                  <div class="msg-box">
+                    <div>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>10:17 AM</span>
+                          </div>
+                        </li>
+                        <li><a href="javascript:void(0);">Edit</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-block sent">
+                <div class="media-body">
+                  <div class="msg-box">
+                    <div>
+                      <p>Lorem ipsum dollar sit</p>
+                      <div class="chat-msg-actions dropdown">
+                        <a href="javascript:void(0);" data-bs-toggle="dropdown" aria-haspopup="true"
+                          aria-expanded="false">
+                          <i class="feather icon-elipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                        </div>
+                      </div>
+                      <ul class="chat-msg-info">
+                        <li>
+                          <div class="chat-time">
+                            <span>10:19 AM</span>
+                          </div>
+                        </li>
+                        <li><a href="javascript:void(0);">Edit</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="chat-block d-flex received">
+                <div class="avatar">
+                  <img src="assets/img/profiles/avatar-02.jpg" alt="User Image" class="avatar-img rounded-circle">
+                </div>
+                <div class="media-body">
+                  <div class="msg-box msg-box-typing">
+                    <div>
+                      <div class="msg-typing">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid px-3" style="border: 1px; padding-top: 14px;">
+    <div class="quick-reply-container" style="--quick-reply-width: 60%;">
+      <!-- Remplacer le file-preview par -->
+      <div class="files-preview" *ngIf="selectedFiles.length > 0">
+        <div class="file-preview" *ngFor="let file of selectedFiles; let i = index ">
+          <div class="file-info">
+            <i class="fas {{ getFileIcon(file) }} ng-icon"></i>
+            <div class="file-meta">
+              <span class="file-name">{{ file.name }}</span>
+              <div class="file-details">
+                <span class="file-extension">{{ getFileExtension(file.name) }}</span>
+                <span class="file-size">{{ formatFileSize(file.size) }}</span>
+              </div>
+            </div>
+          </div>
+          <button class="btn-remove-file" (click)="removeFile(i)">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Conteneur des éléments de saisie -->
+      <div class="input-container">
+        <div class="quick-action-buttons">
+          <label for="fichier-perso" class="bouton-perso"><i class="fas fa-plus"></i></label>
+          <input type="file" id="fichier-perso" style="display: none;" (change)="onFileSelected($event)" multiple>
+        </div>
+
+        <div class="message-input-wrapper flex-grow-1">
+          <textarea #replyTextarea class="form-control quick-reply-textarea" rows="1" placeholder="Type a message"
+            [(ngModel)]="message" style="min-height: 50px;" (input)="onTextareaInput()"></textarea>
+        </div>
+
+        <button type="submit" class="bouton-perso-send" [disabled]="!message.trim().length && selectedFiles.length == 0"
+          [ngClass]="{'active': message.trim().length || selectedFiles.length > 0}" (click)="sendMessage()">
+          <i class="fas fa-arrow-up"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

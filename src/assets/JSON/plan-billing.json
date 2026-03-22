@@ -1,0 +1,33 @@
+{
+    "data": [
+        {
+            "id": "1",
+            "date": "13 Aug 2023",
+            "details1": "ENTERPRISE",
+            "details2": "lifetime",
+            "status": "$199.99"
+        },
+        {
+            "id": "2",
+            "date": "13 Aug 2023",
+            "details1": "FREE TRAIL",
+            "details2": "monthly",
+            "status": "$0.00"
+        },
+        {
+            "id": "3",
+            "date": "13 Aug 2023",
+            "details1": "Basic",
+            "details2": "Yearly",
+            "status": "$49.99"
+        },
+        {
+            "id": "4",
+            "date": "13 Aug 2023",
+            "details1": "ENTERPRISE",
+            "details2": "lifetime",
+            "status": "$199.99"
+        }
+    ],
+    "totalData": 4
+}

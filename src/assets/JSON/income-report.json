@@ -1,0 +1,56 @@
+{
+    "data": [
+      {
+        "sNo": 1,
+        "companyName": "Orn LLC",
+        "duedate":"21 Aug 2023",
+        "mailId": "orn@example.com",
+        "amount": "$2000.99",
+        "img": "assets/img/profiles/avatar-14.jpg",
+        "paymentMethod": "cash"
+      },
+      {
+        "sNo": 2,
+        "companyName": "Accent-e-Technology",
+        "duedate":"20 Aug 2023",
+        "mailId": "accent@example.com",
+        "amount": "$99.99",
+        "img": "assets/img/profiles/avatar-15.jpg",
+        "paymentMethod": "cash"
+      },
+      {
+        "sNo": 3,
+        "companyName": "Express Advertising",
+        "duedate":"23 Aug 2023",
+        "mailId": "express@example.com",
+        "amount": "$3000.00",
+        "img": "assets/img/profiles/avatar-16.jpg",
+        "paymentMethod": "card"
+      },
+      {
+        "sNo": 4,
+        "companyName": "lexicon Technologies",
+        "duedate":"24 Aug 2023",
+        "mailId": "lexicon@example.com",
+        "amount": "$6190.00",
+        "img": "assets/img/profiles/avatar-17.jpg",
+        "paymentMethod": "card"
+      },
+      {
+        "sNo": 5,
+        "companyName": "Sumo Soft Limited",
+        "duedate":"29 Aug 2023",
+        "mailId": "sumo@example.com",
+        "amount": "$990.99",
+        "img": "assets/img/profiles/avatar-18.jpg",
+        "paymentMethod": "cash"
+      }
+     
+    
+  
+  
+     
+    ],
+    "totalData": 5
+  }
+  

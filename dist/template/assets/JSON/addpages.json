@@ -1,0 +1,45 @@
+{
+    "data": [
+      {
+        "sNo": "1",
+        "pages": "About Us",
+        "slug": "about-us",
+        "value":"rating_1"
+        
+      },
+      {
+        "sNo": "2",
+        "pages": "Cookie Policy",
+        "slug": "Cookie Policy",
+        "value":"rating_2"
+      },
+      {
+        "sNo": "3",
+        "pages": "FAQ",
+        "slug": "faq",
+        "value":"rating_3"
+      },
+      {
+        "sNo": "4",
+        "pages": "Helps",
+        "slug": "helps",
+        "value":"rating_4"
+      },
+      {
+        "sNo": "5",
+        "pages": "Home",
+        "slug": "home",
+        "value":"rating_5"
+      },
+      {
+        "sNo": "6",
+        "pages": "Privacy Policy",
+        "slug": "privacy-policy",
+        "value":"rating_6"
+       
+      }
+     
+    ],
+    "totalData": 6
+  }
+  

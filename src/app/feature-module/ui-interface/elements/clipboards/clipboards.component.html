@@ -1,0 +1,96 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Clipboard</h5>
+  </div>	
+</div>
+<!-- /Page Header -->
+<div class="row">
+  <!-- Drag Card -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Copy from input</h5>
+      </div>
+      <div class="card-body">
+        <div class="clipboard">
+
+            <input
+              type="text"
+              class="form-control mb-4"
+              [value]="copyFromInput"
+              [(ngModel)]="copyFromInput"
+            />
+            <a
+              [cdkCopyToClipboard]="copyFromInput"
+              class="mb-1 btn clip-btn btn-primary me-1"
+              ><i class="far fa-copy"></i> Copy from Input</a
+            >
+            <a
+              [cdkCopyToClipboard]="copyFromInput"
+              (click)="copyFromInput = ''" href="javascript:void(0);"
+              class="mb-1 btn clip-btn btn-dark"
+              ><i class="fas fa-cut"></i> Cut from Input</a
+            >
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Copy from Text Area</h5>
+      </div>
+      <div class="card-body">
+        <div class="clipboard">
+          <form class="form-horizontal">
+            <textarea class="form-control mb-4" rows="3">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit...</textarea
+            >
+            <a class="mb-1 me-1 btn clip-btn btn-primary"
+              ><i class="far fa-copy"></i> Copy from Input</a
+            >
+            <a class="mb-1 btn clip-btn btn-dark"
+              ><i class="fas fa-cut"></i> Cut from Input</a
+            >
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Copy Text from Paragraph</h5>
+      </div>
+      <div class="card-body">
+        <div class="clipboard copy-txt">
+          <p class="otp-pass">Here is your OTP <span>22991</span>.</p>
+          <p class="mb-4">Please do not share it to anyone</p>
+          <a class="mb-1 btn clip-btn btn-primary"
+            ><i class="far fa-copy"></i> Copy from Input</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Copy Hidden Text (Advanced)</h5>
+      </div>
+      <div class="card-body">
+        <div class="clipboard copy-txt">
+          <p class="mb-4">
+            Link -> <span>http://www.example.com/example</span>
+          </p>
+          <a class="mb-1 me-1 btn clip-btn btn-primary"
+            ><i class="far fa-copy"></i> Copy Link</a
+          >
+          <a class="mb-1 btn clip-btn btn-warning"
+            ><i class="far fa-copy"></i> Copy Hidden Code</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Drag Card -->
+</div>

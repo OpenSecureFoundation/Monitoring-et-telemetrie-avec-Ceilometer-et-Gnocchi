@@ -1,0 +1,201 @@
+<!-- Header -->
+<div
+  class="header header-three"
+  [ngClass]="{
+    'header-six': headerSidebarStyle === '1',
+    'header-seven': headerSidebarStyle === '2',
+    'header-eight': headerSidebarStyle === '3',
+    'header-nine': headerSidebarStyle === '4'
+  }"
+  >
+  <!-- Logo -->
+  <div class="header-left header-left-three">
+    @if (miniSidebar === false) {
+      <a
+        [routerLink]="routes.dashboard"
+        class="logo"
+        >
+        <img src="assets/img/logo-small.png" alt="Logo" />
+      </a>
+    }
+    <a [routerLink]="routes.dashboard" class="logo logo-small">
+      <img src="assets/img/logo-small.png" alt="Logo" width="30" height="30" />
+    </a>
+  </div>
+  <!-- /Logo -->
+
+  <!-- Search -->
+  <div class="top-nav-search top-nav-search-three">
+    <form>
+      <input type="text" class="form-control" placeholder="Search here" />
+      <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+  <!-- /Search -->
+
+  <!-- Mobile Menu Toggle -->
+  <a href="javascript:void(0);" class="mobile_btn" (click)="toggleMobileIcon()" (keydown.enter)="toggleMobileIcon()" tabindex="0" id="mobile_btn">
+    <i class="fas fa-bars"></i>
+  </a>
+  <!-- /Mobile Menu Toggle -->
+
+  <!-- Header Menu -->
+  <ul class="nav nav-tabs user-menu">
+    <!-- Flag -->
+    <li class="nav-item dropdown has-arrow flag-nav">
+      <a href="javascript:void(0)" class="nav-link dropdown-toggle" aria-controls="collapseExample3"
+        data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
+        <img src="assets/img/flags/us1.png"alt="image" height="20" />
+        <span>English</span>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" id="collapseExample3">
+        <a href="javascript:void(0);" class="dropdown-item">
+          <img src="assets/img/flags/us.png"alt="image" height="16" /> English
+        </a>
+        <a href="javascript:void(0);" class="dropdown-item">
+          <img src="assets/img/flags/fr.png"alt="image" height="16" /> French
+        </a>
+        <a href="javascript:void(0);" class="dropdown-item">
+          <img src="assets/img/flags/es.png"alt="image" height="16" /> Spanish
+        </a>
+        <a href="javascript:void(0);" class="dropdown-item">
+          <img src="assets/img/flags/de.png"alt="image" height="16" /> German
+        </a>
+      </div>
+    </li>
+    <!-- /Flag -->
+    <li class="nav-item  has-arrow dropdown-heads ">
+      <a href="javascript:void(0);" class="toggle-switch">
+        <i class="feather icon-moon"></i>
+      </a>
+    </li>
+
+    <!-- Notifications -->
+    <li class="nav-item dropdown  flag-nav dropdown-heads">
+      <a class="nav-link" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
+        <i class="feather icon-bell"></i> <span class="badge rounded-pill"></span>
+      </a>
+      <div class="dropdown-menu notifications">
+        <div class="topnav-dropdown-header">
+          <div class="notification-title">Notifications <a [routerLink]="routes.notifications">View all</a></div>
+          <a href="javascript:void(0)" class="clear-noti d-flex align-items-center">Mark all as read <i class="feather icon-check-circle"></i></a>
+        </div>
+        <div class="noti-content">
+          <ul class="notification-list">
+            <li class="notification-message">
+              <a [routerLink]="routes.profile">
+                <div class="media d-flex">
+                  <span class="avatar avatar-md active">
+                    <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/profiles/avatar-02.jpg">
+                  </span>
+                  <div class="media-body">
+                    <p class="noti-details">
+                      <span class="noti-title">Lex Murphy</span> requested access to
+                      <span class="noti-title">UNIX directory tree hierarchy</span>
+                    </p>
+                    <div class="notification-btn">
+                      <span class="btn btn-primary">Accept</span>
+                      <span class="btn btn-outline-primary">Reject</span>
+                    </div>
+                    <p class="noti-time"><span class="notification-time">Today at 9:42 AM</span></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="notification-message">
+              <a [routerLink] = "routes.profile">
+                <div class="d-flex">
+                  <span class="avatar avatar-md active">
+                    <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/profiles/avatar-10.jpg">
+                  </span>
+                  <div class="media-body">
+                    <p class="noti-details"><span class="noti-title">Ray Arnold</span> left 6 comments <span class="noti-title">on Isla Nublar SOC2 compliance report</span></p>
+                    <p class="noti-time"><span class="notification-time">Yesterday at 11:42 PM</span></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="notification-message">
+              <a [routerLink] = "routes.profile">
+                <div class="d-flex">
+                  <span class="avatar avatar-md">
+                    <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/profiles/avatar-13.jpg">
+                  </span>
+                  <div class="media-body">
+                    <p class="noti-details"><span class="noti-title">Dennis Nedry</span> commented on <span class="noti-title"> Isla Nublar SOC2 compliance report</span></p>
+                    <blockquote>
+                      “Oh, I finished de-bugging the phones, but the system's compiling for eighteen minutes, or twenty.  So, some minor systems may go on and off for a while.”
+                    </blockquote>
+                    <p class="noti-time"><span class="notification-time">Yesterday at 5:42 PM</span></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+            <li class="notification-message">
+              <a [routerLink] = "routes.profile">
+                <div class="d-flex">
+                  <span class="avatar avatar-md">
+                    <img class="avatar-img rounded-circle" alt="avatar-img" src="assets/img/profiles/avatar-05.jpg">
+                  </span>
+                  <div class="media-body">
+                    <p class="noti-details"><span class="noti-title">John Hammond</span> created <span class="noti-title">Isla Nublar SOC2 compliance report</span></p>
+                    <p class="noti-time"><span class="notification-time">Last Wednesday at 11:15 AM</span></p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="topnav-dropdown-footer">
+          <a [routerLink]="routes.notification">Clear All</a>
+        </div>
+      </div>
+    </li>
+
+
+    <!-- /Notifications -->
+    <li class="nav-item  has-arrow dropdown-heads ">
+      <a href="javascript:void(0);" class="win-maximize" (click)="fullscreen()">
+        <i class="feather icon-maximize"></i>
+      </a>
+    </li>
+
+
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="user-link  nav-link" data-bs-toggle="dropdown">
+        <span class="user-img">
+          <img src="assets/img/profiles/avatar-07.jpg" alt="img" class="profilesidebar">
+          <span class="animate-circle"></span>
+        </span>
+        <span class="user-content">
+          <span class="user-details">Admin</span>
+          <span class="user-name">John Smith</span>
+        </span>
+      </a>
+      <div class="dropdown-menu menu-drop-user">
+        <div class="profilemenu">
+          <div class="subscription-menu">
+            <ul>
+              <li>
+                <a class="dropdown-item" [routerLink]="routes.profile">Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" [routerLink]="routes.profileSettings">Settings</a>
+              </li>
+            </ul>
+          </div>
+          <div class="subscription-logout">
+            <ul>
+              <li class="pb-0">
+                <a href="javascript:void(0);" class="dropdown-item" (click)="logOut()">Log Out</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </li>
+    <!-- /User Menu -->
+  </ul>
+  <!-- /Header Menu -->
+</div>
+<!-- /Header -->

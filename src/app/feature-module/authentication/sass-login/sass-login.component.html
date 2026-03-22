@@ -1,0 +1,83 @@
+<!-- Sign In -->
+<div class="row gx-0 min-vh-100">
+
+  <!-- Banner Section -->
+  <!-- Banner Section -->
+  <div class="col-lg-6 position-relative banner-section">
+    <div class="authentication-wrapper h-100">
+      <div class="content-overlay px-5">
+        <h1 class="display-5 fw-bold text-white mb-4 animate__animated animate__fadeInDown">
+          Surveillez votre cloud OpenStack en temps réel
+        </h1>
+        <p class="lead text-white-80 mb-5 animate__animated animate__fadeIn animate__delay-1s">
+          Plateforme de monitoring complète pour infrastructures cloud
+        </p>
+        <div class="feature-list">
+          <div class="feature-item d-flex align-items-center mb-3">
+            <i class="fas fa-chart-line text-primary me-3 fs-4"></i>
+            <span class="text-white">Tableaux de bord temps réel</span>
+          </div>
+          <div class="feature-item d-flex align-items-center mb-3">
+            <i class="fas fa-server text-primary me-3 fs-4"></i>
+            <span class="text-white">Surveillance complète Nova, Cinder, Neutron</span>
+          </div>
+          <div class="feature-item d-flex align-items-center">
+            <i class="fas fa-bell text-primary me-3 fs-4"></i>
+            <span class="text-white">Alertes et notifications intelligentes</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Section -->
+  <div class="col-lg-6 d-flex align-items-center justify-content-center py-2">
+    <div class="saas-login-wrapper px-3 px-md-5" style="max-width: 500px;">
+      <form [formGroup]="userService.loginForm" (ngSubmit)="login()"
+        class="login-card shadow-lg rounded-4 p-4 p-md-5 bg-white">
+        <div class="text-center mb-5">
+          <!-- <img src="assets/img/saas-login-logo.svg" alt="logo" class="mb-4" width="120"> -->
+          <h2 class="fw-bold mb-2">Bienvenue 👋</h2>
+          <p class="text-muted">Veuillez vous connecter pour continuer</p>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label text-dark mb-2">username</label>
+          <div class="input-group">
+            <span class="input-group-text bg-transparent">
+              <i class="far fa-user text-muted"></i>
+            </span>
+            <input type="text" class="form-control border-start-0" placeholder="admin" formControlName="username">
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label text-dark mb-2">Mot de passe</label>
+          <div class="input-group">
+            <span class="input-group-text bg-transparent">
+              <i class="fas fa-lock text-muted"></i>
+            </span>
+            <input [type]="show_password ? 'text' : 'password'" formControlName="password"
+              class="form-control border-start-0 pe-5" placeholder="••••••••">
+            <a class="password-toggle" (click)="show_password = !show_password">
+              <i class="fas" [ngClass]="show_password ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </a>
+          </div>
+        </div>
+
+        <button class="btn btn-primary w-100 py-3 fw-bold mb-3" style="margin-top: 10px;">
+          <span *ngIf="this.spinnerService.loading$ | async">
+            <span class="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true"></span>
+            loading...
+          </span>
+          <span *ngIf="!(this.spinnerService.loading$ | async)">
+            Se connecter
+            <i class="fas fa-arrow-right ms-2"></i>
+          </span>
+        </button>
+        <div class="text-center mt-4">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

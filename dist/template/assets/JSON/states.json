@@ -1,0 +1,56 @@
+{
+    "data": [
+      {
+        "sNo": "1",
+        "countryCode":"AS",
+        "countryName": "American Samoa(+684)",
+        "countryFlag": "assets/img/flags/as.png",
+        "stateName": "Swains Island"
+        
+      },
+      {
+        "sNo": "2",
+        "countryCode":"AD",
+        "countryName": "Andorra (+376)",
+        "countryFlag": "assets/img/flags/ad.png",
+        "stateName": "Andorra la Vella"
+        
+      },
+      {
+        "sNo": "3",
+        "countryCode":"AO",
+        "countryName": "Angola (+244)",
+        "countryFlag": "assets/img/flags/ao.png",
+        "stateName": "Benguela"
+        
+      },
+      {
+        "sNo": "4",
+        "countryCode":"AI",
+        "countryName": "Anguilla (+1264)",
+        "countryFlag": "assets/img/flags/ai.png",
+        "stateName": "The Valley"
+       
+      },
+      {
+        "sNo": "5",
+        "countryCode":"AQ",
+        "countryName": "Antigua & Barbuda (+1268)",
+        "countryFlag": "assets/img/flags/ag.png",
+        "stateName": "Saint Paul"
+        
+      },
+      {
+        "sNo": "6",
+        "countryCode":"AQ",
+        "countryName": "Australia",
+        "countryFlag": "assets/img/flags/au.png",
+        "stateName": "Queensland"
+        
+      }
+      
+     
+    ],
+    "totalData": 6
+  }
+  

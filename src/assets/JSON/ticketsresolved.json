@@ -1,0 +1,36 @@
+{
+    "data": [
+      {
+        "ticketId": "#4988",
+        "subject": "verify your email",
+        "assigned": "Michel",
+        "assignedPerson": "assets/img/profiles/avatar-02.jpg",
+        "assignedDate": "21 Dec 2022",
+        "createdOn": "23 Dec 2022, 6:12PM",
+        "dueDate": "28 Feb 2023",
+        "assignee": "Johnny",
+        "assigneeImg":"assets/img/profiles/avatar-15.jpg",
+        "assigneePho":"+1 843-443-4298",
+        "lastReply":"21 Jan 2023",
+        "priority": "Low",
+        "status": "Resolved"
+      },
+      {
+        "ticketId": "#4992",
+        "subject": "Calling for help",
+        "assigned": "Randall",
+        "assignedPerson": "assets/img/profiles/avatar-09.jpg",
+        "assignedDate": "28 Jan 2022",
+        "createdOn": "30 Jan 2022, 6:12PM",
+        "dueDate": "29 March 2023",
+        "assignee": "Randall",
+        "assigneeImg":"assets/img/profiles/avatar-19.jpg",
+        "assigneePho":"+1 843-443-4298",
+        "lastReply":"21 Jan 2023",
+        "priority": "High",
+        "status": "Resolved"
+      }
+    ],
+    "totalData": 2
+  }
+  

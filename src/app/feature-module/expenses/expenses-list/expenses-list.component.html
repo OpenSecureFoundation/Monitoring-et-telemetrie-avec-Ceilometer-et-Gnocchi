@@ -1,0 +1,889 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Expenses</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a
+            (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0"
+            matTooltip="Filter"
+            href="javascript:void(0);"
+            class="btn btn-filters w-auto popup-toggle"
+            ><span class="me-2"
+            ><img src="assets/img/icons/filter-icon.svg" alt="filter" /></span
+            >Filter
+          </a>
+        </li>
+        <li>
+          <a
+            class="btn-filters"
+            matTooltip="Settings"
+            href="javascript:void(0);"
+            ><span><i class="feather icon-settings"></i></span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="btn btn-primary"
+            href="javascript:void(0);"
+            data-bs-toggle="modal"
+            data-bs-target="#add_expenses"
+            ><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add
+            Expenses</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <div class="table-scroll">
+              <table
+                matSort
+                (matSortChange)="sortData($event)"
+                class="table table-stripped table-hover datatable"
+                >
+                <thead class="thead-light">
+                  <tr>
+                    <th mat-sort-header="sNo">#</th>
+                    <th mat-sort-header="expenseid">Expense ID</th>
+                    <th mat-sort-header="Reference">Reference</th>
+                    <th mat-sort-header="amount">Amount</th>
+                    <th mat-sort-header="attachment">Attachment</th>
+                    <th mat-sort-header="payment">Payment Mode</th>
+                    <th mat-sort-header="notes">Notes</th>
+                    <th mat-sort-header="status">Status</th>
+                    <th mat-sort-header="action" class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (item of tableData; track item; let i = $index) {
+                    <tr>
+                      <td>{{ item.sNo }}</td>
+                      <td>
+                        <a [routerLink]="routes.viewInvoice" class="invoice-link">{{
+                          item.expenseId
+                        }}</a>
+                      </td>
+                      <td>{{ item.reference }}</td>
+                      <td>{{ item.amount }}</td>
+                      <td>
+                        <h2 class="table-avatar">
+                          <img
+                            class="avatar-img rounded"
+                            width="30"
+                            height="30"
+                            [src]="item.img"
+                            alt="User Image"
+                            />
+                          </h2>
+                        </td>
+                        <td>{{ item.paymentmode }}</td>
+                        <td>{{ item.notes }}</td>
+                        <td>
+                          <span
+                      [ngClass]="{
+                        'bg-success-light text-success-light':
+                          item.status === 'Paid',
+                        ' bg-warning-light text-warning-light':
+                          item.status === 'Pending',
+                        'bg-danger-light': item.status === 'Cancelled'
+                      }"
+                            class="badge"
+                            >{{ item.status }}</span
+                            >
+                          </td>
+                          <td class="d-flex align-items-center">
+                            <a
+                              class="btn-action-icon me-2"
+                              href="javascript:void(0);"
+                              download
+                              ><i class="feather icon-download"></i
+                            ></a>
+                            <div class="dropdown dropdown-action">
+                              <a
+                                href="javascript:void(0);"
+                                class="btn-action-icon"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                                ><i class="fas fa-ellipsis-v"></i
+                              ></a>
+                              <div class="dropdown-menu dropdown-menu-right">
+                                <ul>
+                                  <li>
+                                    <a
+                                      class="dropdown-item"
+                                      href="javascript:void(0);"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#edit_expenses"
+                                      ><i class="far fa-edit me-2"></i>Edit</a
+                                      >
+                                    </li>
+                                    <li>
+                                      <a
+                                        class="dropdown-item"
+                                        href="javascript:void(0);"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#delete_modal"
+                                        ><i class="far fa-trash-alt me-2"></i>Delete</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                          }
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <app-custom-pagination></app-custom-pagination>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Table -->
+
+          <!-- Add Asset -->
+          <div class="toggle-sidebar" [ngClass]="{ 'open-filter': toggleData === true }">
+            <div class="sidebar-layout-filter">
+              <div class="sidebar-header">
+                <h5>Filter</h5>
+                <a
+                  href="javascript:void(0);"
+                  (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0"
+                  class="sidebar-closes"
+                  ><i class="fa-regular fa-circle-xmark"></i
+                ></a>
+              </div>
+              <div class="sidebar-body">
+                <form action="#" autocomplete="off">
+                  <!-- Customer -->
+                  <div class="accordion" id="accordionMain1">
+                    <div class="card-header-new" id="headingOne">
+                      <h6 class="filter-title">
+                        <a
+                          href="javascript:void(0);"
+                          class="w-100"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#collapseOne"
+                          aria-expanded="true"
+                          aria-controls="collapseOne"
+                          >
+                          Expense Id
+                          <span class="float-end"
+                            ><i class="fa-solid fa-chevron-down"></i
+                          ></span>
+                        </a>
+                      </h6>
+                    </div>
+
+                    <div
+                      id="collapseOne"
+                      class="collapse show"
+                      aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample1"
+                      >
+                      <div class="card-body-chat">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div id="checkBoxes1">
+                              <div class="form-custom">
+                                <input
+                                  type="text"
+                                  class="form-control"
+                                  id="member_search1"
+                                  placeholder="Search here"
+                                  />
+                                  <span
+                                    ><img src="assets/img/icons/search.svg" alt="img"
+                                  /></span>
+                                </div>
+                                <div class="selectBox-cont">
+                                  <label class="custom_check w-100">
+                                    <input type="checkbox" name="username" />
+                                    <span class="checkmark"></span> 148061
+                                  </label>
+                                  <label class="custom_check w-100">
+                                    <input type="checkbox" name="username" />
+                                    <span class="checkmark"></span> 148062
+                                  </label>
+                                  <label class="custom_check w-100">
+                                    <input type="checkbox" name="username" />
+                                    <span class="checkmark"></span> 148063
+                                  </label>
+                                  <label class="custom_check w-100">
+                                    <input type="checkbox" name="username" />
+                                    <span class="checkmark"></span> 148064
+                                  </label>
+                                  <!-- View All -->
+                                  <div class="view-content">
+                                    <div class="viewall-One">
+                                      @for (user of users1; track user) {
+                                        <label
+                                          class="custom_check w-100"
+                            [ngClass]="{
+                              closed: !isCollapsed1,
+                              open: isCollapsed1
+                            }"
+                                          >
+                                          <input
+                                            type="checkbox"
+                                            name="username"
+                                            [(ngModel)]="user.checked"
+                                            />
+                                            <span class="checkmark"></span> {{ user.name }}
+                                          </label>
+                                        }
+                                      </div>
+                                      <div class="view-all">
+                                        <a
+                                          (click)="toggleCollapse1()"
+                                          href="javascript:void(0);"
+                                          class="viewall-button-One"
+                                          ><span class="me-2">{{
+                                          isCollapsed1 ? "Close All" : "View All"
+                                          }}</span
+                                          ><span
+                                          ><i
+                                          class="fa"
+                                [ngClass]="
+                                  !isCollapsed1
+                                    ? 'fa-circle-chevron-down'
+                                    : 'fa-circle-chevron-up'
+                                "
+                                        ></i></span
+                                      ></a>
+                                    </div>
+                                  </div>
+                                  <!-- /View All -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /Customer -->
+                    <!-- Reference -->
+                    <div class="accordion" id="accordionMain2">
+                      <div class="card-header-new" id="headingTwo">
+                        <h6 class="filter-title">
+                          <a
+                            href="javascript:void(0);"
+                            class="w-100 collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo"
+                            aria-expanded="true"
+                            aria-controls="collapseTwo"
+                            >
+                            Reference
+                            <span class="float-end"
+                              ><i class="fa-solid fa-chevron-down"></i
+                            ></span>
+                          </a>
+                        </h6>
+                      </div>
+
+                      <div
+                        id="collapseTwo"
+                        class="collapse"
+                        aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample2"
+                        >
+                        <div class="card-body-chat">
+                          <div id="checkBoxes3">
+                            <div class="selectBox-cont">
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="ref-no" />
+                                <span class="checkmark"></span> 25689825
+                              </label>
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="ref-no" />
+                                <span class="checkmark"></span> 25689826
+                              </label>
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="ref-no" />
+                                <span class="checkmark"></span> 25689827
+                              </label>
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="ref-no" />
+                                <span class="checkmark"></span> 25689828
+                              </label>
+                              <!-- View All -->
+                              <div class="view-content">
+                                <div class="viewall-Two">
+                                  <label class="custom_check w-100">
+                                    <input type="checkbox" name="ref-no" />
+                                    <span class="checkmark"></span> 25689829
+                                  </label>
+                                  <label class="custom_check w-100">
+                                    <input type="checkbox" name="ref-no" />
+                                    <span class="checkmark"></span> 25689830
+                                  </label>
+                                </div>
+                                <div class="view-all">
+                                  <a href="javascript:void(0);" class="viewall-button-Two"
+                                    ><span class="me-2">View All</span
+                                    ><span><i class="fa fa-circle-chevron-down"></i></span
+                                  ></a>
+                                </div>
+                              </div>
+                              <!-- /View All -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /Reference -->
+
+                    <!-- Select Date -->
+                    <div class="accordion" id="accordionMain2">
+                      <div class="card-header-new" id="headingTwo">
+                        <h6 class="filter-title">
+                          <a
+                            href="javascript:void(0);"
+                            class="w-100 collapsed"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#collapseTwo"
+                            aria-expanded="true"
+                            aria-controls="collapseTwo"
+                            >
+                            Select Date
+                            <span class="float-end"
+                              ><i class="fa-solid fa-chevron-down"></i
+                            ></span>
+                          </a>
+                        </h6>
+                      </div>
+
+                      <div
+                        id="collapseTwo"
+                        class="collapse"
+                        aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample2"
+                        >
+                        <div class="card-body-chat">
+                          <div class="input-block mb-3">
+                            <label for="From" class="form-control-label">From</label>
+                            <div class="cal-icon">
+                              <input
+                                type="email"
+                                class="form-control datetimepicker"
+                                bsDatepicker [bsConfig]="{ adaptivePosition: true }"
+                                placeholder="DD-MM-YYYY"
+                                />
+                              </div>
+                            </div>
+                            <div class="input-block mb-3">
+                              <label for="To" class="form-control-label">To</label>
+                              <div class="cal-icon">
+                                <input
+                                  type="email"
+                                  class="form-control datetimepicker"
+                                  bsDatepicker [bsConfig]="{ adaptivePosition: true }"
+                                  placeholder="DD-MM-YYYY"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /Select Date -->
+
+                        <!-- By Status -->
+                        <div class="accordion" id="accordionMain3">
+                          <div class="card-header-new" id="headingThree">
+                            <h6 class="filter-title">
+                              <a
+                                href="javascript:void(0);"
+                                class="w-100 collapsed"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree"
+                                aria-expanded="true"
+                                aria-controls="collapseThree"
+                                >
+                                By Status
+                                <span class="float-end"
+                                  ><i class="fa-solid fa-chevron-down"></i
+                                ></span>
+                              </a>
+                            </h6>
+                          </div>
+
+                          <div
+                            id="collapseThree"
+                            class="collapse"
+                            aria-labelledby="headingThree"
+                            data-bs-parent="#accordionExample3"
+                            >
+                            <div class="card-body-chat">
+                              <div id="checkBoxes2">
+                                <!-- <div class="form-custom">
+                                <input type="text" class="form-control" id="member_search2" placeholder="Search here">
+                                <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                              </div> -->
+                              <div class="selectBox-cont">
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="bystatus" />
+                                  <span class="checkmark"></span> All Invoices
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="bystatus" />
+                                  <span class="checkmark"></span> Paid
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="bystatus" />
+                                  <span class="checkmark"></span> Overdue
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="bystatus" />
+                                  <span class="checkmark"></span> Draft
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="bystatus" />
+                                  <span class="checkmark"></span> Recurring
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="bystatus" />
+                                  <span class="checkmark"></span> Cancelled
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /By Status -->
+                      <!-- By Status -->
+                      <div class="accordion accordion-last" id="accordionMain4">
+                        <div class="card-header-new" id="headingFour">
+                          <h6 class="filter-title">
+                            <a
+                              href="javascript:void(0);"
+                              class="w-100 collapsed"
+                              data-bs-toggle="collapse"
+                              data-bs-target="#collapseFour"
+                              aria-expanded="true"
+                              aria-controls="collapseFour"
+                              >
+                              Payment Mode
+                              <span class="float-end"
+                                ><i class="fa-solid fa-chevron-down"></i
+                              ></span>
+                            </a>
+                          </h6>
+                        </div>
+
+                        <div
+                          id="collapseFour"
+                          class="collapse"
+                          aria-labelledby="headingFour"
+                          data-bs-parent="#accordionExample3"
+                          >
+                          <div class="card-body-chat">
+                            <div id="checkBoxes2">
+                              <div class="selectBox-cont">
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="payment-mode" />
+                                  <span class="checkmark"></span> Cash
+                                </label>
+                                <label class="custom_check w-100">
+                                  <input type="checkbox" name="payment-mode" />
+                                  <span class="checkmark"></span> Cheque
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /By Status -->
+
+                      <div class="filter-buttons">
+                        <button
+                          type="submit"
+                          class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary"
+                          >
+                          Apply
+                        </button>
+                        <button
+                          type="submit"
+                          class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary"
+                          >
+                          Reset
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!--/Add Asset -->
+
+              <!-- Add Expenses Modal -->
+              <div class="modal custom-modal modal-lg fade" id="add_expenses" role="dialog">
+                <div class="modal-dialog modal-dialog-centered modal-md">
+                  <div class="modal-content">
+                    <div class="modal-header border-0 pb-0">
+                      <div class="form-header modal-header-title text-start mb-0">
+                        <h4 class="mb-0">Add Expenses</h4>
+                      </div>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card-body">
+                            <div class="border-0 pb-0">
+                              <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                  <div class="input-block mb-3">
+                                    <label for="Expense ">Expense ID</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="Enter Expense ID"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="input-block mb-3">
+                                      <label for="Reference">Reference</label>
+                                      <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Enter Reference No"
+                                        />
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                      <div class="input-block mb-3">
+                                        <label for="Amount">Amount </label>
+                                        <input
+                                          type="number"
+                                          class="form-control"
+                                          placeholder="Enter Amount"
+                                          />
+                                        </div>
+                                      </div>
+                                      <div class="col-lg-4 col-md-6 col-sm-12">
+                                        <div class="input-block mb-3">
+                                          <label for="PaymentMode">Payment Mode</label>
+                                          <mat-select
+                                            [(ngModel)]="mode"
+                                            [ngModelOptions]="{ standalone: true }"
+                                            class="select custom-mat-select"
+                                            >
+                                            <mat-option value="payment"
+                                              >Select Payment Mode</mat-option
+                                              >
+                                              <mat-option value="paid">Cash</mat-option>
+                                              <mat-option value="pending">Cheque</mat-option>
+                                            </mat-select>
+                                          </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                          <div class="input-block mb-3">
+                                            <label for="Expense">Expense Date </label>
+                                            <input
+                                              type="text"
+                                              class="form-control datetimepicker"
+                                              placeholder="Select Expense Date"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div class="input-block mb-3">
+                                              <label for="Status">Payment Status</label>
+                                              <mat-select
+                                                [(ngModel)]="payment"
+                                                [ngModelOptions]="{ standalone: true }"
+                                                class="select custom-mat-select"
+                                                >
+                                                <mat-option value="none"
+                                                  >Select Payment Status</mat-option
+                                                  >
+                                                  <mat-option value="paid">Paid</mat-option>
+                                                  <mat-option value="pending">Pending</mat-option>
+                                                  <mat-option value="ccancelled">Cancelled</mat-option>
+                                                </mat-select>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12 description-box">
+                                              <div class="input-block mb-3" id="summernote_container">
+                                                <label for="Description" class="form-control-label">Description</label>
+                                                <textarea
+                                                  class="summernote form-control"
+                                                  placeholder="Type your message"
+                                                ></textarea>
+                                              </div>
+                                            </div>
+                                            <div class="col-lg-12 col-md-12">
+                                              <div class="input-block">
+                                                <label for="Attachment">Attachment</label>
+                                                <ngx-dropzone
+                                                  (change)="onSelect($event)"
+                                                  class="service-upload"
+                                                  >
+                                                  <ngx-dropzone-label class="drop-browse align-center">
+                                                    <span
+                                                      ><img
+                                                      src="assets/img/icons/drop-icon.svg"
+                                                      alt="upload"
+                                                    /></span>
+                                                    <div class="d-flex">
+                                                      Drop your files here or<span
+                                                      class="text-primary ms-1"
+                                                      >browse</span
+                                                      >
+                                                    </div>
+
+                                                    <span class="text-muted">Maximum size: 50MB</span>
+                                                  </ngx-dropzone-label>
+                                                  @for (f of files; track f) {
+                                                    <ngx-dropzone-image-preview
+                                                      ngProjectAs="ngx-dropzone-preview"
+                                                      [file]="f"
+                                                      [removable]="true"
+                                                      (removed)="onRemove(f)"
+                                                      >
+                                                    </ngx-dropzone-image-preview>
+                                                  }
+                                                </ngx-dropzone>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <a
+                                    href="javascript:void(0);"
+                                    data-bs-dismiss="modal"
+                                    class="btn btn-back cancel-btn me-2"
+                                    >Cancel</a
+                                    >
+                                    <a
+                                      href="javascript:void(0);"
+                                      data-bs-dismiss="modal"
+                                      class="btn btn-primary paid-continue-btn"
+                                      >Add Expenses</a
+                                      >
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- /Add Expenses Modal -->
+
+                              <!-- Edit Expenses Modal -->
+                              <div class="modal custom-modal modal-lg fade" id="edit_expenses" role="dialog">
+                                <div class="modal-dialog modal-dialog-centered modal-md">
+                                  <div class="modal-content">
+                                    <div class="modal-header border-0 pb-0">
+                                      <div class="form-header modal-header-title text-start mb-0">
+                                        <h4 class="mb-0">Edit Expenses</h4>
+                                      </div>
+                                      <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                      ></button>
+                                    </div>
+                                    <div class="modal-body">
+                                      <div class="row">
+                                        <div class="col-md-12">
+                                          <div class="card-body">
+                                            <div class="border-0 pb-0">
+                                              <div class="row">
+                                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                                  <div class="input-block mb-3">
+                                                    <label for="Expense">Expense ID</label>
+                                                    <input
+                                                      type="text"
+                                                      class="form-control"
+                                                      placeholder="Enter Expense ID"
+                                                      />
+                                                    </div>
+                                                  </div>
+                                                  <div class="col-lg-4 col-md-6 col-sm-12">
+                                                    <div class="input-block mb-3">
+                                                      <label for="Reference">Reference</label>
+                                                      <input
+                                                        type="text"
+                                                        class="form-control"
+                                                        placeholder="Enter Reference No"
+                                                        />
+                                                      </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-6 col-sm-12">
+                                                      <div class="input-block mb-3">
+                                                        <label for="Amount">Amount </label>
+                                                        <input
+                                                          type="number"
+                                                          class="form-control"
+                                                          placeholder="Enter Amount"
+                                                          />
+                                                        </div>
+                                                      </div>
+                                                      <div class="col-lg-4 col-md-6 col-sm-12">
+                                                        <div class="input-block mb-3">
+                                                          <label for="Payment">Payment Mode</label>
+                                                          <mat-select
+                                                            [(ngModel)]="mode"
+                                                            [ngModelOptions]="{ standalone: true }"
+                                                            class="select custom-mat-select"
+                                                            >
+                                                            <mat-option value="payment"
+                                                              >Select Payment Mode</mat-option
+                                                              >
+                                                              <mat-option value="paid">Cash</mat-option>
+                                                              <mat-option value="pending">Cheque</mat-option>
+                                                            </mat-select>
+                                                          </div>
+                                                        </div>
+                                                        <div class="col-lg-4 col-md-6 col-sm-12">
+                                                          <div class="input-block mb-3">
+                                                            <label for="Expense">Expense Date </label>
+                                                            <input
+                                                              type="text"
+                                                              class="form-control datetimepicker"
+                                                              placeholder="Select Expense Date"
+                                                              />
+                                                            </div>
+                                                          </div>
+                                                          <div class="col-lg-4 col-md-6 col-sm-12">
+                                                            <div class="input-block mb-3">
+                                                              <label for="Payment">Payment Status</label>
+                                                              <mat-select
+                                                                [(ngModel)]="payment"
+                                                                [ngModelOptions]="{ standalone: true }"
+                                                                class="select custom-mat-select"
+                                                                >
+                                                                <mat-option value="none"
+                                                                  >Select Payment Status</mat-option
+                                                                  >
+                                                                  <mat-option value="paid">Paid</mat-option>
+                                                                  <mat-option value="pending">Pending</mat-option>
+                                                                  <mat-option value="ccancelled">Cancelled</mat-option>
+                                                                </mat-select>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-md-12 description-box">
+                                                              <div class="input-block mb-3" id="summernote_container2">
+                                                                <label for="Description" class="form-control-label">Description</label>
+                                                                <textarea
+                                                                  class="summernote form-control"
+                                                                  placeholder="Type your message"
+                                                                ></textarea>
+                                                              </div>
+                                                            </div>
+                                                            <div class="col-lg-12 col-md-12">
+                                                              <div class="input-block">
+                                                                <label for="Attachment">Attachment</label>
+                                                                <ngx-dropzone
+                                                                  (change)="onSelect($event)"
+                                                                  class="service-upload"
+                                                                  >
+                                                                  <ngx-dropzone-label class="drop-browse align-center">
+                                                                    <span
+                                                                      ><img
+                                                                      src="assets/img/icons/drop-icon.svg"
+                                                                      alt="upload"
+                                                                    /></span>
+                                                                    <div class="d-flex">
+                                                                      Drop your files here or<span
+                                                                      class="text-primary ms-1"
+                                                                      >browse</span
+                                                                      >
+                                                                    </div>
+
+                                                                    <span class="text-muted">Maximum size: 50MB</span>
+                                                                  </ngx-dropzone-label>
+                                                                  @for (f of files; track f) {
+                                                                    <ngx-dropzone-image-preview
+                                                                      ngProjectAs="ngx-dropzone-preview"
+                                                                      [file]="f"
+                                                                      [removable]="true"
+                                                                      (removed)="onRemove(f)"
+                                                                      >
+                                                                    </ngx-dropzone-image-preview>
+                                                                  }
+                                                                </ngx-dropzone>
+                                                              </div>
+                                                            </div>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                  <a
+                                                    href="javascript:void(0);"
+                                                    data-bs-dismiss="modal"
+                                                    class="btn btn-back cancel-btn me-2"
+                                                    >Cancel</a
+                                                    >
+                                                    <a
+                                                      href="javascript:void(0);"
+                                                      data-bs-dismiss="modal"
+                                                      class="btn btn-primary paid-continue-btn"
+                                                      >Update</a
+                                                      >
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- /Edit Expenses Modal -->
+
+                                              <!-- Delete Items Modal -->
+                                              <div class="modal custom-modal fade" id="delete_modal" role="dialog">
+                                                <div class="modal-dialog modal-dialog-centered modal-md">
+                                                  <div class="modal-content">
+                                                    <div class="modal-body">
+                                                      <div class="form-header">
+                                                        <h3>Delete Expenses</h3>
+                                                        <p>Are you sure want to delete?</p>
+                                                      </div>
+                                                      <div class="modal-btn delete-action">
+                                                        <div class="row">
+                                                          <div class="col-6">
+                                                            <button
+                                                              type="reset"
+                                                              data-bs-dismiss="modal"
+                                                              class="w-100 btn btn-primary paid-continue-btn"
+                                                              >
+                                                              Delete
+                                                            </button>
+                                                          </div>
+                                                          <div class="col-6">
+                                                            <button
+                                                              type="submit"
+                                                              data-bs-dismiss="modal"
+                                                              class="w-100 btn btn-primary paid-cancel-btn"
+                                                              >
+                                                              Cancel
+                                                            </button>
+                                                          </div>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- /Delete Items Modal -->

@@ -1,0 +1,59 @@
+{
+    "data": [
+      {
+        "sNo":"1",
+        "person": "John Smith",
+        "email":"john@example.com",
+        "img": "assets/img/profiles/avatar-14.jpg",
+        "requisition": "28 Sep 2022 16:43PM",
+        "delete":"19 Dec 2022, 06:12 PM"
+      },
+      {
+        "sNo":"2",
+        "person": "Johnny",
+        "email":"johnny@example.com",
+        "img": "assets/img/profiles/avatar-15.jpg",
+        "requisition": "12 Dec 2022, 06:12 PM",
+        "delete":"15 Dec 2022, 06:12 PM"
+      },
+     
+      {
+        "sNo":"3",
+        "person": "Robert",
+        "email":"robert@example.com",
+        "img": "assets/img/profiles/avatar-16.jpg",
+        "requisition": "04 Dec 2022, 12:38 PM",
+        "delete":"08 Dec 2022, 12:38 PM"
+      },
+      {
+        "sNo":"4",
+        "person": "Sharonda",
+        "email":"sharon@example.com",
+        "img": "assets/img/profiles/avatar-17.jpg",
+        "requisition": "14 Dec 2022, 12:38 PM",
+        "delete":"24 Dec 2022, 12:38 PM"
+      },
+      {
+        "sNo":"5",
+        "person": "Pricilla",
+        "email":"pricilla@example.com",
+        "img": "assets/img/profiles/avatar-18.jpg",
+        "requisition": "12 Dec 2022, 12:38 PM",
+        "delete":"13 Dec 2022, 12:38 PM"
+      },
+      {
+        "sNo":"6",
+        "person": "Randall",
+        "email":"randall@example.com",
+        "img": "assets/img/profiles/avatar-19.jpg",
+        "requisition": "04 Dec 2022, 12:38 PM",
+        "delete":"09 Dec 2022, 12:38 PM"
+      }
+     
+     
+     
+      
+    ],
+    "totalData": 9
+  }
+  

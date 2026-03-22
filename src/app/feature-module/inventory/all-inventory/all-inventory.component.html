@@ -1,0 +1,510 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Inventory</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="btn btn-filters w-auto popup-toggle" matTooltip="Filter"><span
+            class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+          </li>
+          <li class="">
+            <div class="dropdown dropdown-action" matTooltip="Download">
+              <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span><i
+              class="feather icon-download"></i></span></a>
+              <div class="dropdown-menu dropdown-menu-right">
+                <ul class="d-block">
+                  <li>
+                    <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                    class="far fa-file-pdf me-2"></i>PDF</a>
+                  </li>
+                  <li>
+                    <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i
+                    class="far fa-file-text me-2"></i>CVS</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="btn-filters" href="javascript:void(0);" matTooltip="Print"><span><i
+            class="feather icon-printer"></i></span> </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Table -->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <div class="table-scroll">
+              <table class="table table-center table-hover datatable">
+                <thead matSort (matSortChange)="sortData($event)" class="thead-light">
+                  <tr>
+                    <th mat-sort-header="sNo">#</th>
+                    <th mat-sort-header="item">Item</th>
+                    <th mat-sort-header="code">Code</th>
+                    <th mat-sort-header="units">Units</th>
+                    <th mat-sort-header="quantity">Quantity</th>
+                    <th mat-sort-header="sale">Selling Price</th>
+                    <th mat-sort-header="purchase">Purchase Price</th>
+                    <th mat-sort-header="action">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (data of tableData; track data; let i = $index) {
+                    <tr>
+                      <td>{{ data.sNo }}</td>
+                      <td>{{ data.item }}</td>
+                      <td>{{ data.code }}</td>
+                      <td>{{ data.units }}</td>
+                      <td>{{ data.quantity }}</td>
+                      <td>{{ data.sales }}</td>
+                      <td>{{ data.purchase }}</td>
+                      <td class="d-flex align-items-center">
+                        <a  [routerLink] = "routes.inventoryHistory" class="btn btn-greys bg-history-light me-2">
+                          <i class="far fa-eye me-1"></i> History
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-greys bg-success-light me-2" data-bs-toggle="modal"
+                          data-bs-target="#stock_in">
+                          <i class="fa fa-plus-circle me-1"></i> Stock in
+                        </a>
+                        <a href="javascript:void(0);" class="btn btn-greys bg-danger-light me-2" data-bs-toggle="modal"
+                          data-bs-target="#stock_out">
+                          <i class="fa fa-plus-circle me-1"></i> Stock out
+                        </a>
+                        <div class="dropdown dropdown-action">
+                          <a href="javascript:void(0);" class=" btn-action-icon " data-bs-toggle="dropdown"
+                            aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                              <ul>
+                                <li>
+                                  <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                    data-bs-target="#edit_inventory"><i class="far fa-edit me-2"></i>Edit</a>
+                                  </li>
+                                  <li>
+                                    <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                      data-bs-target="#delete_stock"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <app-custom-pagination></app-custom-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Table -->
+
+        <!-- Add Asset -->
+        <div class="toggle-sidebar" [ngClass]="{'open-filter' : toggleData === true}">
+          <div class="sidebar-layout-filter">
+            <div class="sidebar-header">
+              <h5>Filter</h5>
+              <a href="javascript:void(0);" (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="sidebar-closes"><i
+              class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <div class="sidebar-body">
+              <form action="#" autocomplete="off">
+                <!-- Product -->
+                <div class="accordion" id="accordionMain1">
+                  <div class="card-header-new" id="headingOne">
+                    <h6 class="filter-title">
+                      <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                        Product Name
+                        <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                      </a>
+                    </h6>
+                  </div>
+
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample1">
+                    <div class="card-body-chat">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div id="checkBoxes1">
+                            <div class="form-custom">
+                              <input type="text" class="form-control" id="member_search1" placeholder="Search Product">
+                              <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                            </div>
+                            <div class="selectBox-cont">
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="username">
+                                <span class="checkmark"></span> Lenovo 3rd Generation
+                              </label>
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="username">
+                                <span class="checkmark"></span> Nike Jordan
+                              </label>
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="username">
+                                <span class="checkmark"></span> Apple Series 5 Watch
+                              </label>
+                              <label class="custom_check w-100">
+                                <input type="checkbox" name="username">
+                                <span class="checkmark"></span> Amazon Echo Dot
+                              </label>
+                              <!-- View All -->
+                              <div class="view-content">
+                                <div class="viewall-One">
+                                  @for (user of users; track user) {
+                                    <label class="custom_check w-100"
+                                      [ngClass]="{ closed: !isCollapsed1, open: isCollapsed1 }">
+                                      <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                                      <span class="checkmark"></span> {{ user.name }}
+                                    </label>
+                                  }
+                                </div>
+                                <div class="view-all">
+                                  <a (click)="toggleCollapse1()" href="javascript:void(0);" class="viewall-button-One"><span
+                                  class="me-2">{{ isCollapsed1 ? "Close All" : "View All" }}</span><span><i
+                                class="fa fa-circle-chevron-down"></i></span></a>
+                              </div>
+                            </div>
+                            <!-- /View All -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Product -->
+
+              <!-- Product Code -->
+              <div class="accordion" id="accordionMain4">
+                <div class="card-header-new" id="headingFour">
+                  <h6 class="filter-title">
+                    <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                      data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                      Product Code
+                      <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                    </a>
+                  </h6>
+                </div>
+
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample4">
+                  <div class="card-body-chat">
+                    <div id="checkBoxes3">
+                      <div class="selectBox-cont">
+                        <div class="form-custom">
+                          <input type="text" class="form-control" id="member_search2" placeholder="Search Invoice">
+                          <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                        </div>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="category">
+                          <span class="checkmark"></span> P125389
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="category">
+                          <span class="checkmark"></span> P125390
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="category">
+                          <span class="checkmark"></span> P125391
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="category">
+                          <span class="checkmark"></span> P125392
+                        </label>
+                        <!-- View All -->
+                        <div class="view-content">
+                          <div class="viewall-One">
+                            @for (user of usersTwo; track user) {
+                              <label class="custom_check w-100"
+                                [ngClass]="{ closed: !isCollapsed2, open: isCollapsed2 }">
+                                <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                                <span class="checkmark"></span> {{ user.name }}
+                              </label>
+                            }
+                          </div>
+                          <div class="view-all">
+                            <a (click)="toggleCollapse2()" href="javascript:void(0);" class="viewall-button-One"><span
+                            class="me-2">{{ isCollapsed2 ? "Close All" : "View All" }}</span><span><i
+                          class="fa fa-circle-chevron-down"></i></span></a>
+                        </div>
+                      </div>
+                      <!-- /View All -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Product Code -->
+
+            <!-- Unts -->
+            <div class="accordion accordion-last" id="accordionMain3">
+              <div class="card-header-new" id="headingThree">
+                <h6 class="filter-title">
+                  <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                    data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    Units
+                    <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                  </a>
+                </h6>
+              </div>
+
+              <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample3">
+                <div class="card-body-chat">
+                  <div id="checkBoxes2">
+                    <div class="selectBox-cont">
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="bystatus">
+                        <span class="checkmark"></span> Inches
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="bystatus">
+                        <span class="checkmark"></span> Pieces
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="bystatus">
+                        <span class="checkmark"></span> Hours
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="bystatus">
+                        <span class="checkmark"></span> Box
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="bystatus">
+                        <span class="checkmark"></span> Kilograms
+                      </label>
+                      <label class="custom_check w-100">
+                        <input type="checkbox" name="bystatus">
+                        <span class="checkmark"></span> Meter
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /Units -->
+
+            <div class="filter-buttons">
+              <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+                Apply
+              </button>
+              <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+                Reset
+              </button>
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+    <!--/Add Asset -->
+
+    <!-- Add Stock in Modal -->
+    <div class="modal custom-modal fade" id="stock_in" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <div class="form-header modal-header-title text-start mb-0">
+              <h4 class="mb-0">Add Stock in</h4>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span class="align-center" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Name</label>
+                  <input id="label" type="text" class="bg-white-smoke form-control" placeholder="SEO Service" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Quantity</label>
+                  <input id="label" type="number" class="form-control" placeholder="0" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3 mb-0">
+                  <label htmlFor="label">Units</label>
+                  <mat-select [(ngModel)]="stock" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                    <mat-option value="pieces">Pieces</mat-option>
+                    <mat-option value="inches">Inches</mat-option>
+                    <mat-option value="kilogram">Kilograms</mat-option>
+                    <mat-option value="inches">Inches</mat-option>
+                    <mat-option value="box">Box</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="input-block mb-3 mb-0">
+                  <label htmlFor="label">Notes</label>
+                  <textarea rows="3" cols="3" class="form-control" placeholder="Enter Notes"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add Quantity</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Add Stock in Modal -->
+
+    <!-- Remove Stock Modal -->
+    <div class="modal custom-modal fade" id="stock_out" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <div class="form-header modal-header-title text-start mb-0">
+              <h4 class="mb-0">Remove Stock</h4>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+              <span class="align-center" aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-12 col-md-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Name</label>
+                  <input id="label" type="text" class="bg-white-smoke form-control" placeholder="SEO Service" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label htmlFor="label">Quantity</label>
+                  <input id="label" type="number" class="form-control" placeholder="0" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3 mb-0">
+                  <label htmlFor="label">Units</label>
+                  <mat-select [(ngModel)]="stock1" [ngModelOptions]="{ standalone: true }" class="select custom-mat-select">
+                    <mat-option value="pieces">Pieces</mat-option>
+                    <mat-option value="inches">Inches</mat-option>
+                    <mat-option value="kilogram">Kilograms</mat-option>
+                    <mat-option value="inches">Inches</mat-option>
+                    <mat-option value="box">Box</mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <div class="col-lg-12">
+                <div class="input-block mb-3 mb-0">
+                  <label htmlFor="label">Notes</label>
+                  <textarea rows="3" cols="3" class="form-control" placeholder="Enter Notes"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Remove
+            Quantity</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Remove Stock Modal -->
+
+    <!-- Edit Stock in Modal -->
+    <div class="modal custom-modal fade" id="edit_inventory" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header border-0 pb-0">
+            <div class="form-header modal-header-title text-start mb-0">
+              <h4 class="mb-0">Edit Inventory</h4>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label for="Name">Name</label>
+                  <input type="text" class="form-control" value="Lorem ipsum dolor sit">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label for="Code">Code</label>
+                  <input type="text" class="form-control" value="P125389">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label for="Units">Units</label>
+                  <input type="text" class="form-control" value="Box">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label for="Quantity">Quantity</label>
+                  <input type="text" class="form-control" value="3">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label for="Price">Selling Price</label>
+                  <input type="text" class="form-control" value="$155.00">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-3">
+                  <label for="Purchase">Purchase Price</label>
+                  <input type="text" class="form-control" value="$150.00">
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-12">
+                <div class="input-block mb-0">
+                  <label for="Status">Status</label>
+                  <input type="text" class="form-control" value="Stock in">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+            <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Edit Stock in Modal -->
+
+    <!-- Delete Stock Modal -->
+    <div class="modal custom-modal fade" id="delete_stock" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="form-header">
+              <h3>Delete Inventory</h3>
+              <p>Are you sure want to delete?</p>
+            </div>
+            <div class="modal-btn delete-action">
+              <div class="row">
+                <div class="col-6">
+                  <a href="javascript:void(0);" class="btn btn-primary paid-continue-btn">Delete</a>
+                </div>
+                <div class="col-6">
+                  <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Delete Stock Modal -->

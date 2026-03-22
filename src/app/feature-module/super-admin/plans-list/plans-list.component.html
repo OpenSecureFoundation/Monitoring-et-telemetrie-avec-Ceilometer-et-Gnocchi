@@ -1,0 +1,988 @@
+<div class="subscription-plane-head">
+  <ul>
+    <li>
+      <a [routerLink] = "routes.packages" class="active">Subscription Plans</a>
+    </li>
+    <li>
+      <a [routerLink] = "routes.subscription">Subscribers List</a>
+    </li>
+  </ul>
+</div>
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Plans List</h5>
+    <div class="page-content">
+      <div class="list-btn">
+        <ul class="filter-list">
+          <li>
+            <a class="btn-filters" [routerLink] = "routes.packages" data-bs-toggle="tooltip" data-bs-placement="bottom"
+              title="Grid-View" matTooltip="Grid-View"><span><i class="feather icon-grid"></i></span></a>
+            </li>
+            <li>
+              <a class="btn-filters active" [routerLink] = "routes.plansList" data-bs-toggle="tooltip"
+                data-bs-placement="bottom" title="List-View" matTooltip="List-View"><span><i class="feather icon-list"></i></span></a>
+              </li>
+              <li>
+                <a class="btn-filters" href="javascript:void(0);" data-bs-toggle="tooltip"
+                  data-bs-placement="bottom" title="Refresh" matTooltip="Refresh"><span><i
+                class="feather icon-refresh-ccw"></i></span></a>
+              </li>
+              <li>
+                <a (click)="openContent()" class="btn btn-filters w-auto popup-toggle" data-bs-toggle="tooltip"
+                  data-bs-placement="bottom" title="Filter" matTooltip="Filter"><span class="me-2"><img
+                src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter
+              </a>
+            </li>
+
+            <li>
+              <div class="dropdown dropdown-action" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                title="Download" matTooltip="Download">
+                <a href="javascript:void(0);" class="btn btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span
+                  class="me-2"><i class="feather icon-download"></i></span>Export</a>
+                  <div class="dropdown-menu dropdown-menu-end">
+                    <ul class="d-block">
+                      <li>
+                        <a class="d-flex align-items-center download-item" href="javascript:void(0);"
+                          download><i class="far fa-file-pdf me-2"></i>Export as PDF</a>
+                        </li>
+                        <li>
+                          <a class="d-flex align-items-center download-item" href="javascript:void(0);"
+                            download><i class="far fa-file-text me-2"></i>Export as Excel</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <a class="btn btn-filters" href="javascript:void(0);" data-bs-toggle="tooltip"
+                      data-bs-placement="bottom" title="Print" matTooltip="Print"><span class="me-2"><i
+                    class="feather icon-printer"></i></span> Print
+                  </a>
+                </li>
+                <li>
+                  <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add_newpackage"><i
+                  class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add Plan</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /Page Header -->
+
+      <div class="super-admin-list-head">
+        <div class="row">
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="card">
+              <div class="card-body">
+                <div class="grid-info-item total-plane">
+                  <div class="grid-info">
+                    <span>Total Plan</span>
+                    <h4>07</h4>
+                  </div>
+                  <div class="grid-head-icon">
+                    <i class="feather icon-package"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="card">
+              <div class="card-body">
+                <div class="grid-info-item active-plane">
+                  <div class="grid-info">
+                    <span>Active Plans</span>
+                    <h4>07</h4>
+                  </div>
+                  <div class="grid-head-icon">
+                    <i class="feather icon-list"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="card">
+              <div class="card-body">
+                <div class="grid-info-item inactive-plane">
+                  <div class="grid-info">
+                    <span>Inactive Plans</span>
+                    <h4>0</h4>
+                  </div>
+                  <div class="grid-head-icon">
+                    <i class="feather icon-pause-circle"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6 d-flex">
+            <div class="card w-100">
+              <div class="card-body">
+                <div class="grid-info-item total-type">
+                  <div class="grid-info">
+                    <span>No of Plan Types</span>
+                    <h4>04</h4>
+                  </div>
+                  <div class="grid-head-icon">
+                    <i class="feather icon-pocket"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card-table">
+            <div class="card-body">
+              <div class="table-responsive no-pagination">
+                <div class="companies-table">
+                  <table matSort (matSortChange)="sortData($event)" class="table table-center table-hover datatable">
+                    <thead class="thead-light">
+                      <tr>
+                        <th Class="no-sort">#</th>
+                        <th mat-sort-header="planName">Plan Name</th>
+                        <th mat-sort-header="planType">Plan Type</th>
+                        <th mat-sort-header="price">Price</th>
+                        <th mat-sort-header="users">Users</th>
+                        <th mat-sort-header="suppliers">Suppliers</th>
+                        <th mat-sort-header="products">Products</th>
+                        <th mat-sort-header="invoice">Invoice</th>
+                        <th mat-sort-header="createdDate">Created Date</th>
+                        <th mat-sort-header="status">Status</th>
+                        <th Class="no-sort">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (data of tableData; track data) {
+                        <tr>
+                          <td>{{data.id}}</td>
+                          <td>
+                            {{data.planName}}
+                          </td>
+                          <td>{{data.planType}}</td>
+                          <td>{{data.price}}</td>
+                          <td>{{data.users}}</td>
+                          <td>{{data.suppliers}}</td>
+                          <td>{{data.products}}</td>
+                          <td>{{data.invoice}}</td>
+                          <td>{{data.createdDate}}</td>
+                          <td><span class="badge bg-success-light d-inline-flex align-items-center"><i
+                          class="feather icon-check me-1"></i>{{data.status}}</span></td>
+                          <td class="d-flex align-items-center">
+                            <div class="dropdown dropdown-action">
+                              <a href="javascript:void(0);" class=" btn-action-icon" data-bs-toggle="dropdown"
+                                aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-end">
+                                  <ul class="dropdown-ul">
+                                    <li>
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        data-bs-toggle="modal" data-bs-target="#edit_package"><i
+                                      class="feather icon-edit me-2"></i>Edit</a>
+                                    </li>
+                                    <li class="delete-alt">
+                                      <a class="dropdown-item" href="javascript:void(0);"
+                                        data-bs-toggle="modal" data-bs-target="#delete_modal"><i
+                                      class="feather icon-trash-2 me-2"></i>Delete</a>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <app-custom-pagination></app-custom-pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Page Wrapper -->
+
+        <!-- Add Asset -->
+        <div class="toggle-sidebar" [ngClass]="{ 'open-filter': toggleData === true }">
+          <div class="sidebar-layout-filter">
+            <div class="sidebar-header">
+              <h5>Filter</h5>
+              <a href="javascript:void(0);" class="sidebar-closes" (click)="openContent()"><i class="fa-regular fa-circle-xmark"></i></a>
+            </div>
+            <div class="sidebar-body">
+              <form action="#" autocomplete="off">
+
+                <!-- By Plane -->
+                <div class="accordion" id="accordionMain3">
+                  <div class="card-header-new" id="headingThree">
+                    <h6 class="filter-title">
+                      <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        Plans
+                        <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                      </a>
+                    </h6>
+                  </div>
+
+                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                    data-bs-parent="#accordionExample3">
+                    <div class="card-body-chat">
+                      <div id="checkBoxes2">
+                        <div class="selectBox-cont">
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> All Plans
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> Advanced
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> Basic
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> Enterprise
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span>Premium
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span>Free
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /By Plane -->
+
+                <!-- By Plane -->
+                <div class="accordion" id="accordionMain4">
+                  <div class="card-header-new" id="headingFour">
+                    <h6 class="filter-title">
+                      <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                        Plans Type
+                        <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                      </a>
+                    </h6>
+                  </div>
+
+                  <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                    data-bs-parent="#accordionExample4">
+                    <div class="card-body-chat">
+                      <div id="checkBoxes3">
+                        <div class="selectBox-cont">
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> All Plan Type
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> Monthly
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span> Weekly
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="bystatus">
+                            <span class="checkmark"></span>Lifetime
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /By Plane -->
+
+                <!-- Select Date -->
+                <div class="accordion accordion-last" id="accordionMain2">
+                  <div class="card-header-new" id="headingTwo">
+                    <h6 class="filter-title">
+                      <a href="javascript:void(0);" class="w-100 collapsed" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        Created Date
+                        <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                      </a>
+                    </h6>
+                  </div>
+
+                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                    data-bs-parent="#accordionExample2">
+                    <div class="card-body-chat">
+                      <div class="input-block mb-3">
+                        <label class="form-control-label">From</label>
+                        <div class="cal-icon">
+                          <input type="email" class="form-control datetimepicker" bsDatepicker [bsConfig]="{ adaptivePosition: true }" placeholder="DD-MM-YYYY">
+                        </div>
+                      </div>
+                      <div class="input-block mb-3">
+                        <label class="form-control-label">To</label>
+                        <div class="cal-icon">
+                          <input type="email" class="form-control datetimepicker" bsDatepicker [bsConfig]="{ adaptivePosition: true }" placeholder="DD-MM-YYYY">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /Select Date -->
+
+
+
+                <div class="filter-buttons">
+                  <button type="submit"
+                    class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+                    Apply
+                  </button>
+                  <button type="submit"
+                    class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+                    Reset
+                  </button>
+                </div>
+              </form>
+
+            </div>
+          </div>
+        </div>
+        <!--/Add Asset -->
+
+        <!-- Add New Package Modal -->
+        <div class="modal custom-modal fade p-20" id="add_newpackage" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <div class="form-header modal-header-title text-start mb-0">
+                  <h4 class="mb-0">Add New</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+              </div>
+              <form action="#">
+                <div class="modal-body">
+                  <h5 class="form-title">Plan Image</h5>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="profile-picture">
+                        <div class="upload-profile">
+                          <div class="profile-img company-profile-img">
+                            <img id="company-img" class="img-fluid me-0"
+                              src="assets/img/companies/company-add-img.svg" alt="profile-img">
+                            </div>
+                            <div class="add-profile">
+                              <h5>Upload a New Photo</h5>
+                              <span>Profile-pic.jpg</span>
+                            </div>
+                          </div>
+                          <div class="img-upload">
+                            <label class="btn btn-upload">
+                              Upload <input type="file">
+                            </label>
+                            <a class="btn btn-remove">Remove</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <h5 class="form-title mb-3">Plan Info</h5>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+
+                        <div class="input-block mb-3">
+                          <label>Plan Name</label>
+                          <input type="text" class="form-control" placeholder="Enter Plan Name" value="">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <div class="input-block mb-3">
+                          <label>Plan Type</label>
+                          <mat-select class="select custom-mat-select" placeholder="Monthly">
+                            <mat-option value="Monthly">Monthly</mat-option>
+                            <mat-option value="Yearly">Yearly</mat-option>
+                            <mat-option value="free Trail">Free Trial</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <div class="input-block mb-3">
+                          <label>Plan Position</label>
+                          <mat-select class="select custom-mat-select" placeholder="1">
+                            <mat-option value="1">1</mat-option>
+                            <mat-option value="2">2</mat-option>
+                            <mat-option value="3">3</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <div class="input-block mb-3">
+                          <label>Plan Currency</label>
+                          <mat-select class="select custom-mat-select" placeholder="USD">
+                            <mat-option value="USD">USD</mat-option>
+                            <mat-option value="$">$</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+                        <div class="input-block mb-3">
+                          <label class="d-flex justify-content-between">
+                            <span>Price</span>
+                            <span class="text-primary"><i class="fa-solid fa-circle-exclamation me-2"></i>Set 0
+                          for free</span>
+                        </label>
+                        <input type="text" class="form-control" placeholder="Enter Package Price">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                      <div class="input-block mb-3">
+                        <label>Discount Type</label>
+                        <mat-select class="select custom-mat-select" placeholder="Fixed">
+                          <mat-option value="Fixed">Fixed</mat-option>
+                          <mat-option value="Percentage">Percentage</mat-option>
+                        </mat-select>
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-3">
+                      <div class="input-block mb-3">
+                        <label>Discount</label>
+                        <input type="text" class="form-control" placeholder="Enter Discount">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="input-block mb-3">
+                        <label>Limitations Invoices</label>
+                        <input type="number" class="form-control" placeholder="0">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="input-block mb-3">
+                        <label>Max Customers</label>
+                        <input type="number" class="form-control" placeholder="0">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="input-block mb-3">
+                        <label>Product</label>
+                        <input type="number" class="form-control" placeholder="0">
+                      </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-3">
+                      <div class="input-block mb-3">
+                        <label>Supplier</label>
+                        <input type="number" class="form-control" placeholder="0">
+                      </div>
+                    </div>
+                  </div>
+                  <h6>Plan Modules</h6>
+                  <div class="input-block mb-3">
+                    <div class="row">
+                      <div class="col-lg-12">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Select All
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Invoices
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Payments
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Payment Summary
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked>Vendors
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Estimates
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Quotations
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Memberships
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked>Customers
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Recurring Invoices
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Delivery Challans
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Products
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked>Vendors
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Expenses
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Reports
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked> Inventory
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-lg-3 col-sm-6">
+                        <div class="checkboxes">
+                          <label>
+                            <input type="checkbox" name="checkbox" checked>Signature
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="d-flex align-items-center mb-3">
+                    <h6 class="mb-0">Access Trial</h6>
+                    <div class="status-toggle">
+                      <input id="access-trail" class="check" type="checkbox" checked="">
+                      <label for="access-trail" class="checktoggle checkbox-bg">checkbox</label>
+                    </div>
+                  </div>
+                  <div class="row align-items-center">
+                    <div class="col-sm-12 col-md-8">
+                      <div class="input-block mb-3">
+                        <label>Trial Days</label>
+                        <input type="number" class="form-control" placeholder="0">
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="d-flex align-items-center mb-3">
+                        <h6 class="mb-0">Is Recommended</h6>
+                        <div class="status-toggle">
+                          <input id="recommended" class="check" type="checkbox">
+                          <label for="recommended" class="checktoggle checkbox-bg">checkbox</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="input-block mb-3">
+                        <label>Description</label>
+                        <textarea rows="3" cols="5" class="form-control"
+                        placeholder="Enter Description"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center mb-3">
+                    <h6 class="mb-0">Status</h6>
+                    <div class="status-toggle">
+                      <input id="status-2" class="check" type="checkbox">
+                      <label for="status-2" class="checktoggle checkbox-bg">checkbox</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</button>
+                  <button type="submit" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Save
+                  Changes</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- /Add New Package Modal -->
+
+        <!-- Edit Package Modal -->
+        <div class="modal custom-modal custom-lg-modal fade p-20" id="edit_package" role="dialog">
+          <div class="modal-dialog modal-dialog-centered modal-md">
+            <div class="modal-content">
+              <div class="modal-header border-0">
+                <div class="form-header modal-header-title text-start mb-0">
+                  <h4 class="mb-0">Edit Package</h4>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+              </div>
+              <form action="#">
+                <div class="modal-body">
+                  <h5 class="form-title">Plan Image</h5>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="profile-picture">
+                        <div class="upload-profile">
+                          <div class="profile-img company-profile-img">
+                            <img id="company-img-2" class="img-fluid me-0"
+                              src="assets/img/icons/price-02.svg" alt="profile-img">
+                            </div>
+                            <div class="add-profile">
+                              <h5>Upload a New Photo</h5>
+                              <span>Profile-pic.jpg</span>
+                            </div>
+                          </div>
+                          <div class="img-upload">
+                            <label class="btn btn-upload">
+                              Upload <input type="file">
+                            </label>
+                            <a class="btn btn-remove">Remove</a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-12">
+                        <h5 class="form-title mb-3">Plan Info</h5>
+                      </div>
+                      <div class="col-sm-12 col-md-6">
+
+                        <div class="input-block mb-3">
+                          <label>Plan Name</label>
+                          <input type="text" class="form-control" placeholder="Enter Plan Name"
+                            value="Enterprise">
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                          <div class="input-block mb-3">
+                            <label>Plan Type</label>
+                            <mat-select class="select custom-mat-select" placeholder="Monthly">
+                              <mat-option value="Monthly">Monthly</mat-option>
+                              <mat-option value="Yearly">Yearly</mat-option>
+                              <mat-option value="free Trail">Free Trial</mat-option>
+                            </mat-select>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                          <div class="input-block mb-3">
+                            <label>Plan Position</label>
+                            <mat-select class="select custom-mat-select" placeholder="1">
+                              <mat-option value="1">1</mat-option>
+                              <mat-option value="2">2</mat-option>
+                              <mat-option value="3">3</mat-option>
+                            </mat-select>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                          <div class="input-block mb-3">
+                            <label>Plan Currency</label>
+                            <mat-select class="select custom-mat-select" placeholder="USD">
+                              <mat-option value="USD">USD</mat-option>
+                              <mat-option value="$">$</mat-option>
+                            </mat-select>
+                          </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                          <div class="input-block mb-3">
+                            <label class="d-flex justify-content-between">
+                              <span>Price</span>
+                              <span class="text-primary"><i class="fa-solid fa-circle-exclamation me-2"></i>Set 0
+                            for free</span>
+                          </label>
+                          <input type="text" class="form-control" placeholder="Enter Package Price" value="4545">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-3">
+                        <div class="input-block mb-3">
+                          <label>Discount Type</label>
+                          <mat-select class="select custom-mat-select" placeholder="Fixed">
+                            <mat-option value="Fixed">Fixed</mat-option>
+                            <mat-option value="Percentage">Percentage</mat-option>
+                          </mat-select>
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-3">
+                        <div class="input-block mb-3">
+                          <label>Discount</label>
+                          <input type="text" class="form-control" placeholder="Enter Discount" value="5%">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="input-block mb-3">
+                          <label>Limitations Invoices</label>
+                          <input type="number" class="form-control" placeholder="0" value="50">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="input-block mb-3">
+                          <label>Max Customers</label>
+                          <input type="number" class="form-control" placeholder="0" value="250">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="input-block mb-3">
+                          <label>Product</label>
+                          <input type="number" class="form-control" placeholder="0" value="110">
+                        </div>
+                      </div>
+                      <div class="col-sm-12 col-md-6 col-lg-3">
+                        <div class="input-block mb-3">
+                          <label>Supplier</label>
+                          <input type="number" class="form-control" placeholder="0" value="14">
+                        </div>
+                      </div>
+                    </div>
+                    <h6>Plan Modules</h6>
+                    <div class="input-block mb-3">
+                      <div class="row">
+                        <div class="col-lg-12">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Select All
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Invoices
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Payments
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Payment Summary
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked>Vendors
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Estimates
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Quotations
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Memberships
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked>Customers
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Recurring Invoices
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Delivery Challans
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Products
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked>Vendors
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Expenses
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Reports
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked> Inventory
+                            </label>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                          <div class="checkboxes">
+                            <label>
+                              <input type="checkbox" name="checkbox" checked>Signature
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                      <h6 class="mb-0">Access Trial</h6>
+                      <div class="status-toggle">
+                        <input id="access-trail-2" class="check" type="checkbox" checked="">
+                        <label for="access-trail-2" class="checktoggle checkbox-bg">checkbox</label>
+                      </div>
+                    </div>
+                    <div class="row align-items-center">
+                      <div class="col-sm-12 col-md-8">
+                        <div class="input-block mb-3">
+                          <label>Trial Days</label>
+                          <input type="number" class="form-control" placeholder="0">
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="d-flex align-items-center mb-3">
+                          <h6 class="mb-0">Is Recommended</h6>
+                          <div class="status-toggle">
+                            <input id="recommended-2" class="check" type="checkbox">
+                            <label for="recommended-2" class="checktoggle checkbox-bg">checkbox</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="input-block mb-3">
+                          <label>Description</label>
+                          <textarea rows="3" cols="5" class="form-control"
+                          placeholder="Enter Description"></textarea>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-3">
+                      <h6 class="mb-0">Status</h6>
+                      <div class="status-toggle">
+                        <input id="status" class="check" type="checkbox">
+                        <label for="status" class="checktoggle checkbox-bg">checkbox</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</button>
+                    <button type="submit" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Save
+                    Changes</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- /Edit Package Modal -->
+
+          <!-- Delete Items Modal -->
+          <div class="modal custom-modal fade modal-delete" id="delete_modal" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-md">
+              <div class="modal-content">
+                <div class="modal-body">
+                  <div class="form-header">
+                    <div class="delete-modal-icon">
+                      <span><i class="feather icon-check-circle"></i></span>
+                    </div>
+                    <h3>Are You Sure?</h3>
+                    <p>You want delete plan</p>
+                  </div>
+                  <div class="modal-btn delete-action">
+                    <div class="modal-footer justify-content-center p-0">
+                      <button type="submit" data-bs-dismiss="modal"
+                      class="btn btn-primary paid-continue-btn me-2">Yes, Delete</button>
+                      <button type="button" data-bs-dismiss="modal" class="btn btn-back cancel-btn">No,
+                      Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Delete Items Modal -->

@@ -1,0 +1,118 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">Single File Upload</h5>
+      </div>
+      <div class="card-body">
+        <div class="custom-file-container">
+          <div>
+            <label htmlFor="label"
+              >Upload (Single File)
+              <a
+                (click)="clearSingleImage()"
+                href="javascript:void(0)"
+                class="custom-file-container__image-clear"
+                title="Clear Image"
+                >x</a
+                ></label
+                >
+              </div>
+              <label for="singleFile" class="custom-file-container__custom-file">
+                <input
+                  id="singleFile"
+                  type="file"
+                  (change)="onFileChange($event)"
+                  accept="image/png,image/jpeg,image/jpg"
+                  class="custom-file-container__custom-file__custom-file-input"
+                  />
+                  <span
+                    class="custom-file-container__custom-file__custom-file-control"
+                    >{{ singleFileName }}
+                    <span
+                      class="custom-file-container__custom-file__custom-file-control__button"
+                      >Browse</span
+                      >
+                    </span>
+                  </label>
+                  <div class="custom-file-container__image-preview">
+                    <img [src]="selectedImage" alt="preview" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Multiple File Upload</h5>
+              </div>
+              <div class="card-body">
+                <div class="custom-file-container">
+                  <div>
+                    <label htmlFor="label"
+                      >Upload (Allow Multiple)
+                      <a
+                        (click)="clearMultipleImage()"
+                        href="javascript:void(0)"
+                        class="custom-file-container__image-clear"
+                        title="Clear Image"
+                        >x</a
+                        ></label
+                        >
+                      </div>
+                      <label for="multipleFile" class="custom-file-container__custom-file">
+                        <input
+                          id="multipleFile"
+                          type="file"
+                          multiple="true"
+                          (change)="onFileChange($event)"
+                          accept="image/png,image/jpeg,image/jpg"
+                          class="custom-file-container__custom-file__custom-file-input"
+                          />
+                          <span
+                            class="custom-file-container__custom-file__custom-file-control"
+                            >
+                            @for (item of multipleFileName; track item; let i = $index) {
+                              {{ item }}
+                              @if (
+                                multipleFileName.length > 1 &&
+                                multipleFileName.length - 1 !== i
+                                ) {
+                                ,
+                              }
+                            }
+                            <span
+                              class="custom-file-container__custom-file__custom-file-control__button"
+                              >Browse</span
+                              >
+                            </span>
+                          </label>
+                          <div class="custom-file-container__image-preview">
+                            @for (item of selectedImages; track item; let i = $index) {
+                              <div
+                                class="chooseImg"
+                [hidden]="
+                  selectedImages.length !== 1 &&
+                  item === 'assets/img/fileImage.png'
+                "
+                                >
+                                @if (selectedImages.length > 1) {
+                                  <span>
+                                    <a
+                                      (click)="removeSingleImage(i,item)"
+                                      href="javascript:void(0)"
+                                      class="custom-file-container__image-clear"
+                                      title="Clear Image"
+                                      >x</a
+                                      >
+                                    </span>
+                                  }
+                                  <img [src]="item" alt="preview" />
+                                </div>
+                              }
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>

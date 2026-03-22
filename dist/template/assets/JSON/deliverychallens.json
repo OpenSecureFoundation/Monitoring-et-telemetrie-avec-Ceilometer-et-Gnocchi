@@ -1,0 +1,64 @@
+{
+    "data": [
+      {
+        "sNo": 1,
+        "challenId": "#25689825",
+        "customer": "John Smith",
+        "img":"assets/img/profiles/avatar-14.jpg",
+        "customerNumber":"+1 843-443-3282",
+        "amount": "$1,54,220",
+        "createdOn": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "sNo": 2,
+        "challenId": "#25689826",
+        "customer": "Johnny",
+        "img":"assets/img/profiles/avatar-15.jpg",
+        "customerNumber":"+1 917-409-0861",
+        "amount": "$2,54,220",
+        "createdOn": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "sNo": 3,
+        "challenId": "#25689827",
+        "customer": "Robert",
+        "img":"assets/img/profiles/avatar-16.jpg",
+        "customerNumber":"+1 956-623-2880",
+        "amount": "$3,54,220",
+        "createdOn": "19 Dec 2022, 06:12 PM"
+      },
+      
+      {
+        "sNo": 4,
+        "challenId": "#25689828",
+        "customer": "Sharonda ",
+        "img":"assets/img/profiles/avatar-17.jpg",
+        "customerNumber":"+1 707-439-1732",
+        "amount": "$4,54,220",
+        "createdOn": "19 Dec 2022, 06:12 PM"
+        
+      },
+      {
+        "sNo": 5,
+        "challenId": "#25689829",
+        "customer": "Pricilla",
+        "img":"assets/img/profiles/avatar-18.jpg",
+        "customerNumber":"+1 559-741-9672",
+        "amount": "$5,54,220",
+        "createdOn": "19 Dec 2022, 06:12 PM"
+      },
+      {
+        "sNo": 6,
+        "challenId": "#25689830",
+        "customer": "Randall",
+        "img":"assets/img/profiles/avatar-19.jpg",
+        "customerNumber":"+1 989-438-3131",
+        "amount": "$4,54,220",
+        "createdOn": "19 Dec 2022, 06:12 PM"
+      }
+     
+     
+    ],
+    "totalData": 6
+  }
+  

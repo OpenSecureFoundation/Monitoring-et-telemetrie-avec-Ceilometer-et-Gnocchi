@@ -1,0 +1,440 @@
+<!-- Project Details Container -->
+<div class="project-details-container">
+
+  <!-- Animated Background -->
+  <div class="page-background"></div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="this.spinnerService.loading$ | async">
+    <div class="loading-spinner"></div>
+  </div>
+
+
+  <ng-container *ngIf="!(this.spinnerService.loading$ | async)">
+    <ng-container *ngIf="project$ | async as project">
+      <!-- Page Header with Glassmorphism -->
+      <div class="project-header-modern">
+        <div class="breadcrumb-section">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb-modern">
+              <li class="breadcrumb-item">
+                <a routerLink="/projects">
+                  <i class="fas fa-arrow-left"></i>
+                  Projects
+                </a>
+              </li>
+              <li class="breadcrumb-item active">Project Details</li>
+            </ol>
+          </nav>
+        </div>
+
+        <div class="project-hero">
+          <div class="project-hero-content">
+            <div class="project-avatar-large">
+              <div class="avatar-glow"></div>
+              <span class="avatar-text">PE</span>
+            </div>
+
+            <div class="project-title-section">
+              <div class="project-status-inline">
+                <span class="status-pulse active"></span>
+                <span class="status-label">{{project.projectInf.enabled ? 'Active' : 'Inactive'}}</span>
+              </div>
+              <h1 class="project-title-hero">{{project.projectInf.name}}</h1>
+              <div class="project-id-modern">
+                <span class="id-text">{{project.projectInf.id}}</span>
+                <button class="copy-btn-modern" title="Copy ID">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-hero-actions">
+            <button class="action-btn-hero primary">
+              <i class="fas fa-cog"></i>
+              Settings
+            </button>
+            <button class="action-btn-hero secondary">
+              <i class="fas fa-chart-line"></i>
+              Analytics
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Dashboard with Modern Cards -->
+      <div class="kpi-dashboard">
+        <div class="kpi-grid-three">
+
+          <!-- Compute KPI Card -->
+          <div class="kpi-card-modern-large" data-status="healthy">
+            <div class="kpi-card-glow"></div>
+
+            <div class="kpi-header-large">
+              <div class="kpi-icon-wrapper-large compute">
+                <i class="fas fa-microchip"></i>
+              </div>
+              <div class="kpi-title-section">
+                <h3 class="kpi-title">Compute Resources</h3>
+                <p class="kpi-subtitle">CPU, RAM & Instances</p>
+              </div>
+            </div>
+
+            <div class="kpi-items-grid">
+              <!-- Cores -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-server"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">vCPUs</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.compute.cores.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.compute.cores.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Instances -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-boxes"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Instances</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.compute.instances.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.compute.instances.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- RAM -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-memory"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">RAM</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.compute.ram.used / 1024 | number:'1.0-0'}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.compute.ram.limit / 1024 | number:'1.0-0'}} GB</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Network KPI Card -->
+          <div class="kpi-card-modern-large" data-status="healthy">
+            <div class="kpi-card-glow"></div>
+
+            <div class="kpi-header-large">
+              <div class="kpi-icon-wrapper-large network">
+                <i class="fas fa-network-wired"></i>
+              </div>
+              <div class="kpi-title-section">
+                <h3 class="kpi-title">Network Resources</h3>
+                <p class="kpi-subtitle">Networks, Ports & Routers</p>
+              </div>
+            </div>
+
+            <div class="kpi-items-grid">
+              <!-- Networks -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-project-diagram"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Networks</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.networks.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.networks.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Ports -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-ethernet"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Ports</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.ports.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.ports.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Routers -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-random"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Routers</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.routers.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.routers.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subnets -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-sitemap"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Subnets</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.network.subnets.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.network.subnets.limit}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Storage KPI Card -->
+          <div class="kpi-card-modern-large" data-status="healthy">
+            <div class="kpi-card-glow"></div>
+
+            <div class="kpi-header-large">
+              <div class="kpi-icon-wrapper-large storage">
+                <i class="fas fa-hdd"></i>
+              </div>
+              <div class="kpi-title-section">
+                <h3 class="kpi-title">Storage Resources</h3>
+                <p class="kpi-subtitle">Volumes & Capacity</p>
+              </div>
+            </div>
+
+            <div class="kpi-items-grid">
+              <!-- Volumes -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-database"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Volumes</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.storage.volumes.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.storage.volumes.limit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Gigabytes -->
+              <div class="kpi-item">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-save"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Capacity</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.storage.gigabytes.used}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.storage.gigabytes.limit}} GB</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Snapshots (optionnel si disponible) -->
+              <div class="kpi-item" *ngIf="project.quotas.storage.snapshots">
+                <div class="kpi-item-icon">
+                  <i class="fas fa-camera"></i>
+                </div>
+                <div class="kpi-item-content">
+                  <span class="kpi-item-label">Snapshots</span>
+                  <div class="kpi-item-values">
+                    <span class="kpi-value-current">{{project.quotas.storage.snapshots.used || 0}}</span>
+                    <span class="kpi-value-separator">/</span>
+                    <span class="kpi-value-max">{{project.quotas.storage.snapshots.limit}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Modern Tabs Navigation -->
+      <div class="tabs-navigation-modern">
+        <div class="tabs-wrapper">
+          <button class="tab-btn active" data-tab="dashboard">
+            <i class="fas fa-th-large"></i>
+            <span>Dashboard</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" data-tab="instances">
+            <i class="fas fa-server"></i>
+            <span>Instances</span>
+            <span class="tab-badge">{{project.stats.instances}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" data-tab="members">
+            <i class="fas fa-users"></i>
+            <span>Members</span>
+            <span class="tab-badge">{{project.stats.users}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" data-tab="volumes">
+            <i class="fas fa-hdd"></i>
+            <span>Volumes</span>
+            <span class="tab-badge">{{project.stats.volumes}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" data-tab="networks">
+            <i class="fas fa-network-wired"></i>
+            <span>Networks</span>
+            <span class="tab-badge">{{project.stats.networks}}</span>
+            <div class="tab-indicator"></div>
+          </button>
+          <button class="tab-btn" data-tab="security">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security</span>
+            <div class="tab-indicator"></div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content -->
+      <div class="tab-content-modern">
+
+        <!-- Dashboard Tab -->
+        <!-- Dashboard Tab -->
+        <div class="tab-pane active" id="dashboard">
+          <div class="instances-showcase">
+            <div class="section-header-modern">
+              <h2 class="section-title-modern">Recent Instances</h2>
+              <a href="#" class="view-all-link">
+                View all
+                <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
+
+            <!-- Instances Grid (IMPORTANT: cette div doit entourer les cards) -->
+            <div class="instances-grid-modern">
+              <!-- Boucle sur chaque instance -->
+              <div class="instance-card-modern" *ngFor="let instance of project.instances; let index = index"
+                [class.active]="instance.status === 'ACTIVE'" [class.suspended]="instance.status === 'SUSPENDED'">
+
+                <div class="instance-card-header">
+                  <div class="instance-info-row">
+                    <div class="instance-icon">
+                      <i class="fas fa-server"></i>
+                    </div>
+                    <div class="instance-name-status">
+                      <h4 class="instance-name">{{instance.name}}</h4>
+                      <span class="instance-status-badge" [class.active]="instance.status === 'ACTIVE'"
+                        [class.suspended]="instance.status === 'SUSPENDED'">
+                        <span class="status-dot"></span>
+                        {{instance.status}}
+                      </span>
+                    </div>
+                  </div>
+                  <div class="instance-actions-quick">
+                    <button class="quick-action" title="Console">
+                      <i class="fas fa-terminal"></i>
+                    </button>
+                    <button class="quick-action" title="Metrics">
+                      <i class="fas fa-chart-bar"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="instance-details-grid">
+                  <div class="detail-item-modern">
+                    <span class="detail-icon"><i class="fas fa-network-wired"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">IP Address</span>
+                      <span class="detail-value">{{instance.addresses[0]?.ip || 'N/A'}}</span>
+                    </div>
+                  </div>
+                  <div class="detail-item-modern">
+                    <span class="detail-icon"><i class="fas fa-tag"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">Network</span>
+                      <span class="detail-value">{{instance.addresses[0]?.network || 'N/A'}}</span>
+                    </div>
+                  </div>
+                  <div class="detail-item-modern">
+                    <span class="detail-icon"><i class="fas fa-microchip"></i></span>
+                    <div class="detail-content">
+                      <span class="detail-label">vCPUs</span>
+                      <span class="detail-value">4 cores</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Métriques (si vous les avez) -->
+                <div class="instance-metrics-modern" *ngIf="instance.cpuUsage !== undefined">
+                  <div class="metric-row">
+                    <div class="metric-header">
+                      <span class="metric-name">CPU</span>
+                      <span class="metric-value">{{instance.cpuUsage}}%</span>
+                    </div>
+                    <div class="metric-bar-wrapper">
+                      <div class="metric-bar-track">
+                        <div class="metric-bar-fill" [style.width.%]="instance.cpuUsage"
+                          [class.warning]="instance.cpuUsage >= 70" [class.danger]="instance.cpuUsage >= 90"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="metric-row">
+                    <div class="metric-header">
+                      <span class="metric-name">RAM</span>
+                      <span class="metric-value">{{instance.ramUsage}}%</span>
+                    </div>
+                    <div class="metric-bar-wrapper">
+                      <div class="metric-bar-track">
+                        <div class="metric-bar-fill" [style.width.%]="instance.ramUsage"
+                          [class.warning]="instance.ramUsage >= 70" [class.danger]="instance.ramUsage >= 90"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Fin de la boucle -->
+            </div>
+            <!-- Fin du grid -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Other tabs would follow similar modern styling -->
+      <!-- For brevity, showing structure for one more tab -->
+
+      <!-- Instances Tab -->
+      <div class="tab-pane" id="instances" style="display: none;">
+        <div class="modern-table-container">
+          <div class="table-header-modern">
+            <h2 class="section-title-modern">All Instances</h2>
+            <div class="table-actions">
+              <button class="action-btn-modern primary">
+                <i class="fas fa-plus"></i>
+                New Instance
+              </button>
+            </div>
+          </div>
+
+          <!-- Table content would go here with modern styling -->
+          <p class="placeholder-text">Table view for all instances...</p>
+        </div>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>

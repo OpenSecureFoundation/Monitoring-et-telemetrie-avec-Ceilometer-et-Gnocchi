@@ -1,0 +1,789 @@
+<!-- Resource Monitoring Container -->
+<div class="resource-monitoring-container">
+
+  <!-- Animated Background -->
+  <div class="page-background"></div>
+
+  <!-- Loading Spinner -->
+  <div class="loading-container" *ngIf="loading">
+    <div class="loading-spinner"></div>
+  </div>
+
+  <!-- Main Content -->
+  <ng-container *ngIf="!loading && resource">
+
+    <!-- Breadcrumb Navigation -->
+
+    <!-- Page Header -->
+    <div class="breadcrumb-section">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb-modern">
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/projects']">
+              <i class="fas fa-project-diagram"></i>
+              Projects
+            </a>
+          </li>
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/projects', projectId]">
+              {{projectName}}
+            </a>
+          </li>
+          <li class="breadcrumb-item active">
+            {{resourceType | titlecase}} Monitoring
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <!-- Resource Header -->
+    <div class="resource-header">
+      <div class="resource-header-content">
+        <div class="resource-icon-large" [ngClass]="resourceType">
+          <i class="fas" [ngClass]="{
+            'fa-server': resourceType === 'instance',
+            'fa-hdd': resourceType === 'volume',
+            'fa-network-wired': resourceType === 'network'
+          }"></i>
+        </div>
+
+        <div class="resource-info-section">
+          <div class="resource-type-badge">
+            <i class="fas fa-tag"></i>
+            {{resourceType | titlecase}}
+          </div>
+          <h1 class="resource-title">{{resource.name}}</h1>
+          <div class="resource-meta-row">
+            <span class="meta-chip" *ngIf="resourceType === 'instance'">
+              <i class="fas fa-network-wired"></i>
+              {{resource.ip || 'N/A'}}
+            </span>
+            <span class="meta-chip" *ngIf="resourceType === 'volume'">
+              <i class="fas fa-database"></i>
+              {{resource.size}} GB
+            </span>
+            <span class="meta-chip" *ngIf="resourceType === 'network'">
+              <i class="fas fa-sitemap"></i>
+              {{resource.subnet || 'N/A'}}
+            </span>
+            <span class="meta-chip status" [ngClass]="resource.status">
+              <span class="status-dot"></span>
+              {{resource.status | uppercase}}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="resource-header-actions">
+        <button class="action-btn-header secondary" (click)="exportMetrics()">
+          <i class="fas fa-download"></i>
+          Export
+        </button>
+        <button class="action-btn-header primary" (click)="refreshData()">
+          <i class="fas fa-sync-alt" [class.spinning]="refreshing"></i>
+          Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Stats Cards -->
+    <div class="quick-stats-section" *ngIf="activeTab === 'overview'">
+      <div class="stats-grid-monitoring">
+        <!-- Stats vary by resource type -->
+        <ng-container [ngSwitch]="resourceType">
+
+          <!-- Instance Stats -->
+          <ng-container *ngSwitchCase="'instance'">
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Uptime</div>
+                <div class="stat-value-mini">{{resource.uptime || '0h'}}</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini cpu">
+                <i class="fas fa-microchip"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">CPU Usage</div>
+                <div class="stat-value-mini">{{resource.currentCpu || 0}}%</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini ram">
+                <i class="fas fa-memory"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">RAM Usage</div>
+                <div class="stat-value-mini">{{resource.currentRam || 0}}%</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-server"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Flavor</div>
+                <div class="stat-value-mini">{{resource.flavor || 'N/A'}}</div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Volume Stats -->
+          <ng-container *ngSwitchCase="'volume'">
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini storage">
+                <i class="fas fa-database"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Capacity</div>
+                <div class="stat-value-mini">{{resource.size}} GB</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Usage</div>
+                <div class="stat-value-mini">{{resource.usagePercent || 0}}%</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-link"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Attached To</div>
+                <div class="stat-value-mini">{{resource.attachedTo || 'None'}}</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-layer-group"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Type</div>
+                <div class="stat-value-mini">{{resource.volumeType || 'SSD'}}</div>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- Network Stats -->
+          <ng-container *ngSwitchCase="'network'">
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini network">
+                <i class="fas fa-ethernet"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Active Ports</div>
+                <div class="stat-value-mini">{{resource.activePorts || 0}} / {{resource.maxPorts || 0}}</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-globe"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Floating IPs</div>
+                <div class="stat-value-mini">{{resource.floatingIps || 0}} / {{resource.maxFloatingIps || 0}}</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-random"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Routers</div>
+                <div class="stat-value-mini">{{resource.connectedRouters || 0}}</div>
+              </div>
+            </div>
+
+            <div class="stat-card-monitoring">
+              <div class="stat-icon-mini">
+                <i class="fas fa-sitemap"></i>
+              </div>
+              <div class="stat-content-mini">
+                <div class="stat-label-mini">Subnets</div>
+                <div class="stat-value-mini">{{resource.subnets || 0}}</div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="tabs-navigation-monitoring">
+      <div class="tabs-wrapper">
+        <button class="tab-btn-monitoring" [class.active]="activeTab === 'overview'" (click)="switchTab('overview')">
+          <i class="fas fa-th-large"></i>
+          <span>Overview</span>
+          <div class="tab-indicator"></div>
+        </button>
+
+        <button class="tab-btn-monitoring" [class.active]="activeTab === 'metrics'" (click)="switchTab('metrics')">
+          <i class="fas fa-chart-line"></i>
+          <span>Metrics</span>
+          <div class="tab-indicator"></div>
+        </button>
+
+        <button class="tab-btn-monitoring" [class.active]="activeTab === 'alarms'" (click)="switchTab('alarms')">
+          <i class="fas fa-bell"></i>
+          <span>Alarms</span>
+          <span class="tab-badge" *ngIf="alarms.length > 0">{{alarms.length}}</span>
+          <div class="tab-indicator"></div>
+        </button>
+
+        <button class="tab-btn-monitoring" *ngIf="resourceType === 'instance'" [class.active]="activeTab === 'console'"
+          (click)="switchTab('console')">
+          <i class="fas fa-terminal"></i>
+          <span>Console</span>
+          <div class="tab-indicator"></div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="tab-content-monitoring">
+
+      <!-- Overview Tab -->
+      <div class="tab-pane-monitoring" *ngIf="activeTab === 'overview'">
+        <div class="overview-content">
+
+          <div class="overview-section">
+            <h3 class="section-title-monitoring">
+              <i class="fas fa-info-circle"></i>
+              Resource Details
+            </h3>
+            <div class="details-grid">
+              <div class="detail-item-monitoring">
+                <span class="detail-label-monitoring">ID</span>
+                <span class="detail-value-monitoring">{{resource.id}}</span>
+              </div>
+              <div class="detail-item-monitoring">
+                <span class="detail-label-monitoring">Created</span>
+                <span class="detail-value-monitoring">{{resource.created | date:'medium'}}</span>
+              </div>
+              <div class="detail-item-monitoring">
+                <span class="detail-label-monitoring">Status</span>
+                <span class="detail-value-monitoring">
+                  <span class="status-badge-inline" [ngClass]="resource.status">
+                    {{resource.status | uppercase}}
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mini Sparkline Charts -->
+          <div class="overview-section">
+            <h3 class="section-title-monitoring">
+              <i class="fas fa-chart-area"></i>
+              Quick Trends (Last Hour)
+            </h3>
+            <div class="sparkline-grid">
+              <div class="sparkline-card" *ngFor="let metric of miniMetrics">
+                <div class="sparkline-header">
+                  <span class="sparkline-label">{{metric.label}}</span>
+                  <span class="sparkline-value" [style.color]="metric.color">
+                    {{metric.currentValue}}{{metric.unit}}
+                  </span>
+                </div>
+                <div class="sparkline-chart-container">
+                  <apx-chart [series]="metric.series"
+                    [chart]="metric.chartOptions?.chart || sparklineChartOptions.chart"
+                    [stroke]="metric.chartOptions?.stroke || sparklineChartOptions.stroke" [colors]="[metric.color]"
+                    [fill]="sparklineChartOptions.fill" [tooltip]="sparklineChartOptions.tooltip">
+                  </apx-chart>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="overview-section">
+            <h3 class="section-title-monitoring">
+              <i class="fas fa-bolt"></i>
+              Quick Actions
+            </h3>
+            <div class="quick-actions-grid">
+              <button class="quick-action-card" *ngIf="resourceType === 'instance'" (click)="restartInstance()">
+                <i class="fas fa-redo"></i>
+                <span>Restart</span>
+              </button>
+              <button class="quick-action-card" *ngIf="resourceType === 'instance'" (click)="stopInstance()">
+                <i class="fas fa-stop"></i>
+                <span>Stop</span>
+              </button>
+              <button class="quick-action-card" (click)="createSnapshot()">
+                <i class="fas fa-camera"></i>
+                <span>Snapshot</span>
+              </button>
+              <button class="quick-action-card" (click)="viewLogs()">
+                <i class="fas fa-file-alt"></i>
+                <span>Logs</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics Tab -->
+      <div class="tab-pane-monitoring" *ngIf="activeTab === 'metrics'">
+
+        <!-- Metrics Controls -->
+        <div class="metrics-controls">
+          <div class="time-range-selector">
+            <label class="control-label">Time Range</label>
+            <div class="time-range-buttons">
+              <button class="time-btn" [class.active]="timeRange === '1h'" (click)="changeTimeRange('1h')">
+                1h
+              </button>
+              <button class="time-btn" [class.active]="timeRange === '6h'" (click)="changeTimeRange('6h')">
+                6h
+              </button>
+              <button class="time-btn" [class.active]="timeRange === '24h'" (click)="changeTimeRange('24h')">
+                24h
+              </button>
+              <button class="time-btn" [class.active]="timeRange === '7d'" (click)="changeTimeRange('7d')">
+                7d
+              </button>
+            </div>
+          </div>
+
+          <div class="metrics-controls-right">
+            <span class="last-update-text">
+              <i class="fas fa-clock"></i>
+              Updated {{lastUpdateTime}}
+            </span>
+            <button class="control-btn" [class.active]="autoRefresh" (click)="toggleAutoRefresh()">
+              <i class="fas" [ngClass]="autoRefresh ? 'fa-pause' : 'fa-play'"></i>
+              {{autoRefresh ? 'Pause' : 'Resume'}}
+            </button>
+            <button class="control-btn" (click)="refreshMetrics()">
+              <i class="fas fa-sync-alt" [class.spinning]="refreshing"></i>
+              Refresh
+            </button>
+          </div>
+        </div>
+
+        <!-- Charts Grid -->
+        <div class="charts-grid">
+
+          <!-- INSTANCE CHARTS -->
+          <ng-container *ngIf="resourceType === 'instance'">
+
+            <!-- CPU & RAM Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-microchip"></i>
+                  CPU & RAM Usage
+                </h3>
+                <div class="chart-legend">
+                  <span class="legend-item cpu">
+                    <span class="legend-dot"></span>
+                    CPU
+                  </span>
+                  <span class="legend-item ram">
+                    <span class="legend-dot"></span>
+                    RAM
+                  </span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="cpuRamSeries" [chart]="cpuRamChartOptions.chart" [xaxis]="cpuRamChartOptions.xaxis"
+                  [yaxis]="cpuRamChartOptions.yaxis" [stroke]="cpuRamChartOptions.stroke"
+                  [colors]="cpuRamChartOptions.colors" [dataLabels]="cpuRamChartOptions.dataLabels"
+                  [grid]="cpuRamChartOptions.grid" [tooltip]="cpuRamChartOptions.tooltip"
+                  [legend]="cpuRamChartOptions.legend" [annotations]="cpuRamChartOptions.annotations"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Disk I/O Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-hdd"></i>
+                  Disk I/O
+                </h3>
+                <div class="chart-legend">
+                  <span class="legend-item disk-read">
+                    <span class="legend-dot"></span>
+                    Read
+                  </span>
+                  <span class="legend-item disk-write">
+                    <span class="legend-dot"></span>
+                    Write
+                  </span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="diskIoSeries" [chart]="diskIoChartOptions.chart" [xaxis]="diskIoChartOptions.xaxis"
+                  [yaxis]="diskIoChartOptions.yaxis" [stroke]="diskIoChartOptions.stroke"
+                  [colors]="diskIoChartOptions.colors" [dataLabels]="diskIoChartOptions.dataLabels"
+                  [grid]="diskIoChartOptions.grid" [tooltip]="diskIoChartOptions.tooltip"
+                  [legend]="diskIoChartOptions.legend"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Network Traffic Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-network-wired"></i>
+                  Network Traffic
+                </h3>
+                <div class="chart-legend">
+                  <span class="legend-item network-in">
+                    <span class="legend-dot"></span>
+                    Inbound
+                  </span>
+                  <span class="legend-item network-out">
+                    <span class="legend-dot"></span>
+                    Outbound
+                  </span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="networkSeries" [chart]="networkChartOptions.chart"
+                  [xaxis]="networkChartOptions.xaxis" [yaxis]="networkChartOptions.yaxis"
+                  [stroke]="networkChartOptions.stroke" [colors]="networkChartOptions.colors"
+                  [dataLabels]="networkChartOptions.dataLabels" [grid]="networkChartOptions.grid"
+                  [tooltip]="networkChartOptions.tooltip" [legend]="networkChartOptions.legend"></apx-chart>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- VOLUME CHARTS -->
+          <ng-container *ngIf="resourceType === 'volume'">
+
+            <!-- Volume Usage -->
+            <div class="chart-card usage-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-database"></i>
+                  Volume Usage
+                </h3>
+              </div>
+              <div class="usage-container">
+                <div class="usage-stats">
+                  <div class="usage-value">{{volumeUsed}} GB / {{volumeTotal}} GB</div>
+                  <div class="usage-percent">{{volumeUsagePercent}}% Used</div>
+                </div>
+                <div class="usage-bar-wrapper">
+                  <div class="usage-bar-track">
+                    <div class="usage-bar-fill" [style.width.%]="volumeUsagePercent"
+                      [class.warning]="volumeUsagePercent >= 80" [class.critical]="volumeUsagePercent >= 90">
+                    </div>
+                  </div>
+                </div>
+                <div class="usage-warning" *ngIf="volumeUsagePercent >= 80">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  <span *ngIf="volumeUsagePercent >= 90">Critical: Volume nearly full</span>
+                  <span *ngIf="volumeUsagePercent >= 80 && volumeUsagePercent < 90">Warning: Approaching capacity</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- IOPS Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-tachometer-alt"></i>
+                  IOPS (Input/Output Operations)
+                </h3>
+                <div class="chart-legend">
+                  <span class="legend-item iops-read">
+                    <span class="legend-dot"></span>
+                    Read
+                  </span>
+                  <span class="legend-item iops-write">
+                    <span class="legend-dot"></span>
+                    Write
+                  </span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="iopsSeries" [chart]="iopsChartOptions.chart" [xaxis]="iopsChartOptions.xaxis"
+                  [yaxis]="iopsChartOptions.yaxis" [stroke]="iopsChartOptions.stroke" [colors]="iopsChartOptions.colors"
+                  [dataLabels]="iopsChartOptions.dataLabels" [grid]="iopsChartOptions.grid"
+                  [tooltip]="iopsChartOptions.tooltip" [legend]="iopsChartOptions.legend"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Latency Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-clock"></i>
+                  Average Latency
+                </h3>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="latencySeries" [chart]="latencyChartOptions.chart"
+                  [xaxis]="latencyChartOptions.xaxis" [yaxis]="latencyChartOptions.yaxis"
+                  [stroke]="latencyChartOptions.stroke" [colors]="latencyChartOptions.colors"
+                  [dataLabels]="latencyChartOptions.dataLabels" [grid]="latencyChartOptions.grid"
+                  [tooltip]="latencyChartOptions.tooltip" [legend]="latencyChartOptions.legend"
+                  [annotations]="latencyChartOptions.annotations"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Attached Instance Info -->
+            <div class="chart-card info-card" *ngIf="resource.attachedTo">
+              <div class="info-content">
+                <i class="fas fa-link info-icon"></i>
+                <div class="info-text">
+                  <div class="info-label">Volume attached to:</div>
+                  <div class="info-value">{{resource.attachedTo}}</div>
+                </div>
+                <button class="info-action-btn" (click)="viewAttachedInstance()">
+                  <i class="fas fa-external-link-alt"></i>
+                  View Instance
+                </button>
+              </div>
+            </div>
+          </ng-container>
+
+          <!-- NETWORK CHARTS -->
+          <ng-container *ngIf="resourceType === 'network'">
+
+            <!-- Bandwidth Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-wave-square"></i>
+                  Bandwidth
+                </h3>
+                <div class="chart-legend">
+                  <span class="legend-item bandwidth-in">
+                    <span class="legend-dot"></span>
+                    Inbound
+                  </span>
+                  <span class="legend-item bandwidth-out">
+                    <span class="legend-dot"></span>
+                    Outbound
+                  </span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="bandwidthSeries" [chart]="bandwidthChartOptions.chart"
+                  [xaxis]="bandwidthChartOptions.xaxis" [yaxis]="bandwidthChartOptions.yaxis"
+                  [stroke]="bandwidthChartOptions.stroke" [colors]="bandwidthChartOptions.colors"
+                  [dataLabels]="bandwidthChartOptions.dataLabels" [grid]="bandwidthChartOptions.grid"
+                  [tooltip]="bandwidthChartOptions.tooltip" [legend]="bandwidthChartOptions.legend"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Packet Rate Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-exchange-alt"></i>
+                  Packet Rate
+                </h3>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="packetRateSeries" [chart]="packetRateChartOptions.chart"
+                  [xaxis]="packetRateChartOptions.xaxis" [yaxis]="packetRateChartOptions.yaxis"
+                  [stroke]="packetRateChartOptions.stroke" [colors]="packetRateChartOptions.colors"
+                  [dataLabels]="packetRateChartOptions.dataLabels" [grid]="packetRateChartOptions.grid"
+                  [tooltip]="packetRateChartOptions.tooltip" [legend]="packetRateChartOptions.legend"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Packet Loss Chart -->
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-exclamation-triangle"></i>
+                  Packet Loss
+                </h3>
+              </div>
+              <div class="chart-container">
+                <apx-chart [series]="packetLossSeries" [chart]="packetLossChartOptions.chart"
+                  [xaxis]="packetLossChartOptions.xaxis" [yaxis]="packetLossChartOptions.yaxis"
+                  [stroke]="packetLossChartOptions.stroke" [colors]="packetLossChartOptions.colors"
+                  [dataLabels]="packetLossChartOptions.dataLabels" [grid]="packetLossChartOptions.grid"
+                  [tooltip]="packetLossChartOptions.tooltip" [legend]="packetLossChartOptions.legend"
+                  [annotations]="packetLossChartOptions.annotations"></apx-chart>
+              </div>
+            </div>
+
+            <!-- Network Stats Card -->
+            <div class="chart-card info-card">
+              <div class="chart-header">
+                <h3 class="chart-title">
+                  <i class="fas fa-chart-bar"></i>
+                  Network Statistics
+                </h3>
+              </div>
+              <div class="network-stats-grid">
+                <div class="network-stat-item">
+                  <i class="fas fa-ethernet"></i>
+                  <div class="network-stat-content">
+                    <div class="network-stat-label">Active Ports</div>
+                    <div class="network-stat-value">{{resource.activePorts || 0}} / {{resource.maxPorts || 250}}</div>
+                  </div>
+                </div>
+                <div class="network-stat-item">
+                  <i class="fas fa-globe"></i>
+                  <div class="network-stat-content">
+                    <div class="network-stat-label">Floating IPs</div>
+                    <div class="network-stat-value">{{resource.floatingIps || 0}} / {{resource.maxFloatingIps || 10}}
+                    </div>
+                  </div>
+                </div>
+                <div class="network-stat-item">
+                  <i class="fas fa-random"></i>
+                  <div class="network-stat-content">
+                    <div class="network-stat-label">Connected Routers</div>
+                    <div class="network-stat-value">{{resource.connectedRouters || 0}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+
+        </div>
+      </div>
+
+      <!-- Alarms Tab -->
+      <div class="tab-pane-monitoring" *ngIf="activeTab === 'alarms'">
+
+        <div class="alarms-header-section">
+          <h3 class="section-title-monitoring">
+            <i class="fas fa-bell"></i>
+            Configured Alarms
+          </h3>
+          <button class="add-alarm-btn" (click)="openAddAlarmModal()">
+            <i class="fas fa-plus"></i>
+            Add Alarm
+          </button>
+        </div>
+
+        <!-- Alarms List -->
+        <div class="alarms-list" *ngIf="alarms.length > 0">
+          <div class="alarm-card-monitoring" *ngFor="let alarm of alarms; let i = index"
+            [style.animation-delay.s]="(i * 0.05)">
+
+            <div class="alarm-card-header">
+              <div class="alarm-title-section">
+                <div class="alarm-icon-wrapper" [ngClass]="alarm.severity">
+                  <i class="fas" [ngClass]="{
+                    'fa-exclamation-triangle': alarm.severity === 'critical',
+                    'fa-exclamation-circle': alarm.severity === 'warning',
+                    'fa-info-circle': alarm.severity === 'info'
+                  }"></i>
+                </div>
+                <div class="alarm-title-content">
+                  <h4 class="alarm-title">{{alarm.name}}</h4>
+                  <div class="alarm-meta">
+                    <span class="alarm-metric">{{alarm.metric}}</span>
+                    <span class="alarm-condition">{{alarm.condition}} {{alarm.threshold}}{{alarm.unit}}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="alarm-status-section">
+                <span class="alarm-status-badge" [ngClass]="alarm.status">
+                  <span class="status-dot-alarm"></span>
+                  {{alarm.status | uppercase}}
+                </span>
+                <div class="alarm-actions">
+                  <button class="alarm-action-btn" [class.active]="alarm.enabled" (click)="toggleAlarm(alarm)"
+                    [title]="alarm.enabled ? 'Disable' : 'Enable'">
+                    <i class="fas" [ngClass]="alarm.enabled ? 'fa-toggle-on' : 'fa-toggle-off'"></i>
+                  </button>
+                  <button class="alarm-action-btn" (click)="editAlarm(alarm)" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="alarm-action-btn danger" (click)="deleteAlarm(alarm)" title="Delete">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="alarm-description" *ngIf="alarm.description">
+              <p>{{alarm.description}}</p>
+            </div>
+
+            <div class="alarm-footer">
+              <div class="alarm-notification">
+                <i class="fas fa-envelope"></i>
+                <span>Notifications: {{alarm.notificationEmail}}</span>
+              </div>
+              <div class="alarm-last-triggered" *ngIf="alarm.lastTriggered">
+                <i class="fas fa-clock"></i>
+                <span>Last triggered: {{alarm.lastTriggered | date:'short'}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state-alarms" *ngIf="alarms.length === 0">
+          <div class="empty-icon-alarms">
+            <i class="fas fa-bell-slash"></i>
+          </div>
+          <h3 class="empty-title-alarms">No Alarms Configured</h3>
+          <p class="empty-text-alarms">Set up alarms to monitor this resource and get notified when thresholds are
+            exceeded.</p>
+          <button class="empty-action-btn" (click)="openAddAlarmModal()">
+            <i class="fas fa-plus"></i>
+            Create Your First Alarm
+          </button>
+        </div>
+      </div>
+
+      <!-- Console Tab (Instance Only) -->
+      <div class="tab-pane-monitoring" *ngIf="activeTab === 'console' && resourceType === 'instance'">
+        <div class="console-container">
+          <div class="console-header">
+            <h3 class="console-title">
+              <i class="fas fa-terminal"></i>
+              Instance Console
+            </h3>
+            <div class="console-actions">
+              <button class="console-btn" (click)="clearConsole()">
+                <i class="fas fa-eraser"></i>
+                Clear
+              </button>
+              <button class="console-btn" (click)="downloadLogs()">
+                <i class="fas fa-download"></i>
+                Download Logs
+              </button>
+            </div>
+          </div>
+          <div class="console-content">
+            <div class="console-terminal" #consoleTerminal>
+              <!-- Terminal will be rendered here via xterm.js or similar -->
+              <div class="console-placeholder">
+                <i class="fas fa-terminal"></i>
+                <p>Console functionality coming soon...</p>
+                <p class="console-info">Use VNC or SSH to access your instance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+</div>

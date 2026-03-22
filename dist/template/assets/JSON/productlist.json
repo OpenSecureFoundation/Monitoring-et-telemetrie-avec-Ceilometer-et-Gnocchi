@@ -1,0 +1,115 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "item": "Lenovo 3rd Generation",
+      "code": "P125389",
+      "category": "Laptop",
+      "units": "Inches",
+      "quantity": "2",
+      "sellingPrice": "$253.00",
+      "purchasePrice": "$248.00",
+      "img": "assets/img/sales-return1.svg"
+    },
+    {
+      "id": "2",
+      "item": "Nike Jordan",
+      "code": "P125390",
+      "category": "Shoes",
+      "units": "Pieces",
+      "quantity": "4",
+      "sellingPrice": "$360.00",
+      "purchasePrice": "$350.00",
+      "img": "assets/img/sales-return2.svg"
+    },
+    {
+      "id": "3",
+      "item": "Apple Series 5 Watch",
+      "code": "P125391",
+      "category": "Accessories",
+      "units": "Inches",
+      "quantity": "7",
+      "sellingPrice": "$724.00",
+      "purchasePrice": "$700.00",
+      "img": "assets/img/sales-return3.svg"
+    },
+    {
+      "id": "4",
+      "item": "Amazon Echo Dot",
+      "code": "P125392",
+      "category": "Electronics",
+      "units": "Box",
+      "quantity": "3",
+      "sellingPrice": "$210.00",
+      "purchasePrice": "$200.00",
+      "img": "assets/img/sales-return4.svg"
+    },
+    {
+      "id": "5",
+      "item": "Lobar Handy",
+      "code": "P125393",
+      "category": "Furnitures",
+      "units": "Kilograms",
+      "quantity": "1",
+      "sellingPrice": "$155.00",
+      "purchasePrice": "$150.00",
+      "img": "assets/img/sales-return5.svg"
+    },
+    {
+      "id": "6",
+      "item": "Woodcraft Sandal",
+      "code": "P125394",
+      "category": "Bags",
+      "units": "Inches",
+      "quantity": "2",
+      "sellingPrice": "$253.00",
+      "purchasePrice": "$248.00",
+      "img": "assets/img/sales-return6.svg"
+    },
+    {
+      "id": "7",
+      "item": "Black Slim 200",
+      "code": "P125394",
+      "category": "Furnitures",
+      "units": "Inches",
+      "quantity": "2",
+      "sellingPrice": "$253.00",
+      "purchasePrice": "$248.00",
+      "img": "assets/img/sales-return7.svg"
+    },
+    {
+      "id": "8",
+      "item": "Red Premium Handy",
+      "code": "P125394",
+      "category": "Bags",
+      "units": "Inches",
+      "quantity": "2",
+      "sellingPrice": "$253.00",
+      "purchasePrice": "$248.00",
+      "img": "assets/img/sales-return8.svg"
+    },
+    {
+      "id": "9",
+      "item": "Bold V3.2",
+      "code": "P125394",
+      "category": "Electronics",
+      "units": "Inches",
+      "quantity": "2",
+      "sellingPrice": "$253.00",
+      "purchasePrice": "$248.00",
+      "img": "assets/img/sales-return9.svg"
+    },
+    {
+      "id": "10",
+      "item": "Iphone 14 Pro",
+      "code": "P125394",
+      "category": "Phone",
+      "units": "Inches",
+      "quantity": "2",
+      "sellingPrice": "$253.00",
+      "purchasePrice": "$248.00",
+      "img": "assets/img/sales-return10.svg"
+    }
+  ],
+  "totalData": 10
+}

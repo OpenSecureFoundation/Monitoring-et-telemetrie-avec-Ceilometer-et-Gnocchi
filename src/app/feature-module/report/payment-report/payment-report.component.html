@@ -1,0 +1,236 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header ">
+    <h5>Payment Report</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="btn btn-filters w-auto popup-toggle" matTooltip="Filter"><img src="assets/img/icons/filter-icon.svg" class="me-2" alt="filter">Filter </a>
+        </li>
+        <li class="daterangepicker-wrap cal-icon cal-icon-info">
+          <!-- <input type="text" class="btn-filters" name="datetimes" placeholder="From Date - To Date" /> -->
+          <input type="text"
+            placeholder="From Date - To Date"
+            class="btn-filters"
+            bsDaterangepicker
+            [bsConfig]="{ isAnimated: true }"
+            container=".page-header">
+          </li>
+          <li class="">
+            <div class="dropdown dropdown-action" matTooltip="Download">
+              <a href="javascript:void(0);" class="btn-filters" data-bs-toggle="dropdown" aria-expanded="false"><span><i class="feather icon-download"></i></span></a>
+              <div class="dropdown-menu dropdown-menu-end">
+                <ul class="d-block">
+                  <li>
+                    <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i class="far fa-file-pdf me-2"></i>PDF</a>
+                  </li>
+                  <li>
+                    <a class="d-flex align-items-center download-item" href="javascript:void(0);" download><i class="far fa-file-text me-2"></i>CVS</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li>
+            <a class="btn-filters" href="javascript:void(0);" matTooltip="Print"><span><i class="feather icon-printer"></i></span> </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- /Page Header -->
+
+  <!-- Search Filter -->
+  <div id="filter_inputs" class="card filter-card">
+    <div class="card-body pb-0">
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="input-block mb-3">
+            <label for="name">Name</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="input-block mb-3">
+            <label for="Email">Email</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="input-block mb-3">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Search Filter -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class=" card-table">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table matSort
+              (matSortChange)="sortData($event)"
+              class="table table-center table-hover datatable">
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="sno">#</th>
+                  <th mat-sort-header="companyname">Company</th>
+                  <th mat-sort-header="Received">Payment Received</th>
+                  <th mat-sort-header="Sent">Payment Sent</th>
+                  <th mat-sort-header="Payment">Net Payment</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (data of expensereport; track data; let i = $index) {
+                  <tr>
+                    <td>{{data.sNo}}</td>
+                    <td>
+                      <h2 class="table-avatar">
+                        <a [routerLink]="routes.profile" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" [src]="data.img" alt="User Image"></a>
+                        <a [routerLink]="routes.profile">{{data.companyName}} <span>{{data.mailId}}</span></a>
+                      </h2>
+                    </td>
+                    <td>{{data.amount}}</td>
+                    <td>{{data.amount2}}</td>
+                    <td>{{data.amount3}}</td>
+                  </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+          <app-custom-pagination></app-custom-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Add Asset -->
+  <div [ngClass]="{ 'open-filter': Toggledata === true }" class="toggle-sidebar">
+    <div class="sidebar-layout-filter">
+      <div class="sidebar-header">
+        <h5>Filter</h5>
+        <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" href="javascript:void(0);" class="sidebar-closes"
+          ><i class="fa-regular fa-circle-xmark"></i
+        ></a>
+      </div>
+      <div class="sidebar-body">
+        <form action="#" autocomplete="off">
+          <!-- Customer -->
+          <div class="accordion" id="accordionMain1">
+            <div class="card-header-new" id="headingOne">
+              <h6 class="filter-title">
+                <a
+                  href="javascript:void(0);"
+                  class="w-100"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                  >
+                  Customer
+                  <span class="float-end"
+                    ><i class="fa-solid fa-chevron-down"></i
+                  ></span>
+                </a>
+              </h6>
+            </div>
+
+            <div
+              id="collapseOne"
+              class="collapse show"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample1"
+              >
+              <div class="card-body-chat">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div id="checkBoxes1">
+                      <div class="form-custom">
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="member_search1"
+                          placeholder="Search Customer"
+                          />
+                          <span
+                            ><img src="assets/img/icons/search.svg" alt="img"
+                          /></span>
+                        </div>
+                        <div class="selectBox-cont">
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="username" />
+                            <span class="checkmark"></span>  Orn LLC
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="username" />
+                            <span class="checkmark"></span>  Accent-e-Technology
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="username" />
+                            <span class="checkmark"></span>  Express Advertising
+                          </label>
+                          <label class="custom_check w-100">
+                            <input type="checkbox" name="username" />
+                            <span class="checkmark"></span>  lexicon Technologies
+                          </label>
+                          <!-- View All -->
+                          <div class="view-content">
+                            @for (user of users; track user) {
+                              <div
+                                class="viewall-One"
+                            [ngClass]="{
+                              closed: !isCollapsed,
+                              open: isCollapsed
+                            }"
+                                >
+                                <label class="custom_check w-100">
+                                  <input
+                                    type="checkbox"
+                                    name="username"
+                                    [(ngModel)]="user.checked"
+                                    />
+                                    <span class="checkmark"></span> {{ user.name }}
+                                  </label>
+                                </div>
+                              }
+                              <div class="view-all">
+                                <a
+                                  href="javascript:void(0);"
+                                  class="viewall-button-One"
+                                  (click)="toggleCollapse()"
+                                  ><span class="me-2">{{
+                                  isCollapsed ? "View Less" : "View All"
+                                  }}</span
+                                  ><span
+                                  ><i class="fa fa-circle-chevron-down" [ngClass]="isCollapsed? 'fa-circle-chevron-up' :'fa-circle-chevron-down' "></i></span
+                                ></a>
+                              </div>
+                            </div>
+                            <!-- /View All -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /Customer -->
+
+
+              <div class="filter-buttons">
+                <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+                  Apply
+                </button>
+                <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+                  Reset
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!--/Add Asset -->

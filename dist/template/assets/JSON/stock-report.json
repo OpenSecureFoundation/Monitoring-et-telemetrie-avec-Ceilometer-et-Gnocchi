@@ -1,0 +1,75 @@
+{
+    "data": [
+      {
+        "sNo":"1",
+        "product":"Lenovo 3rd Generation",
+        "productImg":"assets/img/sales-return1.svg",
+        "sku":"PPT001",
+        "category":"Laptop",
+        "soldAmount":"$8253.00",
+        "soldQty":"50",
+        "openQty":"0",
+        "instockQty":"100",
+        "dueDate":"20 Aug 2023",
+        "closeQty":"5"
+      },
+      {
+        "sNo":"2",
+        "product":"Nike Jordan",
+        "productImg":"assets/img/sales-return2.svg",
+        "sku":"PPT005",
+        "category":"Shoe",
+        "soldAmount":"$1360.00",
+        "soldQty":"70",
+        "openQty":"0",
+        "instockQty":"140",
+        "dueDate":"23 Aug 2023",
+        "closeQty":"10"
+      },
+      {
+        "sNo":"3",
+        "product":"Apple Series 5 Watch",
+        "productImg":"assets/img/sales-return3.svg",
+        "sku":"PPT010",
+        "category":"Accessories",
+        "soldAmount":"$724.00",
+        "soldQty":"30",
+        "openQty":"0",
+        "instockQty":"200",
+        "dueDate":"25 Aug 2023",
+        "closeQty":"15"
+      },
+      {
+        "sNo":"4",
+        "product":"Amazon Echo Dot",
+        "productImg":"assets/img/sales-return4.svg",
+        "sku":"PPT104",
+        "category":"Elecctronics",
+        "soldAmount":"$210.00",
+        "soldQty":"20",
+        "openQty":"0",
+        "instockQty":"250",
+        "dueDate":"27 Aug 2023",
+        "closeQty":"10"
+      },
+      {
+        "sNo":"5",
+        "product":"Lobar Handy",
+        "productImg":"assets/img/sales-return5.svg",
+        "sku":"PPT050",
+        "openQty":"0",
+        "category":"Furnitures",
+        "soldAmount":"$155.00",
+        "soldQty":"40",
+        "instockQty":"300",
+        "dueDate":"30 Aug 2023",
+        "closeQty":"10"
+      }
+      
+      
+     
+      
+    ],
+    "totalData": 5
+  }
+  

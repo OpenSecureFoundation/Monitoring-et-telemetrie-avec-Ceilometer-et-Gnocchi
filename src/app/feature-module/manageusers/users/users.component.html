@@ -1,0 +1,506 @@
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header ">
+    <h5>Users</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <a (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" matTooltip="Filter" href="javascript:void(0);" class="btn btn-filters w-auto popup-toggle" ><span class="me-2"><img src="assets/img/icons/filter-icon.svg" alt="filter"></span>Filter </a>
+        </li>
+        <li>
+          <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add_user"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>Add user</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card-table">
+      <div class="card-body">
+        <div class="table-responsive">
+          <div class="table-scroll">
+            <table  matSort
+              (matSortChange)="sortData($event)"
+              class="table table-center table-hover datatable">
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="id">#</th>
+                  <th mat-sort-header="name">User Name</th>
+                  <th mat-sort-header="phone">Mobile Number</th>
+                  <th mat-sort-header="role">Role </th>
+                  <th mat-sort-header="activity">Last Activity</th>
+                  <th mat-sort-header="created">Created on</th>
+                  <th mat-sort-header="status">Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (data of users; track data; let i = $index) {
+                  <tr>
+                    <td>{{data.id}}</td>
+                    <td>
+                      <h2 class="table-avatar">
+                        <a [routerLink]="routes.profile" class="avatar avatar-sm me-2"><img class="avatar-img rounded-circle" [src]="data.img" alt="User Image"></a>
+                        <a [routerLink]="routes.profile">{{data.name}}<span>{{data.email}}</span></a>
+                      </h2>
+                    </td>
+                    <td>{{data.phone}}</td>
+                    <td>{{data.role}}</td>
+                            <td><span [ngClass]="{
+                                'bg-ash-gray text-gray-light': data.activity === '10 mins ago',
+                                ' bg-success-light':
+                                data.activity === 'Online'
+                               }"
+                    class="badge badge-pill ">{{data.activity}}</span></td>
+                    <td>{{data.created}}</td>
+                            <td><span [ngClass]="{
+                                'bg-success-light': data.status === 'Active',
+                                ' bg-ash-gray text-gray-light':
+                                data.status === 'Restricted'
+                               }"
+                    class="badge badge-pill ">{{data.status}}</span></td>
+                    <td class="d-flex align-items-center">
+                      <div class="dropdown dropdown-action">
+                        <a href="javascript:void(0);" class=" btn-action-icon " data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                          <ul>
+                            <li>
+                              <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#edit_user"><i class="far fa-edit me-2"></i>Edit</a>
+                            </li>
+                            <li>
+                              <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#delete_modal"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                }
+
+              </tbody>
+            </table>
+          </div>
+          <app-custom-pagination></app-custom-pagination>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Add Asset -->
+  <div class="toggle-sidebar" [ngClass]="{'open-filter' : toggleData === true}">
+    <div class="sidebar-layout-filter">
+      <div class="sidebar-header">
+        <h5>Filter</h5>
+        <a href="javascript:void(0);" (click)="openContent()"  (keydown.enter)="openContent()" tabindex="0" class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+      </div>
+      <div class="sidebar-body">
+        <form action="#" autocomplete="off">
+          <!-- Customer -->
+          <div class="accordion" id="accordionMain1">
+            <div class="card-header-new" id="headingOne">
+              <h6 class="filter-title">
+                <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Customer
+                  <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+              </h6>
+            </div>
+
+            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"  data-bs-parent="#accordionExample1">
+              <div class="card-body-chat">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div id="checkBoxes1">
+                      <div class="form-custom">
+                        <input type="text" class="form-control" id="member_search1" placeholder="Search here">
+                        <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                      </div>
+                      <div class="selectBox-cont">
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span>  John Smith
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span>  Johnny
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span>  Robert
+                        </label>
+                        <label class="custom_check w-100">
+                          <input type="checkbox" name="username">
+                          <span class="checkmark"></span> Sharonda
+                        </label>
+                        <!-- View All -->
+                        <div class="view-content">
+                          <div class="viewall-One">
+                            @for (user of users1; track user) {
+                              <label class="custom_check w-100" [ngClass]="{ closed: !isCollapsed1, open: isCollapsed1 }">
+                                <input type="checkbox" name="username" [(ngModel)]="user.checked">
+                                <span class="checkmark"></span> {{ user.name }}
+                              </label>
+                            }
+                          </div>
+                          <div class="view-all">
+                            <a (click)="toggleCollapse1()" href="javascript:void(0);" class="viewall-button-One"><span
+                            class="me-2">{{ isCollapsed1 ? "Close All" : "View All" }}</span><span><i
+                          class="fa" [ngClass]="!isCollapsed1 ? 'fa-circle-chevron-down' : 'fa-circle-chevron-up'"></i></span></a>
+                        </div>
+                      </div>
+                      <!-- /View All -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Customer -->
+
+        <!-- Select Date -->
+        <div class="accordion" id="accordionMain2">
+          <div class="card-header-new" id="headingTwo">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                Select Date
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"  data-bs-parent="#accordionExample2">
+            <div class="card-body-chat">
+              <div class="input-block mb-3">
+                <label for="From" class="form-control-label">From</label>
+                <div class="cal-icon">
+                  <input type="email" class="form-control datetimepicker" bsDatepicker [bsConfig]="{ adaptivePosition: true }" placeholder="DD-MM-YYYY">
+                </div>
+              </div>
+              <div class="input-block mb-3">
+                <label for="To" class="form-control-label">To</label>
+                <div class="cal-icon">
+                  <input type="email" class="form-control datetimepicker" bsDatepicker [bsConfig]="{ adaptivePosition: true }" placeholder="DD-MM-YYYY">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /Select Date -->
+
+        <!-- By Status -->
+        <div class="accordion accordion-last" id="accordionMain3">
+          <div class="card-header-new" id="headingThree">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                By Status
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree"  data-bs-parent="#accordionExample3">
+            <div class="card-body-chat">
+              <div id="checkBoxes2">
+                <div class="form-custom">
+                  <input type="text" class="form-control" id="member_search2" placeholder="Search here">
+                  <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                </div>
+                <div class="selectBox-cont">
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span> Active
+                  </label>
+                  <label class="custom_check w-100">
+                    <input type="checkbox" name="bystatus">
+                    <span class="checkmark"></span>  Restricted
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /By Status -->
+        <div class="filter-buttons">
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+            Apply
+          </button>
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+<!--/Add Asset -->
+
+<!-- Add User -->
+<div class="modal custom-modal modal-lg fade" id="add_user" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Add User</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="form-groups-item">
+                <h5 class="form-title">Profile Picture</h5>
+                <div class="profile-picture">
+                  <div class="upload-profile">
+                    <div class="profile-img">
+                      <img id="blah" class="avatar" src="assets/img/profiles/avatar-10.jpg" alt="profile-img">
+                    </div>
+                    <div class="add-profile">
+                      <h5>Upload a New Photo</h5>
+                      <span>Profile-pic.jpg</span>
+                    </div>
+                  </div>
+                  <div class="img-upload">
+                    <a class="btn btn-primary me-2">Upload</a>
+                    <a class="btn btn-remove">Remove</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="FirstName">First Name</label>
+                      <input type="text" class="form-control" placeholder="Enter First Name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="LastName">Last Name</label>
+                      <input type="text" class="form-control" placeholder="Enter Last Name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="UserName">User Name</label>
+                      <input type="text" class="form-control" placeholder="Enter User Name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Email">Email</label>
+                      <input type="email" class="form-control" placeholder="Enter Email Address">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="PhoneNumber">Phone Number</label>
+                      <input type="text" class="form-control" placeholder="Enter Phone Number" name="name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Role">Role</label>
+                      <mat-select [(ngModel)]="status" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                        <mat-option value="action">Select Role</mat-option>
+                        <mat-option value="countryname1">Role 1</mat-option>
+                        <mat-option value="countryname2">Role 2</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="pass-group" id="3">
+                      <div class="input-block">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control pass-input" placeholder="">
+                        <span class="toggle-password feather icon-eye"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="pass-group" id="passwordInput2">
+                      <div class="input-block">
+                        <label for="Confirm">Confirm Password</label>
+                        <input type="password" class="form-control pass-input" placeholder="">
+                        <span class="toggle-password feather icon-eye"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block ">
+                      <label for="Status">Status</label>
+                      <mat-select [(ngModel)]="Action" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                        <mat-option value="status">Select Status</mat-option>
+                        <mat-option value="countryname1">Active</mat-option>
+                        <mat-option value="countryname2">Inactive</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Add User</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Add User -->
+
+<!-- Add User -->
+<div class="modal custom-modal modal-lg fade" id="edit_user" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header border-0 pb-0">
+        <div class="form-header modal-header-title text-start mb-0">
+          <h4 class="mb-0">Edit User</h4>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card-body">
+              <div class="form-groups-item">
+                <h5 class="form-title">Profile Picture</h5>
+                <div class="profile-picture">
+                  <div class="upload-profile">
+                    <div class="profile-img">
+                      <img id="blah2" class="avatar" src="assets/img/profiles/avatar-10.jpg" alt="profile-img">
+                    </div>
+                    <div class="add-profile">
+                      <h5>Upload a New Photo</h5>
+                      <span>Profile-pic.jpg</span>
+                    </div>
+                  </div>
+                  <div class="img-upload">
+                    <label class="btn btn-primary">
+                      Upload <input type="file">
+                    </label>
+                    <a class="btn btn-remove">Remove</a>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="FirstName">First Name</label>
+                      <input type="text" value="John" class="form-control" placeholder="Enter First Name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label  for="LastName">Last Name</label>
+                      <input type="text" class="form-control" value="Smith" placeholder="Enter Last Name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="UserName">User Name</label>
+                      <input type="text" class="form-control" value="John Smith" placeholder="Enter User Name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Email">Email</label>
+                      <input type="email" class="form-control" value="john@example.com" placeholder="Enter Email Address">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Phone">Phone Number</label>
+                      <input type="text" class="form-control" value="+1 989-438-3131" placeholder="Enter Phone Number" name="name">
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block mb-3">
+                      <label for="Role">Role</label>
+                      <mat-select [(ngModel)]="status" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                        <mat-option value="action">Select Role</mat-option>
+                        <mat-option value="countryname1">Role 1</mat-option>
+                        <mat-option value="countryname2">Role 2</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="pass-group" id="passwordInput1">
+                      <div class="input-block">
+                        <label for="Password">Password</label>
+                        <input type="password" class="form-control pass-input" value="12345678" placeholder="">
+                        <span class="toggle-password feather icon-eye"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="pass-group" id="passwordInput4">
+                      <div class="input-block">
+                        <label for="Password">Confirm Password</label>
+                        <input type="password" class="form-control pass-input" value="12345678" placeholder="">
+                        <span class="toggle-password feather icon-eye"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="input-block ">
+                      <label for="Status">Status</label>
+                      <mat-select [(ngModel)]="Action" [ngModelOptions]="{standalone: true}"class="select custom-mat-select">
+                        <mat-option value="status">Select Status</mat-option>
+                        <mat-option value="countryname1">Active</mat-option>
+                        <mat-option value="countryname2">Inactive</mat-option>
+                      </mat-select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-back cancel-btn me-2">Cancel</a>
+        <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Update</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Edit User -->
+
+<!-- Delete Items Modal -->
+<div class="modal custom-modal fade" id="delete_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="form-header">
+          <h3>Delete Users</h3>
+          <p>Are you sure want to delete?</p>
+        </div>
+        <div class="modal-btn delete-action">
+          <div class="row">
+            <div class="col-6">
+              <a href="javascript:void(0);" class="btn btn-primary paid-continue-btn">Delete</a>
+            </div>
+            <div class="col-6">
+              <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn">Cancel</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Delete Items Modal -->

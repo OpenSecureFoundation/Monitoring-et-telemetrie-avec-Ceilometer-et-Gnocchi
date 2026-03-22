@@ -1,0 +1,335 @@
+/* 1) le parent doit être relatif */
+.chat-cont-right {
+  position: relative;
+}
+
+/* 1) votre scroll de messages */
+.chat-body .chat-scroll {
+  /* empêche le texte de déborder sous le footer */
+  padding-bottom: 30px;
+}
+
+.quick-reply-container {
+  flex-direction: column; // Changement crucial vers une colonne
+  align-items: stretch; // Étire les enfants sur la largeur
+  padding-bottom: 8px; // Espacement en bas
+
+  position: absolute;
+  bottom: 0; /* collé en bas */
+  left: 50%; /* centré horizontalement */
+  transform: translateX(-50%);
+  border: 1px solid #999;
+
+  width: var(--quick-reply-width, 300px);
+  z-index: 10; /* au-dessus des messages */
+
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  resize: none; /* interdit le resize manuel au coin */
+  overflow: hidden; /* masque la barre de scroll */
+  background: #ffffff;
+  border-radius: 24px;
+
+  /* --- Nouveaux styles --- */
+  max-width: none; /* lève toute limite Bootstrap */
+}
+
+.message-input-wrapper {
+  /* permet au champ de saisir de prendre tout l'espace restant */
+  flex: 1;
+  min-width: 0; /* pour que width:100% sur l'input fonctionne en flex */
+}
+
+.form-control {
+  border: none;
+}
+
+.message-input-wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.quick-reply-textarea {
+  width: 100%;
+  border: none;
+  padding: 8px 12px;
+  resize: none;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.4;
+  max-height: 150px;
+  overflow-y: auto; // Rétablit le scroll si le max-height est atteint
+
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+
+  min-height: 50px !important; // Hauteur minimale garantie
+  margin-bottom: -4px; // Compensation d'alignement
+}
+
+.quick-reply-textarea::placeholder {
+  color: #b6b6b6;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* 3. On fait croître .chat-cont-right pour remplir tout l’espace */
+.chat-cont-right.full-height {
+  flex: 1 1 auto;
+  max-width: 100%;
+}
+
+.bouton-perso {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #b6b6b6;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 5px;
+}
+
+.fa-plus,
+.fa-arrow-up {
+  font-size: 20px;
+  color: #b6b6b6;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bouton-perso-send {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #999;
+  position: relative;
+  bottom: 10px;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    border-color 0.3s ease;
+  background-color: #ccc;
+  border: 1px solid #999;
+  cursor: not-allowed;
+}
+
+.bouton-perso-send.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  cursor: pointer;
+}
+.bouton-perso-send.active:hover {
+  transform: scale(1.1);
+}
+
+/* 3) Petite pulsation lors du clic */
+.bouton-perso-send:active {
+  transform: scale(0.95);
+}
+
+.fa-arrow-up {
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.files-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 8px;
+  width: 100%;
+
+  // Ajouter une marge protectrice
+  margin-bottom: 8px; // Marge de sécurité supplémentaire
+  padding-bottom: 4px; // Espace interne
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.files-preview .file-preview {
+  flex: 1; // Prend tout l'espace disponible
+  min-width: 120px; // Largeur minimale pour éviter le débordement
+  max-width: 33%; // Limite la largeur à un tiers de l'écran
+  margin-bottom: 10px; // Espacement vertical
+}
+
+.file-preview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+
+  position: relative; // Ajouté pour le positionnement absolu
+  padding-top: 25px; // Espace pour le bouton
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); // Animation plus douce
+  transform-origin: center bottom;
+  will-change: transform, box-shadow; // Optimisation performance
+
+  &:hover {
+    transform: translateY(-3px) scale(1.02); // Léger soulèvement
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); // Ombre plus douce
+    z-index: 1; // Assure que l'élément survolé est au-dessus des autres
+  }
+
+  background: #f8f9fa; // Fond plus léger
+  border: 1px dashed #e0e0e0; // Bordure en pointillés
+  padding: 10px 15px; // Plus aéré
+  margin: 0 0 10px 0; // Espacement vertical
+  border-radius: 12px;
+  animation: fadeIn 0.3s ease; // Apparition en douceur
+
+  .file-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%; // Prend toute la largeur disponible
+
+    .file-meta {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .file-name {
+      font-size: 0.9rem;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 150px;
+    }
+    .file-details {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 2px;
+
+      .file-extension {
+        &::before {
+          content: "•";
+          margin-right: 4px;
+          color: #999;
+        }
+
+        // Style spécifique pour les extensions
+        font-family: "Courier New", monospace;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: #007bff !important;
+      }
+
+      .file-size {
+        font-size: 0.7rem;
+        color: #666;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &::before {
+          content: "•";
+          margin: 0 4px;
+          color: #999;
+        }
+      }
+    }
+  }
+
+  .btn-remove-file {
+    position: absolute;
+    top: -4px; // Remonté au-dessus du conteneur
+    right: -1px; // Décalé à l'extérieur
+    width: 20px; // Taille réduite
+    height: 20px;
+    border-radius: 50%;
+    background: #ff4444;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid white; // Contour pour meilleure visibilité
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Ombre portée
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.5) rotate(45deg); // Rotation initiale
+    transition:
+      opacity 0.2s ease,
+      transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55),
+      background 0.2s ease;
+
+    i {
+      font-size: 10px; // Icône plus petite
+      transition: transform 0.3s ease;
+    }
+
+    &:hover {
+      background: #cc0000;
+      transform: scale(1.1) rotate(135deg); // Rotation continue au survol
+
+      i {
+        transform: scale(1.2); // Zoom sur l'icône
+      }
+    }
+  }
+
+  &:hover .btn-remove-file {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) rotate(0deg); // Retour à l'angle normal
+    transition-delay: 0.15s;
+  }
+}
+
+.input-container {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.file-preview:nth-child(3) {
+  position: relative;
+
+  &::after {
+    content: "Limite de 3 fichiers atteinte";
+    position: absolute;
+    color: #ff4444;
+    font-size: 0.8rem;
+
+    white-space: nowrap;
+    right: 50%;
+    transform: translateX(50%);
+    bottom: -25px;
+  }
+}
+
+.ng-icon {
+  font-size: 30px;
+}
+
+
+
+@media (max-width: 767px) {
+   .chat-body {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    border: #333 1px solid;
+    position: relative;
+    left: -300px;
+  }
+
+}

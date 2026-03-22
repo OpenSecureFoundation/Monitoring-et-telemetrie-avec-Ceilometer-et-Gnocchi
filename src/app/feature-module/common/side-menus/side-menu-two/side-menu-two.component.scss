@@ -1,0 +1,9 @@
+::ng-deep {  // <= add this if you are customizing the style from the component's stylesheet
+    .custom-scrollbars {
+      background-color: rgb(117, 57, 255) !important;
+  
+      &:hover, &:active {
+        background-color: rgb(117, 57, 255)!important;
+      }
+    }
+  }

@@ -1,0 +1,58 @@
+<!-- Page Header -->
+<div class="page-header">
+  <div class="row">
+    <div class="col-sm-6">
+      <h3 class="page-title">Invoice settings</h3>
+      <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a [routerLink]="routes.dashboard">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">{{ base | titlecase }}</li>
+        <li class="breadcrumb-item active">{{ page | titlecase }}</li>
+        <li class="breadcrumb-item active">{{ last | titlecase }}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<div class="row">
+  <div class="col-xl-3 col-md-4">
+    <div class="widget settings-menu">
+      <ul>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.invoiceSettings"
+            [class.active]="currentRoute === routes.invoiceSettings"
+            class="nav-link"
+          >
+            <i class="fa fa-code-commit"></i> <span>General Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.taxSettings"
+            [class.active]="currentRoute === routes.taxSettings"
+            class="nav-link"
+          >
+            <i class="fa fa-bookmark"></i> <span>Tax Settings</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            [routerLink]="routes.bankSettings"
+            [class.active]="currentRoute === routes.bankSettings"
+            class="nav-link"
+          >
+            <i class="fa fa-university"></i> <span>Bank Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-xl-9 col-md-8">
+    <div class="card invoices-settings-card">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

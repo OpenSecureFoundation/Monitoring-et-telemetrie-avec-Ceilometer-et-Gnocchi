@@ -1,0 +1,66 @@
+{
+    "data": [
+      {
+        "id": "1",
+        "planName": "Free",
+        "planType": "Monthly",
+        "price": "$00.00",
+        "users": "2",
+        "suppliers": "1",
+        "products": "10",
+        "invoice": "1",
+        "createdDate": "19 Jan 2024",
+        "status": "Active"
+      },
+      {
+        "id": "2",
+        "planName": "Basic",
+        "planType": "Yearly",
+        "price": "$19.99",
+        "users": "5",
+        "suppliers": "5",
+        "products": "100",
+        "invoice": "10",
+        "createdDate": "16 Jan 2024",
+        "status": "Active"
+      },
+      {
+        "id": "3",
+        "planName": "Premium",
+        "planType": "Lifetime",
+        "price": "$6549.99",
+        "users": "50",
+        "suppliers": "10",
+        "products": "1000",
+        "invoice": "1000",
+        "createdDate": "12 Jan 2024",
+        "status": "Active"
+      },
+      {
+        "id": "4",
+        "planName": "Enterprise",
+        "planType": "Yearly",
+        "price": "$99.99",
+        "users": "1000",
+        "suppliers": "Unlimited",
+        "products": "Unlimited",
+        "invoice": "Unlimited",
+        "createdDate": "9 Jan 2024",
+        "status": "Active"
+      },
+      {
+        "id": "5",
+        "planName": "Advanced",
+        "planType": "Monthly",
+        "price": "$499.99",
+        "users": "Unlimited",
+        "suppliers": "Unlimited",
+        "products": "Unlimited",
+        "invoice": "Unlimited",
+        "createdDate": "5 Jan 2024",
+        "status": "Active"
+      }
+    ],
+    "totalData": 5
+  }
+  

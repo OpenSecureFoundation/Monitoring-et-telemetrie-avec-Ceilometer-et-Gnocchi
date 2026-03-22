@@ -1,0 +1,605 @@
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="content-page-header">
+    <h5>Tickets</h5>
+    <div class="list-btn">
+      <ul class="filter-list">
+        <li>
+          <div class="short-filter">
+            <img class="me-2" src="assets/img/icons/sort.svg" alt="Sort by select">
+            <div class="sort-by">
+              <select class="sort">
+                <option>Sort by: Date</option>
+                <option>Sort by: Date 1</option>
+                <option>Sort by: Date 2</option>
+              </select>
+            </div>
+          </div>
+        </li>
+        <li>
+          <a class="btn btn-filters w-auto popup-toggle"><span class="me-2"><i class="feather icon-filter"></i></span>Filter </a>
+        </li>
+        <li>
+          <a class="btn-filters" href="javascript:void(0);"><span><i class="feather icon-settings"></i></span> </a>
+        </li>
+        <li>
+          <a class="btn btn-primary" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#add_ticket"><i class="fa fa-plus-circle me-2" aria-hidden="true"></i>New Tickets</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- /Page Header -->
+
+<!-- Search Filter -->
+<div id="filter_inputs" class="card filter-card">
+  <div class="card-body pb-0">
+    <div class="row">
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Name</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Email</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-3">
+        <div class="form-group">
+          <label htmlFor="label">Phone</label>
+          <input id="label" type="text" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Search Filter -->
+
+<!-- Inovices card -->
+<div class="row">
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header mb-0">
+          <span class="inovices-widget-icon rounded-circle bg-info-light">
+            <img src="assets/img/icons/receipt-item.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Total Tickets</div>
+            <div class="dash-counts">
+              <p class="mb-0">$298</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header mb-0">
+          <span class="inovices-widget-icon rounded-circle bg-primary-light">
+            <img src="assets/img/icons/transaction-minus.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Completed</div>
+            <div class="dash-counts">
+              <p class="mb-0">$325,215</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header mb-0">
+          <span class="inovices-widget-icon rounded-circle bg-warning-light">
+            <img src="assets/img/icons/archive-book.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">In Progress</div>
+            <div class="dash-counts">
+              <p class="mb-0">$7825</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header mb-0">
+          <span class="inovices-widget-icon rounded-circle bg-primary-light">
+            <img src="assets/img/icons/clipboard-close.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Unassigned</div>
+            <div class="dash-counts">
+              <p class="mb-0">100</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header mb-0">
+          <span class="inovices-widget-icon rounded-circle bg-green-light">
+            <img src="assets/img/icons/message-edit.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">New</div>
+            <div class="dash-counts">
+              <p class="mb-0">$125,586</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-2 col-lg-4 col-sm-6 col-12">
+    <div class="card inovices-card">
+      <div class="card-body">
+        <div class="dash-widget-header mb-0">
+          <span class="inovices-widget-icon rounded-circle bg-danger-light">
+            <img src="assets/img/icons/3d-rotate.svg"alt="image">
+          </span>
+          <div class="dash-count">
+            <div class="dash-title">Hold Tickets</div>
+            <div class="dash-counts">
+              <p class="mb-0">$86,892</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /Inovices card -->
+
+<!-- All Invoice -->
+<div class="card invoices-tabs-card">
+  <div class="invoices-main-tabs">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        <div class="invoices-tabs">
+          <ul>
+            <li><a [routerLink]="routes.ticketskanban">All</a></li>
+            <li><a [routerLink]="routes.ticketslistpending">Pending</a></li>
+            <li><a [routerLink]="routes.ticketslistoverdue">Overdue</a></li>
+            <li><a [routerLink]="routes.ticketslistdraft">Draft</a></li>
+            <li><a [routerLink]="routes.ticketslistrecurring" class="active">Recurring</a></li>
+            <li><a [routerLink]="routes.ticketslistcancelled">Cancelled</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /All Invoice -->
+
+<!-- Ticket list -->
+<div class="comments">
+  <!-- card -->
+  <div class="card">
+    <div class="card-body card-support">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center describe-btn mt-0">
+          <h6 class="fw-bolder text-gray-dark">Support for theme</h6><span class="badge bg-primary-light ms-3">Overdue</span>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex text-gray-light"><span><i class="feather icon-clock text-gray-light fw-normal me-2"></i></span><span class="text-gray-light fw-normal">Just Now</span></a>
+      </div>
+      <div class="card-describe">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt labore dolore magna aliqua. Ut enim minim veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="describe-btn">
+        <span class="badge bg-warning-light text-warning-light me-2">Medium</span>
+        <span class="badge badge-gray-outline me-2">#4987</span>
+        <span><i class="feather icon-message-square text-gray-light fw-normal me-2"></i>3</span>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+
+  <!-- card -->
+  <div class="card">
+    <div class="card-body card-support">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center describe-btn mt-0">
+          <h6 class="fw-bolder text-gray-dark">Verify your email</h6><span class="badge bg-primary-light ms-3">Overdue</span>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex text-gray-light"><span><i class="feather icon-clock text-gray-light fw-normal me-2"></i></span><span class="text-gray-light fw-normal">Just Now</span></a>
+      </div>
+      <div class="card-describe">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt labore dolore magna aliqua. Ut enim minim veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="describe-btn">
+        <span class="badge bg-danger-light text-danger-light me-2">High</span>
+        <span class="badge badge-gray-outline me-2">#4987</span>
+        <span><i class="feather icon-message-square text-gray-light fw-normal me-2"></i>3</span>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+
+  <!-- card -->
+  <div class="card">
+    <div class="card-body card-support">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center describe-btn mt-0">
+          <h6 class="fw-bolder text-gray-dark">Calling for help</h6><span class="badge bg-primary-light ms-3">Overdue</span>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex text-gray-light"><span><i class="feather icon-clock text-gray-light fw-normal me-2"></i></span><span class="text-gray-light fw-normal">Just Now</span></a>
+      </div>
+      <div class="card-describe">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt labore dolore magna aliqua. Ut enim minim veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="describe-btn">
+        <span class="badge bg-primary-light me-2">Low</span>
+        <span class="badge badge-gray-outline me-2">#4987</span>
+        <span><i class="feather icon-message-square text-gray-light fw-normal me-2"></i>3</span>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+
+  <!-- card -->
+  <div class="card">
+    <div class="card-body card-support">
+      <div class="comments-details d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center describe-btn mt-0">
+          <h6 class="fw-bolder text-gray-dark">Management</h6><span class="badge bg-primary-light ms-3">Overdue</span>
+        </div>
+        <a href="javascript:void(0);" class="reply-comment d-flex text-gray-light"><span><i class="feather icon-clock text-gray-light fw-normal me-2"></i></span><span class="text-gray-light fw-normal">Just Now</span></a>
+      </div>
+      <div class="card-describe">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt labore dolore magna aliqua. Ut enim minim veniam, nostrud exercitation ullamco laboris nisi ut aliquip ex commodo consequat. Duis aute non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      </div>
+      <div class="describe-btn">
+        <span class="badge bg-warning-light text-warning-light me-2">Low</span>
+        <span class="badge badge-gray-outline me-2">#4987</span>
+        <span><i class="feather icon-message-square text-gray-light fw-normal me-2"></i>3</span>
+      </div>
+    </div>
+  </div>
+  <!-- /card -->
+
+</div>
+<!-- /Ticket list -->
+
+
+
+<!-- Add Asset -->
+<div class="toggle-sidebar">
+  <div class="sidebar-layout-filter">
+    <div class="sidebar-header">
+      <h5>Filter</h5>
+      <a href="javascript:void(0);" class="sidebar-closes"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+    <div class="sidebar-body">
+      <form action="#" autocomplete="off">
+        <!-- Customer -->
+        <div class="accordion" id="accordionMain1">
+          <div class="card-header-new" id="headingOne">
+            <h6 class="filter-title">
+              <a href="javascript:void(0);" class="w-100" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Customer
+                <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+              </a>
+            </h6>
+          </div>
+
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"  data-bs-parent="#accordionExample1">
+            <div class="card-body-chat">
+              <div class="row">
+                <div class="col-md-12">
+                  <div id="checkBoxes1">
+                    <div class="form-custom">
+                      <input type="text" class="form-control" id="member_search1" placeholder="Search here">
+                      <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                    </div>
+                    <div class="selectBox-cont">
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> John Smith
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Johnny Charles
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Robert George
+                      </label>
+                      <label htmlFor="label" class="custom_check w-100">
+                        <input id="label" type="checkbox" name="username" />
+                        <span class="checkmark"></span> Sharonda Letha
+                      </label>
+                      <!-- View All -->
+                      <div class="view-content">
+                        @for (user of users; track user) {
+                          <div
+                            class="viewall-One"
+                                                [ngClass]="{
+                                                  closed: !isCollapsed,
+                                                  open: isCollapsed
+                                                }"
+                            >
+                            <label htmlFor="label" class="custom_check w-100">
+                              <input
+                                id="label"
+                                type="checkbox"
+                                name="username"
+                                [(ngModel)]="user.checked"
+                                />
+                                <span class="checkmark"></span> {{ user.name }}
+                              </label>
+                            </div>
+                          }
+                          <div class="view-all">
+                            <a
+                              href="javascript:void(0);"
+                              class="viewall-button-One"
+                              (click)="toggleCollapse()"
+                              ><span class="me-2">{{
+                              isCollapsed ? "Close All" : "View All"
+                              }}</span
+                            ></a>
+                          </div>
+                        </div>
+                        <!-- /View All -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Customer -->
+
+          <!-- Select Date -->
+          <div class="accordion" id="accordionMain2">
+            <div class="card-header-new" id="headingTwo">
+              <h6 class="filter-title">
+                <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                  Select Date
+                  <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+              </h6>
+            </div>
+
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"  data-bs-parent="#accordionExample2">
+              <div class="card-body-chat">
+                <div class="form-group">
+                  <label htmlFor="label" class="form-control-label">From</label>
+                  <div class="cal-icon">
+                    <input id="label" type="email" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label htmlFor="label" class="form-control-label">To</label>
+                  <div class="cal-icon">
+                    <input id="label" type="email" class="form-control datetimepicker" placeholder="DD-MM-YYYY">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Select Date -->
+
+          <!-- By Status -->
+          <div class="accordion" id="accordionMain3">
+            <div class="card-header-new" id="headingThree">
+              <h6 class="filter-title">
+                <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                  By Status
+                  <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+              </h6>
+            </div>
+
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree"  data-bs-parent="#accordionExample3">
+              <div class="card-body-chat">
+                <div id="checkBoxes2">
+                  <div class="form-custom">
+                    <input type="text" class="form-control" id="member_search2" placeholder="Search here">
+                    <span><img src="assets/img/icons/search.svg" alt="img"></span>
+                  </div>
+                  <div class="selectBox-cont">
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="bystatus">
+                      <span class="checkmark"></span> All Invoices
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="bystatus">
+                      <span class="checkmark"></span>  Paid
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="bystatus">
+                      <span class="checkmark"></span>  Overdue
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="bystatus">
+                      <span class="checkmark"></span> Draft
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="bystatus">
+                      <span class="checkmark"></span> Recurring
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="bystatus">
+                      <span class="checkmark"></span> Cancelled
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /By Status -->
+
+          <!-- Category -->
+          <div class="accordion accordion-last" id="accordionMain4">
+            <div class="card-header-new" id="headingFour">
+              <h6 class="filter-title">
+                <a href="javascript:void(0);" class="w-100 collapsed"  data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                  Category
+                  <span class="float-end"><i class="fa-solid fa-chevron-down"></i></span>
+                </a>
+              </h6>
+            </div>
+
+            <div id="collapseFour" class="collapse" aria-labelledby="headingFour"  data-bs-parent="#accordionExample4">
+              <div class="card-body-chat">
+                <div id="checkBoxes3">
+                  <div class="selectBox-cont">
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="category">
+                      <span class="checkmark"></span> Advertising
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="category">
+                      <span class="checkmark"></span>  Food
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label" type="checkbox" name="category">
+                      <span class="checkmark"></span>  Repairs
+                    </label>
+                    <label htmlFor="label" class="custom_check w-100">
+                      <input id="label"type="checkbox" name="category">
+                      <span class="checkmark"></span> Software
+                    </label>
+                    <!-- View All -->
+                    <div class="view-content">
+                      <div class="viewall-Two">
+                        <label htmlFor="label" class="custom_check w-100">
+                          <input id="label" type="checkbox" name="username">
+                          <span class="checkmark"></span> Stationary
+                        </label>
+                        <label htmlFor="label" class="custom_check w-100">
+                          <input id="label" type="checkbox" name="username">
+                          <span class="checkmark"></span> Medical
+                        </label>
+                        <label htmlFor="label" class="custom_check w-100">
+                          <input id="label" type="checkbox" name="username">
+                          <span class="checkmark"></span> Designing
+                        </label>
+                      </div>
+                      <div class="view-all">
+                        <a href="javascript:void(0);" class="viewall-button-Two"><span class="me-2">View All</span><span><i class="fa fa-circle-chevron-down"></i></span></a>
+                      </div>
+                    </div>
+                    <!-- /View All -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- /Category -->
+
+          <button type="submit" class="d-inline-flex align-items-center justify-content-center btn w-100 btn-primary">
+            <span><img src="assets/img/icons/chart.svg" class="me-2" alt="Generate report"></span>Generate report
+          </button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+  <!--/Add Asset -->
+
+  <!-- Add Ticket Modal -->
+  <div class="modal custom-modal fade" id="add_ticket" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <div class="form-header modal-header-title text-start mb-0">
+            <h4 class="mb-0">Add Ticket</h4>
+          </div>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <span class="align-center" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Subject</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Subject">
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Assigned Name</label>
+                <input id="label" type="number" class="form-control" placeholder="Enter Assigned Name">
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Assigned Date</label>
+                <div class="cal-icon cal-icon-info">
+                  <input id="label" type="text" class="datetimepicker form-control" placeholder="Select Date">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Created Date</label>
+                <div class="cal-icon cal-icon-info">
+                  <input id="label" type="text" class="datetimepicker form-control" placeholder="Select Date">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Due Date</label>
+                <div class="cal-icon cal-icon-info">
+                  <input id="label" type="text" class="datetimepicker form-control" placeholder="Select Date">
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12">
+              <div class="form-group">
+                <label htmlFor="label">Assignee Name</label>
+                <input id="label" type="text" class="form-control" placeholder="Enter Assignee Name">
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group">
+                <label htmlFor="label">Priority</label>
+                <select class="select">
+                  <option>Select Priority</option>
+                  <option>Priority 1</option>
+                  <option>Priority 2</option>
+                  <option>Priority 3</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="form-group mb-0">
+                <label htmlFor="label">Status</label>
+                <select class="select">
+                  <option>Select Status</option>
+                  <option>Status 1</option>
+                  <option>Status 2</option>
+                  <option>Status 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-cancel-btn me-2">Back</a>
+          <a href="javascript:void(0);" data-bs-dismiss="modal" class="btn btn-primary paid-continue-btn">Save</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Add Ticket Modal -->

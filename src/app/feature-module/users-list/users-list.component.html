@@ -1,0 +1,191 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card card-table">
+      <div class="card-header">
+        <h4 class="card-title">List of Users</h4>
+      </div>
+      <div class="card-body">
+        <div>
+          <div class="table-scroll">
+            <!-- <ng-scrollbar> -->
+            <table
+              matSort
+              (matSortChange)="sortData($event)"
+              class="table table-stripped table-hover"
+              >
+              <thead class="thead-light">
+                <tr>
+                  <th mat-sort-header="name">Name</th>
+                  <th mat-sort-header="email">Email</th>
+                  <th mat-sort-header="registered_on">Registered On</th>
+                  <th mat-sort-header="registered_on">Role</th>
+                  <th mat-sort-header="status">Status</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                @for (users of userList; track users; let i = $index) {
+                  <tr>
+                    <td>
+                      <h2 class="table-avatar">
+                        <a [routerLink]="routes.profile"
+                          ><img
+                          class="avatar avatar-sm me-2 avatar-img rounded-circle"
+                          src="{{ users.img }}"
+                          alt="User Image"
+                          />
+                          {{ users.name }}</a
+                          >
+                        </h2>
+                      </td>
+                      <td>{{ users.email }}</td>
+                      <td>{{ users.registered_on | date : "dd MMM yyyy" }}</td>
+                      <td>
+                        <span class="text-success">{{ users.role }}</span>
+                      </td>
+                      <td>
+                        <span
+                        [ngClass]="
+                          users.status === 'Active'
+                            ? 'badge badge-pill bg-success-light'
+                            : 'badge badge-pill bg-danger-light'
+                        "
+                          >{{ users.status }}</span
+                          >
+                        </td>
+                        <td class="text-end">
+                          <a
+                            href="javascript:void(0);"
+                            class="btn btn-sm btn-white text-success me-2"
+                            ><i class="far fa-edit me-1"></i> Edit</a
+                            >
+                            <a
+                              href="javascript:void(0);"
+                              class="btn btn-sm btn-white text-danger me-2"
+                              ><i class="far fa-trash-alt me-1"></i>Delete</a
+                              >
+                            </td>
+                          </tr>
+                        }
+                        @if (userList.length === 0) {
+                          <tr>
+                            <td colspan="6">
+                              <h5 style="text-align: center">No data found</h5>
+                            </td>
+                          </tr>
+                        }
+                      </tbody>
+                    </table>
+                  <!-- </ng-scrollbar> -->
+                </div>
+
+                <div class="table_footer">
+                  <div class="col-sm-12 col-md-5">
+                    <div class="dataTables_info">
+                      Showing {{ serialNumberArray[0] }} to
+                      {{ serialNumberArray[serialNumberArray.length - 1] }} of
+                      {{ totalData }} entries
+                    </div>
+                  </div>
+
+                  <div class="col-sm-12 col-md-7">
+                    <div class="pagination_section">
+                      <ul class="pagination">
+                        <li
+                          class="page-item"
+                    [ngClass]="{
+                      disabled: currentPage === 1
+                    }"
+                          >
+                          <a
+                            (click)="getMoreData('previous')"
+                            class="page-link"
+                            href="javascript:void(0);"
+                            tabindex="-1"
+                            >Previous</a
+                            >
+                          </li>
+
+                          @for (item of pageNumberArray; track item; let i = $index) {
+                            <li
+                              class="page-item"
+                              [class.active]="item === currentPage"
+                      [ngClass]="
+                        (pageNumberArray[currentPage - 2] > item &&
+                          item !== 1 &&
+                          pageNumberArray.length > 6) ||
+                        (pageNumberArray[currentPage] < item &&
+                          item !== 1 &&
+                          pageNumberArray.length > 6 &&
+                          pageNumberArray.length !== item)
+                          ? 'hide-sub-menu'
+                          : 'show-sub-menu'
+                      "
+                              >
+                              <a
+                                (click)="moveToPage(item)"
+                                class="page-link"
+                                href="javascript:void(0);"
+                                >
+                                {{ item }}
+                                @if (item === currentPage) {
+                                  <span class="visually-hidden"
+                                    >(current)</span
+                                    >
+                                  }
+                                </a>
+                              </li>
+                              @if (
+                                i === 0 && pageNumberArray.length > 6 && currentPage > 2
+                                ) {
+                                <li
+                                  class="page-item"
+                                  [hidden]="currentPage === 1"
+                                  >
+                                  <a  (click)="moveToPage(currentPage - 2)"tabindex="0" class="page-link" href="javascript:void(0);"> ... </a>
+                                </li>
+                              }
+                              @if (
+                                i === pageNumberArray.length - 2 &&
+                                pageNumberArray.length > 6
+                                ) {
+                                <li
+                      [hidden]="
+                        currentPage >=
+                          pageNumberArray[pageNumberArray.length - 2] ||
+                        totalData <
+                          serialNumberArray[serialNumberArray.length - 1]
+                      "
+                                  class="page-item"
+                                  >
+                                  <a (click)="moveToPage(currentPage + 2)"tabindex="0" class="page-link" href="javascript:void(0);"> ... </a>
+                                </li>
+                              }
+                            }
+
+                            <li
+                              class="page-item"
+                    [ngClass]="{
+                      disabled:
+                        currentPage ===
+                          pageNumberArray[pageNumberArray.length - 1] ||
+                        userList.length === 0
+                    }"
+                              >
+                              <a
+                                (click)="getMoreData('next')"
+                                class="page-link"
+                                href="javascript:void(0);"
+                                >Next
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>

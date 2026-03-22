@@ -1,0 +1,116 @@
+{
+    "data": [
+      {
+        "id": "1",
+        "name": "Hermann Groups",
+        "email": "info@example.com",
+        "accountURL": "hru.example.com",
+        "plan": "Advanced (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "19 Jan 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-01.svg"
+      },
+      {
+        "id": "2",
+        "name": "Skiles LLC",
+        "email": "sales@example.com",
+        "accountURL": "sk.example.com",
+        "plan": "Basic (Yearly)",
+        "changePlan": "Change",
+        "createdDate": "15 Jan 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-02.svg"
+      },
+      {
+        "id": "3",
+        "name": "Kerluke Group",
+        "email": "info@example.com",
+        "accountURL": "kerluke.example.com",
+        "plan": "Enterprise (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "04 Jan 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-03.svg"
+      },
+      {
+        "id": "4",
+        "name": "Schowalter Group",
+        "email": "user233@example.com",
+        "accountURL": "schowalter.example.com",
+        "plan": "Advanced (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "28 Feb 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-04.svg"
+      },
+      {
+        "id": "5",
+        "name": "Accentric Global",
+        "email": "accounts@example.com",
+        "accountURL": "accentric.example.com",
+        "plan": "Advanced (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "20 Feb 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-05.svg"
+      },
+      {
+        "id": "6",
+        "name": "Dexter Matrix",
+        "email": "sales@example.com",
+        "accountURL": "dexter.example.com",
+        "plan": "Premium (Yearly)",
+        "changePlan": "Change",
+        "createdDate": "15 Feb 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-06.svg"
+      },
+      {
+        "id": "7",
+        "name": "Emporis Technologies",
+        "email": "info@example.com",
+        "accountURL": "emporis.example.com",
+        "plan": "Free (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "15 Feb 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-07.svg"
+      },
+      {
+        "id": "8",
+        "name": "Beacon Softwares",
+        "email": "business@example.com",
+        "accountURL": "beacon.example.com",
+        "plan": "Enterprise (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "15 Feb 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-08.svg"
+      },
+      {
+        "id": "9",
+        "name": "Global tech",
+        "email": "user234@example.com",
+        "accountURL": "global.example.com",
+        "plan": "Free (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "15 Feb 2024",
+        "status": "Active",
+        "img": "assets/img/companies/company-09.svg"
+      },
+      {
+        "id": "10",
+        "name": "High Tech Lead",
+        "email": "accounts@example.com",
+        "accountURL": "high.example.com",
+        "plan": "Enterprise (Monthly)",
+        "changePlan": "Change",
+        "createdDate": "15 Feb 2024",
+        "status": "Inactive",
+        "img": "assets/img/companies/company-10.svg"
+      }
+    ],
+    "totalData": 6
+  }
+  

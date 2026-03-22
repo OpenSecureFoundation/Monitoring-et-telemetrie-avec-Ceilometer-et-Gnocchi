@@ -1,0 +1,176 @@
+<div class="row">
+  <!-- Alert -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Alert</div>
+      </div>
+      <div class="card-body">
+        <a
+          href="javascript: void(0);"
+          data-bs-toggle="modal"
+          data-bs-target="#alert_modal"
+          class="btn btn-primary waves-effect waves-light"
+          >Click me</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Alert -->
+
+  <!-- Alert -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Confirm</div>
+      </div>
+      <div class="card-body">
+        <a
+          href="javascript: void(0);"
+          data-bs-toggle="modal"
+          data-bs-target="#confirm_modal"
+          class="btn btn-primary waves-effect waves-light"
+          >Click me</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Alert -->
+
+  <!-- Alert -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Info Alert</div>
+      </div>
+      <div class="card-body">
+        <a
+          href="javascript: void(0);"
+          (click)="typeInfo()"
+          class="btn btn-primary waves-effect waves-light"
+          >Click me</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Alert -->
+
+  <!-- Alert -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Success Alert</div>
+      </div>
+      <div class="card-body">
+        <a
+          href="javascript: void(0);"
+          (click)="typeSuccess()"
+          class="btn btn-primary btn-sm waves-effect waves-light"
+          >Click me</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Alert -->
+
+  <!-- Alert -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Error Alert</div>
+      </div>
+      <div class="card-body">
+        <a
+          href="javascript: void(0);"
+          (click)="typeError()"
+          class="btn btn-primary btn-sm waves-effect waves-light"
+          >Click me</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Alert -->
+
+  <!-- Alert -->
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Warnng Alert</div>
+      </div>
+      <div class="card-body">
+        <a
+          href="javascript: void(0);"
+          (click)="typeWarning()"
+          class="btn btn-primary btn-sm waves-effect waves-light"
+          >Click me</a
+        >
+      </div>
+    </div>
+  </div>
+  <!-- /Alert -->
+</div>
+<div class="modal custom-modal fade" id="alert_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-icon text-center mb-3">
+          <i class="fa fa-circle-exclamation text-warning"></i>
+        </div>
+        <div class="modal-text text-center">
+          <p>Are you sure want you wont be able to revert this ?</p>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button
+          (click)="cancel()"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          (click)="confirm()"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal custom-modal fade" id="confirm_modal" role="dialog">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="modal-icon text-center mb-3">
+          <i class="fas fa-trash-alt text-danger"></i>
+        </div>
+        <div class="modal-text text-center">
+          <p>Are you sure want you wont be able to revert this ?</p>
+        </div>
+      </div>
+      <div class="modal-footer text-center">
+        <button
+          type="button"
+          (click)="confirm()"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Confirm
+        </button>
+
+        <button
+          (click)="cancel()"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

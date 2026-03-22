@@ -1,0 +1,75 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "number": "EST-17ER281",
+      "customer_name": "Marie Canales",
+      "customer_img": "assets/img/profiles/avatar-03.jpg",
+      "estimate_date": "Wed Nov 16 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Nov 22 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$100",
+      "status": "Accepted"
+    },
+    {
+      "id": 2,
+      "number": "EST-26AS699",
+      "customer_name": "Barbara Moore",
+      "customer_img": "assets/img/profiles/avatar-04.jpg",
+      "estimate_date": "Wed Nov 5 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Nov 10 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$75",
+      "status": "Declined"
+    },
+    {
+      "id": 3,
+      "number": "EST-11KI214",
+      "customer_name": "Greg Lynch",
+      "customer_img": "assets/img/profiles/avatar-05.jpg",
+      "estimate_date": "Wed Nov 1 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Nov 5 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$175",
+      "status": "Sent"
+    },
+    {
+      "id": 4,
+      "number": "EST-98HJ687",
+      "customer_name": "Karlene Chaidez",
+      "customer_img": "assets/img/profiles/avatar-06.jpg",
+      "estimate_date": "Wed Nov 12 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Oct 17 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$1500",
+      "status": "Expired"
+    },
+    {
+      "id": 5,
+      "number": "EST-71DR001",
+      "customer_name": "John Blair",
+      "customer_img": "assets/img/profiles/avatar-07.jpg",
+      "estimate_date": "Wed Oct 2 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Oct 8 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$1890",
+      "status": "Accepted"
+    },
+    {
+      "id": 6,
+      "number": "EST-68MN425",
+      "customer_name": "Russell Copeland",
+      "customer_img": "assets/img/profiles/avatar-08.jpg",
+      "estimate_date": "Wed Oct 2 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Oct 8 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$1890",
+      "status": "Accepted"
+    },
+    {
+      "id": 7,
+      "number": "EST-86YU963",
+      "customer_name": "Leatha Bailey",
+      "customer_img": "assets/img/profiles/avatar-09.jpg",
+      "estimate_date": "Wed Sep 25 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "expiry_date": "Wed Sep 30 2020 09:41:48 GMT+0530 (India Standard Time)",
+      "amount": "$785",
+      "status": "Accepted"
+    }
+  ],
+  "totalData": 7
+}

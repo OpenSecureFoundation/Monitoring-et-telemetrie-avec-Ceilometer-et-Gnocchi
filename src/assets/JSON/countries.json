@@ -1,0 +1,69 @@
+{
+    "data": [
+      {
+        "sNo": "1",
+        "countryCode": "AS",
+        "countryName": "684",
+        "countryId": "American Samoa(+684)",
+        "countryFlag": "assets/img/flags/as.png"
+      },
+      {
+        "sNo": "2",
+        "countryCode": "AD",
+        "countryName": "376",
+        "countryId": "Andorra (+376)",
+        "countryFlag": "assets/img/flags/ad.png"
+      },
+      {
+        "sNo": "3",
+        "countryCode": "AO",
+        "countryName": "244",
+        "countryId": "Angola (+244)",
+        "countryFlag": "assets/img/flags/ao.png"
+      },
+      {
+        "sNo": "4",
+        "countryCode": "AI",
+        "countryName": "1264",
+        "countryId": "Anguilla (+1264)",
+        "countryFlag": "assets/img/flags/ai.png"
+      },
+      {
+        "sNo": "5",
+        "countryCode": "AQ",
+        "countryName": "672",
+        "countryId": "Antigua & Barbuda (+1268)",
+        "countryFlag": "assets/img/flags/ag.png"
+      },
+      {
+        "sNo": "6",
+        "countryCode": "AQ",
+        "countryName": "1268",
+        "countryId": "Australia",
+        "countryFlag": "assets/img/flags/au.png"
+      },
+      {
+        "sNo": "7",
+        "countryCode": "AS",
+        "countryName": "684",
+        "countryId": "American Samoa(+684)",
+        "countryFlag": "assets/img/flags/as.png"
+      },
+      {
+        "sNo": "8",
+        "countryCode": "AD",
+        "countryName": "376",
+        "countryId": "Andorra (+376)",
+        "countryFlag": "assets/img/flags/ad.png"
+      },
+      {
+        "sNo": "9",
+        "countryCode": "AO",
+        "countryName": "244",
+        "countryId": "Angola (+244)",
+        "countryFlag": "assets/img/flags/ao.png"
+      }
+    ],
+    "totalData": 8
+  }
+  

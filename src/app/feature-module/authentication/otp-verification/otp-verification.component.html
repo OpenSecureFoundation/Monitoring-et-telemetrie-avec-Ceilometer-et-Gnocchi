@@ -1,0 +1,83 @@
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+<!-- Sign In -->
+<div class="row gx-0">
+
+  <!-- Fond mobile personnalisé -->
+  <div class="mobile-bg-overlay" *ngIf="isMobile">
+    <div class="mobile-bg-pattern"></div>
+    <div class="mobile-bg-icons">
+      <div class="mobile-bg-icons">
+        <div *ngFor="let bgIcon of backgroundIcons" class="bg-icon" [style.left]="bgIcon.position.left"
+          [style.top]="bgIcon.position.top" [style.font-size]="bgIcon.size"
+          [style.animation-delay]="bgIcon.animationDelay">
+          {{ bgIcon.icon }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banner Content -->
+  <div class="col-lg-6 banner-section d-none d-lg-block">
+    <div class="authentication-wrapper">
+      <div class="authentication-content">
+        <h1>Access to our dashboard, Please login to continue your session!</h1>
+        <p>Effortless Invoice Management for Your Business</p>
+      </div>
+      <div class="authen-img">
+        <img src="assets/img/CyberSecurity-Photoroom.png" alt="">
+      </div>
+      <div class="login-bg-img"></div>
+    </div>
+  </div>
+  <!-- /Banner Content -->
+
+  <!-- Otp Content -->
+  <div class="col-12 col-lg-6 otp-content-section">
+    <div class="saas-login-wrapper">
+      <form (ngSubmit)="validateOtp()" class="otp-form">
+        <div class="otp-container">
+          <div class="login-logo">
+            <h1 class="otp-title">
+              <span class="otp-icon">🔐</span>
+              Vérification de l'OTP
+            </h1>
+          </div>
+
+          <p class="otp-message">Entrez le code à 6 chiffres envoyé à votre adresse email</p>
+
+          <div class="otp-inputs">
+            <input #otpInput type="text" class="otp-input" maxlength="1" data-index="1" autofocus>
+            <input #otpInput type="text" class="otp-input" maxlength="1" data-index="2">
+            <input #otpInput type="text" class="otp-input" maxlength="1" data-index="3">
+            <input #otpInput type="text" class="otp-input" maxlength="1" data-index="4">
+            <input #otpInput type="text" class="otp-input" maxlength="1" data-index="5">
+            <input #otpInput type="text" class="otp-input" maxlength="1" data-index="6">
+          </div>
+
+          <button type="submit" class="otp-button">
+            <span *ngIf="this.spinnerService.loading$ | async">
+              <span class="spinner-grow spinner-grow-sm me-1" role="status" aria-hidden="true"></span>
+              loading...
+            </span>
+            <span *ngIf="!(this.spinnerService.loading$ | async)">
+              Valider
+            </span>
+          </button>
+
+          <!-- Ajout du compteur de temps -->
+          <div class="otp-timer">
+            Code valide pendant: <span *ngIf="time$ | async as timer">{{ timer.minute }}:{{ timer.second | number:'2.0'
+              }}</span>
+          </div>
+
+          <p class="otp-resend" *ngIf="sendOtp">
+            Vous n'avez pas reçu de code ? <a (click)="resendOtp()">Renvoyer le code</a>
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- /Sign In -->

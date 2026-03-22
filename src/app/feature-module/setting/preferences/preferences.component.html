@@ -1,0 +1,113 @@
+<div class="card">
+  <div class="card-body">
+    <div class="content-page-header">
+      <h5>Preference Settings</h5>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-12">
+        <div class="input-block mb-3">
+          <label for="currency">Currency</label>
+          <mat-select
+            [(ngModel)]="currency"
+            [ngModelOptions]="{ standalone: true }"
+            class="select custom-mat-select"
+          >
+            <mat-option value="selectcurrency">Select Currency</mat-option>
+            <mat-option value="Usd">USD - US Dollar</mat-option>
+            <mat-option value="gbp">GBP - British Pound</mat-option>
+            <mat-option value="eur">EUR - Euro</mat-option>
+            <mat-option value="inr">INR - Indian Rupee</mat-option>
+            <mat-option value="aud">AUD - Australian Dollar</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-lg-6 col-12">
+        <div class="input-block mb-3">
+          <label for="language">language</label>
+          <mat-select
+            [(ngModel)]="language"
+            [ngModelOptions]="{ standalone: true }"
+            class="select custom-mat-select"
+          >
+            <mat-option value="selectedlanguage">Select Language</mat-option>
+            <mat-option value="english">English</mat-option>
+            <mat-option value="french">French</mat-option>
+            <mat-option value="german">German</mat-option>
+            <mat-option value="italian">Italian</mat-option>
+            <mat-option value="spanish">Spanish</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+        <div class="input-block mb-3">
+          <label for="timezone">Time Zone</label>
+          <mat-select
+            [(ngModel)]="time"
+            [ngModelOptions]="{ standalone: true }"
+            class="select custom-mat-select"
+          >
+            <mat-option value="timezone">Select Time Zone</mat-option>
+            <mat-option value="zone1">(UTC+09:00) Tokyo</mat-option>
+            <mat-option value="zone2">(UTC+11:00) INR</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+        <div class="input-block mb-3">
+          <label for="date">Date Format</label>
+          <mat-select
+            [(ngModel)]="date"
+            [ngModelOptions]="{ standalone: true }"
+            class="select custom-mat-select"
+          >
+            <mat-option value="dateformat">Select Date Format</mat-option>
+            <mat-option value="dateformat1">2020 Nov 09</mat-option>
+            <mat-option value="dateformat2">09 Nov 2020</mat-option>
+            <mat-option value="dateformat3">09/11/2020</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+          <label for="time">Time Format</label>
+          <mat-select
+            [(ngModel)]="date1"
+            [ngModelOptions]="{ standalone: true }"
+            class="select custom-mat-select"
+          >
+            <mat-option value="date2">Select Time Format</mat-option>
+            <mat-option value="date3">10:00 AM - 11:00 AM</mat-option>
+            <mat-option value="date3">12:00 PM - 02:00 PM</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+        <div class="input-block mb-3">
+          <label for="financial year">Financial Year </label>
+          <mat-select
+            [(ngModel)]="finalyear"
+            [ngModelOptions]="{ standalone: true }"
+            class="select custom-mat-select"
+          >
+            <mat-option value="finalyear">Select Financial Year </mat-option>
+            <mat-option value="january">january-december</mat-option>
+            <mat-option value="februbary">february-january</mat-option>
+            <mat-option value="march">march-february</mat-option>
+          </mat-select>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="btn-path text-end">
+          <a
+            href="javascript:void(0);"
+            class="btn btn-cancel bg-primary-light me-3"
+            >Cancel</a
+          >
+          <a href="javascript:void(0);" class="btn btn-primary">Save Changes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

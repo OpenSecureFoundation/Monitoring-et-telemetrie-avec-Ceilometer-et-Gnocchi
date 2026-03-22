@@ -1,0 +1,65 @@
+<!-- Sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+    <div id="sidebar-menu" class="sidebar-menu">
+      <nav class="greedys sidebar-horizantal">
+        
+          <button (click)="openMoreMenus()" class="viewmoremenu">{{showMoreMenu?'Less Menu':'More Menu'}}</button>
+          <!-- /Settings -->
+          <ul class="hidden-links" [class.hidden]="showMoreMenu === false">
+            @for (
+              mainTittle of side_bar_data; track
+              mainTittle; let mainTittleIndex = $index) {
+              <li class="menu-title">
+                <span>{{ mainTittle.tittle }}</span>
+              </li>
+              @for (menu of mainTittle.menu; track menu) {
+                @if (menu?.hasSubRoute === false) {
+                  
+                }
+                @if (menu.hasSubRoute === true) {
+                  <li
+                    class="submenu"
+                        [hidden]="
+                          (
+                          menu.menuValue === 'Super Admin'
+                            )   "
+                    [class.active]="base === menu.base"
+                    (click)="expandSubMenus(menu)"
+                    >
+                    <a
+                      href="javascript:void(0)"
+                      [ngClass]="{ subdrop: menu.showSubRoute === true }"
+                      >
+                      <i [class]="'feather icon-' + menu.icon"></i>
+                      <span>{{ menu.menuValue }}</span>
+                      <span class="menu-arrow"></span>
+                    </a>
+                    <ul
+                          [ngClass]="
+                            menu.showSubRoute === true
+                              ? 'show-sub-menu'
+                              : 'hide-sub-menu'
+                          "
+                      >
+                      @for (subMenus of menu.subMenus; track subMenus) {
+                        <li>
+                          <a
+                            [routerLink]="subMenus.route"
+                            >{{ subMenus.menuValue }}</a
+                            >
+                          </li>
+                        }
+                      </ul>
+                    </li>
+                  }
+                }
+              }
+            </ul>
+          </nav>
+
+        </div>
+
+      </div>
+    </div>
+    <!-- /Sidebar -->
