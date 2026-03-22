@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Facture {{invoiceId}} - OpenStack Monitoring</title>
+    <style>
+        :root {
+            --openstack-blue: #1C3A94;
+            --openstack-light-blue: #2A5BC3;
+            --openstack-dark-blue: #0A1A4A;
+            --openstack-gray: #F4F6F9;
+            --openstack-dark-gray: #6C737E;
+            --openstack-accent: #00A4D9;
+            --border-color: #E1E5EB;
+            --text-primary: #1A1F36;
+            --text-secondary: #4A5568;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', 'Helvetica', 'Arial', sans-serif;
+            margin: 0;
+            padding: 40px;
+            color: var(--text-primary);
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .invoice-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Header */
+        .invoice-header {
+            background: linear-gradient(135deg, var(--openstack-blue), var(--openstack-light-blue));
+            color: white;
+            padding: 30px 40px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .logo-section h1 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-section .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .invoice-meta {
+            text-align: right;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        .invoice-id {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .invoice-date {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+
+        /* Client & Project Info */
+        .info-section {
+            padding: 30px 40px;
+            background: var(--openstack-gray);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--openstack-accent);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        .info-card h3 {
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: var(--openstack-dark-gray);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card p {
+            margin: 8px 0;
+            font-size: 15px;
+            color: var(--text-primary);
+        }
+
+        /* Table Section */
+        .table-section {
+            padding: 30px 40px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--openstack-dark-blue);
+            margin: 0 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--openstack-gray);
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+
+        .invoice-table thead {
+            background: var(--openstack-gray);
+        }
+
+        .invoice-table th {
+            padding: 16px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--openstack-dark-blue);
+            border-bottom: 2px solid var(--border-color);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .invoice-table td {
+            padding: 16px 12px;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .invoice-table tbody tr:hover {
+            background-color: rgba(42, 91, 195, 0.03);
+        }
+
+        .invoice-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Total Section */
+        .total-section {
+            padding: 20px 40px;
+            background: var(--openstack-gray);
+            text-align: right;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--openstack-blue);
+            margin: 0;
+        }
+
+        .total-label {
+            font-size: 14px;
+            color: var(--openstack-dark-gray);
+            margin: 0 0 5px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Footer */
+        .invoice-footer {
+            padding: 25px 40px;
+            background: var(--openstack-dark-blue);
+            color: white;
+            font-size: 12px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .signature {
+            opacity: 0.8;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            word-break: break-all;
+            max-width: 60%;
+        }
+
+        .footer-meta {
+            text-align: right;
+            opacity: 0.8;
+        }
+
+        .brand {
+            font-weight: 600;
+            color: var(--openstack-accent);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: #10B981;
+            color: white;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .invoice-meta {
+                text-align: left;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .signature {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="invoice-container">
+        <!-- Header -->
+        <div class="invoice-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1>OPENSTACK MONITORING</h1>
+                    <div class="subtitle">Cloud Infrastructure Telemetry & Billing</div>
+                </div>
+                <div class="invoice-meta">
+                    <div class="invoice-id">FACTURE #{{invoiceId}}</div>
+                    <div class="invoice-date">Émise le {{date}}</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client & Project Information -->
+        <div class="info-section">
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Projet Facturé</h3>
+                    <p><strong>{{projectName}}</strong></p>
+                    <p>Environnement de monitoring et télémétrie</p>
+                </div>
+                <div class="info-card">
+                    <h3>Période de Facturation</h3>
+                    <p><strong>{{period}}</strong></p>
+                    <p>Données collectées via Ceilometer & Gnocchi</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Table -->
+        <div class="table-section">
+            <h2 class="section-title">Détail de la Consommation</h2>
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th style="width: 35%">Ressource</th>
+                        <th style="width: 45%">Métrique</th>
+                        <th style="width: 20%; text-align: right;">Coût (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{rows}}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Total -->
+        <div class="total-section">
+            <p class="total-label">Montant Total TTC</p>
+            <p class="total-amount">{{total}} €</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="invoice-footer">
+            <div class="footer-content">
+                <div class="signature">
+                    <strong>Signature HMAC :</strong><br />
+                    {{signature}}
+                </div>
+                <div class="footer-meta">
+                    <div class="brand">OPENSTACK MONITORING PLATFORM</div>
+                    <div>Facture générée automatiquement</div>
+                    <div>ID de transaction: {{invoiceId}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
